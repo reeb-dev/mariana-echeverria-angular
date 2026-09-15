@@ -157,30 +157,45 @@
   }
 
   .prop-card-media img {
-    /* Escala + object-position para ocultar franjas superiores del aviso */
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 58%;
-    transform: scale(1.08);
-    transform-origin: center 60%;
+    /* Crop agresivo de franjas superior/inferior del aviso original */
+    object-position: center 42%;
+    transform: scale(1.22);
+    transform-origin: center center;
     transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .prop-card:hover .prop-card-media img {
-    transform: scale(1.14);
+    transform: scale(1.28);
   }
 
   .prop-card-media::before {
     content: "";
     position: absolute;
     inset: 0 0 auto;
-    height: 18%;
+    height: 22%;
     z-index: 1;
     background: linear-gradient(
       180deg,
-      rgb(28 22 18 / 0.55) 0%,
-      rgb(28 22 18 / 0.12) 70%,
+      rgb(28 22 18 / 0.62) 0%,
+      rgb(28 22 18 / 0.18) 65%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  .prop-card-media::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 38%;
+    z-index: 1;
+    background: linear-gradient(
+      0deg,
+      rgb(28 22 18 / 0.78) 0%,
+      rgb(28 22 18 / 0.28) 55%,
       transparent 100%
     );
     pointer-events: none;
