@@ -120,7 +120,7 @@ export const PROPERTIES: Property[] = [
     priceLabel: "USD 45.000",
     areaLabel: "800 m²",
     image:
-      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1628624747186-a941c476b7ef?auto=format&fit=crop&w=1200&q=80",
     imageAlt: "Terreno amplio listo para construir",
   },
   {
