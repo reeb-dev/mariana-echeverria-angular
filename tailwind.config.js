@@ -4,33 +4,34 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "#f4f7f4",
-        foreground: "#1c2e24",
+        background: "#faf7f2",
+        foreground: "#2a1f16",
         primary: {
-          DEFAULT: "#243f32",
-          foreground: "#f4f7f4",
+          DEFAULT: "#c45c1a",
+          foreground: "#fffaf5",
         },
         muted: {
-          DEFAULT: "#e7eee8",
-          foreground: "#5a6b60",
+          DEFAULT: "#f3ebe1",
+          foreground: "#6b5748",
         },
-        border: "#cfdad2",
+        border: "#e4d5c4",
+        /* Remapeados al branding del logo (naranja + dorado) */
         forest: {
-          DEFAULT: "#2f5a43",
-          deep: "#1a3026",
+          DEFAULT: "#c45c1a",
+          deep: "#8f3d0f",
         },
         stone: {
-          warm: "#c9b496",
+          warm: "#d4a017",
         },
-        mist: "#eef3ef",
+        mist: "#f7f1e8",
       },
       fontFamily: {
-        sans: ["\"Source Sans 3\"", "system-ui", "sans-serif"],
-        display: ["\"Libre Baskerville\"", "Georgia", "serif"],
-        heading: ["\"Libre Baskerville\"", "Georgia", "serif"],
+        sans: ['"Source Sans 3"', "system-ui", "sans-serif"],
+        display: ['"Source Sans 3"', "system-ui", "sans-serif"],
+        heading: ['"Source Sans 3"', "system-ui", "sans-serif"],
       },
       letterSpacing: {
-        brand: "0.01em",
+        brand: "0.04em",
       },
       lineHeight: {
         brand: "1.12",

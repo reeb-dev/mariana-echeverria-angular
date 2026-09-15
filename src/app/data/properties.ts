@@ -38,7 +38,7 @@ export const CONTACT = {
   email: 'marianalecheverria@gmail.com',
   instagram: 'coronelsuarezbienesraices',
   instagramUrl: 'https://www.instagram.com/coronelsuarezbienesraices/',
-  matricula: 'Mat. 2227 CBB',
+  matricula: 'Mat. CMCBB 2227',
   years: '25',
   offices: [
     {

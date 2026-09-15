@@ -10,8 +10,8 @@
   body {
     @apply bg-background font-sans text-foreground antialiased;
     background-image:
-      radial-gradient(ellipse 80% 50% at 10% -10%, rgb(47 90 67 / 0.08), transparent),
-      radial-gradient(ellipse 60% 40% at 100% 20%, rgb(201 180 150 / 0.18), transparent);
+      radial-gradient(ellipse 80% 50% at 10% -10%, rgb(196 92 26 / 0.1), transparent),
+      radial-gradient(ellipse 60% 40% at 100% 20%, rgb(212 160 23 / 0.14), transparent);
     background-attachment: fixed;
   }
 
@@ -50,28 +50,30 @@
   animation: hero-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+.animate-hero-image,
 .animate-hero-image {
   animation: hero-ken-burns 10s ease-out both;
 }
 
-/* Una sola serif para marca/títulos: line-height holgado evita solapes */
+/* Títulos alineados al logo: sans bold, tracking amplio, sin solapes */
 .brand-title {
-  font-family: "Libre Baskerville", Georgia, serif;
+  font-family: "Source Sans 3", system-ui, sans-serif;
   font-weight: 700;
-  line-height: 1.28;
-  letter-spacing: 0;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .section-title {
-  font-family: "Libre Baskerville", Georgia, serif;
+  font-family: "Source Sans 3", system-ui, sans-serif;
   font-weight: 700;
-  line-height: 1.35;
-  letter-spacing: 0;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
 }
 
 .eyebrow {
   font-family: "Source Sans 3", system-ui, sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.16em;
   line-height: 1.5;
   text-transform: uppercase;

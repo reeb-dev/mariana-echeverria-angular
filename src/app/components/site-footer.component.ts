@@ -7,28 +7,33 @@ import { CONTACT } from '../data/properties';
   standalone: true,
   imports: [RouterLink],
   template: `
-    <footer class="border-t border-white/10 bg-forest-deep text-white/70">
-      <div class="mx-auto grid max-w-6xl gap-10 px-5 py-12 md:grid-cols-[1.2fr_1fr_1fr] md:px-8">
+    <footer class="border-t border-white/10 bg-forest-deep text-white/75">
+      <div class="mx-auto grid max-w-6xl gap-10 px-5 py-12 md:grid-cols-[1.3fr_1fr_1fr] md:px-8">
         <div>
-          <p class="brand-title text-xl leading-snug text-white md:text-2xl">{{ contact.brand }}</p>
-          <p class="mt-2 font-sans text-sm font-medium text-stone-warm">{{ contact.tagline }}</p>
+          <div class="inline-flex rounded-md bg-white px-3 py-2">
+            <img
+              src="/about/logo-mark.png"
+              alt="Mariana Echeverría Bienes Raíces"
+              class="h-12 w-auto max-w-[260px] object-contain object-left"
+            />
+          </div>
           <p class="mt-4 max-w-sm text-sm leading-relaxed">
             Corredora, tasadora y martillera pública. {{ contact.matricula }}.
             Venta, alquiler, arrendamientos, tasaciones en el día y home staging.
           </p>
         </div>
         <div>
-          <p class="text-xs tracking-[0.16em] text-white/45 uppercase">Explorar</p>
+          <p class="text-xs font-semibold tracking-[0.16em] text-stone-warm uppercase">Explorar</p>
           <ul class="mt-4 space-y-2 text-sm">
             <li><a routerLink="/" fragment="servicios" class="hover:text-stone-warm">Servicios</a></li>
             <li><a routerLink="/" fragment="propiedades" class="hover:text-stone-warm">Propiedades</a></li>
-            <li><a routerLink="/" fragment="proceso" class="hover:text-stone-warm">Proceso</a></li>
-            <li><a routerLink="/" fragment="faq" class="hover:text-stone-warm">FAQ</a></li>
+            <li><a routerLink="/" fragment="instagram" class="hover:text-stone-warm">Instagram</a></li>
+            <li><a routerLink="/" fragment="trayectoria" class="hover:text-stone-warm">Trayectoria</a></li>
             <li><a routerLink="/" fragment="contacto" class="hover:text-stone-warm">Contacto</a></li>
           </ul>
         </div>
         <div>
-          <p class="text-xs tracking-[0.16em] text-white/45 uppercase">Contacto</p>
+          <p class="text-xs font-semibold tracking-[0.16em] text-stone-warm uppercase">Contacto</p>
           <ul class="mt-4 space-y-2 text-sm">
             <li>
               <a [href]="contact.whatsappUrl" target="_blank" rel="noopener noreferrer" class="hover:text-stone-warm">
@@ -49,11 +54,16 @@ import { CONTACT } from '../data/properties';
           </ul>
         </div>
       </div>
+      <div class="bg-forest">
+        <p class="mx-auto max-w-6xl px-5 py-3 text-center text-xs font-semibold text-black md:px-8 md:text-left">
+          ☎ {{ contact.phoneDisplay }} / {{ contact.phoneSecondary }}
+          · ✉ {{ contact.email }}
+          · {{ contact.matricula }}
+        </p>
+      </div>
       <div class="border-t border-white/10">
         <p class="mx-auto max-w-6xl px-5 py-4 text-xs text-white/45 md:px-8">
-          Demo Angular de rediseño — no es el sitio oficial. Datos de
-          www.marianaecheverria.com.ar · {{ contact.matricula }} · COPYRIGHT
-          {{ year }}
+          Demo Angular de rediseño — no es el sitio oficial · COPYRIGHT {{ year }}
         </p>
       </div>
     </footer>

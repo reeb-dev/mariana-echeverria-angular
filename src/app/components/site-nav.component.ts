@@ -8,107 +8,114 @@ import { CONTACT } from '../data/properties';
   standalone: true,
   imports: [RouterLink, NgClass],
   template: `
-    <header
-      class="fixed inset-x-0 top-0 z-40 transition-all duration-300"
-      [ngClass]="
-        scrolled() || open()
-          ? 'border-b border-border/70 bg-background/90 text-foreground shadow-sm backdrop-blur-md'
-          : 'bg-transparent text-white'
-      "
-    >
-      <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 md:px-8">
-        <a routerLink="/" fragment="inicio" class="brand-title text-lg leading-none md:text-xl">
-          {{ contact.brand }}
-        </a>
-
-        <nav aria-label="Principal" class="hidden items-center gap-7 text-sm md:flex">
-          @for (link of links; track link.href) {
-            <a
-              [routerLink]="'/'"
-              [fragment]="link.fragment"
-              class="transition"
-              [ngClass]="
-                scrolled()
-                  ? 'text-foreground/75 hover:text-foreground'
-                  : 'text-white/85 hover:text-white'
-              "
-            >
-              {{ link.label }}
-            </a>
-          }
-        </nav>
-
-        <div class="flex items-center gap-2">
-          <a
-            [href]="contact.whatsappUrl"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="rounded-md px-3 py-1.5 text-sm transition"
-            [ngClass]="
-              scrolled() || open()
-                ? 'bg-primary text-primary-foreground hover:bg-primary/90'
-                : 'border border-white/35 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20'
-            "
-          >
-            WhatsApp
+    <div class="fixed inset-x-0 top-0 z-40">
+      <div class="bg-forest text-black">
+        <div
+          class="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-6 gap-y-1 px-5 py-1.5 text-xs font-semibold sm:justify-between md:px-8 md:text-sm"
+        >
+          <a [href]="phoneTel" class="inline-flex items-center gap-2">
+            <span aria-hidden>☎</span>
+            {{ contact.phoneDisplay }} / {{ contact.phoneSecondary }}
           </a>
-          <button
-            type="button"
-            class="inline-flex h-9 w-9 items-center justify-center rounded-md border md:hidden"
-            [ngClass]="
-              scrolled() || open()
-                ? 'border-border text-foreground'
-                : 'border-white/35 text-white'
-            "
-            [attr.aria-expanded]="open()"
-            aria-controls="menu-movil"
-            [attr.aria-label]="open() ? 'Cerrar menú' : 'Abrir menú'"
-            (click)="toggleMenu()"
-          >
-            <span class="sr-only">Menú</span>
-            ☰
-          </button>
+          <a [href]="'mailto:' + contact.email" class="inline-flex items-center gap-2">
+            <span aria-hidden>✉</span>
+            {{ contact.email }}
+          </a>
         </div>
       </div>
 
-      @if (open()) {
-        <div id="menu-movil" class="border-t border-border bg-background md:hidden">
-          <nav class="mx-auto flex max-w-6xl flex-col gap-1 px-5 py-4 text-foreground">
-            @for (link of links; track link.href) {
+      <header
+        class="transition-all duration-300"
+        [ngClass]="
+          scrolled() || open()
+            ? 'border-b border-border/70 bg-background/95 text-foreground shadow-sm backdrop-blur-md'
+            : 'bg-background/80 text-foreground backdrop-blur-sm'
+        "
+      >
+        <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3 md:px-8">
+          <a routerLink="/" fragment="inicio" class="block shrink-0">
+            <img
+              src="/about/logo-mark.png"
+              alt="Mariana Echeverría Bienes Raíces"
+              class="h-10 w-auto max-w-[220px] object-contain object-left sm:h-12 sm:max-w-[280px]"
+            />
+          </a>
+
+          <nav aria-label="Principal" class="hidden items-center gap-6 text-sm font-medium md:flex">
+            @for (link of links; track link.fragment) {
               <a
-                [routerLink]="'/'"
+                routerLink="/"
                 [fragment]="link.fragment"
-                class="rounded-md px-2 py-3 text-base hover:bg-muted"
-                (click)="open.set(false)"
+                class="text-foreground/75 transition hover:text-forest"
               >
                 {{ link.label }}
               </a>
             }
+          </nav>
+
+          <div class="flex items-center gap-2">
             <a
-              [href]="contact.instagramUrl"
+              [href]="contact.whatsappUrl"
               target="_blank"
               rel="noopener noreferrer"
-              class="rounded-md px-2 py-3 text-base text-forest hover:bg-muted"
-              (click)="open.set(false)"
+              class="rounded-md bg-forest px-3 py-1.5 text-sm font-semibold text-white transition hover:bg-forest-deep"
             >
-              Instagram &#64;{{ contact.instagram }}
+              WhatsApp
             </a>
-          </nav>
+            <button
+              type="button"
+              class="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border text-foreground md:hidden"
+              [attr.aria-expanded]="open()"
+              aria-controls="menu-movil"
+              [attr.aria-label]="open() ? 'Cerrar menú' : 'Abrir menú'"
+              (click)="toggleMenu()"
+            >
+              <span class="sr-only">Menú</span>
+              ☰
+            </button>
+          </div>
         </div>
-      }
-    </header>
+
+        @if (open()) {
+          <div id="menu-movil" class="border-t border-border bg-background md:hidden">
+            <nav class="mx-auto flex max-w-6xl flex-col gap-1 px-5 py-4 text-foreground">
+              @for (link of links; track link.fragment) {
+                <a
+                  routerLink="/"
+                  [fragment]="link.fragment"
+                  class="rounded-md px-2 py-3 text-base hover:bg-muted"
+                  (click)="open.set(false)"
+                >
+                  {{ link.label }}
+                </a>
+              }
+              <a
+                [href]="contact.instagramUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="rounded-md px-2 py-3 text-base text-forest hover:bg-muted"
+                (click)="open.set(false)"
+              >
+                Instagram &#64;{{ contact.instagram }}
+              </a>
+            </nav>
+          </div>
+        }
+      </header>
+    </div>
   `,
 })
 export class SiteNavComponent {
   readonly contact = CONTACT;
   readonly open = signal(false);
   readonly scrolled = signal(false);
+  readonly phoneTel = `tel:${CONTACT.phoneDisplay.replace(/\s/g, '')}`;
   readonly links = [
-    { href: '#servicios', fragment: 'servicios', label: 'Servicios' },
-    { href: '#propiedades', fragment: 'propiedades', label: 'Propiedades' },
-    { href: '#instagram', fragment: 'instagram', label: 'Instagram' },
-    { href: '#trayectoria', fragment: 'trayectoria', label: 'Trayectoria' },
-    { href: '#contacto', fragment: 'contacto', label: 'Contacto' },
+    { fragment: 'servicios', label: 'Servicios' },
+    { fragment: 'propiedades', label: 'Propiedades' },
+    { fragment: 'instagram', label: 'Instagram' },
+    { fragment: 'trayectoria', label: 'Trayectoria' },
+    { fragment: 'contacto', label: 'Contacto' },
   ];
 
   @HostListener('window:scroll')

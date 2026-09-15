@@ -8,7 +8,9 @@
     <header class="border-b border-border bg-background/95">
       <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 md:px-8">
         <a routerLink="/" fragment="propiedades" class="text-sm text-muted-foreground hover:text-forest">← Volver a propiedades</a>
-        <a routerLink="/" class="brand-title text-base leading-none text-forest-deep md:text-lg">{{ contact.brand }}</a>
+        <a routerLink="/" class="block">
+          <img src="/about/logo-mark.png" alt="Mariana Echeverría Bienes Raíces" class="h-9 w-auto max-w-[200px] object-contain object-left" />
+        </a>
         <a [href]="waUrl()" target="_blank" rel="noopener noreferrer" class="rounded-md bg-primary px-3 py-1.5 text-sm text-primary-foreground">WhatsApp</a>
       </div>
     </header>
