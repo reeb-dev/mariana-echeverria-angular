@@ -1,18 +1,20 @@
-<!-- HERO: marca dominante, un titular, un apoyo, CTAs — foto full-bleed + velo legible -->
+<!-- HERO: marca dominante, overlay, CTAs — foto full-bleed -->
 <section id="inicio" class="relative flex min-h-[100svh] items-end overflow-hidden">
   <img
     src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=80"
     alt="Residencia contemporánea con jardín"
     class="animate-hero-image absolute inset-0 h-full w-full object-cover object-[center_35%]"
   />
-  <!-- Capas de contraste (sin card): base + left + bottom + acento logo -->
-  <div class="absolute inset-0 bg-[#1c1612]/50"></div>
-  <div class="absolute inset-0 bg-gradient-to-r from-[#1c1612] from-0% via-[#1c1612]/88 via-40% to-transparent to-78%"></div>
-  <div class="absolute inset-0 bg-gradient-to-t from-[#1c1612] from-5% via-[#1c1612]/65 via-45% to-transparent to-78%"></div>
-  <div class="absolute inset-0 bg-gradient-to-tr from-[#d06a28]/22 via-transparent to-[#e0b040]/10"></div>
+  <div class="absolute inset-0 bg-[#1c1612]/45"></div>
+  <div class="absolute inset-0 bg-gradient-to-r from-[#1c1612]/95 via-[#1c1612]/72 to-transparent"></div>
+  <div class="absolute inset-0 bg-gradient-to-t from-[#1c1612] via-[#1c1612]/55 to-transparent"></div>
+  <div class="animate-soft-fade absolute inset-0 bg-gradient-to-tr from-[#d06a28]/20 via-transparent to-[#e0b040]/08"></div>
 
-  <div class="relative z-10 mx-auto w-full max-w-6xl px-5 pb-14 pt-40 md:px-8 md:pb-24 md:pt-44 lg:pb-28">
-    <p class="animate-hero-rise eyebrow text-[#f0c85a]" style="animation-delay:40ms; text-shadow:0 2px 12px rgba(28,22,18,0.95)">
+  <div class="relative z-10 mx-auto w-full max-w-6xl px-5 pb-16 pt-44 md:px-8 md:pb-28 md:pt-48 lg:pb-32">
+    <p
+      class="animate-hero-rise eyebrow text-[#f0c85a]"
+      style="animation-delay:40ms; text-shadow:0 2px 12px rgba(28,22,18,0.95)"
+    >
       {{ contact.matricula }} · Corredora · Tasadora · Martillera
     </p>
 
@@ -22,49 +24,76 @@
       alt="Mariana Echeverría Bienes Raíces"
       width="462"
       height="107"
-      class="animate-hero-rise mt-5 h-16 w-auto max-w-[min(100%,420px)] bg-transparent object-contain object-left sm:mt-6 sm:h-[5.25rem] md:h-24"
-      style="animation-delay:100ms; filter: drop-shadow(0 6px 20px rgba(28,22,18,0.75))"
+      class="animate-hero-rise mt-6 h-[4.25rem] w-auto max-w-[min(100%,440px)] bg-transparent object-contain object-left sm:h-[5.5rem] md:mt-7 md:h-28"
+      style="animation-delay:100ms; filter: drop-shadow(0 8px 24px rgba(28,22,18,0.8))"
     />
 
-    <h1 class="animate-hero-rise mt-8 max-w-xl font-sans text-2xl font-semibold leading-snug tracking-tight text-white sm:text-[1.65rem] md:mt-10 md:text-3xl md:leading-snug" style="animation-delay:220ms; text-shadow:0 2px 16px rgba(28,22,18,0.9)">
+    <h1
+      class="animate-hero-rise mt-9 max-w-xl font-display text-[1.65rem] font-medium leading-[1.25] tracking-tight text-white sm:text-3xl md:mt-11 md:text-4xl md:leading-[1.2]"
+      style="animation-delay:220ms; text-shadow:0 2px 18px rgba(28,22,18,0.9)"
+    >
       Venta, alquiler, arrendamientos y tasaciones en el día.
     </h1>
-    <p class="animate-hero-rise mt-4 max-w-md font-sans text-[0.95rem] leading-relaxed text-white/92 md:text-lg" style="animation-delay:300ms; text-shadow:0 2px 12px rgba(28,22,18,0.85)">
+    <p
+      class="animate-hero-rise mt-5 max-w-md text-base leading-relaxed text-white/90 md:text-lg"
+      style="animation-delay:300ms; text-shadow:0 2px 12px rgba(28,22,18,0.85)"
+    >
       Avisos claros de Coronel Suárez, Zona Norte, lotes y campos — con respaldo de abogada en derecho inmobiliario.
     </p>
 
-    <div class="animate-hero-rise mt-8 flex flex-wrap items-center gap-3 md:mt-10" style="animation-delay:400ms">
-      <a href="#contacto" class="inline-flex h-12 items-center rounded-md bg-stone-warm px-6 text-sm font-semibold text-forest-deep shadow-brand transition hover:bg-[#e8c056]">Pedí tasación en el día</a>
-      <a href="#propiedades" class="inline-flex h-12 items-center rounded-md border border-white/45 bg-transparent px-6 text-sm font-medium text-white transition hover:border-stone-warm hover:bg-white/10">Ver avisos</a>
-      <a [href]="contact.instagramUrl" target="_blank" rel="noopener noreferrer" class="inline-flex h-12 items-center px-2 text-sm font-medium text-white/85 underline decoration-stone-warm/50 underline-offset-4 transition hover:text-stone-warm hover:decoration-stone-warm">&#64;{{ contact.instagram }}</a>
+    <div class="animate-hero-rise mt-10 flex flex-wrap items-center gap-3 md:mt-12" style="animation-delay:400ms">
+      <a
+        href="#contacto"
+        class="inline-flex h-12 items-center rounded-lg bg-stone-warm px-7 text-sm font-semibold text-forest-deep shadow-brand transition duration-300 hover:bg-[#e8c056] hover:shadow-card"
+      >
+        Pedí tasación en el día
+      </a>
+      <a
+        href="#propiedades"
+        class="inline-flex h-12 items-center rounded-lg border border-white/40 bg-white/5 px-7 text-sm font-medium text-white backdrop-blur-sm transition duration-300 hover:border-stone-warm hover:bg-white/12"
+      >
+        Ver avisos
+      </a>
+      <a
+        [href]="contact.instagramUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex h-12 items-center px-2 text-sm font-medium text-white/80 underline decoration-stone-warm/40 underline-offset-4 transition hover:text-stone-warm hover:decoration-stone-warm"
+      >
+        &#64;{{ contact.instagram }}
+      </a>
     </div>
   </div>
 </section>
 
 <!-- ZONES -->
-<section aria-label="Zonas de trabajo" class="border-b border-border bg-forest-deep text-primary-foreground">
-  <div class="mx-auto grid max-w-6xl gap-8 px-5 py-10 sm:grid-cols-2 md:grid-cols-4 md:px-8 md:py-12">
+<section aria-label="Zonas de trabajo" class="bg-forest-deep text-primary-foreground">
+  <div class="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:grid-cols-2 md:grid-cols-4 md:px-8 md:py-16">
     @for (zone of zones; track zone.name; let i = $index) {
       <div appReveal [appRevealDelay]="i * 50">
-        <p class="font-sans text-lg font-semibold leading-snug text-stone-warm">{{ zone.name }}</p>
-        <p class="mt-2 text-sm leading-relaxed text-white/70">{{ zone.detail }}</p>
+        <p class="font-display text-xl font-medium leading-snug text-stone-warm">{{ zone.name }}</p>
+        <p class="mt-2.5 text-sm leading-relaxed text-white/65">{{ zone.detail }}</p>
       </div>
     }
   </div>
 </section>
 
 <!-- SERVICES -->
-<section id="servicios" class="mx-auto max-w-6xl px-5 py-20 md:px-8 md:py-28">
+<section id="servicios" class="mx-auto max-w-6xl px-5 py-24 md:px-8 md:py-32">
   <div appReveal>
     <p class="eyebrow text-forest">Servicios</p>
     <h2 class="section-title mt-4 max-w-2xl text-3xl text-forest-deep md:text-4xl">Del aviso en Instagram al cierre</h2>
-    <p class="mt-4 max-w-xl leading-relaxed text-muted-foreground">Venta, alquiler, arrendamientos, tasaciones en el día, home staging y asesoría legal — el mix que ves en el perfil profesional.</p>
+    <p class="mt-5 max-w-xl leading-relaxed text-muted-foreground">
+      Venta, alquiler, arrendamientos, tasaciones en el día, home staging y asesoría legal — el mix que ves en el perfil profesional.
+    </p>
   </div>
-  <ol class="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+  <ol class="mt-16 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
     @for (service of services; track service.title; let i = $index) {
-      <li appReveal [appRevealDelay]="i * 60" class="border-t border-forest/25 pt-6">
-        <span class="font-sans text-sm font-semibold tracking-[0.14em] text-stone-warm tabular-nums">{{ i + 1 < 10 ? '0' + (i + 1) : i + 1 }}</span>
-        <h3 class="mt-3 font-sans text-xl font-semibold leading-snug text-forest-deep md:text-2xl">{{ service.title }}</h3>
+      <li appReveal [appRevealDelay]="i * 60" class="border-t border-forest/20 pt-7">
+        <span class="font-sans text-sm font-semibold tracking-[0.14em] text-stone-warm tabular-nums">
+          {{ i + 1 < 10 ? '0' + (i + 1) : i + 1 }}
+        </span>
+        <h3 class="mt-4 font-display text-xl font-medium leading-snug text-forest-deep md:text-2xl">{{ service.title }}</h3>
         <p class="mt-3 max-w-sm leading-relaxed text-muted-foreground">{{ service.description }}</p>
       </li>
     }
@@ -72,25 +101,30 @@
 </section>
 
 <!-- LISTINGS -->
-<section id="propiedades" class="border-y border-border bg-mist/70 py-20 md:py-28">
+<section id="propiedades" class="border-y border-border/70 bg-mist/50 py-24 md:py-32">
   <div class="mx-auto max-w-6xl px-5 md:px-8">
-    <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-      <div appReveal>
+    <div class="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
+      <div appReveal class="max-w-xl">
         <p class="eyebrow text-forest">Propiedades</p>
         <h2 class="section-title mt-4 text-3xl text-forest-deep md:text-4xl">Avisos como en el feed</h2>
-        <p class="mt-4 max-w-xl leading-relaxed text-muted-foreground">Selección inspirada en lo publicado: Mitre, Rivas, Sierra de la Ventana, Belgrano, Nordelta y Paseo Victorica.</p>
+        <p class="mt-5 leading-relaxed text-muted-foreground">
+          Selección inspirada en lo publicado: Mitre, Rivas, Sierra de la Ventana, Belgrano, Nordelta y Paseo Victorica.
+        </p>
       </div>
-      <div class="flex w-full flex-col gap-4 md:w-auto md:min-w-[20rem] md:items-stretch">
+
+      <!-- Filtros: operación + zona (select + buscador dinámico desde PROPERTIES) -->
+      <div
+        appReveal
+        [appRevealDelay]="60"
+        class="w-full max-w-xl space-y-5 rounded-2xl border border-border/80 bg-background/80 p-5 shadow-soft backdrop-blur-sm md:p-6"
+      >
         <div class="flex flex-wrap gap-2" role="group" aria-label="Filtrar por operación">
           @for (item of [['todas','Todas'],['venta','Venta'],['alquiler','Alquiler']]; track item[0]) {
             <button
               type="button"
-              class="inline-flex h-9 items-center rounded-md px-4 text-sm font-medium transition"
-              [class.bg-primary]="filter() === item[0]"
-              [class.text-primary-foreground]="filter() === item[0]"
-              [class.border]="filter() !== item[0]"
-              [class.border-border]="filter() !== item[0]"
-              [class.bg-background]="filter() !== item[0]"
+              class="filter-chip"
+              [class.filter-chip-active]="filter() === item[0]"
+              [class.filter-chip-idle]="filter() !== item[0]"
               (click)="setFilter($any(item[0]))"
             >
               {{ item[1] }}
@@ -98,14 +132,13 @@
           }
         </div>
 
-        <!-- Zona: select + buscador (escala con N zonas; opciones desde PROPERTIES) -->
-        <div class="grid gap-3 sm:grid-cols-2">
+        <div class="grid gap-4 sm:grid-cols-2">
           <div class="flex min-w-0 flex-col gap-1.5">
             <label for="zone-select" class="text-xs font-semibold tracking-[0.12em] text-forest uppercase">Zona</label>
             <div class="relative">
               <select
                 id="zone-select"
-                class="h-10 w-full appearance-none rounded-md border border-border bg-background py-2 pr-9 pl-3 text-sm text-foreground shadow-sm outline-none transition focus:border-forest focus:ring-2 focus:ring-forest/25"
+                class="h-11 w-full appearance-none rounded-lg border border-border bg-background py-2 pr-9 pl-3.5 text-sm text-foreground outline-none transition focus:border-forest focus:ring-2 focus:ring-forest/20"
                 [ngModel]="zoneFilter()"
                 (ngModelChange)="onZoneSelect($event)"
                 aria-label="Filtrar por zona"
@@ -126,7 +159,7 @@
               list="zone-datalist"
               autocomplete="off"
               placeholder="Ej. Zona Norte…"
-              class="h-10 w-full rounded-md border border-border bg-background px-3 text-sm text-foreground shadow-sm outline-none transition placeholder:text-muted-foreground focus:border-forest focus:ring-2 focus:ring-forest/25"
+              class="h-11 w-full rounded-lg border border-border bg-background px-3.5 text-sm text-foreground outline-none transition placeholder:text-muted-foreground focus:border-forest focus:ring-2 focus:ring-forest/20"
               [ngModel]="zoneQuery()"
               (ngModelChange)="onZoneSearchInput($event)"
               (keydown.enter)="$event.preventDefault(); onZoneSearchCommit()"
@@ -143,48 +176,68 @@
     </div>
 
     @if (properties().length === 0) {
-      <div class="mt-14 space-y-3">
-        <p class="font-sans text-lg font-semibold text-forest-deep">Sin resultados en esta combinación</p>
-        <p class="max-w-md text-muted-foreground">Probá otra zona u operación, o volvé a «Todas las zonas» para ver el listado completo.</p>
+      <div class="mt-16 space-y-4">
+        <p class="font-display text-xl font-medium text-forest-deep">Sin resultados en esta combinación</p>
+        <p class="max-w-md text-muted-foreground">
+          Probá otra zona u operación, o volvé a «Todas las zonas» para ver el listado completo.
+        </p>
         <button
           type="button"
-          class="inline-flex h-9 items-center rounded-md border border-border bg-background px-4 text-sm font-medium hover:border-forest/40"
+          class="inline-flex h-10 items-center rounded-lg border border-border bg-background px-4 text-sm font-medium transition hover:border-forest/40"
           (click)="setFilter('todas'); setZoneFilter('todas')"
         >
           Ver todas las propiedades
         </button>
       </div>
     } @else {
-      <ul class="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+      <ul class="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
         @for (property of properties(); track property.id; let i = $index) {
-          <li appReveal [appRevealDelay]="i * 50" class="group">
-            <article>
+          <li appReveal [appRevealDelay]="i * 50">
+            <article class="prop-card">
               <a [routerLink]="['/propiedades', property.slug]" class="block">
-                <div class="relative aspect-[4/3] overflow-hidden">
+                <div class="relative aspect-[5/4] overflow-hidden">
                   <img
                     [src]="coverPhoto(property).src"
                     [alt]="coverPhoto(property).alt"
-                    class="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]"
+                    class="h-full w-full object-cover transition duration-700 ease-premium group-hover:scale-[1.05]"
                   />
-                  <div class="absolute inset-x-0 bottom-0 flex justify-between bg-gradient-to-t from-forest-deep/80 to-transparent p-3 pt-12">
-                    <span class="rounded bg-white/95 px-2 py-1 text-[11px] font-medium uppercase text-forest-deep">{{ property.operation }}</span>
-                    <span class="rounded bg-black/45 px-2 py-1 text-[11px] font-medium text-white">{{ property.photos.length }} fotos</span>
+                  <div class="absolute inset-0 bg-gradient-to-t from-forest-deep/70 via-transparent to-transparent opacity-90"></div>
+                  <div class="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-4">
+                    <span class="rounded-md bg-white/95 px-2.5 py-1 text-[11px] font-semibold tracking-wide text-forest-deep uppercase">
+                      {{ property.operation }}
+                    </span>
+                    <span class="text-[11px] font-medium text-white/90">{{ property.photos.length }} fotos</span>
                   </div>
                 </div>
-                <div class="mt-4 space-y-2">
-                  <p class="eyebrow text-[11px] text-forest">{{ property.type }}@if (property.highlight) { · {{ property.highlight }} }</p>
-                  <h3 class="font-sans text-lg font-semibold leading-snug text-forest-deep group-hover:text-forest">{{ property.title }}</h3>
+                <div class="space-y-2 px-4 pt-5 pb-5">
+                  <p class="eyebrow text-[10px] text-forest">
+                    {{ property.type }}@if (property.highlight) { · {{ property.highlight }} }
+                  </p>
+                  <h3 class="font-display text-xl font-medium leading-snug text-forest-deep transition group-hover:text-forest">
+                    {{ property.title }}
+                  </h3>
                   <p class="text-sm text-muted-foreground">{{ property.location }}</p>
-                  <p class="pt-1 font-medium">{{ property.priceLabel }}</p>
+                  <p class="pt-2 text-lg font-semibold tracking-tight text-forest-deep">{{ property.priceLabel }}</p>
                   <p class="text-sm text-muted-foreground">
                     {{ property.areaLabel }}
                     @if (property.beds != null) { · {{ property.beds }} dorm. }
                     @if (property.baths != null) { · {{ property.baths }} baños }
                   </p>
-                  <p class="pt-2 text-sm font-medium text-forest">Ver ficha y galería →</p>
+                  <p class="pt-3 text-sm font-semibold text-forest transition group-hover:translate-x-0.5">
+                    Ver ficha →
+                  </p>
                 </div>
               </a>
-              <a [href]="waFor(property.title, property.location)" target="_blank" rel="noopener noreferrer" class="inline-flex pt-2 text-sm text-muted-foreground underline underline-offset-4 hover:text-forest">Consultar por WhatsApp</a>
+              <div class="border-t border-border/60 px-4 py-3">
+                <a
+                  [href]="waFor(property.title, property.location)"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-sm text-muted-foreground underline underline-offset-4 transition hover:text-forest"
+                >
+                  Consultar por WhatsApp
+                </a>
+              </div>
             </article>
           </li>
         }
@@ -194,16 +247,16 @@
 </section>
 
 <!-- PROCESS -->
-<section id="proceso" class="mx-auto max-w-6xl px-5 py-20 md:px-8 md:py-28">
+<section id="proceso" class="mx-auto max-w-6xl px-5 py-24 md:px-8 md:py-32">
   <div appReveal>
     <p class="eyebrow text-forest">Proceso</p>
     <h2 class="section-title mt-4 max-w-2xl text-3xl text-forest-deep md:text-4xl">Cómo trabajamos con vos</h2>
   </div>
-  <ol class="mt-14 grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+  <ol class="mt-16 grid gap-12 md:grid-cols-2 lg:grid-cols-4">
     @for (item of process; track item.step; let i = $index) {
       <li appReveal [appRevealDelay]="i * 70">
         <p class="font-sans text-sm font-semibold tracking-[0.14em] text-stone-warm">{{ item.step }}</p>
-        <h3 class="mt-3 font-sans text-xl font-semibold leading-snug text-forest-deep md:text-2xl">{{ item.title }}</h3>
+        <h3 class="mt-4 font-display text-xl font-medium leading-snug text-forest-deep md:text-2xl">{{ item.title }}</h3>
         <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{{ item.description }}</p>
       </li>
     }
@@ -211,12 +264,12 @@
 </section>
 
 <!-- ABOUT -->
-<section id="trayectoria" class="border-y border-border bg-mist/50 py-20 md:py-28">
-  <div class="mx-auto grid max-w-6xl items-center gap-12 px-5 md:px-8 lg:grid-cols-[0.9fr_1.1fr]">
-    <div appReveal class="relative aspect-[4/5] overflow-hidden">
+<section id="trayectoria" class="border-y border-border/70 bg-mist/40 py-24 md:py-32">
+  <div class="mx-auto grid max-w-6xl items-center gap-14 px-5 md:px-8 lg:grid-cols-[0.9fr_1.1fr]">
+    <div appReveal class="relative aspect-[4/5] overflow-hidden rounded-2xl">
       <img src="/about/mariana.jpg" alt="Mariana Echeverría" class="h-full w-full object-cover object-top" />
-      <div class="absolute inset-0 bg-gradient-to-t from-forest-deep/55 to-transparent"></div>
-      <div class="absolute bottom-6 left-6 right-6">
+      <div class="absolute inset-0 bg-gradient-to-t from-forest-deep/60 to-transparent"></div>
+      <div class="absolute bottom-7 left-7 right-7">
         <p class="brand-title text-4xl text-white md:text-5xl">{{ contact.years }}</p>
         <p class="mt-2 font-sans text-sm font-medium tracking-[0.14em] text-stone-warm uppercase">años de oficio</p>
       </div>
@@ -229,15 +282,15 @@
           Abogada (UBA, 1998). Corredora inmobiliaria, tasadora y martillera pública ({{ contact.matricula }}). Servicio personalizado en Coronel Suárez, Zona Norte, CABA, Costa Argentina y Patagonia.
         </p>
       </div>
-      <ul appReveal [appRevealDelay]="80" class="mt-8 space-y-3 border-l border-forest/25 pl-5">
+      <ul appReveal [appRevealDelay]="80" class="mt-9 space-y-3.5 border-l border-forest/20 pl-5">
         @for (item of credentials; track item) {
           <li class="text-sm leading-relaxed text-foreground/90">{{ item }}</li>
         }
       </ul>
-      <div appReveal [appRevealDelay]="120" class="mt-10 grid gap-6 sm:grid-cols-2">
+      <div appReveal [appRevealDelay]="120" class="mt-12 grid gap-8 sm:grid-cols-2">
         @for (office of contact.offices; track office.name) {
           <div>
-            <h3 class="font-sans text-base font-semibold text-forest-deep">{{ office.name }}</h3>
+            <h3 class="font-display text-lg font-medium text-forest-deep">{{ office.name }}</h3>
             <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{{ office.address }}</p>
             <p class="mt-1 text-xs leading-relaxed text-muted-foreground/80">{{ office.detail }}</p>
           </div>
@@ -248,17 +301,19 @@
 </section>
 
 <!-- TESTIMONIALS -->
-<section id="testimonios" class="mx-auto max-w-6xl px-5 py-20 md:px-8 md:py-28">
+<section id="testimonios" class="mx-auto max-w-6xl px-5 py-24 md:px-8 md:py-32">
   <div appReveal>
     <p class="eyebrow text-forest">Voces</p>
     <h2 class="section-title mt-4 max-w-2xl text-3xl text-forest-deep md:text-4xl">Confianza operación a operación</h2>
   </div>
-  <ul class="mt-14 grid gap-8 md:grid-cols-3">
+  <ul class="mt-16 grid gap-10 md:grid-cols-3">
     @for (item of testimonials; track item.name; let i = $index) {
-      <li appReveal [appRevealDelay]="i * 80" class="flex h-full flex-col border-t border-border pt-6">
-        <blockquote class="flex-1 font-sans text-lg font-medium leading-relaxed text-forest-deep">“{{ item.quote }}”</blockquote>
-        <footer class="mt-6 text-sm text-muted-foreground">
-          <p class="font-medium text-foreground">{{ item.name }}</p>
+      <li appReveal [appRevealDelay]="i * 80" class="flex h-full flex-col border-t border-border pt-7">
+        <blockquote class="flex-1 font-display text-lg font-medium leading-relaxed text-forest-deep">
+          “{{ item.quote }}”
+        </blockquote>
+        <footer class="mt-7 text-sm text-muted-foreground">
+          <p class="font-semibold text-foreground">{{ item.name }}</p>
           <p>{{ item.place }}</p>
         </footer>
       </li>
@@ -267,22 +322,22 @@
 </section>
 
 <!-- FAQ -->
-<section id="faq" class="border-y border-border bg-mist/60 py-20 md:py-28">
+<section id="faq" class="border-y border-border/70 bg-mist/45 py-24 md:py-32">
   <div class="mx-auto max-w-6xl px-5 md:px-8">
     <div appReveal>
       <p class="eyebrow text-forest">FAQ</p>
       <h2 class="section-title mt-4 text-3xl text-forest-deep md:text-4xl">Preguntas frecuentes</h2>
     </div>
-    <div class="mt-12 divide-y divide-border border-y border-border">
+    <div class="mt-14 divide-y divide-border border-y border-border">
       @for (item of faqs; track item.q; let i = $index) {
-        <details appReveal [appRevealDelay]="i * 40" class="group py-5">
-          <summary class="cursor-pointer list-none font-sans text-lg font-semibold leading-snug text-forest-deep [&::-webkit-details-marker]:hidden">
+        <details appReveal [appRevealDelay]="i * 40" class="group py-6">
+          <summary class="cursor-pointer list-none font-display text-lg font-medium leading-snug text-forest-deep [&::-webkit-details-marker]:hidden">
             <span class="flex items-start justify-between gap-4">
               {{ item.q }}
               <span class="mt-1 shrink-0 text-stone-warm transition group-open:rotate-45">+</span>
             </span>
           </summary>
-          <p class="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground md:text-base">{{ item.a }}</p>
+          <p class="mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground md:text-base">{{ item.a }}</p>
         </details>
       }
     </div>
@@ -290,85 +345,163 @@
 </section>
 
 <!-- INSTAGRAM -->
-<section id="instagram" class="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
+<section id="instagram" class="mx-auto max-w-6xl px-5 py-20 md:px-8 md:py-28">
   <div appReveal>
     <p class="eyebrow text-forest">Instagram</p>
-    <h2 class="section-title mt-4 max-w-2xl text-3xl text-forest-deep md:text-4xl">Lo que más publica &#64;{{ contact.instagram }}</h2>
-    <p class="mt-4 max-w-xl leading-relaxed text-muted-foreground">Cuatro ejes del feed: avisos de venta y alquiler, lotes/desarrollos y tasaciones en el día.</p>
+    <h2 class="section-title mt-4 max-w-2xl text-3xl text-forest-deep md:text-4xl">
+      Lo que más publica &#64;{{ contact.instagram }}
+    </h2>
+    <p class="mt-5 max-w-xl leading-relaxed text-muted-foreground">
+      Cuatro ejes del feed: avisos de venta y alquiler, lotes/desarrollos y tasaciones en el día.
+    </p>
   </div>
-  <ul class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+  <ul class="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
     @for (item of instagramHighlights; track item.title; let i = $index) {
-      <li appReveal [appRevealDelay]="i * 60" class="border-t border-forest/25 pt-5">
-        <h3 class="font-sans text-lg font-semibold leading-snug text-forest-deep">{{ item.title }}</h3>
-        <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{{ item.detail }}</p>
+      <li appReveal [appRevealDelay]="i * 60" class="border-t border-forest/20 pt-6">
+        <h3 class="font-display text-lg font-medium leading-snug text-forest-deep">{{ item.title }}</h3>
+        <p class="mt-2.5 text-sm leading-relaxed text-muted-foreground">{{ item.detail }}</p>
       </li>
     }
   </ul>
-  <div appReveal [appRevealDelay]="120" class="mt-12 flex flex-wrap items-center gap-4 rounded-xl bg-gradient-to-r from-clay-deep via-forest to-[#e08a3a] px-6 py-8 text-primary-foreground shadow-brand md:px-10">
+  <div
+    appReveal
+    [appRevealDelay]="120"
+    class="mt-14 flex flex-wrap items-center gap-5 rounded-2xl bg-gradient-to-r from-clay-deep via-forest to-[#e08a3a] px-7 py-9 text-primary-foreground shadow-brand md:px-10"
+  >
     <div class="max-w-xl flex-1">
-      <p class="font-sans text-lg font-semibold leading-snug">Seguí novedades y avisos nuevos</p>
+      <p class="font-display text-xl font-medium leading-snug">Seguí novedades y avisos nuevos</p>
       <p class="mt-2 text-sm text-white/85">Publicación continua en &#64;{{ contact.instagram }} · consulta por WhatsApp.</p>
     </div>
-    <a [href]="contact.instagramUrl" target="_blank" rel="noopener noreferrer" class="inline-flex h-11 items-center rounded-md bg-stone-warm px-5 text-sm font-semibold text-forest-deep hover:bg-[#e8c056]">Abrir Instagram</a>
+    <a
+      [href]="contact.instagramUrl"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex h-11 items-center rounded-lg bg-stone-warm px-5 text-sm font-semibold text-forest-deep transition hover:bg-[#e8c056]"
+    >
+      Abrir Instagram
+    </a>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contacto" class="relative overflow-hidden bg-forest-deep text-primary-foreground">
-  <div class="relative mx-auto grid max-w-6xl gap-12 px-5 py-20 md:grid-cols-2 md:px-8 md:py-28">
+  <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#d06a28]/15 via-transparent to-[#e0b040]/10"></div>
+  <div class="relative mx-auto grid max-w-6xl gap-14 px-5 py-24 md:grid-cols-2 md:px-8 md:py-32">
     <div appReveal>
       <p class="eyebrow text-stone-warm">Contacto</p>
       <h2 class="section-title mt-4 text-3xl md:text-4xl">Pedí tu tasación en el día</h2>
-      <p class="mt-4 max-w-md leading-relaxed text-white/75">Contanos el inmueble: te respondemos por WhatsApp o email, como en Instagram.</p>
-      <dl class="mt-10 space-y-5 text-sm">
+      <p class="mt-5 max-w-md leading-relaxed text-white/70">
+        Contanos el inmueble: te respondemos por WhatsApp o email, como en Instagram.
+      </p>
+      <dl class="mt-12 space-y-6 text-sm">
         <div>
-          <dt class="tracking-[0.14em] text-white/50 uppercase">WhatsApp</dt>
-          <dd class="mt-1">
-            <a [href]="contact.whatsappUrl" target="_blank" rel="noopener noreferrer" class="text-base underline decoration-white/25 underline-offset-4">{{ contact.phoneDisplay }}</a>
-            <span class="text-white/55"> / {{ contact.phoneSecondary }}</span>
+          <dt class="tracking-[0.14em] text-white/45 uppercase">WhatsApp</dt>
+          <dd class="mt-1.5">
+            <a [href]="contact.whatsappUrl" target="_blank" rel="noopener noreferrer" class="text-base underline decoration-white/25 underline-offset-4 transition hover:text-stone-warm">
+              {{ contact.phoneDisplay }}
+            </a>
+            <span class="text-white/50"> / {{ contact.phoneSecondary }}</span>
           </dd>
         </div>
         <div>
-          <dt class="tracking-[0.14em] text-white/50 uppercase">Email</dt>
-          <dd class="mt-1"><a [href]="'mailto:' + contact.email" class="text-base underline decoration-white/25 underline-offset-4">{{ contact.email }}</a></dd>
+          <dt class="tracking-[0.14em] text-white/45 uppercase">Email</dt>
+          <dd class="mt-1.5">
+            <a [href]="'mailto:' + contact.email" class="text-base underline decoration-white/25 underline-offset-4 transition hover:text-stone-warm">
+              {{ contact.email }}
+            </a>
+          </dd>
         </div>
         <div>
-          <dt class="tracking-[0.14em] text-white/50 uppercase">Instagram</dt>
-          <dd class="mt-1"><a [href]="contact.instagramUrl" target="_blank" rel="noopener noreferrer" class="text-base underline decoration-white/25 underline-offset-4">&#64;{{ contact.instagram }}</a></dd>
+          <dt class="tracking-[0.14em] text-white/45 uppercase">Instagram</dt>
+          <dd class="mt-1.5">
+            <a [href]="contact.instagramUrl" target="_blank" rel="noopener noreferrer" class="text-base underline decoration-white/25 underline-offset-4 transition hover:text-stone-warm">
+              &#64;{{ contact.instagram }}
+            </a>
+          </dd>
         </div>
       </dl>
     </div>
 
-    <form appReveal [appRevealDelay]="100" class="space-y-5 rounded-xl border border-white/10 bg-white/5 p-5 md:p-7" (submit)="submitForm($event)" novalidate>
+    <form
+      appReveal
+      [appRevealDelay]="100"
+      class="space-y-5 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm md:p-8"
+      (submit)="submitForm($event)"
+      novalidate
+    >
       <div class="space-y-2">
         <label for="name" class="text-sm text-white/90">Nombre</label>
-        <input id="name" name="name" [(ngModel)]="name" class="h-10 w-full rounded-md border border-white/20 bg-white/10 px-3 text-white placeholder:text-white/45" placeholder="Tu nombre" />
+        <input
+          id="name"
+          name="name"
+          [(ngModel)]="name"
+          class="h-11 w-full rounded-lg border border-white/20 bg-white/10 px-3.5 text-white placeholder:text-white/40"
+          placeholder="Tu nombre"
+        />
       </div>
       <div class="grid gap-5 sm:grid-cols-2">
         <div class="space-y-2">
           <label for="email" class="text-sm text-white/90">Email</label>
-          <input id="email" type="email" name="email" [(ngModel)]="email" class="h-10 w-full rounded-md border border-white/20 bg-white/10 px-3 text-white placeholder:text-white/45" placeholder="tu@email.com" />
+          <input
+            id="email"
+            type="email"
+            name="email"
+            [(ngModel)]="email"
+            class="h-11 w-full rounded-lg border border-white/20 bg-white/10 px-3.5 text-white placeholder:text-white/40"
+            placeholder="tu@email.com"
+          />
         </div>
         <div class="space-y-2">
           <label for="phone" class="text-sm text-white/90">Teléfono</label>
-          <input id="phone" type="tel" name="phone" [(ngModel)]="phone" class="h-10 w-full rounded-md border border-white/20 bg-white/10 px-3 text-white placeholder:text-white/45" placeholder="11 ..." />
+          <input
+            id="phone"
+            type="tel"
+            name="phone"
+            [(ngModel)]="phone"
+            class="h-11 w-full rounded-lg border border-white/20 bg-white/10 px-3.5 text-white placeholder:text-white/40"
+            placeholder="11 ..."
+          />
         </div>
       </div>
       <div class="grid gap-5 sm:grid-cols-2">
         <div class="space-y-2">
           <label for="propertyType" class="text-sm text-white/90">Tipo de propiedad</label>
-          <input id="propertyType" name="propertyType" [(ngModel)]="propertyType" class="h-10 w-full rounded-md border border-white/20 bg-white/10 px-3 text-white placeholder:text-white/45" placeholder="Casa, depto, lote, campo..." />
+          <input
+            id="propertyType"
+            name="propertyType"
+            [(ngModel)]="propertyType"
+            class="h-11 w-full rounded-lg border border-white/20 bg-white/10 px-3.5 text-white placeholder:text-white/40"
+            placeholder="Casa, depto, lote, campo..."
+          />
         </div>
         <div class="space-y-2">
           <label for="operation" class="text-sm text-white/90">Operación</label>
-          <input id="operation" name="operation" [(ngModel)]="operation" class="h-10 w-full rounded-md border border-white/20 bg-white/10 px-3 text-white placeholder:text-white/45" placeholder="Venta, alquiler, tasación..." />
+          <input
+            id="operation"
+            name="operation"
+            [(ngModel)]="operation"
+            class="h-11 w-full rounded-lg border border-white/20 bg-white/10 px-3.5 text-white placeholder:text-white/40"
+            placeholder="Venta, alquiler, tasación..."
+          />
         </div>
       </div>
       <div class="space-y-2">
         <label for="message" class="text-sm text-white/90">Mensaje</label>
-        <textarea id="message" name="message" rows="4" [(ngModel)]="message" class="w-full rounded-md border border-white/20 bg-white/10 px-3 py-2 text-white placeholder:text-white/45" placeholder="Ubicación y detalles útiles"></textarea>
+        <textarea
+          id="message"
+          name="message"
+          rows="4"
+          [(ngModel)]="message"
+          class="w-full rounded-lg border border-white/20 bg-white/10 px-3.5 py-2.5 text-white placeholder:text-white/40"
+          placeholder="Ubicación y detalles útiles"
+        ></textarea>
       </div>
-      <button type="submit" class="inline-flex h-11 w-full items-center justify-center rounded-md bg-stone-warm px-5 text-sm font-semibold text-forest-deep hover:bg-[#e8c056] sm:w-auto">Enviar por WhatsApp</button>
+      <button
+        type="submit"
+        class="inline-flex h-11 w-full items-center justify-center rounded-lg bg-stone-warm px-5 text-sm font-semibold text-forest-deep transition hover:bg-[#e8c056] sm:w-auto"
+      >
+        Enviar por WhatsApp
+      </button>
       <p
         class="min-h-5 text-sm"
         [class.text-red-200]="formState() === 'error'"

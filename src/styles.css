@@ -10,9 +10,9 @@
   body {
     @apply bg-background font-sans text-foreground antialiased;
     background-image:
-      radial-gradient(ellipse 90% 55% at 8% -8%, rgb(208 106 40 / 0.12), transparent 55%),
-      radial-gradient(ellipse 70% 45% at 96% 12%, rgb(224 176 64 / 0.16), transparent 50%),
-      linear-gradient(180deg, #f7f1e6 0%, #f3ebe0 100%);
+      radial-gradient(ellipse 80% 50% at 0% 0%, rgb(208 106 40 / 0.08), transparent 55%),
+      radial-gradient(ellipse 60% 40% at 100% 8%, rgb(224 176 64 / 0.1), transparent 48%),
+      linear-gradient(180deg, #faf7f2 0%, #f6f1ea 100%);
     background-attachment: fixed;
   }
 
@@ -35,7 +35,7 @@
 @keyframes hero-rise {
   from {
     opacity: 0;
-    transform: translateY(0.75rem);
+    transform: translateY(0.9rem);
   }
   to {
     opacity: 1;
@@ -45,22 +45,35 @@
 
 @keyframes hero-ken-burns {
   from {
-    transform: scale(1.06);
+    transform: scale(1.08);
   }
   to {
     transform: scale(1);
   }
 }
 
+@keyframes soft-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .animate-hero-rise {
-  animation: hero-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: hero-rise 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .animate-hero-image {
-  animation: hero-ken-burns 10s ease-out both;
+  animation: hero-ken-burns 12s ease-out both;
 }
 
-/* Títulos alineados al logo: sans bold, tracking amplio */
+.animate-soft-fade {
+  animation: soft-fade 0.9s ease-out both;
+}
+
+/* Títulos: sans bold para marca; display serif para secciones */
 .brand-title {
   font-family: "Source Sans 3", system-ui, sans-serif;
   font-weight: 700;
@@ -70,10 +83,10 @@
 }
 
 .section-title {
-  font-family: "Source Sans 3", system-ui, sans-serif;
-  font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: 0.02em;
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 550;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
 .eyebrow {
@@ -101,5 +114,27 @@
     transition:
       opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
       transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+@layer components {
+  .filter-chip {
+    @apply inline-flex h-10 items-center rounded-lg px-4 text-sm font-medium transition duration-300;
+  }
+
+  .filter-chip-active {
+    @apply bg-forest-deep text-white shadow-soft;
+  }
+
+  .filter-chip-idle {
+    @apply border border-border/80 bg-background/80 text-foreground/80 hover:border-forest/35 hover:text-forest-deep;
+  }
+
+  .prop-card {
+    @apply group block overflow-hidden rounded-2xl bg-background/60 transition duration-500 ease-premium;
+  }
+
+  .prop-card:hover {
+    @apply -translate-y-1 shadow-card;
   }
 }
