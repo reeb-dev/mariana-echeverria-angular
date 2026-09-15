@@ -14,19 +14,32 @@ export function Reveal({ children, className = "", delayMs = 0 }: RevealProps) {
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    node.classList.add("will-animate");
+
+    const show = () => {
+      node.classList.add("in-view");
+    };
+
+    const fallback = window.setTimeout(show, 900);
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          node.classList.add("is-visible");
+          show();
+          window.clearTimeout(fallback);
           observer.unobserve(node);
         }
       },
-      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.08 }
     );
-
     observer.observe(node);
-    return () => observer.disconnect();
+
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(fallback);
+    };
   }, []);
 
   return (
