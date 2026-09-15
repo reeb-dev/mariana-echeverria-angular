@@ -1,6 +1,8 @@
 import { NgClass } from '@angular/common';
-import { Component, HostListener, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, HostListener, computed, inject, signal } from '@angular/core';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { CONTACT } from '../data/properties';
 import { BrandLogoComponent } from './brand-logo.component';
 
@@ -13,7 +15,7 @@ import { BrandLogoComponent } from './brand-logo.component';
       <div
         class="border-b transition-colors duration-300"
         [ngClass]="
-          scrolled() || open()
+          solid()
             ? 'border-stone-warm/30 bg-forest-deep text-primary-foreground'
             : 'border-white/10 bg-forest-deep/90 text-primary-foreground backdrop-blur-md'
         "
@@ -40,7 +42,7 @@ import { BrandLogoComponent } from './brand-logo.component';
       <header
         class="transition-all duration-300"
         [ngClass]="
-          scrolled() || open()
+          solid()
             ? 'border-b border-border/60 bg-background/92 text-foreground shadow-soft backdrop-blur-xl'
             : 'bg-transparent text-white'
         "
@@ -49,7 +51,7 @@ import { BrandLogoComponent } from './brand-logo.component';
           <a routerLink="/" fragment="inicio" class="block shrink-0 drop-shadow-sm">
             <app-brand-logo
               size="md"
-              [tone]="scrolled() || open() ? 'on-light' : 'on-dark'"
+              [tone]="solid() ? 'on-light' : 'on-dark'"
             />
           </a>
 
@@ -60,7 +62,7 @@ import { BrandLogoComponent } from './brand-logo.component';
                 [fragment]="link.fragment"
                 class="transition"
                 [ngClass]="
-                  scrolled() || open()
+                  solid()
                     ? 'text-foreground/70 hover:text-forest'
                     : 'text-white/80 hover:text-stone-warm'
                 "
@@ -77,7 +79,7 @@ import { BrandLogoComponent } from './brand-logo.component';
               rel="noopener noreferrer"
               class="rounded-lg px-3.5 py-2 text-sm font-semibold transition"
               [ngClass]="
-                scrolled() || open()
+                solid()
                   ? 'bg-forest text-white hover:bg-clay-deep'
                   : 'bg-stone-warm text-forest-deep hover:bg-[#e8c056]'
               "
@@ -88,7 +90,7 @@ import { BrandLogoComponent } from './brand-logo.component';
               type="button"
               class="inline-flex h-9 w-9 items-center justify-center rounded-lg border md:hidden"
               [ngClass]="
-                scrolled() || open()
+                solid()
                   ? 'border-border text-foreground'
                   : 'border-white/30 text-white'
               "
@@ -133,6 +135,8 @@ import { BrandLogoComponent } from './brand-logo.component';
   `,
 })
 export class SiteNavComponent {
+  private readonly router = inject(Router);
+
   readonly contact = CONTACT;
   readonly open = signal(false);
   readonly scrolled = signal(false);
@@ -144,6 +148,19 @@ export class SiteNavComponent {
     { fragment: 'trayectoria', label: 'Trayectoria' },
     { fragment: 'contacto', label: 'Contacto' },
   ];
+
+  /** Rutas sin hero a pantalla completa: nav sólido (evita texto blanco sobre fondo crema). */
+  private readonly url = toSignal(
+    this.router.events.pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd)),
+    { initialValue: null }
+  );
+
+  readonly onInnerPage = computed(() => {
+    const path = (this.url()?.urlAfterRedirects ?? this.router.url).split('?')[0].split('#')[0];
+    return path !== '/' && path !== '';
+  });
+
+  readonly solid = computed(() => this.scrolled() || this.open() || this.onInnerPage());
 
   @HostListener('window:scroll')
   onScroll() {

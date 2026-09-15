@@ -1,10 +1,11 @@
 @if (!property) {
-  <div class="mx-auto max-w-3xl px-5 py-24 text-center">
+  <div class="mx-auto max-w-3xl px-5 pt-[8.25rem] pb-24 text-center md:pt-[8.75rem]">
     <h1 class="section-title text-3xl text-forest-deep">Propiedad no encontrada</h1>
     <a routerLink="/" fragment="propiedades" class="mt-6 inline-block text-forest underline">Volver al listado</a>
   </div>
 } @else {
-  <div class="min-h-full bg-background">
+  <!-- pt compensa top bar + nav fijos (~132–140px); evita que el borde del header corte el logo -->
+  <div class="min-h-full bg-background pt-[8.25rem] md:pt-[8.75rem]">
     <header class="border-b border-border bg-background/95">
       <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 md:px-8">
         <a routerLink="/" fragment="propiedades" class="text-sm text-muted-foreground hover:text-forest">← Volver a propiedades</a>
@@ -21,7 +22,7 @@
           <app-property-gallery [photos]="property.photos" [title]="property.title" />
         </section>
 
-        <aside class="space-y-6 lg:sticky lg:top-24 lg:self-start">
+        <aside class="space-y-6 lg:sticky lg:top-[8.75rem] lg:self-start">
           <div>
             <p class="text-xs tracking-[0.18em] text-forest uppercase">{{ property.operation }} · {{ property.type }}</p>
             <h1 class="section-title mt-3 text-2xl text-forest-deep md:text-3xl">{{ property.title }}</h1>
