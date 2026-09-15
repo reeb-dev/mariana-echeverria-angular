@@ -8,6 +8,7 @@ No es el sitio oficial.
 
 - Angular 19 (standalone components)
 - Tailwind CSS 3
+- Tipografía: Libre Baskerville (marca/títulos) + Source Sans 3 (cuerpo)
 - Angular Router (landing + fichas `/propiedades/:slug`)
 
 ## Cómo correrlo
@@ -25,9 +26,10 @@ Build de producción:
 npm run build
 ```
 
-## Contenido
+## Contenido (inspirado en el feed de Instagram)
 
-- Landing con hero, zonas, servicios, proceso, trayectoria, testimonios, FAQ y contacto
-- Listado filtrable con enlace a ficha
-- Ficha de propiedad con galería (captions, thumbs, flechas), descripción y amenities
-- WhatsApp flotante y formulario que abre WhatsApp
+- Hero con marca clara, sin tipografías superpuestas
+- Servicios: venta, alquiler/arrendamientos, tasaciones en el día, home staging, derecho inmobiliario
+- Avisos demo al estilo del feed (Mitre, Rivas, Sierra de la Ventana, Nordelta, Paseo Victorica, etc.)
+- Bloque “Lo que más publica” con los ejes del Instagram
+- Ficha de propiedad con galería, WhatsApp flotante y formulario a WhatsApp
