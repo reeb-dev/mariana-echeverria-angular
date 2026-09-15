@@ -216,7 +216,7 @@ export const FAQS = [
   },
 ] as const;
 
-/** Inventario demo (CS urbano, lotes, alquileres, Zona Norte). Galerías: avisos públicos CS + Unsplash Zona Norte — ver public/properties/SOURCES.md (no Instagram). */
+/** Inventario demo (CS urbano, lotes, alquileres, Zona Norte). Galerías: fotos de avisos públicos (Pogost, Ferrari, Galeazzi, BG, Argenprop, etc.) en public/properties — ver SOURCES.md. No Instagram. */
 export const PROPERTIES: Property[] = [
   {
     id: '1',
@@ -234,7 +234,7 @@ export const PROPERTIES: Property[] = [
     description:
       'Casa en Mitre 2000, Coronel Suárez. Living-comedor, cocina, dormitorios y patio. Precio visible, fotos del circuito inmobiliario de Coronel Suárez y consulta directa por WhatsApp.',
     amenities: ['Patio', 'Garage', 'Cocina separada', 'Barrio consolidado', 'Cerca del centro'],
-    photos: [
+        photos: [
       {
         src: '/properties/casa-mitre/01.jpg',
         alt: 'Fachada',
@@ -257,33 +257,13 @@ export const PROPERTIES: Property[] = [
       },
       {
         src: '/properties/casa-mitre/05.jpg',
-        alt: 'Baño',
-        caption: 'Baño',
-      },
-      {
-        src: '/properties/casa-mitre/06.jpg',
         alt: 'Patio',
         caption: 'Patio',
       },
       {
-        src: '/properties/casa-mitre/07.jpg',
+        src: '/properties/casa-mitre/06.jpg',
         alt: 'Garage',
         caption: 'Garage',
-      },
-      {
-        src: '/properties/casa-mitre/08.jpg',
-        alt: 'Exterior',
-        caption: 'Exterior',
-      },
-      {
-        src: '/properties/casa-mitre/09.jpg',
-        alt: 'Ambiente',
-        caption: 'Ambiente',
-      },
-      {
-        src: '/properties/casa-mitre/10.jpg',
-        alt: 'Detalle',
-        caption: 'Detalle',
       },
     ],
   },
@@ -303,7 +283,7 @@ export const PROPERTIES: Property[] = [
     description:
       'Departamento en Rivas 200, listo para habitar. Dos dormitorios, living y cocina. Ubicación, precio mensual y consulta rápida por WhatsApp.',
     amenities: ['Luminoso', 'Cocina equipada', 'Cerca de servicios', 'Segundo piso'],
-    photos: [
+        photos: [
       {
         src: '/properties/depto-rivas/01.jpg',
         alt: 'Living',
@@ -311,8 +291,8 @@ export const PROPERTIES: Property[] = [
       },
       {
         src: '/properties/depto-rivas/02.jpg',
-        alt: 'Dormitorio',
-        caption: 'Dormitorio',
+        alt: 'Ambiente',
+        caption: 'Ambiente',
       },
       {
         src: '/properties/depto-rivas/03.jpg',
@@ -321,38 +301,18 @@ export const PROPERTIES: Property[] = [
       },
       {
         src: '/properties/depto-rivas/04.jpg',
+        alt: 'Dormitorio',
+        caption: 'Dormitorio',
+      },
+      {
+        src: '/properties/depto-rivas/05.jpg',
         alt: 'Baño',
         caption: 'Baño',
       },
       {
-        src: '/properties/depto-rivas/05.jpg',
-        alt: 'Ambiente',
-        caption: 'Ambiente',
-      },
-      {
         src: '/properties/depto-rivas/06.jpg',
-        alt: 'Pasillo',
-        caption: 'Pasillo',
-      },
-      {
-        src: '/properties/depto-rivas/07.jpg',
-        alt: 'Vista',
-        caption: 'Vista',
-      },
-      {
-        src: '/properties/depto-rivas/08.jpg',
-        alt: 'Detalle',
-        caption: 'Detalle',
-      },
-      {
-        src: '/properties/depto-rivas/09.jpg',
         alt: 'Estar',
         caption: 'Estar',
-      },
-      {
-        src: '/properties/depto-rivas/10.jpg',
-        alt: 'Comedor',
-        caption: 'Comedor',
       },
     ],
   },
@@ -370,7 +330,7 @@ export const PROPERTIES: Property[] = [
     description:
       'Lote en Juan Bautista Gil, Sierra de la Ventana. Ideal vivienda de fin de semana o inversión. Ubicación, precio y contacto inmediato por WhatsApp.',
     amenities: ['Entorno serrano', 'Para construir', 'Inversión', 'Escritura'],
-    photos: [
+        photos: [
       {
         src: '/properties/lote-sierra/01.jpg',
         alt: 'Vista del lote',
@@ -378,38 +338,28 @@ export const PROPERTIES: Property[] = [
       },
       {
         src: '/properties/lote-sierra/02.jpg',
-        alt: 'Entorno',
-        caption: 'Entorno',
+        alt: 'Entorno serrano',
+        caption: 'Entorno serrano',
       },
       {
         src: '/properties/lote-sierra/03.jpg',
-        alt: 'Vegetación',
-        caption: 'Vegetación',
-      },
-      {
-        src: '/properties/lote-sierra/04.jpg',
         alt: 'Horizonte',
         caption: 'Horizonte',
       },
       {
-        src: '/properties/lote-sierra/05.jpg',
-        alt: 'Acceso',
-        caption: 'Acceso',
+        src: '/properties/lote-sierra/04.jpg',
+        alt: 'Vegetación',
+        caption: 'Vegetación',
       },
       {
-        src: '/properties/lote-sierra/06.jpg',
+        src: '/properties/lote-sierra/05.jpg',
         alt: 'Relieve',
         caption: 'Relieve',
       },
       {
-        src: '/properties/lote-sierra/07.jpg',
-        alt: 'Panorámica',
-        caption: 'Panorámica',
-      },
-      {
-        src: '/properties/lote-sierra/08.jpg',
-        alt: 'Referencia',
-        caption: 'Referencia',
+        src: '/properties/lote-sierra/06.jpg',
+        alt: 'Paisaje',
+        caption: 'Paisaje',
       },
     ],
   },
@@ -427,7 +377,7 @@ export const PROPERTIES: Property[] = [
     description:
       'Local comercial en Belgrano 1200 con buena exposición. Apto comercio o servicio profesional. Ubicación, precio y consulta por WhatsApp.',
     amenities: ['Vidriera', 'Zona comercial', 'Baño', 'Alta circulación'],
-    photos: [
+        photos: [
       {
         src: '/properties/local-belgrano/01.jpg',
         alt: 'Frente',
@@ -435,8 +385,8 @@ export const PROPERTIES: Property[] = [
       },
       {
         src: '/properties/local-belgrano/02.jpg',
-        alt: 'Salón',
-        caption: 'Salón',
+        alt: 'Vidriera',
+        caption: 'Vidriera',
       },
       {
         src: '/properties/local-belgrano/03.jpg',
@@ -445,8 +395,8 @@ export const PROPERTIES: Property[] = [
       },
       {
         src: '/properties/local-belgrano/04.jpg',
-        alt: 'Vidriera',
-        caption: 'Vidriera',
+        alt: 'Salón',
+        caption: 'Salón',
       },
       {
         src: '/properties/local-belgrano/05.jpg',
@@ -457,26 +407,6 @@ export const PROPERTIES: Property[] = [
         src: '/properties/local-belgrano/06.jpg',
         alt: 'Detalle',
         caption: 'Detalle',
-      },
-      {
-        src: '/properties/local-belgrano/07.jpg',
-        alt: 'Baño',
-        caption: 'Baño',
-      },
-      {
-        src: '/properties/local-belgrano/08.jpg',
-        alt: 'Depósito',
-        caption: 'Depósito',
-      },
-      {
-        src: '/properties/local-belgrano/09.jpg',
-        alt: 'Acceso',
-        caption: 'Acceso',
-      },
-      {
-        src: '/properties/local-belgrano/10.jpg',
-        alt: 'Lateral',
-        caption: 'Lateral',
       },
     ],
   },
@@ -496,7 +426,7 @@ export const PROPERTIES: Property[] = [
     description:
       'Chalet en Nordelta con jardín y amenities del barrio. Representa la línea Zona Norte que también difundimos desde la Sucursal Tigre: producto premium, fotos cuidadas y atención personalizada.',
     amenities: ['Pileta', 'Jardín', 'Cochera', 'Suite', 'Barrio cerrado', 'Seguridad'],
-    photos: [
+        photos: [
       {
         src: '/properties/chalet-nordelta/01.jpg',
         alt: 'Fachada',
@@ -527,16 +457,6 @@ export const PROPERTIES: Property[] = [
         alt: 'Pileta',
         caption: 'Pileta',
       },
-      {
-        src: '/properties/chalet-nordelta/07.jpg',
-        alt: 'Ambiente',
-        caption: 'Ambiente',
-      },
-      {
-        src: '/properties/chalet-nordelta/08.jpg',
-        alt: 'Detalle',
-        caption: 'Detalle',
-      },
     ],
   },
   {
@@ -553,9 +473,9 @@ export const PROPERTIES: Property[] = [
     areaLabel: '75 m²',
     highlight: 'Frente al río',
     description:
-      'Departamento en Paseo Victorica, Tigre. Ubicación sobre el río, ideal vivienda o inversión. Representa la línea Zona Norte que comparte en el feed junto a los avisos de Coronel Suárez.',
+      'Departamento en Paseo Victorica, Tigre. Ubicación sobre el río, ideal vivienda o inversión. Representa la línea Zona Norte: ubicación sobre el río, ficha con fotos de avisos públicos y consulta por WhatsApp.',
     amenities: ['Vista abierta', 'Balcón', 'Amenities', 'Cerca del centro de Tigre'],
-    photos: [
+        photos: [
       {
         src: '/properties/depto-victorica/01.jpg',
         alt: 'Living',
@@ -602,7 +522,7 @@ export const PROPERTIES: Property[] = [
     description:
       'Últimos lotes en desarrollo de San José (Berutti). Precio accesible para quien busca terreno propio. Últimos lotes: ubicación accesible y valor a consultar.',
     amenities: ['Servicios cercanos', 'Financiación a consultar', 'Zona en crecimiento'],
-    photos: [
+        photos: [
       {
         src: '/properties/lotes-sanjose/01.jpg',
         alt: 'Lote',
@@ -649,7 +569,7 @@ export const PROPERTIES: Property[] = [
     description:
       'Campo disponible para arrendamiento en el partido. Operaciones rurales con la misma seriedad que las urbanas: contrato claro y seguimiento. Consultá disponibilidad y condiciones por WhatsApp.',
     amenities: ['Aptitud mixta', 'Acceso consolidado', 'Contrato de arrendamiento'],
-    photos: [
+        photos: [
       {
         src: '/properties/campo/01.jpg',
         alt: 'Vista general',
@@ -667,8 +587,8 @@ export const PROPERTIES: Property[] = [
       },
       {
         src: '/properties/campo/04.jpg',
-        alt: 'Acceso',
-        caption: 'Acceso',
+        alt: 'Cultivo',
+        caption: 'Cultivo',
       },
       {
         src: '/properties/campo/05.jpg',
@@ -679,11 +599,6 @@ export const PROPERTIES: Property[] = [
         src: '/properties/campo/06.jpg',
         alt: 'Panorámica',
         caption: 'Panorámica',
-      },
-      {
-        src: '/properties/campo/07.jpg',
-        alt: 'Cultivo',
-        caption: 'Cultivo',
       },
     ],
   },

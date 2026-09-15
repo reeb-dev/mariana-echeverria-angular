@@ -1,13 +1,10 @@
 # Origen de las fotos de propiedades
 
-## Instagram
-Handle confirmado en CONTACT: **@coronelsuarezbienesraices**.
+Fotos **descargadas localmente** desde avisos públicos del mercado inmobiliario argentino
+(Pogost, Ferrari, Galeazzi, Verdechia, BG Propiedades, Argenprop CDN / Zonaprop CDN).
 
-Al 2026-09-15 el perfil público exige login; no se pudieron obtener imágenes del feed ni de scrapers/CDN sin credenciales.
+**No** son del Instagram `@coronelsuarezbienesraices`.
+**No** son stock Unsplash.
+**No** se usan hotlinks: las rutas `/properties/{carpeta}/0N.jpg` pasan por el pipe `assetUrl` (baseHref de GitHub Pages).
 
-## Qué usamos en su lugar
-- **Coronel Suárez / Sierra / San José / campo**: fotos de avisos públicos en [coronelsuarezpropiedades.com.ar](https://coronelsuarezpropiedades.com.ar/), alineados por tipo, zona o calle a cada ficha del inventario demo.
-- **Zona Norte (Nordelta / Paseo Victorica)**: sin avisos equivalentes en ese portal → se mantienen fotos de **stock Unsplash** ya descargadas.
-
-**No** son (ni se presentan como) capturas del Instagram de Mariana.
 Detalle por carpeta: `SOURCES.json`.
