@@ -131,7 +131,7 @@
   }
 
   .prop-card {
-    @apply group block overflow-hidden rounded-2xl bg-background/60 transition duration-500 ease-premium;
+    @apply block overflow-hidden rounded-2xl bg-background/60 transition duration-500 ease-premium;
   }
 
   .prop-card:hover {

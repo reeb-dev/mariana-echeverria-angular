@@ -36,7 +36,7 @@
     </h1>
     <p
       class="animate-hero-rise mt-5 max-w-md text-base leading-relaxed text-white md:text-lg"
-      style="animation-delay:300ms; text-shadow:0 2px 14px rgba(28,22,18,0.95)"
+      style="animation-delay:300ms; color:#fff; text-shadow:0 2px 14px rgba(28,22,18,0.95)"
     >
       Avisos claros de Coronel Suárez, Zona Norte, lotes y campos — con respaldo de abogada en derecho inmobiliario.
     </p>
@@ -193,7 +193,7 @@
       <ul class="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
         @for (property of properties(); track property.id; let i = $index) {
           <li appReveal [appRevealDelay]="i * 50">
-            <article class="prop-card">
+            <article class="prop-card group">
               <a [routerLink]="['/propiedades', property.slug]" class="block">
                 <div class="relative aspect-[5/4] overflow-hidden">
                   <img
