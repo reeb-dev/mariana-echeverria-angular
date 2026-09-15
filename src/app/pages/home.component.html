@@ -95,7 +95,19 @@
           }
         </div>
         <div class="flex flex-wrap gap-2" role="group" aria-label="Filtrar por zona">
-          @for (item of zoneFilters; track item.id) {
+          <button
+            type="button"
+            class="inline-flex h-9 items-center rounded-md px-4 text-sm font-medium"
+            [class.bg-primary]="zoneFilter() === 'todas'"
+            [class.text-primary-foreground]="zoneFilter() === 'todas'"
+            [class.border]="zoneFilter() !== 'todas'"
+            [class.border-border]="zoneFilter() !== 'todas'"
+            [class.bg-background]="zoneFilter() !== 'todas'"
+            (click)="setZoneFilter('todas')"
+          >
+            Todas las zonas
+          </button>
+          @for (item of zoneOptions(); track item.id) {
             <button
               type="button"
               class="inline-flex h-9 items-center rounded-md px-4 text-sm font-medium"
@@ -113,10 +125,10 @@
       </div>
     </div>
 
-    @if (properties.length === 0) {
+    @if (properties().length === 0) {
       <div class="mt-14 space-y-3">
         <p class="font-sans text-lg font-semibold text-forest-deep">Sin resultados en esta combinación</p>
-        <p class="max-w-md text-muted-foreground">Probá otra zona u operación, o volvé a «Todas» para ver el listado completo.</p>
+        <p class="max-w-md text-muted-foreground">Probá otra zona u operación, o volvé a «Todas las zonas» para ver el listado completo.</p>
         <button
           type="button"
           class="inline-flex h-9 items-center rounded-md border border-border bg-background px-4 text-sm font-medium hover:border-forest/40"
@@ -127,7 +139,7 @@
       </div>
     } @else {
       <ul class="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-        @for (property of properties; track property.id; let i = $index) {
+        @for (property of properties(); track property.id; let i = $index) {
           <li appReveal [appRevealDelay]="i * 50" class="group">
             <article>
               <a [routerLink]="['/propiedades', property.slug]" class="block">

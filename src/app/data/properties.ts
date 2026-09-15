@@ -1,8 +1,6 @@
 export type PropertyOperation = 'venta' | 'alquiler';
-export type PropertyZone =
-  | 'coronel-suarez'
-  | 'zona-norte'
-  | 'sierra-ventana';
+/** Slug de zona; nuevas zonas en PROPERTIES aparecen solas en el filtro. */
+export type PropertyZone = string;
 export type PropertyType =
   | 'casa'
   | 'departamento'
@@ -34,13 +32,33 @@ export type Property = {
   photos: PropertyPhoto[];
 };
 
-/** Chips de filtro de zona (coherentes con el inventario demo) */
-export const ZONE_FILTERS: { id: 'todas' | PropertyZone; label: string }[] = [
-  { id: 'todas', label: 'Todas' },
-  { id: 'coronel-suarez', label: 'Coronel Suárez' },
-  { id: 'zona-norte', label: 'Zona Norte' },
-  { id: 'sierra-ventana', label: 'Sierra de la Ventana' },
-];
+/** Etiquetas legibles; si falta, se deriva del slug. */
+export const ZONE_LABELS: Record<string, string> = {
+  'coronel-suarez': 'Coronel Suárez',
+  'zona-norte': 'Zona Norte',
+  'sierra-ventana': 'Sierra de la Ventana',
+  'costa-argentina': 'Costa Argentina',
+};
+
+export function labelForZone(zone: PropertyZone): string {
+  const known = ZONE_LABELS[zone];
+  if (known) return known;
+  return zone
+    .split('-')
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
+}
+
+/** Opciones de filtro derivadas del inventario (únicas, A–Z). */
+export function zoneFilterOptionsFrom(
+  properties: readonly Property[]
+): { id: PropertyZone; label: string }[] {
+  const unique = [...new Set(properties.map((p) => p.zone).filter(Boolean))];
+  return unique
+    .map((id) => ({ id, label: labelForZone(id) }))
+    .sort((a, b) => a.label.localeCompare(b.label, 'es'));
+}
 
 export const CONTACT = {
   brand: 'Mariana Echeverría',

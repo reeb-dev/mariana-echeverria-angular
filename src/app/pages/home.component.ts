@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { RevealDirective } from '../directives/reveal.directive';
@@ -11,9 +11,9 @@ import {
   PROPERTIES,
   SERVICES,
   TESTIMONIALS,
-  ZONE_FILTERS,
   ZONES,
   coverPhoto,
+  zoneFilterOptionsFrom,
   type Property,
   type PropertyOperation,
   type PropertyZone,
@@ -29,7 +29,6 @@ export class HomeComponent {
   readonly contact = CONTACT;
   readonly services = SERVICES;
   readonly zones = ZONES;
-  readonly zoneFilters = ZONE_FILTERS;
   readonly process = PROCESS;
   readonly credentials = CREDENTIALS;
   readonly testimonials = TESTIMONIALS;
@@ -43,14 +42,10 @@ export class HomeComponent {
     'Demo local: el envío abre WhatsApp con tu mensaje.'
   );
 
-  name = '';
-  email = '';
-  phone = '';
-  propertyType = '';
-  operation = '';
-  message = '';
+  /** Zonas únicas del inventario — si agregás una zona nueva en data, aparece acá. */
+  readonly zoneOptions = computed(() => zoneFilterOptionsFrom(PROPERTIES));
 
-  get properties(): Property[] {
+  readonly properties = computed(() => {
     const op = this.filter();
     const zone = this.zoneFilter();
     return PROPERTIES.filter((p) => {
@@ -58,7 +53,14 @@ export class HomeComponent {
       const matchZone = zone === 'todas' || p.zone === zone;
       return matchOp && matchZone;
     });
-  }
+  });
+
+  name = '';
+  email = '';
+  phone = '';
+  propertyType = '';
+  operation = '';
+  message = '';
 
   setFilter(value: 'todas' | PropertyOperation) {
     this.filter.set(value);
