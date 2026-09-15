@@ -19,6 +19,13 @@ npm run dev
 
 Abrí [http://127.0.0.1:43127](http://127.0.0.1:43127).
 
+Para producción local:
+
+```bash
+npm run build
+npm run start
+```
+
 ## Contenido
 
 - Hero con marca y CTAs (tasación / Instagram)
