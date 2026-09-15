@@ -659,5 +659,11 @@ export function getPropertyBySlug(slug: string) {
 }
 
 export function coverPhoto(property: Property) {
-  return property.photos[0];
+  const first = property.photos[0];
+  const dir = first.src.replace(/\/[^/]+$/, '');
+  return {
+    src: `${dir}/cover-card.jpg`,
+    alt: first.alt,
+    caption: first.caption,
+  };
 }
