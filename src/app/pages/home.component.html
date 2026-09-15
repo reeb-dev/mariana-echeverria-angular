@@ -5,31 +5,36 @@
     alt="Residencia contemporánea con jardín"
     class="animate-hero-image absolute inset-0 h-full w-full object-cover"
   />
-  <div class="absolute inset-0 bg-gradient-to-t from-forest-deep/95 via-forest-deep/60 to-forest-deep/25"></div>
+  <!-- Velo espresso fuerte (sin card): left + bottom para contraste sobre ventanas claras -->
+  <div class="absolute inset-0 bg-[#1c1612]/45"></div>
+  <div class="absolute inset-0 bg-gradient-to-r from-[#1c1612] via-[#1c1612]/80 to-transparent md:via-[#1c1612]/70"></div>
+  <div class="absolute inset-0 bg-gradient-to-t from-[#1c1612] via-[#1c1612]/55 to-transparent"></div>
+  <div class="absolute inset-0 bg-gradient-to-tr from-[#d06a28]/18 via-transparent to-[#e0b040]/08"></div>
 
   <div class="relative z-10 mx-auto w-full max-w-6xl px-5 pb-16 pt-44 md:px-8 md:pb-24 md:pt-48">
-    <p class="animate-hero-rise eyebrow text-stone-warm" style="animation-delay:40ms">
+    <p class="animate-hero-rise eyebrow text-stone-warm drop-shadow-[0_1px_8px_rgba(28,22,18,0.9)]" style="animation-delay:40ms">
       {{ contact.matricula }} · Corredora · Tasadora · Martillera
     </p>
 
-    <img
-      src="/about/logo-mark.png"
-      alt="Mariana Echeverría Bienes Raíces"
-      class="animate-hero-rise mt-6 h-16 w-auto max-w-[min(100%,420px)] object-contain object-left brightness-0 invert sm:h-20"
-      style="animation-delay:100ms"
-    />
+    <div class="animate-hero-rise logo-plate mt-6 px-4 py-3 sm:px-5 sm:py-3.5" style="animation-delay:100ms">
+      <img
+        src="/about/logo-mark.png"
+        alt="Mariana Echeverría Bienes Raíces"
+        class="h-14 w-auto max-w-[min(100%,380px)] object-contain object-left sm:h-[4.5rem]"
+      />
+    </div>
 
-    <h1 class="animate-hero-rise mt-10 max-w-xl font-sans text-xl font-semibold leading-snug text-white md:mt-12 md:text-2xl md:leading-snug" style="animation-delay:220ms">
+    <h1 class="animate-hero-rise mt-10 max-w-xl font-sans text-xl font-semibold leading-snug text-white drop-shadow-[0_2px_12px_rgba(28,22,18,0.95)] md:mt-12 md:text-2xl md:leading-snug" style="animation-delay:220ms">
       Venta, alquiler, arrendamientos y tasaciones en el día.
     </h1>
-    <p class="animate-hero-rise mt-4 max-w-lg font-sans text-base leading-relaxed text-white/80 md:text-lg" style="animation-delay:300ms">
+    <p class="animate-hero-rise mt-4 max-w-lg font-sans text-base leading-relaxed text-white drop-shadow-[0_2px_10px_rgba(28,22,18,0.9)] md:text-lg" style="animation-delay:300ms">
       El mismo criterio que en &#64;{{ contact.instagram }}: avisos claros de Coronel Suárez, Zona Norte, lotes y campos, con respaldo de abogada en derecho inmobiliario.
     </p>
 
     <div class="animate-hero-rise mt-9 flex flex-wrap gap-3" style="animation-delay:400ms">
-      <a href="#contacto" class="inline-flex h-11 items-center rounded-md bg-stone-warm px-5 text-sm font-semibold text-forest-deep hover:bg-stone-warm/90">Pedí tasación en el día</a>
-      <a href="#propiedades" class="inline-flex h-11 items-center rounded-md border border-white/40 px-5 text-sm font-medium text-white hover:bg-white/10">Ver avisos</a>
-      <a [href]="contact.instagramUrl" target="_blank" rel="noopener noreferrer" class="inline-flex h-11 items-center px-3 text-sm text-white/85 hover:text-white">Seguir en Instagram</a>
+      <a href="#contacto" class="inline-flex h-11 items-center rounded-md bg-stone-warm px-5 text-sm font-semibold text-forest-deep shadow-brand hover:bg-[#e8c056]">Pedí tasación en el día</a>
+      <a href="#propiedades" class="inline-flex h-11 items-center rounded-md border border-stone-warm/70 bg-[#1c1612]/35 px-5 text-sm font-medium text-white backdrop-blur-sm hover:border-stone-warm hover:bg-[#1c1612]/55">Ver avisos</a>
+      <a [href]="contact.instagramUrl" target="_blank" rel="noopener noreferrer" class="inline-flex h-11 items-center px-3 text-sm font-medium text-white drop-shadow-[0_1px_6px_rgba(28,22,18,0.9)] hover:text-stone-warm">Seguir en Instagram</a>
     </div>
   </div>
 </section>
@@ -243,12 +248,12 @@
       </li>
     }
   </ul>
-  <div appReveal [appRevealDelay]="120" class="mt-12 flex flex-wrap items-center gap-4 rounded-xl bg-forest px-6 py-8 text-primary-foreground md:px-10">
+  <div appReveal [appRevealDelay]="120" class="mt-12 flex flex-wrap items-center gap-4 rounded-xl bg-gradient-to-r from-clay-deep via-forest to-[#e08a3a] px-6 py-8 text-primary-foreground shadow-brand md:px-10">
     <div class="max-w-xl flex-1">
       <p class="font-sans text-lg font-semibold leading-snug">Seguí novedades y avisos nuevos</p>
-      <p class="mt-2 text-sm text-white/75">Publicación continua en &#64;{{ contact.instagram }} · consulta por WhatsApp.</p>
+      <p class="mt-2 text-sm text-white/85">Publicación continua en &#64;{{ contact.instagram }} · consulta por WhatsApp.</p>
     </div>
-    <a [href]="contact.instagramUrl" target="_blank" rel="noopener noreferrer" class="inline-flex h-11 items-center rounded-md bg-stone-warm px-5 text-sm font-medium text-forest-deep hover:bg-stone-warm/90">Abrir Instagram</a>
+    <a [href]="contact.instagramUrl" target="_blank" rel="noopener noreferrer" class="inline-flex h-11 items-center rounded-md bg-stone-warm px-5 text-sm font-semibold text-forest-deep hover:bg-[#e8c056]">Abrir Instagram</a>
   </div>
 </section>
 
@@ -307,7 +312,7 @@
         <label for="message" class="text-sm text-white/90">Mensaje</label>
         <textarea id="message" name="message" rows="4" [(ngModel)]="message" class="w-full rounded-md border border-white/20 bg-white/10 px-3 py-2 text-white placeholder:text-white/45" placeholder="Ubicación y detalles útiles"></textarea>
       </div>
-      <button type="submit" class="inline-flex h-11 w-full items-center justify-center rounded-md bg-stone-warm px-5 text-sm font-medium text-forest-deep hover:bg-stone-warm/90 sm:w-auto">Enviar por WhatsApp</button>
+      <button type="submit" class="inline-flex h-11 w-full items-center justify-center rounded-md bg-stone-warm px-5 text-sm font-semibold text-forest-deep hover:bg-[#e8c056] sm:w-auto">Enviar por WhatsApp</button>
       <p
         class="min-h-5 text-sm"
         [class.text-red-200]="formState() === 'error'"

@@ -4,26 +4,31 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "#faf7f2",
-        foreground: "#2a1f16",
+        /* Paleta tomada del logo: naranja terracota + oro + espresso */
+        background: "#f7f1e6",
+        foreground: "#1c1612",
         primary: {
-          DEFAULT: "#c45c1a",
-          foreground: "#fffaf5",
+          DEFAULT: "#d06a28",
+          foreground: "#fffaf3",
         },
         muted: {
-          DEFAULT: "#f3ebe1",
-          foreground: "#6b5748",
+          DEFAULT: "#efe6d8",
+          foreground: "#6a5748",
         },
-        border: "#e4d5c4",
-        /* Remapeados al branding del logo (naranja + dorado) */
+        border: "#e2d4c2",
+        /* Alias usados en templates */
         forest: {
-          DEFAULT: "#c45c1a",
-          deep: "#8f3d0f",
+          DEFAULT: "#d06a28", /* naranja del logo */
+          deep: "#1c1612", /* espresso — títulos y secciones oscuras */
         },
         stone: {
-          warm: "#d4a017",
+          warm: "#e0b040", /* dorado del logo */
         },
-        mist: "#f7f1e8",
+        mist: "#f3ebe0",
+        clay: {
+          DEFAULT: "#c45c1a",
+          deep: "#9a4518",
+        },
       },
       fontFamily: {
         sans: ['"Source Sans 3"', "system-ui", "sans-serif"],
@@ -35,6 +40,9 @@ module.exports = {
       },
       lineHeight: {
         brand: "1.12",
+      },
+      boxShadow: {
+        brand: "0 18px 40px -24px rgb(28 22 18 / 0.45)",
       },
     },
   },

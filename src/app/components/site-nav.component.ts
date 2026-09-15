@@ -9,16 +9,16 @@ import { CONTACT } from '../data/properties';
   imports: [RouterLink, NgClass],
   template: `
     <div class="fixed inset-x-0 top-0 z-40">
-      <div class="bg-forest text-black">
+      <div class="border-b border-stone-warm/25 bg-forest-deep text-primary-foreground">
         <div
-          class="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-6 gap-y-1 px-5 py-1.5 text-xs font-semibold sm:justify-between md:px-8 md:text-sm"
+          class="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-6 gap-y-1 px-5 py-1.5 text-xs font-medium sm:justify-between md:px-8 md:text-sm"
         >
-          <a [href]="phoneTel" class="inline-flex items-center gap-2">
-            <span aria-hidden>☎</span>
+          <a [href]="phoneTel" class="inline-flex items-center gap-2 transition hover:text-stone-warm">
+            <span class="text-stone-warm" aria-hidden>☎</span>
             {{ contact.phoneDisplay }} / {{ contact.phoneSecondary }}
           </a>
-          <a [href]="'mailto:' + contact.email" class="inline-flex items-center gap-2">
-            <span aria-hidden>✉</span>
+          <a [href]="'mailto:' + contact.email" class="inline-flex items-center gap-2 transition hover:text-stone-warm">
+            <span class="text-stone-warm" aria-hidden>✉</span>
             {{ contact.email }}
           </a>
         </div>
@@ -58,7 +58,7 @@ import { CONTACT } from '../data/properties';
               [href]="contact.whatsappUrl"
               target="_blank"
               rel="noopener noreferrer"
-              class="rounded-md bg-forest px-3 py-1.5 text-sm font-semibold text-white transition hover:bg-forest-deep"
+              class="rounded-md bg-forest px-3 py-1.5 text-sm font-semibold text-white transition hover:bg-clay-deep"
             >
               WhatsApp
             </a>

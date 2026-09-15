@@ -10,7 +10,7 @@ import { CONTACT } from '../data/properties';
     <footer class="border-t border-white/10 bg-forest-deep text-white/75">
       <div class="mx-auto grid max-w-6xl gap-10 px-5 py-12 md:grid-cols-[1.3fr_1fr_1fr] md:px-8">
         <div>
-          <div class="inline-flex rounded-md bg-white px-3 py-2">
+          <div class="logo-plate px-3 py-2">
             <img
               src="/about/logo-mark.png"
               alt="Mariana Echeverría Bienes Raíces"
@@ -54,8 +54,8 @@ import { CONTACT } from '../data/properties';
           </ul>
         </div>
       </div>
-      <div class="bg-forest">
-        <p class="mx-auto max-w-6xl px-5 py-3 text-center text-xs font-semibold text-black md:px-8 md:text-left">
+      <div class="bg-gradient-to-r from-clay-deep via-forest to-stone-warm">
+        <p class="mx-auto max-w-6xl px-5 py-3 text-center text-xs font-semibold text-forest-deep md:px-8 md:text-left">
           ☎ {{ contact.phoneDisplay }} / {{ contact.phoneSecondary }}
           · ✉ {{ contact.email }}
           · {{ contact.matricula }}
