@@ -8,10 +8,12 @@ import {
   signal,
 } from '@angular/core';
 import { PropertyPhoto } from '../data/properties';
+import { AssetUrlPipe } from '../utils/asset-url';
 
 @Component({
   selector: 'app-property-gallery',
   standalone: true,
+  imports: [AssetUrlPipe],
   template: `
     <div class="space-y-4">
       <div class="relative aspect-[16/10] overflow-hidden bg-mist md:aspect-[16/9]">
@@ -22,7 +24,7 @@ import { PropertyPhoto } from '../data/properties';
           (click)="openLightbox(active())"
         >
           <img
-            [src]="current().src"
+            [src]="current().src | assetUrl"
             [alt]="current().alt"
             class="h-full w-full object-cover transition duration-500 ease-premium group-hover:scale-[1.02]"
           />
@@ -76,7 +78,7 @@ import { PropertyPhoto } from '../data/properties';
               [attr.aria-current]="i === active() ? 'true' : null"
               (click)="openLightbox(i)"
             >
-              <img [src]="photo.src" [alt]="photo.alt" class="h-full w-full object-cover" />
+              <img [src]="photo.src | assetUrl" [alt]="photo.alt" class="h-full w-full object-cover" />
             </button>
           </li>
         }
@@ -126,7 +128,7 @@ import { PropertyPhoto } from '../data/properties';
           </button>
 
           <img
-            [src]="current().src"
+            [src]="current().src | assetUrl"
             [alt]="current().alt"
             class="max-h-full max-w-full object-contain select-none"
             draggable="false"

@@ -19,11 +19,12 @@ import {
   type PropertyOperation,
   type PropertyZone,
 } from '../data/properties';
+import { AssetUrlPipe } from '../utils/asset-url';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink, FormsModule, RevealDirective, BrandLogoComponent],
+  imports: [RouterLink, FormsModule, RevealDirective, BrandLogoComponent, AssetUrlPipe],
   templateUrl: './home.component.html',
 })
 export class HomeComponent {

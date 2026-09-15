@@ -3,11 +3,12 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { BrandLogoComponent } from '../components/brand-logo.component';
 import { PropertyGalleryComponent } from '../components/property-gallery.component';
 import { CONTACT, PROPERTIES, getPropertyBySlug } from '../data/properties';
+import { AssetUrlPipe } from '../utils/asset-url';
 
 @Component({
   selector: 'app-property-detail',
   standalone: true,
-  imports: [RouterLink, PropertyGalleryComponent, BrandLogoComponent],
+  imports: [RouterLink, PropertyGalleryComponent, BrandLogoComponent, AssetUrlPipe],
   templateUrl: './property-detail.component.html',
 })
 export class PropertyDetailComponent {

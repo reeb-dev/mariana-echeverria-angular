@@ -134,7 +134,8 @@ export class BrandLogoComponent {
   }
 
   get nameColor(): string {
-    return this.tone === 'on-dark' ? 'text-[#f3d9a8]' : 'text-clay-deep';
+    /* on-dark: cream claro sobre hero/zonas oscuras; on-light: terracota sobre crema */
+    return this.tone === 'on-dark' ? 'text-[#f7e6c4]' : 'text-clay-deep';
   }
 
   get tagColor(): string {
@@ -142,6 +143,6 @@ export class BrandLogoComponent {
   }
 
   get matColor(): string {
-    return this.tone === 'on-dark' ? 'text-white/55' : 'text-muted-foreground';
+    return this.tone === 'on-dark' ? 'text-white/70' : 'text-muted-foreground';
   }
 }

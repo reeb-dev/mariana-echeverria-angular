@@ -204,7 +204,7 @@
               <a [routerLink]="['/propiedades', property.slug]" class="block">
                 <div class="prop-card-media">
                   <img
-                    [src]="coverPhoto(property).src"
+                    [src]="coverPhoto(property).src | assetUrl"
                     [alt]="coverPhoto(property).alt"
                   />
                   <div class="absolute inset-0 z-[1] bg-gradient-to-t from-forest-deep/40 via-transparent to-transparent"></div>
@@ -278,7 +278,7 @@
 <section id="trayectoria" class="border-y border-border/70 bg-mist/40 py-24 md:py-32">
   <div class="mx-auto grid max-w-6xl items-center gap-14 px-5 md:px-8 lg:grid-cols-[0.9fr_1.1fr]">
     <div appReveal class="relative aspect-[4/5] overflow-hidden rounded-2xl">
-      <img src="/about/mariana.jpg" alt="Mariana Echeverría" class="h-full w-full object-cover object-top" />
+      <img [src]="'/about/mariana.jpg' | assetUrl" alt="Mariana Echeverría" class="h-full w-full object-cover object-top" />
       <div class="absolute inset-0 bg-gradient-to-t from-forest-deep/60 to-transparent"></div>
       <div class="absolute bottom-7 left-7 right-7">
         <p class="brand-title text-4xl text-white md:text-5xl">{{ contact.years }}</p>

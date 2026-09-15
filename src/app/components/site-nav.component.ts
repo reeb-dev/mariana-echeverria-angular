@@ -1,5 +1,12 @@
 import { NgClass } from '@angular/common';
-import { Component, HostListener, computed, inject, signal } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  afterNextRender,
+  computed,
+  inject,
+  signal,
+} from '@angular/core';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -43,7 +50,7 @@ import { BrandLogoComponent } from './brand-logo.component';
         class="transition-all duration-300"
         [ngClass]="
           solid()
-            ? 'border-b border-border/60 bg-background/92 text-foreground shadow-soft backdrop-blur-xl'
+            ? 'border-b border-border/60 bg-background/95 text-foreground shadow-soft backdrop-blur-xl'
             : 'bg-transparent text-white'
         "
       >
@@ -63,8 +70,8 @@ import { BrandLogoComponent } from './brand-logo.component';
                 class="transition"
                 [ngClass]="
                   solid()
-                    ? 'text-foreground/70 hover:text-forest'
-                    : 'text-white/80 hover:text-stone-warm'
+                    ? 'text-foreground/80 hover:text-forest'
+                    : 'text-[#f3d9a8] hover:text-stone-warm'
                 "
               >
                 {{ link.label }}
@@ -92,7 +99,7 @@ import { BrandLogoComponent } from './brand-logo.component';
               [ngClass]="
                 solid()
                   ? 'border-border text-foreground'
-                  : 'border-white/30 text-white'
+                  : 'border-white/40 text-[#f3d9a8]'
               "
               [attr.aria-expanded]="open()"
               aria-controls="menu-movil"
@@ -157,10 +164,17 @@ export class SiteNavComponent {
 
   readonly onInnerPage = computed(() => {
     const path = (this.url()?.urlAfterRedirects ?? this.router.url).split('?')[0].split('#')[0];
-    return path !== '/' && path !== '';
+    const normalized = path.replace(/\/+$/, '') || '/';
+    return normalized !== '/';
   });
 
   readonly solid = computed(() => this.scrolled() || this.open() || this.onInnerPage());
+
+  constructor() {
+    afterNextRender(() => {
+      this.scrolled.set(window.scrollY > 24);
+    });
+  }
 
   @HostListener('window:scroll')
   onScroll() {
