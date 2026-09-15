@@ -1,0 +1,57 @@
+{
+  "casa-mitre": [
+    "/properties/casa-mitre/01.jpeg"
+  ],
+  "depto-rivas": [
+    "/properties/depto-rivas/01.jpg",
+    "/properties/depto-rivas/02.jpg",
+    "/properties/depto-rivas/03.jpg",
+    "/properties/depto-rivas/04.jpg",
+    "/properties/depto-rivas/05.jpg",
+    "/properties/depto-rivas/06.jpg",
+    "/properties/depto-rivas/07.jpg",
+    "/properties/depto-rivas/08.jpg"
+  ],
+  "lote-sierra": [
+    "/properties/lote-sierra/01.jpg",
+    "/properties/lote-sierra/02.jpg",
+    "/properties/lote-sierra/03.jpg",
+    "/properties/lote-sierra/04.jpg",
+    "/properties/lote-sierra/05.jpg",
+    "/properties/lote-sierra/06.jpg"
+  ],
+  "local-belgrano": [
+    "/properties/local-belgrano/01.jpg",
+    "/properties/local-belgrano/02.jpg",
+    "/properties/local-belgrano/03.jpg",
+    "/properties/local-belgrano/04.jpg"
+  ],
+  "chalet-nordelta": [
+    "/properties/chalet-nordelta/01.jpg",
+    "/properties/chalet-nordelta/02.jpg",
+    "/properties/chalet-nordelta/03.jpg",
+    "/properties/chalet-nordelta/04.jpg",
+    "/properties/chalet-nordelta/05.jpg",
+    "/properties/chalet-nordelta/06.jpg",
+    "/properties/chalet-nordelta/07.jpg",
+    "/properties/chalet-nordelta/08.jpg"
+  ],
+  "depto-victorica": [
+    "/properties/depto-victorica/01.jpeg",
+    "/properties/depto-victorica/02.jpeg",
+    "/properties/depto-victorica/03.jpeg",
+    "/properties/depto-victorica/04.jpeg",
+    "/properties/depto-victorica/05.jpeg"
+  ],
+  "lotes-sanjose": [
+    "/properties/lotes-sanjose/01.jpg"
+  ],
+  "campo": [
+    "/properties/campo/01.jpeg",
+    "/properties/campo/02.jpeg",
+    "/properties/campo/03.jpeg",
+    "/properties/campo/04.jpeg",
+    "/properties/campo/05.jpeg",
+    "/properties/campo/06.jpeg"
+  ]
+}
