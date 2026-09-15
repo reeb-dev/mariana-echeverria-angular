@@ -1,11 +1,13 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { Reveal } from "@/components/reveal";
 import {
   CONTACT,
   PROPERTIES,
+  coverPhoto,
   type PropertyOperation,
 } from "@/data/properties";
 
@@ -34,8 +36,8 @@ export function Listings() {
               Selección destacada
             </h2>
             <p className="mt-4 max-w-xl text-muted-foreground">
-              Casos de muestra para esta demo. Consultá disponibilidad real por
-              WhatsApp o Instagram.
+              Tocá una ficha para ver la galería completa, descripción y
+              amenities. Disponibilidad real por WhatsApp.
             </p>
           </Reveal>
 
@@ -72,9 +74,6 @@ export function Listings() {
             <p className="font-heading text-xl text-forest-deep">
               No hay propiedades en este filtro
             </p>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Probá otra categoría o escribinos: armamos una búsqueda a medida.
-            </p>
             <button
               type="button"
               className="mt-5 text-sm font-medium text-forest underline underline-offset-4"
@@ -86,6 +85,7 @@ export function Listings() {
         ) : (
           <ul className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
             {items.map((property, index) => {
+              const cover = coverPhoto(property);
               const wa = `${CONTACT.whatsappUrl}?text=${encodeURIComponent(
                 `Hola Mariana, me interesa: ${property.title} (${property.location}).`
               )}`;
@@ -93,56 +93,65 @@ export function Listings() {
                 <Reveal key={property.id} delayMs={index * 50}>
                   <li className="group">
                     <article className="h-full">
-                      <div className="relative aspect-[4/3] overflow-hidden">
-                        <Image
-                          src={property.image}
-                          alt={property.imageAlt}
-                          fill
-                          className="object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        />
-                        <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 bg-gradient-to-t from-forest-deep/80 to-transparent p-3 pt-12">
-                          <span className="rounded bg-white/95 px-2 py-1 text-[11px] font-medium tracking-wide text-forest-deep uppercase">
-                            {property.operation}
-                          </span>
-                          {property.highlight ? (
-                            <span className="rounded bg-stone-warm/95 px-2 py-1 text-[11px] font-medium text-forest-deep">
-                              {property.highlight}
+                      <Link
+                        href={`/propiedades/${property.slug}`}
+                        className="block"
+                      >
+                        <div className="relative aspect-[4/3] overflow-hidden">
+                          <Image
+                            src={cover.src}
+                            alt={cover.alt}
+                            fill
+                            className="object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          />
+                          <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 bg-gradient-to-t from-forest-deep/80 to-transparent p-3 pt-12">
+                            <span className="rounded bg-white/95 px-2 py-1 text-[11px] font-medium tracking-wide text-forest-deep uppercase">
+                              {property.operation}
                             </span>
-                          ) : null}
+                            <span className="rounded bg-black/45 px-2 py-1 text-[11px] font-medium text-white backdrop-blur-sm">
+                              {property.photos.length} fotos
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                      <div className="mt-4 space-y-1.5">
-                        <p className="text-xs tracking-[0.16em] text-forest uppercase">
-                          {property.type}
-                        </p>
-                        <h3 className="font-heading text-xl text-forest-deep">
-                          {property.title}
-                        </h3>
-                        <p className="text-sm text-muted-foreground">
-                          {property.location}
-                        </p>
-                        <p className="pt-1 font-medium text-foreground">
-                          {property.priceLabel}
-                        </p>
-                        <p className="text-sm text-muted-foreground">
-                          {property.areaLabel}
-                          {property.beds != null
-                            ? ` · ${property.beds} dorm.`
-                            : ""}
-                          {property.baths != null
-                            ? ` · ${property.baths} baños`
-                            : ""}
-                        </p>
-                        <a
-                          href={wa}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex pt-3 text-sm font-medium text-forest underline decoration-forest/30 underline-offset-4 transition hover:decoration-forest"
-                        >
-                          Consultar por WhatsApp
-                        </a>
-                      </div>
+                        <div className="mt-4 space-y-1.5">
+                          <p className="text-xs tracking-[0.16em] text-forest uppercase">
+                            {property.type}
+                            {property.highlight
+                              ? ` · ${property.highlight}`
+                              : ""}
+                          </p>
+                          <h3 className="font-heading text-xl text-forest-deep transition group-hover:text-forest">
+                            {property.title}
+                          </h3>
+                          <p className="text-sm text-muted-foreground">
+                            {property.location}
+                          </p>
+                          <p className="pt-1 font-medium text-foreground">
+                            {property.priceLabel}
+                          </p>
+                          <p className="text-sm text-muted-foreground">
+                            {property.areaLabel}
+                            {property.beds != null
+                              ? ` · ${property.beds} dorm.`
+                              : ""}
+                            {property.baths != null
+                              ? ` · ${property.baths} baños`
+                              : ""}
+                          </p>
+                          <p className="pt-2 text-sm font-medium text-forest">
+                            Ver ficha y galería →
+                          </p>
+                        </div>
+                      </Link>
+                      <a
+                        href={wa}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex pt-2 text-sm text-muted-foreground underline decoration-border underline-offset-4 transition hover:text-forest hover:decoration-forest"
+                      >
+                        Consultar por WhatsApp
+                      </a>
                     </article>
                   </li>
                 </Reveal>

@@ -6,8 +6,15 @@ export type PropertyType =
   | "lote"
   | "local";
 
+export type PropertyPhoto = {
+  src: string;
+  alt: string;
+  caption: string;
+};
+
 export type Property = {
   id: string;
+  slug: string;
   title: string;
   location: string;
   operation: PropertyOperation;
@@ -17,8 +24,9 @@ export type Property = {
   baths?: number;
   areaLabel: string;
   highlight?: string;
-  image: string;
-  imageAlt: string;
+  description: string;
+  amenities: string[];
+  photos: PropertyPhoto[];
 };
 
 export const CONTACT = {
@@ -171,6 +179,7 @@ export const FAQS = [
 export const PROPERTIES: Property[] = [
   {
     id: "1",
+    slug: "casa-barrio-cerrado-tigre",
     title: "Casa en barrio cerrado",
     location: "Zona Norte, Tigre",
     operation: "venta",
@@ -180,12 +189,47 @@ export const PROPERTIES: Property[] = [
     baths: 3,
     areaLabel: "280 m²",
     highlight: "Jardín y pileta",
-    image:
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
-    imageAlt: "Casa moderna con jardín en barrio cerrado",
+    description:
+      "Casa contemporánea en barrio cerrado de Tigre, con living-comedor integrado, cocina equipada, suite principal y jardín con pileta. Ideal para quienes buscan privacidad y amenities de club house a minutos de Acceso Norte.",
+    amenities: [
+      "Pileta",
+      "Jardín perimetral",
+      "Cochera doble",
+      "Suite con vestidor",
+      "Seguridad 24 hs",
+      "Quincho",
+    ],
+    photos: [
+      {
+        src: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80",
+        alt: "Fachada de casa moderna con jardín",
+        caption: "Fachada principal",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1600&q=80",
+        alt: "Living luminoso con ventanales",
+        caption: "Living-comedor",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1556912173-46c336c7fd55?auto=format&fit=crop&w=1600&q=80",
+        alt: "Cocina abierta con isla",
+        caption: "Cocina integrada",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1600&q=80",
+        alt: "Dormitorio principal con cama king",
+        caption: "Suite principal",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=1600&q=80",
+        alt: "Pileta y deck en el jardín",
+        caption: "Jardín y pileta",
+      },
+    ],
   },
   {
     id: "2",
+    slug: "departamento-luminoso-vicente-lopez",
     title: "Departamento luminoso",
     location: "Vicente López",
     operation: "alquiler",
@@ -195,12 +239,42 @@ export const PROPERTIES: Property[] = [
     baths: 2,
     areaLabel: "85 m²",
     highlight: "A estrenar",
-    image:
-      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
-    imageAlt: "Living de departamento luminoso con ventanales",
+    description:
+      "Departamento a estrenar con orientación norte, balcón aterrazado y amenities. A pasos de Libertador, ideal para profesionales que buscan confort y buena conectividad.",
+    amenities: [
+      "Balcón aterrazado",
+      "Cocina equipada",
+      "Aire acondicionado",
+      "Lavadero",
+      "Cochera",
+      "SUM y parrilla",
+    ],
+    photos: [
+      {
+        src: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1600&q=80",
+        alt: "Living de departamento con ventanales",
+        caption: "Living principal",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1600&q=80",
+        alt: "Dormitorio con luz natural",
+        caption: "Dormitorio",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1600&q=80",
+        alt: "Baño moderno con duchador",
+        caption: "Baño completo",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1600&q=80",
+        alt: "Balcón con vista abierta",
+        caption: "Balcón",
+      },
+    ],
   },
   {
     id: "3",
+    slug: "campo-productivo-coronel-suarez",
     title: "Campo productivo",
     location: "Coronel Suárez",
     operation: "venta",
@@ -208,12 +282,41 @@ export const PROPERTIES: Property[] = [
     priceLabel: "Consultar",
     areaLabel: "120 ha",
     highlight: "Buena aptitud",
-    image:
-      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80",
-    imageAlt: "Campo abierto con pasturas bajo cielo amplio",
+    description:
+      "Campo de 120 hectáreas con buena aptitud agrícola-ganadera, aguadas naturales y acceso por camino consolidado. Oportunidad para inversión productiva en el sudoeste bonaerense.",
+    amenities: [
+      "Aguadas naturales",
+      "Alambrados perimetrales",
+      "Acceso consolidado",
+      "Aptitud mixta",
+      "Mejoras básicas",
+    ],
+    photos: [
+      {
+        src: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80",
+        alt: "Campo abierto con pasturas",
+        caption: "Vista general",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1500937386664-56d1dfef385a?auto=format&fit=crop&w=1600&q=80",
+        alt: "Horizonte rural al atardecer",
+        caption: "Horizonte productivo",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=1600&q=80",
+        alt: "Camino rural entre campos",
+        caption: "Acceso interno",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1600&q=80",
+        alt: "Pasturas verdes bajo cielo nublado",
+        caption: "Pasturas",
+      },
+    ],
   },
   {
     id: "4",
+    slug: "lote-desarrollo-exaltacion",
     title: "Lote en desarrollo",
     location: "Exaltación de la Cruz",
     operation: "venta",
@@ -221,12 +324,36 @@ export const PROPERTIES: Property[] = [
     priceLabel: "USD 45.000",
     areaLabel: "800 m²",
     highlight: "Servicios cerca",
-    image:
-      "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1200&q=80",
-    imageAlt: "Terreno amplio listo para construir",
+    description:
+      "Lote regular de 800 m² en zona de crecimiento, con servicios cercanos y buena orientación. Apto para vivienda permanente o inversión a mediano plazo.",
+    amenities: [
+      "Medidas regulares",
+      "Servicios próximos",
+      "Buena orientación",
+      "Zona residencial",
+      "Escritura lista",
+    ],
+    photos: [
+      {
+        src: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1600&q=80",
+        alt: "Terreno amplio listo para construir",
+        caption: "Vista del lote",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80",
+        alt: "Entorno natural del lote",
+        caption: "Entorno",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1449844908441-882987cb0c71?auto=format&fit=crop&w=1600&q=80",
+        alt: "Referencia de vivienda en zona similar",
+        caption: "Potencial de obra",
+      },
+    ],
   },
   {
     id: "5",
+    slug: "local-comercial-santos-lugares",
     title: "Local comercial",
     location: "Santos Lugares",
     operation: "alquiler",
@@ -234,12 +361,36 @@ export const PROPERTIES: Property[] = [
     priceLabel: "USD 900 / mes",
     areaLabel: "65 m²",
     highlight: "Alta exposición",
-    image:
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80",
-    imageAlt: "Local comercial con vidriera a la calle",
+    description:
+      "Local a la calle con vidriera amplia, baño y depósito. Excelente circulación peatonal, apto para retail, gastronomía liviana o servicios profesionales.",
+    amenities: [
+      "Vidriera a la calle",
+      "Baño",
+      "Depósito",
+      "Alta circulación",
+      "Zona comercial",
+    ],
+    photos: [
+      {
+        src: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80",
+        alt: "Interior de local comercial luminoso",
+        caption: "Salón principal",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=80",
+        alt: "Espacio de trabajo abierto",
+        caption: "Planta libre",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1600&q=80",
+        alt: "Detalle de vidriera comercial",
+        caption: "Vidriera",
+      },
+    ],
   },
   {
     id: "6",
+    slug: "casa-parque-coronel-suarez",
     title: "Casa con parque",
     location: "Coronel Suárez",
     operation: "venta",
@@ -249,12 +400,42 @@ export const PROPERTIES: Property[] = [
     baths: 2,
     areaLabel: "210 m²",
     highlight: "Ideal familia",
-    image:
-      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=80",
-    imageAlt: "Casa con fachada blanca y parque frontal",
+    description:
+      "Casa familiar con parque amplio, living luminoso, tres dormitorios y garage. En barrio consolidado de Coronel Suárez, a pocas cuadras del centro.",
+    amenities: [
+      "Parque frontal y fondo",
+      "Garage",
+      "Living comedor",
+      "Cocina separada",
+      "Calefacción",
+      "Barrio consolidado",
+    ],
+    photos: [
+      {
+        src: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1600&q=80",
+        alt: "Casa blanca con parque frontal",
+        caption: "Fachada y parque",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1600&q=80",
+        alt: "Living familiar con sofá",
+        caption: "Living",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1600&q=80",
+        alt: "Cocina con mesada amplia",
+        caption: "Cocina",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdbc?auto=format&fit=crop&w=1600&q=80",
+        alt: "Patio trasero con césped",
+        caption: "Fondo",
+      },
+    ],
   },
   {
     id: "7",
+    slug: "ph-patio-olivos",
     title: "PH con patio",
     location: "Olivos",
     operation: "alquiler",
@@ -264,12 +445,41 @@ export const PROPERTIES: Property[] = [
     baths: 2,
     areaLabel: "110 m²",
     highlight: "Patio propio",
-    image:
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80",
-    imageAlt: "Interior de PH luminoso con living amplio",
+    description:
+      "PH reciclado con patio propio, tres dormitorios y doble circulación. Tranquilo, a pocas cuadras de Maipú y con fácil acceso a Libertador.",
+    amenities: [
+      "Patio propio",
+      "Reciclado reciente",
+      "Lavadero",
+      "Estar en planta baja",
+      "Cerca de Maipú",
+    ],
+    photos: [
+      {
+        src: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1600&q=80",
+        alt: "Living de PH luminoso",
+        caption: "Living",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1600&q=80",
+        alt: "Cocina clara con mesa",
+        caption: "Cocina-comedor",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1600&q=80",
+        alt: "Dormitorio con placard",
+        caption: "Dormitorio",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80",
+        alt: "Patio interior con vegetación",
+        caption: "Patio",
+      },
+    ],
   },
   {
     id: "8",
+    slug: "chacra-casco-coronel-suarez",
     title: "Chacra con casco",
     location: "Coronel Suárez",
     operation: "venta",
@@ -279,8 +489,49 @@ export const PROPERTIES: Property[] = [
     baths: 3,
     areaLabel: "18 ha",
     highlight: "Casco restaurado",
-    image:
-      "https://images.unsplash.com/photo-1449844908441-882987cb0c71?auto=format&fit=crop&w=1200&q=80",
-    imageAlt: "Casa de campo rodeada de árbolado",
+    description:
+      "Chacra de 18 hectáreas con casco restaurado, parque arbolado y mejoras. Perfecta para uso familiar de fin de semana o pequeña producción.",
+    amenities: [
+      "Casco restaurado",
+      "Parque arbolado",
+      "4 dormitorios",
+      "Galpón",
+      "Pozo de agua",
+      "Tranquera de acceso",
+    ],
+    photos: [
+      {
+        src: "https://images.unsplash.com/photo-1449844908441-882987cb0c71?auto=format&fit=crop&w=1600&q=80",
+        alt: "Casco de chacra entre árboles",
+        caption: "Casco principal",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=80",
+        alt: "Interior cálido de casa de campo",
+        caption: "Interior del casco",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80",
+        alt: "Galería exterior con jardín",
+        caption: "Galería y jardín",
+      },
+      {
+        src: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80",
+        alt: "Campo alrededor de la chacra",
+        caption: "Entorno productivo",
+      },
+    ],
   },
 ];
+
+export function getPropertyById(id: string) {
+  return PROPERTIES.find((p) => p.id === id);
+}
+
+export function getPropertyBySlug(slug: string) {
+  return PROPERTIES.find((p) => p.slug === slug);
+}
+
+export function coverPhoto(property: Property) {
+  return property.photos[0];
+}
