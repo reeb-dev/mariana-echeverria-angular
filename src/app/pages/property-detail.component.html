@@ -1,0 +1,103 @@
+@if (!property) {
+  <div class="mx-auto max-w-3xl px-5 py-24 text-center">
+    <h1 class="font-display text-3xl text-forest-deep">Propiedad no encontrada</h1>
+    <a routerLink="/" fragment="propiedades" class="mt-6 inline-block text-forest underline">Volver al listado</a>
+  </div>
+} @else {
+  <div class="min-h-full bg-background">
+    <header class="border-b border-border bg-background/95">
+      <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 md:px-8">
+        <a routerLink="/" fragment="propiedades" class="text-sm text-muted-foreground hover:text-forest">← Volver a propiedades</a>
+        <a routerLink="/" class="font-display text-lg text-forest-deep md:text-xl">{{ contact.brand }}</a>
+        <a [href]="waUrl()" target="_blank" rel="noopener noreferrer" class="rounded-md bg-primary px-3 py-1.5 text-sm text-primary-foreground">WhatsApp</a>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-5 py-8 md:px-8 md:py-12">
+      <div class="grid gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:gap-12">
+        <section aria-label="Galería de fotos">
+          <app-property-gallery [photos]="property.photos" [title]="property.title" />
+        </section>
+
+        <aside class="space-y-6 lg:sticky lg:top-24 lg:self-start">
+          <div>
+            <p class="text-xs tracking-[0.18em] text-forest uppercase">{{ property.operation }} · {{ property.type }}</p>
+            <h1 class="mt-2 font-display text-3xl tracking-tight text-forest-deep md:text-4xl">{{ property.title }}</h1>
+            <p class="mt-2 text-muted-foreground">{{ property.location }}</p>
+            <p class="mt-4 font-heading text-2xl text-forest-deep">{{ property.priceLabel }}</p>
+          </div>
+
+          <dl class="grid grid-cols-2 gap-3 border-y border-border py-5 text-sm">
+            <div>
+              <dt class="text-muted-foreground">Superficie</dt>
+              <dd class="mt-1 font-medium">{{ property.areaLabel }}</dd>
+            </div>
+            @if (property.beds != null) {
+              <div>
+                <dt class="text-muted-foreground">Dormitorios</dt>
+                <dd class="mt-1 font-medium">{{ property.beds }}</dd>
+              </div>
+            }
+            @if (property.baths != null) {
+              <div>
+                <dt class="text-muted-foreground">Baños</dt>
+                <dd class="mt-1 font-medium">{{ property.baths }}</dd>
+              </div>
+            }
+            @if (property.highlight) {
+              <div>
+                <dt class="text-muted-foreground">Destacado</dt>
+                <dd class="mt-1 font-medium">{{ property.highlight }}</dd>
+              </div>
+            }
+            <div>
+              <dt class="text-muted-foreground">Fotos</dt>
+              <dd class="mt-1 font-medium">{{ property.photos.length }}</dd>
+            </div>
+          </dl>
+
+          <div class="flex flex-col gap-3">
+            <a [href]="waUrl()" target="_blank" rel="noopener noreferrer" class="inline-flex h-11 items-center justify-center rounded-md bg-stone-warm text-sm font-medium text-forest-deep hover:bg-stone-warm/90">Consultar esta propiedad</a>
+            <a [href]="'mailto:' + contact.email + '?subject=Consulta: ' + property.title" class="inline-flex h-11 items-center justify-center rounded-md border border-border text-sm font-medium hover:bg-muted">Escribir por email</a>
+          </div>
+          <p class="text-xs text-muted-foreground">Demo Angular · {{ contact.matricula }}. Las fotos son de muestra.</p>
+        </aside>
+      </div>
+
+      <section class="mt-14 grid gap-10 border-t border-border pt-12 md:grid-cols-[1.2fr_0.8fr]">
+        <div>
+          <h2 class="font-heading text-2xl text-forest-deep">Descripción</h2>
+          <p class="mt-4 max-w-2xl leading-relaxed text-muted-foreground">{{ property.description }}</p>
+        </div>
+        <div>
+          <h2 class="font-heading text-2xl text-forest-deep">Características</h2>
+          <ul class="mt-4 grid gap-2 sm:grid-cols-2">
+            @for (item of property.amenities; track item) {
+              <li class="border-l border-forest/30 pl-3 text-sm">{{ item }}</li>
+            }
+          </ul>
+        </div>
+      </section>
+
+      @if (related.length > 0) {
+        <section class="mt-16 border-t border-border pt-12">
+          <h2 class="font-heading text-2xl text-forest-deep">También te puede interesar</h2>
+          <ul class="mt-8 grid gap-8 sm:grid-cols-3">
+            @for (item of related; track item.id) {
+              <li>
+                <a [routerLink]="['/propiedades', item.slug]" class="group block">
+                  <div class="aspect-[4/3] overflow-hidden">
+                    <img [src]="item.photos[0].src" [alt]="item.photos[0].alt" class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
+                  </div>
+                  <p class="mt-3 text-xs tracking-[0.14em] text-forest uppercase">{{ item.operation }} · {{ item.photos.length }} fotos</p>
+                  <h3 class="mt-1 font-heading text-lg text-forest-deep group-hover:text-forest">{{ item.title }}</h3>
+                  <p class="text-sm text-muted-foreground">{{ item.location }}</p>
+                </a>
+              </li>
+            }
+          </ul>
+        </section>
+      }
+    </main>
+  </div>
+}

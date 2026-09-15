@@ -1,31 +1,33 @@
-# Mariana Echeverría Bienes Raíces — Demo
+# Mariana Echeverría Bienes Raíces — Demo Angular
 
-Rediseño demo de [marianaecheverria.com.ar](https://www.marianaecheverria.com.ar/) alineado al trabajo de Mariana Echeverría (corredora, tasadora y martillera pública) e Instagram [@marianaecheverriainmob](https://www.instagram.com/marianaecheverriainmob/).
+Rediseño demo en **Angular 19** + Tailwind, alineado a [marianaecheverria.com.ar](https://www.marianaecheverria.com.ar/) e Instagram [@marianaecheverriainmob](https://www.instagram.com/marianaecheverriainmob/).
 
-No es el sitio oficial: incluye datos reales de contacto y propiedades de muestra.
+No es el sitio oficial.
 
 ## Stack
 
-- Next.js (App Router) + TypeScript
-- Tailwind CSS + shadcn/ui
-- Imágenes de Unsplash (placeholders)
+- Angular 19 (standalone components)
+- Tailwind CSS 3
+- Angular Router (landing + fichas `/propiedades/:slug`)
 
 ## Cómo correrlo
 
 ```bash
 npm install
-npm run build
-npm run start
+npm start
 ```
 
 Abrí [http://127.0.0.1:43127](http://127.0.0.1:43127).
 
-En desarrollo: `npm run dev` (mismo puerto).
+Build de producción:
+
+```bash
+npm run build
+```
 
 ## Contenido
 
-- Hero full-bleed con marca, matrícula y CTAs
-- Zonas de trabajo, servicios numerados y proceso en 4 pasos
-- Propiedades filtrables (venta/alquiler) con consulta por WhatsApp
-- Trayectoria, testimonios, FAQ e Instagram
-- Formulario de tasación, footer completo, nav sticky/móvil y botón flotante de WhatsApp
+- Landing con hero, zonas, servicios, proceso, trayectoria, testimonios, FAQ y contacto
+- Listado filtrable con enlace a ficha
+- Ficha de propiedad con galería (captions, thumbs, flechas), descripción y amenities
+- WhatsApp flotante y formulario que abre WhatsApp
