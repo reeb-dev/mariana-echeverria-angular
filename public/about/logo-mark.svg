@@ -1,11 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 100" fill="none" role="img" aria-hidden="true">
-  <!-- Marco dorado: casa asimétrica con hueco (fill-rule evenodd) -->
+  <!--
+    Mark geométrico tipo casa (referencia brand):
+    marco oro + núcleo terracota. Fondo transparente.
+  -->
   <path
     fill="#E0B040"
     fill-rule="evenodd"
-    d="M4 40 L36 4 L76 52 L76 96 H4 V40 Z
-       M18 52 L36 28 L62 58 V80 H18 V52 Z"
+    d="M5 38 L34 5 L75 50 L75 95 H5 V38 Z
+       M19 50 L34 28 L61 56 V79 H19 V50 Z"
   />
-  <!-- Núcleo terracota, techo paralelo al marco -->
-  <path fill="#D06A28" d="M24 56 L38 36 L50 54 V76 H24 V56 Z" />
+  <path fill="#D06A28" d="M25 54 L36 36 L49 52 V75 H25 V54 Z" />
 </svg>
