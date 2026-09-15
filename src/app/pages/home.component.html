@@ -18,15 +18,13 @@
       {{ contact.matricula }} · Corredora · Tasadora · Martillera
     </p>
 
-    <!-- Logo a color, fondo transparente — sin caja -->
-    <img
-      src="/about/logo-mark.png"
-      alt="Mariana Echeverría Bienes Raíces"
-      width="462"
-      height="107"
-      class="animate-hero-rise mt-6 h-[4.25rem] w-auto max-w-[min(100%,440px)] bg-transparent object-contain object-left sm:h-[5.5rem] md:mt-7 md:h-28"
+    <!-- Wordmark vectorial: mark SVG + Source Sans 3 -->
+    <div
+      class="animate-hero-rise mt-6 md:mt-7"
       style="animation-delay:100ms; filter: drop-shadow(0 8px 24px rgba(28,22,18,0.8))"
-    />
+    >
+      <app-brand-logo size="hero" tone="on-dark" [showMatricula]="false" />
+    </div>
 
     <h1
       class="animate-hero-rise mt-9 max-w-xl font-display text-[1.65rem] font-medium leading-[1.25] tracking-tight text-white sm:text-3xl md:mt-11 md:text-4xl md:leading-[1.2]"

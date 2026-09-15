@@ -1,6 +1,7 @@
 import { Component, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { BrandLogoComponent } from '../components/brand-logo.component';
 import { RevealDirective } from '../directives/reveal.directive';
 import {
   CONTACT,
@@ -22,7 +23,7 @@ import {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink, FormsModule, RevealDirective],
+  imports: [RouterLink, FormsModule, RevealDirective, BrandLogoComponent],
   templateUrl: './home.component.html',
 })
 export class HomeComponent {

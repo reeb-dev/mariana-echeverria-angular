@@ -1,20 +1,17 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CONTACT } from '../data/properties';
+import { BrandLogoComponent } from './brand-logo.component';
 
 @Component({
   selector: 'app-site-footer',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, BrandLogoComponent],
   template: `
     <footer class="border-t border-white/10 bg-forest-deep text-white/75">
       <div class="mx-auto grid max-w-6xl gap-12 px-5 py-16 md:grid-cols-[1.4fr_1fr_1fr] md:px-8">
         <div>
-          <img
-            src="/about/logo-mark.png"
-            alt="Mariana Echeverría Bienes Raíces"
-            class="h-12 w-auto max-w-[260px] bg-transparent object-contain object-left"
-          />
+          <app-brand-logo size="lg" tone="on-dark" />
           <p class="mt-5 max-w-sm text-sm leading-relaxed text-white/65">
             Corredora, tasadora y martillera pública. {{ contact.matricula }}.
             Venta, alquiler, arrendamientos, tasaciones en el día y home staging.

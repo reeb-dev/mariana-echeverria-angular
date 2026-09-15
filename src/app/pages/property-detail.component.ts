@@ -1,12 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { BrandLogoComponent } from '../components/brand-logo.component';
 import { PropertyGalleryComponent } from '../components/property-gallery.component';
 import { CONTACT, PROPERTIES, getPropertyBySlug } from '../data/properties';
 
 @Component({
   selector: 'app-property-detail',
   standalone: true,
-  imports: [RouterLink, PropertyGalleryComponent],
+  imports: [RouterLink, PropertyGalleryComponent, BrandLogoComponent],
   templateUrl: './property-detail.component.html',
 })
 export class PropertyDetailComponent {

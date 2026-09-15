@@ -2,11 +2,12 @@ import { NgClass } from '@angular/common';
 import { Component, HostListener, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CONTACT } from '../data/properties';
+import { BrandLogoComponent } from './brand-logo.component';
 
 @Component({
   selector: 'app-site-nav',
   standalone: true,
-  imports: [RouterLink, NgClass],
+  imports: [RouterLink, NgClass, BrandLogoComponent],
   template: `
     <div class="fixed inset-x-0 top-0 z-40">
       <div
@@ -40,11 +41,10 @@ import { CONTACT } from '../data/properties';
         "
       >
         <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3.5 md:px-8">
-          <a routerLink="/" fragment="inicio" class="block shrink-0">
-            <img
-              src="/about/logo-mark.png"
-              alt="Mariana Echeverría Bienes Raíces"
-              class="h-10 w-auto max-w-[220px] bg-transparent object-contain object-left drop-shadow-sm sm:h-11 sm:max-w-[260px]"
+          <a routerLink="/" fragment="inicio" class="block shrink-0 drop-shadow-sm">
+            <app-brand-logo
+              size="md"
+              [tone]="scrolled() || open() ? 'on-light' : 'on-dark'"
             />
           </a>
 
