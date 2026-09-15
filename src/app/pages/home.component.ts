@@ -37,6 +37,8 @@ export class HomeComponent {
 
   readonly filter = signal<'todas' | PropertyOperation>('todas');
   readonly zoneFilter = signal<'todas' | PropertyZone>('todas');
+  /** Texto del buscador de zona (autocomplete); se sincroniza con el select. */
+  readonly zoneQuery = signal('');
   readonly formState = signal<'idle' | 'error' | 'success'>('idle');
   readonly formMessage = signal(
     'Demo local: el envío abre WhatsApp con tu mensaje.'
@@ -68,6 +70,53 @@ export class HomeComponent {
 
   setZoneFilter(value: 'todas' | PropertyZone) {
     this.zoneFilter.set(value);
+    if (value === 'todas') {
+      this.zoneQuery.set('');
+      return;
+    }
+    const match = this.zoneOptions().find((z) => z.id === value);
+    this.zoneQuery.set(match?.label ?? '');
+  }
+
+  onZoneSelect(value: string) {
+    this.setZoneFilter(
+      value === 'todas' ? 'todas' : (value as PropertyZone)
+    );
+  }
+
+  onZoneSearchInput(raw: string) {
+    this.zoneQuery.set(raw);
+    const q = raw.trim().toLowerCase();
+    if (!q) {
+      this.zoneFilter.set('todas');
+      return;
+    }
+    const match = this.zoneOptions().find(
+      (z) =>
+        z.label.toLowerCase() === q ||
+        z.id.toLowerCase() === q ||
+        z.label.toLowerCase().startsWith(q)
+    );
+    if (match) {
+      this.zoneFilter.set(match.id);
+    }
+  }
+
+  onZoneSearchCommit() {
+    const q = this.zoneQuery().trim().toLowerCase();
+    if (!q) {
+      this.setZoneFilter('todas');
+      return;
+    }
+    const match = this.zoneOptions().find(
+      (z) =>
+        z.label.toLowerCase() === q ||
+        z.id.toLowerCase() === q ||
+        z.label.toLowerCase().includes(q)
+    );
+    if (match) {
+      this.setZoneFilter(match.id);
+    }
   }
 
   coverPhoto(property: Property) {
