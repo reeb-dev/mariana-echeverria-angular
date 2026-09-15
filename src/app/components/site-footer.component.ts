@@ -8,7 +8,7 @@ import { BrandLogoComponent } from './brand-logo.component';
   standalone: true,
   imports: [RouterLink, BrandLogoComponent],
   template: `
-    <footer class="border-t border-white/10 bg-forest-deep text-white/75">
+    <footer data-nav-surface="dark" class="border-t border-white/10 bg-forest-deep text-white/75">
       <div class="mx-auto grid max-w-6xl gap-12 px-5 py-16 md:grid-cols-[1.4fr_1fr_1fr] md:px-8">
         <div>
           <app-brand-logo size="lg" tone="on-dark" />

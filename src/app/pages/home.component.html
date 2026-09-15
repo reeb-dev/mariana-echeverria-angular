@@ -1,5 +1,5 @@
 <!-- HERO: marca dominante, overlay, CTAs — foto full-bleed -->
-<section id="inicio" class="relative flex min-h-[100svh] items-end overflow-hidden">
+<section id="inicio" data-nav-surface="dark" class="relative flex min-h-[100svh] items-end overflow-hidden">
   <img
     src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=80"
     alt="Residencia contemporánea con jardín"
@@ -68,7 +68,7 @@
 </section>
 
 <!-- ZONES -->
-<section aria-label="Zonas de trabajo" class="bg-forest-deep text-primary-foreground">
+<section id="zonas" data-nav-surface="dark" aria-label="Zonas de trabajo" class="bg-forest-deep text-primary-foreground">
   <div class="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:grid-cols-2 md:grid-cols-4 md:px-8 md:py-16">
     @for (zone of zones; track zone.name; let i = $index) {
       <div appReveal [appRevealDelay]="i * 50">
@@ -395,7 +395,7 @@
 </section>
 
 <!-- CONTACT -->
-<section id="contacto" class="relative overflow-hidden bg-forest-deep text-primary-foreground">
+<section id="contacto" data-nav-surface="dark" class="relative overflow-hidden bg-forest-deep text-primary-foreground">
   <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#d06a28]/15 via-transparent to-[#e0b040]/10"></div>
   <div class="relative mx-auto grid max-w-6xl gap-14 px-5 py-24 md:grid-cols-2 md:px-8 md:py-32">
     <div appReveal>

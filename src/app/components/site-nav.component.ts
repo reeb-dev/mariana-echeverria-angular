@@ -48,18 +48,11 @@ import { BrandLogoComponent } from './brand-logo.component';
 
       <header
         class="transition-all duration-300"
-        [ngClass]="
-          solid()
-            ? 'border-b border-border/60 bg-background/95 text-foreground shadow-soft backdrop-blur-xl'
-            : 'bg-transparent text-white'
-        "
+        [ngClass]="headerChromeClass()"
       >
         <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3.5 md:px-8">
           <a routerLink="/" fragment="inicio" class="block shrink-0 drop-shadow-sm">
-            <app-brand-logo
-              size="md"
-              [tone]="solid() ? 'on-light' : 'on-dark'"
-            />
+            <app-brand-logo size="md" [tone]="logoTone()" />
           </a>
 
           <nav aria-label="Principal" class="hidden items-center gap-7 text-sm font-medium md:flex">
@@ -69,9 +62,9 @@ import { BrandLogoComponent } from './brand-logo.component';
                 [fragment]="link.fragment"
                 class="transition"
                 [ngClass]="
-                  solid()
+                  lightChrome()
                     ? 'text-foreground/80 hover:text-forest'
-                    : 'text-[#f3d9a8] hover:text-stone-warm'
+                    : 'text-[#f7e6c4] hover:text-stone-warm'
                 "
               >
                 {{ link.label }}
@@ -86,7 +79,7 @@ import { BrandLogoComponent } from './brand-logo.component';
               rel="noopener noreferrer"
               class="rounded-lg px-3.5 py-2 text-sm font-semibold transition"
               [ngClass]="
-                solid()
+                lightChrome()
                   ? 'bg-forest text-white hover:bg-clay-deep'
                   : 'bg-stone-warm text-forest-deep hover:bg-[#e8c056]'
               "
@@ -97,9 +90,9 @@ import { BrandLogoComponent } from './brand-logo.component';
               type="button"
               class="inline-flex h-9 w-9 items-center justify-center rounded-lg border md:hidden"
               [ngClass]="
-                solid()
+                lightChrome()
                   ? 'border-border text-foreground'
-                  : 'border-white/40 text-[#f3d9a8]'
+                  : 'border-white/40 text-[#f7e6c4]'
               "
               [attr.aria-expanded]="open()"
               aria-controls="menu-movil"
@@ -147,6 +140,8 @@ export class SiteNavComponent {
   readonly contact = CONTACT;
   readonly open = signal(false);
   readonly scrolled = signal(false);
+  /** Contenido bajo el nav es espresso/hero/contacto: tipografía clara + logo on-dark. */
+  readonly overDark = signal(true);
   readonly phoneTel = `tel:${CONTACT.phoneDisplay.replace(/\s/g, '')}`;
   readonly links = [
     { fragment: 'servicios', label: 'Servicios' },
@@ -170,18 +165,90 @@ export class SiteNavComponent {
 
   readonly solid = computed(() => this.scrolled() || this.open() || this.onInnerPage());
 
+  /**
+   * Chrome claro (crema + tipografía oscura) solo si el nav es sólido Y la
+   * superficie debajo no es oscura. Si el glass deja ver espresso, forzar on-dark.
+   */
+  readonly lightChrome = computed(() => this.solid() && !this.overDark());
+
+  readonly logoTone = computed(() => (this.lightChrome() ? 'on-light' : 'on-dark'));
+
+  readonly headerChromeClass = computed(() => {
+    if (this.lightChrome()) {
+      return 'border-b border-border/60 bg-background/95 text-foreground shadow-soft backdrop-blur-xl';
+    }
+    if (this.solid()) {
+      return 'border-b border-white/10 bg-forest-deep/90 text-primary-foreground shadow-soft backdrop-blur-xl';
+    }
+    return 'bg-transparent text-white';
+  });
+
   constructor() {
     afterNextRender(() => {
-      this.scrolled.set(window.scrollY > 24);
+      this.syncNavSurface();
+      this.router.events
+        .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+        .subscribe(() => {
+          // Tras navegar, el DOM de secciones dark cambia; re-sondear.
+          requestAnimationFrame(() => this.syncNavSurface());
+        });
     });
   }
 
   @HostListener('window:scroll')
   onScroll() {
-    this.scrolled.set(window.scrollY > 24);
+    this.syncNavSurface();
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.syncNavSurface();
   }
 
   toggleMenu() {
     this.open.update((v) => !v);
+    // Menú abierto: re-evaluar (panel móvil es crema opaco; chrome sigue la superficie).
+    queueMicrotask(() => this.syncNavSurface());
+  }
+
+  private syncNavSurface() {
+    this.scrolled.set(window.scrollY > 24);
+    this.overDark.set(this.detectOverDark());
+  }
+
+  private detectOverDark(): boolean {
+    if (typeof document === 'undefined') {
+      return true;
+    }
+
+    // Home al tope (hero): siempre on-dark.
+    if (!this.scrolled() && !this.onInnerPage()) {
+      return true;
+    }
+
+    // El host <app-site-nav> no es fixed (se va con el scroll); el chrome sí.
+    const navShell = document.querySelector('app-site-nav .fixed');
+    const navRoot = document.querySelector('app-site-nav');
+    const navBottom = navShell?.getBoundingClientRect().bottom ?? 110;
+    const probeY = Math.min(window.innerHeight - 2, Math.max(0, navBottom + 2));
+    const probeX = Math.floor(window.innerWidth / 2);
+
+    const hits = document.elementsFromPoint(probeX, probeY);
+    for (const el of hits) {
+      if (!(el instanceof Element)) continue;
+      if (navRoot?.contains(el)) continue;
+      if (el.closest('app-whatsapp-float')) continue;
+      const surface = el.closest('[data-nav-surface]');
+      if (surface) {
+        return surface.getAttribute('data-nav-surface') === 'dark';
+      }
+    }
+
+    // Fichas / páginas internas: fondos claros → chrome crema.
+    if (this.onInnerPage()) {
+      return false;
+    }
+
+    return false;
   }
 }
