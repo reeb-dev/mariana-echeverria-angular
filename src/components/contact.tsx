@@ -22,6 +22,7 @@ export function Contact() {
     const email = String(data.get("email") ?? "").trim();
     const phone = String(data.get("phone") ?? "").trim();
     const propertyType = String(data.get("propertyType") ?? "").trim();
+    const operation = String(data.get("operation") ?? "").trim();
     const notes = String(data.get("message") ?? "").trim();
 
     if (!name || !email || !phone) {
@@ -41,6 +42,7 @@ export function Contact() {
       `Email: ${email}`,
       `Teléfono: ${phone}`,
       propertyType ? `Tipo de propiedad: ${propertyType}` : "",
+      operation ? `Operación: ${operation}` : "",
       notes ? `Consulta: ${notes}` : "",
     ]
       .filter(Boolean)
@@ -58,9 +60,12 @@ export function Contact() {
   return (
     <section
       id="contacto"
-      className="border-t border-border bg-forest-deep text-primary-foreground"
+      className="relative overflow-hidden bg-forest-deep text-primary-foreground"
     >
-      <div className="mx-auto grid max-w-6xl gap-12 px-5 py-20 md:grid-cols-2 md:px-8 md:py-28">
+      <div className="pointer-events-none absolute -right-24 top-0 h-72 w-72 rounded-full bg-stone-warm/15 blur-3xl" />
+      <div className="pointer-events-none absolute -left-16 bottom-0 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
+
+      <div className="relative mx-auto grid max-w-6xl gap-12 px-5 py-20 md:grid-cols-2 md:px-8 md:py-28">
         <Reveal>
           <p className="text-sm tracking-[0.2em] text-stone-warm uppercase">
             Contacto
@@ -72,42 +77,69 @@ export function Contact() {
             Contanos sobre tu inmueble y te respondemos a la brevedad. También
             podés escribir por WhatsApp o Instagram.
           </p>
-          <div className="mt-8 space-y-3 text-sm text-white/80">
-            <p>
-              <a
-                href={CONTACT.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline decoration-white/30 underline-offset-4 transition hover:decoration-stone-warm"
-              >
-                WhatsApp {CONTACT.phoneDisplay}
-              </a>
-            </p>
-            <p>
-              <a
-                href={`mailto:${CONTACT.email}`}
-                className="underline decoration-white/30 underline-offset-4 transition hover:decoration-stone-warm"
-              >
-                {CONTACT.email}
-              </a>
-            </p>
-            <p>
-              <a
-                href={CONTACT.instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline decoration-white/30 underline-offset-4 transition hover:decoration-stone-warm"
-              >
-                @{CONTACT.instagram}
-              </a>
-            </p>
-          </div>
+
+          <dl className="mt-10 space-y-5 text-sm">
+            <div>
+              <dt className="tracking-[0.14em] text-white/50 uppercase">
+                WhatsApp
+              </dt>
+              <dd className="mt-1">
+                <a
+                  href={CONTACT.whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-base text-white underline decoration-white/25 underline-offset-4 transition hover:decoration-stone-warm"
+                >
+                  {CONTACT.phoneDisplay}
+                </a>
+                <span className="text-white/55"> / {CONTACT.phoneSecondary}</span>
+              </dd>
+            </div>
+            <div>
+              <dt className="tracking-[0.14em] text-white/50 uppercase">Email</dt>
+              <dd className="mt-1">
+                <a
+                  href={`mailto:${CONTACT.email}`}
+                  className="text-base text-white underline decoration-white/25 underline-offset-4 transition hover:decoration-stone-warm"
+                >
+                  {CONTACT.email}
+                </a>
+              </dd>
+            </div>
+            <div>
+              <dt className="tracking-[0.14em] text-white/50 uppercase">
+                Instagram
+              </dt>
+              <dd className="mt-1">
+                <a
+                  href={CONTACT.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-base text-white underline decoration-white/25 underline-offset-4 transition hover:decoration-stone-warm"
+                >
+                  @{CONTACT.instagram}
+                </a>
+              </dd>
+            </div>
+            <div>
+              <dt className="tracking-[0.14em] text-white/50 uppercase">Sedes</dt>
+              <dd className="mt-2 space-y-2 text-white/75">
+                {CONTACT.offices.map((office) => (
+                  <p key={office.name}>
+                    <span className="text-white">{office.name}</span>
+                    <br />
+                    {office.address}
+                  </p>
+                ))}
+              </dd>
+            </div>
+          </dl>
         </Reveal>
 
         <Reveal delayMs={100}>
           <form
             onSubmit={onSubmit}
-            className="space-y-5"
+            className="space-y-5 rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm md:p-7"
             noValidate
             aria-describedby="form-status"
           >
@@ -151,16 +183,29 @@ export function Contact() {
                 />
               </div>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="propertyType" className="text-white/90">
-                Tipo de propiedad
-              </Label>
-              <Input
-                id="propertyType"
-                name="propertyType"
-                placeholder="Casa, depto, campo, lote..."
-                className="h-10 border-white/20 bg-white/10 text-white placeholder:text-white/45"
-              />
+            <div className="grid gap-5 sm:grid-cols-2">
+              <div className="space-y-2">
+                <Label htmlFor="propertyType" className="text-white/90">
+                  Tipo de propiedad
+                </Label>
+                <Input
+                  id="propertyType"
+                  name="propertyType"
+                  placeholder="Casa, depto, campo..."
+                  className="h-10 border-white/20 bg-white/10 text-white placeholder:text-white/45"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="operation" className="text-white/90">
+                  Operación
+                </Label>
+                <Input
+                  id="operation"
+                  name="operation"
+                  placeholder="Venta, alquiler, tasación..."
+                  className="h-10 border-white/20 bg-white/10 text-white placeholder:text-white/45"
+                />
+              </div>
             </div>
             <div className="space-y-2">
               <Label htmlFor="message" className="text-white/90">

@@ -9,7 +9,7 @@ export function Services() {
           Servicios
         </p>
         <h2 className="mt-3 max-w-2xl font-display text-4xl tracking-tight text-forest-deep md:text-5xl">
-          Un equipo para cada decisión inmobiliaria
+          Todo el camino inmobiliario, en un solo estudio
         </h2>
         <p className="mt-4 max-w-xl text-muted-foreground">
           Intermediación, valuación y acompañamiento jurídico con más de 25 años
@@ -17,20 +17,23 @@ export function Services() {
         </p>
       </Reveal>
 
-      <ul className="mt-14 space-y-0 divide-y divide-border border-y border-border">
+      <ol className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {SERVICES.map((service, index) => (
           <Reveal key={service.title} delayMs={index * 60}>
-            <li className="grid gap-3 py-7 md:grid-cols-[minmax(12rem,18rem)_1fr] md:gap-10">
-              <h3 className="font-heading text-xl text-forest-deep md:text-2xl">
+            <li className="group relative h-full border-t border-forest/25 pt-6 transition hover:border-forest">
+              <span className="font-display text-3xl text-stone-warm/90 tabular-nums">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h3 className="mt-4 font-heading text-2xl text-forest-deep">
                 {service.title}
               </h3>
-              <p className="max-w-2xl leading-relaxed text-muted-foreground">
+              <p className="mt-3 max-w-sm leading-relaxed text-muted-foreground">
                 {service.description}
               </p>
             </li>
           </Reveal>
         ))}
-      </ul>
+      </ol>
     </section>
   );
 }
