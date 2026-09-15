@@ -11,10 +11,12 @@ import {
   PROPERTIES,
   SERVICES,
   TESTIMONIALS,
+  ZONE_FILTERS,
   ZONES,
   coverPhoto,
   type Property,
   type PropertyOperation,
+  type PropertyZone,
 } from '../data/properties';
 
 @Component({
@@ -27,6 +29,7 @@ export class HomeComponent {
   readonly contact = CONTACT;
   readonly services = SERVICES;
   readonly zones = ZONES;
+  readonly zoneFilters = ZONE_FILTERS;
   readonly process = PROCESS;
   readonly credentials = CREDENTIALS;
   readonly testimonials = TESTIMONIALS;
@@ -34,6 +37,7 @@ export class HomeComponent {
   readonly instagramHighlights = INSTAGRAM_HIGHLIGHTS;
 
   readonly filter = signal<'todas' | PropertyOperation>('todas');
+  readonly zoneFilter = signal<'todas' | PropertyZone>('todas');
   readonly formState = signal<'idle' | 'error' | 'success'>('idle');
   readonly formMessage = signal(
     'Demo local: el envío abre WhatsApp con tu mensaje.'
@@ -47,13 +51,21 @@ export class HomeComponent {
   message = '';
 
   get properties(): Property[] {
-    const f = this.filter();
-    if (f === 'todas') return PROPERTIES;
-    return PROPERTIES.filter((p) => p.operation === f);
+    const op = this.filter();
+    const zone = this.zoneFilter();
+    return PROPERTIES.filter((p) => {
+      const matchOp = op === 'todas' || p.operation === op;
+      const matchZone = zone === 'todas' || p.zone === zone;
+      return matchOp && matchZone;
+    });
   }
 
   setFilter(value: 'todas' | PropertyOperation) {
     this.filter.set(value);
+  }
+
+  setZoneFilter(value: 'todas' | PropertyZone) {
+    this.zoneFilter.set(value);
   }
 
   coverPhoto(property: Property) {

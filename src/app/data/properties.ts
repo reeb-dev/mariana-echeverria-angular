@@ -1,4 +1,8 @@
 export type PropertyOperation = 'venta' | 'alquiler';
+export type PropertyZone =
+  | 'coronel-suarez'
+  | 'zona-norte'
+  | 'sierra-ventana';
 export type PropertyType =
   | 'casa'
   | 'departamento'
@@ -17,6 +21,7 @@ export type Property = {
   slug: string;
   title: string;
   location: string;
+  zone: PropertyZone;
   operation: PropertyOperation;
   type: PropertyType;
   priceLabel: string;
@@ -28,6 +33,14 @@ export type Property = {
   amenities: string[];
   photos: PropertyPhoto[];
 };
+
+/** Chips de filtro de zona (coherentes con el inventario demo) */
+export const ZONE_FILTERS: { id: 'todas' | PropertyZone; label: string }[] = [
+  { id: 'todas', label: 'Todas' },
+  { id: 'coronel-suarez', label: 'Coronel Suárez' },
+  { id: 'zona-norte', label: 'Zona Norte' },
+  { id: 'sierra-ventana', label: 'Sierra de la Ventana' },
+];
 
 export const CONTACT = {
   brand: 'Mariana Echeverría',
@@ -192,6 +205,7 @@ export const PROPERTIES: Property[] = [
     slug: 'casa-mitre-coronel-suarez',
     title: 'Casa en venta – Mitre 2000',
     location: 'Coronel Suárez',
+    zone: 'coronel-suarez',
     operation: 'venta',
     type: 'casa',
     priceLabel: 'USD 54.000',
@@ -255,6 +269,7 @@ export const PROPERTIES: Property[] = [
     slug: 'departamento-rivas-alquiler',
     title: 'Excelente departamento – Rivas 200',
     location: 'Coronel Suárez',
+    zone: 'coronel-suarez',
     operation: 'alquiler',
     type: 'departamento',
     priceLabel: '$ 1.200.000 / mes',
@@ -313,6 +328,7 @@ export const PROPERTIES: Property[] = [
     slug: 'lote-sierra-de-la-ventana',
     title: 'Terreno/lote – Juan Bautista Gil',
     location: 'Sierra de la Ventana',
+    zone: 'sierra-ventana',
     operation: 'venta',
     type: 'lote',
     priceLabel: 'USD 21.000',
@@ -379,6 +395,7 @@ export const PROPERTIES: Property[] = [
     slug: 'local-belgrano-alquiler',
     title: 'Local en alquiler – Belgrano 1200',
     location: 'Coronel Suárez',
+    zone: 'coronel-suarez',
     operation: 'alquiler',
     type: 'local',
     priceLabel: '$ 1.200.000 / mes',
@@ -415,6 +432,7 @@ export const PROPERTIES: Property[] = [
     slug: 'chalet-nordelta',
     title: 'Chalet en Nordelta',
     location: 'Av. de los Lagos, Nordelta, Tigre',
+    zone: 'zona-norte',
     operation: 'venta',
     type: 'casa',
     priceLabel: 'USD 850.000',
@@ -473,6 +491,7 @@ export const PROPERTIES: Property[] = [
     slug: 'depto-paseo-victorica-tigre',
     title: 'Depto en venta – Paseo Victorica',
     location: 'Paseo Victorica, Tigre',
+    zone: 'zona-norte',
     operation: 'venta',
     type: 'departamento',
     priceLabel: 'Consultar',
@@ -516,6 +535,7 @@ export const PROPERTIES: Property[] = [
     slug: 'lotes-san-jose-berutti',
     title: 'Lotes en San José',
     location: 'Berutti / Pueblo San José',
+    zone: 'coronel-suarez',
     operation: 'venta',
     type: 'lote',
     priceLabel: 'USD 13.650',
@@ -572,6 +592,7 @@ export const PROPERTIES: Property[] = [
     slug: 'campo-arrendamiento-sudoeste',
     title: 'Campo para arrendamiento',
     location: 'Partido de Coronel Suárez',
+    zone: 'coronel-suarez',
     operation: 'alquiler',
     type: 'campo',
     priceLabel: 'Consultar',

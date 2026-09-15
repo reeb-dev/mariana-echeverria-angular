@@ -77,26 +77,54 @@
         <h2 class="section-title mt-4 text-3xl text-forest-deep md:text-4xl">Avisos como en el feed</h2>
         <p class="mt-4 max-w-xl leading-relaxed text-muted-foreground">Selección inspirada en lo publicado: Mitre, Rivas, Sierra de la Ventana, Belgrano, Nordelta y Paseo Victorica.</p>
       </div>
-      <div class="flex flex-wrap gap-2">
-        @for (item of [['todas','Todas'],['venta','Venta'],['alquiler','Alquiler']]; track item[0]) {
-          <button
-            type="button"
-            class="inline-flex h-9 items-center rounded-md px-4 text-sm font-medium"
-            [class.bg-primary]="filter() === item[0]"
-            [class.text-primary-foreground]="filter() === item[0]"
-            [class.border]="filter() !== item[0]"
-            [class.border-border]="filter() !== item[0]"
-            [class.bg-background]="filter() !== item[0]"
-            (click)="setFilter($any(item[0]))"
-          >
-            {{ item[1] }}
-          </button>
-        }
+      <div class="flex flex-col items-start gap-3">
+        <div class="flex flex-wrap gap-2" role="group" aria-label="Filtrar por operación">
+          @for (item of [['todas','Todas'],['venta','Venta'],['alquiler','Alquiler']]; track item[0]) {
+            <button
+              type="button"
+              class="inline-flex h-9 items-center rounded-md px-4 text-sm font-medium"
+              [class.bg-primary]="filter() === item[0]"
+              [class.text-primary-foreground]="filter() === item[0]"
+              [class.border]="filter() !== item[0]"
+              [class.border-border]="filter() !== item[0]"
+              [class.bg-background]="filter() !== item[0]"
+              (click)="setFilter($any(item[0]))"
+            >
+              {{ item[1] }}
+            </button>
+          }
+        </div>
+        <div class="flex flex-wrap gap-2" role="group" aria-label="Filtrar por zona">
+          @for (item of zoneFilters; track item.id) {
+            <button
+              type="button"
+              class="inline-flex h-9 items-center rounded-md px-4 text-sm font-medium"
+              [class.bg-primary]="zoneFilter() === item.id"
+              [class.text-primary-foreground]="zoneFilter() === item.id"
+              [class.border]="zoneFilter() !== item.id"
+              [class.border-border]="zoneFilter() !== item.id"
+              [class.bg-background]="zoneFilter() !== item.id"
+              (click)="setZoneFilter(item.id)"
+            >
+              {{ item.label }}
+            </button>
+          }
+        </div>
       </div>
     </div>
 
     @if (properties.length === 0) {
-      <p class="mt-14 text-muted-foreground">No hay propiedades en este filtro.</p>
+      <div class="mt-14 space-y-3">
+        <p class="font-sans text-lg font-semibold text-forest-deep">Sin resultados en esta combinación</p>
+        <p class="max-w-md text-muted-foreground">Probá otra zona u operación, o volvé a «Todas» para ver el listado completo.</p>
+        <button
+          type="button"
+          class="inline-flex h-9 items-center rounded-md border border-border bg-background px-4 text-sm font-medium hover:border-forest/40"
+          (click)="setFilter('todas'); setZoneFilter('todas')"
+        >
+          Ver todas las propiedades
+        </button>
+      </div>
     } @else {
       <ul class="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
         @for (property of properties; track property.id; let i = $index) {
