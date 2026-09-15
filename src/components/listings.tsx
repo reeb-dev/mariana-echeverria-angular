@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import { Reveal } from "@/components/reveal";
-import { Button } from "@/components/ui/button";
 import {
   PROPERTIES,
   type PropertyOperation,
@@ -45,18 +44,24 @@ export function Listings() {
               ["venta", "Venta"],
               ["alquiler", "Alquiler"],
             ] as const
-          ).map(([value, label]) => (
-            <Button
-              key={value}
-              type="button"
-              size="sm"
-              variant={filter === value ? "default" : "outline"}
-              onClick={() => setFilter(value)}
-              className="rounded-md"
-            >
-              {label}
-            </Button>
-          ))}
+          ).map(([value, label]) => {
+            const active = filter === value;
+            return (
+              <button
+                key={value}
+                type="button"
+                onClick={() => setFilter(value)}
+                aria-pressed={active}
+                className={
+                  active
+                    ? "inline-flex h-8 items-center rounded-md bg-primary px-3 text-sm font-medium text-primary-foreground"
+                    : "inline-flex h-8 items-center rounded-md border border-border bg-background px-3 text-sm font-medium text-foreground hover:bg-muted"
+                }
+              >
+                {label}
+              </button>
+            );
+          })}
         </div>
 
         {items.length === 0 ? (
