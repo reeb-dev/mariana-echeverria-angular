@@ -58,6 +58,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/mariana-echeverria-angular/",
               "budgets": [
                 {
                   "type": "initial",

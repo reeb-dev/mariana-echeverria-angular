@@ -26,6 +26,25 @@ Build de producción:
 npm run build
 ```
 
+## Deploy (GitHub Pages)
+
+La demo se publica con GitHub Actions (`.github/workflows/deploy-pages.yml`) en:
+
+**https://reeb-dev.github.io/mariana-echeverria-angular/**
+
+Requisitos en el repo GitHub `reeb-dev/mariana-echeverria-angular` (público):
+
+1. Settings → Pages → Source: **GitHub Actions**
+2. Push a `main` (o *Actions → Deploy GitHub Pages → Run workflow*)
+
+El `baseHref` de producción es `/mariana-echeverria-angular/`. El workflow copia `index.html` a `404.html` para el router SPA.
+
+Build local equivalente a CI:
+
+```bash
+npm run build:pages
+```
+
 ## Contenido (inspirado en el feed de Instagram)
 
 - Hero con marca clara, sin tipografías superpuestas
