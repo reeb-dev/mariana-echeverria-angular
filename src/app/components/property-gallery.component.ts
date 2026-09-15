@@ -85,7 +85,7 @@ import { PropertyPhoto } from '../data/properties';
 
     @if (lightboxOpen()) {
       <div
-        class="animate-soft-fade fixed inset-0 z-[100] flex flex-col bg-forest-deep/92"
+        class="fixed inset-0 z-[100] flex flex-col bg-forest-deep"
         role="dialog"
         aria-modal="true"
         [attr.aria-label]="'Galería ampliada: ' + title"
