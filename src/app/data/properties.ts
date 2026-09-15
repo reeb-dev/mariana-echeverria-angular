@@ -36,8 +36,8 @@ export const CONTACT = {
   phoneSecondary: '02926 460944',
   whatsappUrl: 'https://wa.me/5491165911565',
   email: 'marianalecheverria@gmail.com',
-  instagram: 'marianaecheverriacs',
-  instagramUrl: 'https://www.instagram.com/marianaecheverriacs/',
+  instagram: 'coronelsuarezbienesraices',
+  instagramUrl: 'https://www.instagram.com/coronelsuarezbienesraices/',
   matricula: 'Mat. 2227 CBB',
   years: '25',
   offices: [
@@ -107,7 +107,7 @@ export const PROCESS = [
     step: '03',
     title: 'Publicación',
     description:
-      'Armamos fotos, texto y difusión — el mismo criterio que ves en @marianaecheverriacs.',
+      'Armamos fotos, texto y difusión — el mismo criterio que ves en @coronelsuarezbienesraices.',
   },
   {
     step: '04',
@@ -120,12 +120,12 @@ export const PROCESS = [
 export const CREDENTIALS = [
   'Corredora, tasadora y martillera pública — Mat. 2227 CBB',
   'Abogada · corredora inmobiliaria · tasadora',
-  'Ventas · alquileres · tasaciones (bio de @marianaecheverriacs)',
+  'Ventas · alquileres · tasaciones (bio de @coronelsuarezbienesraices)',
   '25 años de servicios profesionales personalizados',
   'Oficinas en Coronel Suárez y Sucursal Norte (Tigre)',
 ] as const;
 
-/** Destacados del perfil @marianaecheverriacs (bio + highlights) */
+/** Destacados del perfil @coronelsuarezbienesraices (bio + highlights) */
 export const INSTAGRAM_HIGHLIGHTS = [
   {
     title: 'Ventas',
@@ -173,7 +173,7 @@ export const FAQS = [
   },
   {
     q: '¿Publican en Instagram todas las propiedades?',
-    a: 'La mayoría de los avisos activos se difunden en @marianaecheverriacs: venta, alquiler, lotes y novedades de tasación. Acá en la web tenés la ficha con galería completa.',
+    a: 'La mayoría de los avisos activos se difunden en @coronelsuarezbienesraices: venta, alquiler, lotes y novedades de tasación. Acá en la web tenés la ficha con galería completa.',
   },
   {
     q: '¿Trabajan Coronel Suárez y Zona Norte?',
