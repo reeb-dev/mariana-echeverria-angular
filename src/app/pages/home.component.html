@@ -5,12 +5,13 @@
     alt="Residencia contemporánea con jardín"
     class="animate-hero-image absolute inset-0 h-full w-full object-cover object-[center_35%]"
   />
-  <div class="absolute inset-0 bg-[#1c1612]/45"></div>
-  <div class="absolute inset-0 bg-gradient-to-r from-[#1c1612]/95 via-[#1c1612]/72 to-transparent"></div>
-  <div class="absolute inset-0 bg-gradient-to-t from-[#1c1612] via-[#1c1612]/55 to-transparent"></div>
-  <div class="animate-soft-fade absolute inset-0 bg-gradient-to-tr from-[#d06a28]/20 via-transparent to-[#e0b040]/08"></div>
+  <!-- Overlay espresso ~10–15% más liviano para ver más la foto -->
+  <div class="absolute inset-0 bg-[#1c1612]/32"></div>
+  <div class="absolute inset-0 bg-gradient-to-r from-[#1c1612]/82 via-[#1c1612]/58 to-transparent"></div>
+  <div class="absolute inset-0 bg-gradient-to-t from-[#1c1612]/92 via-[#1c1612]/42 to-transparent"></div>
+  <div class="animate-soft-fade absolute inset-0 bg-gradient-to-tr from-[#d06a28]/12 via-transparent to-[#e0b040]/06"></div>
 
-  <div class="relative z-10 mx-auto w-full max-w-6xl px-5 pb-16 pt-44 md:px-8 md:pb-28 md:pt-48 lg:pb-32">
+  <div class="relative z-10 mx-auto w-full max-w-6xl px-5 pb-16 pt-40 md:px-8 md:pb-28 md:pt-48 lg:pb-32">
     <p
       class="animate-hero-rise eyebrow text-[#f0c85a]"
       style="animation-delay:40ms; text-shadow:0 2px 12px rgba(28,22,18,0.95)"
@@ -18,45 +19,47 @@
       {{ contact.matricula }} · Corredora · Tasadora · Martillera
     </p>
 
-    <!-- Wordmark vectorial: mark SVG + Source Sans 3 -->
+    <!-- Wordmark vectorial: mark SVG + Source Sans 3 (más chico en mobile) -->
     <div
-      class="animate-hero-rise mt-6 md:mt-7"
+      class="animate-hero-rise mt-5 md:mt-7"
       style="animation-delay:100ms; filter: drop-shadow(0 8px 24px rgba(28,22,18,0.8))"
     >
       <app-brand-logo size="hero" tone="on-dark" [showMatricula]="false" />
     </div>
 
     <h1
-      class="animate-hero-rise mt-9 max-w-xl font-display text-[1.65rem] font-medium leading-[1.25] tracking-tight text-white sm:text-3xl md:mt-11 md:text-4xl md:leading-[1.2]"
+      class="animate-hero-rise mt-7 max-w-xl font-display text-[1.5rem] font-medium leading-[1.25] tracking-tight text-white sm:text-3xl md:mt-11 md:text-4xl md:leading-[1.2]"
       style="animation-delay:220ms; text-shadow:0 2px 18px rgba(28,22,18,0.9)"
     >
       Venta, alquiler, arrendamientos y tasaciones en el día.
     </h1>
     <p
-      class="animate-hero-rise mt-5 max-w-md text-base leading-relaxed text-white md:text-lg"
+      class="animate-hero-rise mt-4 max-w-md text-base leading-relaxed text-white md:mt-5 md:text-lg"
       style="animation-delay:300ms; color:#fff; text-shadow:0 2px 14px rgba(28,22,18,0.95)"
     >
       Avisos claros de Coronel Suárez, Zona Norte, lotes y campos — con respaldo de abogada en derecho inmobiliario.
     </p>
 
-    <div class="animate-hero-rise mt-10 flex flex-wrap items-center gap-3 md:mt-12" style="animation-delay:400ms">
-      <a
-        href="#contacto"
-        class="inline-flex h-12 items-center rounded-lg bg-stone-warm px-7 text-sm font-semibold text-forest-deep shadow-brand transition duration-300 hover:bg-[#e8c056] hover:shadow-card"
-      >
-        Pedí tasación en el día
-      </a>
-      <a
-        href="#propiedades"
-        class="inline-flex h-12 items-center rounded-lg border border-white/40 bg-white/5 px-7 text-sm font-medium text-white backdrop-blur-sm transition duration-300 hover:border-stone-warm hover:bg-white/12"
-      >
-        Ver avisos
-      </a>
+    <div class="animate-hero-rise mt-8 md:mt-12" style="animation-delay:400ms">
+      <div class="flex flex-wrap items-center gap-3">
+        <a
+          href="#contacto"
+          class="inline-flex h-12 items-center rounded-lg bg-stone-warm px-7 text-sm font-semibold text-forest-deep shadow-brand transition duration-300 hover:bg-[#e8c056] hover:shadow-card"
+        >
+          Pedí tasación en el día
+        </a>
+        <a
+          href="#propiedades"
+          class="inline-flex h-12 items-center rounded-lg border border-white/40 bg-white/5 px-7 text-sm font-medium text-white backdrop-blur-sm transition duration-300 hover:border-stone-warm hover:bg-white/12"
+        >
+          Ver avisos
+        </a>
+      </div>
       <a
         [href]="contact.instagramUrl"
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex h-12 items-center px-2 text-sm font-medium text-white/80 underline decoration-stone-warm/40 underline-offset-4 transition hover:text-stone-warm hover:decoration-stone-warm"
+        class="mt-4 inline-flex items-center text-sm font-medium text-white/80 underline decoration-stone-warm/40 underline-offset-4 transition hover:text-stone-warm hover:decoration-stone-warm"
       >
         &#64;{{ contact.instagram }}
       </a>
@@ -110,13 +113,13 @@
         </p>
       </div>
 
-      <!-- Filtros: operación + zona (select + buscador dinámico desde PROPERTIES) -->
+      <!-- Filtros: operación + zona (buscador principal; select secundario en desktop) -->
       <div
         appReveal
         [appRevealDelay]="60"
-        class="w-full max-w-xl space-y-5 border-t border-border/80 pt-5 md:border-t-0 md:pt-0"
+        class="w-full max-w-xl space-y-4 border-t border-border/80 pt-5 md:border-t-0 md:pt-0"
       >
-        <div class="flex flex-wrap gap-2" role="group" aria-label="Filtrar por operación">
+        <div class="flex flex-wrap items-center gap-2" role="group" aria-label="Filtrar por operación">
           @for (item of [['todas','Todas'],['venta','Venta'],['alquiler','Alquiler']]; track item[0]) {
             <button
               type="button"
@@ -128,48 +131,54 @@
               {{ item[1] }}
             </button>
           }
+          <p class="ml-auto text-sm font-medium tabular-nums text-muted-foreground" aria-live="polite">
+            {{ properties().length }}
+            {{ properties().length === 1 ? 'aviso' : 'avisos' }}
+          </p>
         </div>
 
-        <div class="grid gap-4 sm:grid-cols-2">
-          <div class="flex min-w-0 flex-col gap-1.5">
-            <label for="zone-select" class="text-xs font-semibold tracking-[0.12em] text-forest uppercase">Zona</label>
-            <div class="relative">
-              <select
-                id="zone-select"
-                class="h-11 w-full appearance-none rounded-lg border border-border bg-background py-2 pr-9 pl-3.5 text-sm text-foreground outline-none transition focus:border-forest focus:ring-2 focus:ring-forest/20"
-                [ngModel]="zoneFilter()"
-                (ngModelChange)="onZoneSelect($event)"
-                aria-label="Filtrar por zona"
-              >
-                <option value="todas">Todas las zonas</option>
-                @for (item of zoneOptions(); track item.id) {
-                  <option [value]="item.id">{{ item.label }}</option>
-                }
-              </select>
-              <span class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-forest" aria-hidden="true">▾</span>
-            </div>
-          </div>
-          <div class="flex min-w-0 flex-col gap-1.5">
-            <label for="zone-search" class="text-xs font-semibold tracking-[0.12em] text-forest uppercase">Buscar zona</label>
-            <input
-              id="zone-search"
-              type="search"
-              list="zone-datalist"
-              autocomplete="off"
-              placeholder="Ej. Zona Norte…"
-              class="h-11 w-full rounded-lg border border-border bg-background px-3.5 text-sm text-foreground outline-none transition placeholder:text-muted-foreground focus:border-forest focus:ring-2 focus:ring-forest/20"
-              [ngModel]="zoneQuery()"
-              (ngModelChange)="onZoneSearchInput($event)"
-              (keydown.enter)="$event.preventDefault(); onZoneSearchCommit()"
-              aria-label="Buscar zona"
-            />
-            <datalist id="zone-datalist">
-              @for (item of zoneOptions(); track item.id) {
-                <option [value]="item.label"></option>
-              }
-            </datalist>
-          </div>
+        <div class="flex min-w-0 flex-col gap-1.5">
+          <label for="zone-search" class="text-xs font-semibold tracking-[0.12em] text-forest uppercase">Zona</label>
+          <input
+            id="zone-search"
+            type="search"
+            list="zone-datalist"
+            autocomplete="off"
+            placeholder="Buscar zona… (ej. Zona Norte)"
+            class="h-11 w-full rounded-lg border border-border bg-background px-3.5 text-sm text-foreground outline-none transition placeholder:text-muted-foreground focus:border-forest focus:ring-2 focus:ring-forest/20"
+            [ngModel]="zoneQuery()"
+            (ngModelChange)="onZoneSearchInput($event)"
+            (keydown.enter)="$event.preventDefault(); onZoneSearchCommit()"
+            aria-label="Buscar zona"
+          />
+          <datalist id="zone-datalist">
+            @for (item of zoneOptions(); track item.id) {
+              <option [value]="item.label"></option>
+            }
+          </datalist>
         </div>
+
+        <!-- Select: oculto en mobile; disponible en sm+ como alternativa -->
+        <details class="hidden sm:block">
+          <summary class="cursor-pointer text-xs font-medium text-muted-foreground transition hover:text-forest">
+            O elegir zona de la lista
+          </summary>
+          <div class="relative mt-2">
+            <select
+              id="zone-select"
+              class="h-11 w-full appearance-none rounded-lg border border-border bg-background py-2 pr-9 pl-3.5 text-sm text-foreground outline-none transition focus:border-forest focus:ring-2 focus:ring-forest/20"
+              [ngModel]="zoneFilter()"
+              (ngModelChange)="onZoneSelect($event)"
+              aria-label="Filtrar por zona"
+            >
+              <option value="todas">Todas las zonas</option>
+              @for (item of zoneOptions(); track item.id) {
+                <option [value]="item.id">{{ item.label }}</option>
+              }
+            </select>
+            <span class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-forest" aria-hidden="true">▾</span>
+          </div>
+        </details>
       </div>
     </div>
 
@@ -193,21 +202,20 @@
           <li appReveal [appRevealDelay]="i * 50">
             <article class="prop-card group">
               <a [routerLink]="['/propiedades', property.slug]" class="block">
-                <div class="relative aspect-[5/4] overflow-hidden">
+                <div class="prop-card-media">
                   <img
                     [src]="coverPhoto(property).src"
                     [alt]="coverPhoto(property).alt"
-                    class="h-full w-full object-cover transition duration-700 ease-premium group-hover:scale-[1.05]"
                   />
-                  <div class="absolute inset-0 bg-gradient-to-t from-forest-deep/70 via-transparent to-transparent opacity-90"></div>
-                  <div class="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-4">
-                    <span class="rounded-md bg-white/95 px-2.5 py-1 text-[11px] font-semibold tracking-wide text-forest-deep uppercase">
+                  <div class="absolute inset-0 z-[1] bg-gradient-to-t from-forest-deep/75 via-transparent to-transparent"></div>
+                  <div class="absolute inset-x-0 bottom-0 z-[2] flex items-end justify-between gap-2 p-4">
+                    <span class="prop-card-badge">
                       {{ property.operation }}
                     </span>
-                    <span class="text-[11px] font-medium text-white/90">{{ property.photos.length }} fotos</span>
+                    <span class="text-[11px] font-medium text-white/85">{{ property.photos.length }} fotos</span>
                   </div>
                 </div>
-                <div class="space-y-2 px-4 pt-5 pb-5">
+                <div class="space-y-2 px-4 pt-5 pb-4">
                   <p class="eyebrow text-[10px] text-forest">
                     {{ property.type }}@if (property.highlight) { · {{ property.highlight }} }
                   </p>
@@ -215,25 +223,30 @@
                     {{ property.title }}
                   </h3>
                   <p class="text-sm text-muted-foreground">{{ property.location }}</p>
-                  <p class="pt-2 text-lg font-semibold tracking-tight text-forest-deep">{{ property.priceLabel }}</p>
                   <p class="text-sm text-muted-foreground">
                     {{ property.areaLabel }}
                     @if (property.beds != null) { · {{ property.beds }} dorm. }
                     @if (property.baths != null) { · {{ property.baths }} baños }
                   </p>
-                  <p class="pt-3 text-sm font-semibold text-forest transition group-hover:translate-x-0.5">
-                    Ver ficha →
-                  </p>
                 </div>
               </a>
-              <div class="border-t border-border/60 px-4 py-3">
+              <div class="flex items-end justify-between gap-3 border-t border-border/60 px-4 py-3.5">
+                <div class="min-w-0">
+                  <p class="text-lg font-semibold tracking-tight text-forest-deep">{{ property.priceLabel }}</p>
+                  <a
+                    [href]="waFor(property.title, property.location)"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="mt-1 inline-block text-xs text-muted-foreground/80 transition hover:text-muted-foreground"
+                  >
+                    WhatsApp
+                  </a>
+                </div>
                 <a
-                  [href]="waFor(property.title, property.location)"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="text-sm text-muted-foreground underline underline-offset-4 transition hover:text-forest"
+                  [routerLink]="['/propiedades', property.slug]"
+                  class="shrink-0 inline-flex h-10 items-center rounded-lg bg-forest-deep px-4 text-sm font-semibold text-stone-warm transition hover:bg-forest hover:text-white"
                 >
-                  Consultar por WhatsApp
+                  Ver ficha
                 </a>
               </div>
             </article>
@@ -364,17 +377,17 @@
   <div
     appReveal
     [appRevealDelay]="120"
-    class="mt-14 flex flex-wrap items-center gap-5 rounded-2xl bg-gradient-to-r from-clay-deep via-forest to-[#e08a3a] px-7 py-9 text-primary-foreground shadow-brand md:px-10"
+    class="mt-14 flex flex-wrap items-center gap-5 rounded-2xl border border-stone-warm/25 bg-gradient-to-r from-forest-deep via-[#2a221c] to-forest-deep px-7 py-9 text-primary-foreground shadow-soft md:px-10"
   >
     <div class="max-w-xl flex-1">
-      <p class="font-display text-xl font-medium leading-snug">Seguí novedades y avisos nuevos</p>
-      <p class="mt-2 text-sm text-white/85">Publicación continua en &#64;{{ contact.instagram }} · consulta por WhatsApp.</p>
+      <p class="font-display text-xl font-medium leading-snug text-[#f3d9a8]">Seguí novedades y avisos nuevos</p>
+      <p class="mt-2 text-sm text-white/70">Publicación continua en &#64;{{ contact.instagram }} · consulta por WhatsApp.</p>
     </div>
     <a
       [href]="contact.instagramUrl"
       target="_blank"
       rel="noopener noreferrer"
-      class="inline-flex h-11 items-center rounded-lg bg-stone-warm px-5 text-sm font-semibold text-forest-deep transition hover:bg-[#e8c056]"
+      class="inline-flex h-11 items-center rounded-lg border border-stone-warm/50 bg-stone-warm/15 px-5 text-sm font-semibold text-stone-warm transition hover:border-stone-warm hover:bg-stone-warm hover:text-forest-deep"
     >
       Abrir Instagram
     </a>

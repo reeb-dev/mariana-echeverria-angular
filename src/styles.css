@@ -7,6 +7,19 @@
     scroll-behavior: smooth;
   }
 
+  /* Anclas: compensar top bar + nav fijos (~130px) */
+  section[id],
+  #contacto {
+    scroll-margin-top: 8.25rem;
+  }
+
+  @media (min-width: 768px) {
+    section[id],
+    #contacto {
+      scroll-margin-top: 8.75rem;
+    }
+  }
+
   body {
     @apply bg-background font-sans text-foreground antialiased;
     background-image:
@@ -136,5 +149,44 @@
 
   .prop-card:hover {
     @apply -translate-y-1 shadow-card;
+  }
+
+  /* Recorta banners cian/violeta típicos del feed; ancla visual marca */
+  .prop-card-media {
+    @apply relative aspect-[5/4] overflow-hidden;
+  }
+
+  .prop-card-media img {
+    /* Escala + object-position para ocultar franjas superiores del aviso */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 58%;
+    transform: scale(1.08);
+    transform-origin: center 60%;
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .prop-card:hover .prop-card-media img {
+    transform: scale(1.14);
+  }
+
+  .prop-card-media::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 18%;
+    z-index: 1;
+    background: linear-gradient(
+      180deg,
+      rgb(28 22 18 / 0.55) 0%,
+      rgb(28 22 18 / 0.12) 70%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  .prop-card-badge {
+    @apply rounded-md bg-forest-deep/90 px-2.5 py-1 text-[11px] font-semibold tracking-wide text-stone-warm uppercase backdrop-blur-sm;
   }
 }

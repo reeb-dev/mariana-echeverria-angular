@@ -19,15 +19,20 @@ import { BrandLogoComponent } from './brand-logo.component';
         "
       >
         <div
-          class="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-6 gap-y-1 px-5 py-1.5 text-xs font-medium sm:justify-between md:px-8 md:text-sm"
+          class="mx-auto flex max-w-6xl items-center justify-between gap-x-6 px-5 py-1.5 text-xs font-medium md:px-8 md:text-sm"
         >
-          <a [href]="phoneTel" class="inline-flex items-center gap-2 transition hover:text-stone-warm">
+          <a [href]="phoneTel" class="inline-flex min-w-0 items-center gap-2 truncate transition hover:text-stone-warm">
             <span class="text-stone-warm" aria-hidden>☎</span>
-            {{ contact.phoneDisplay }} / {{ contact.phoneSecondary }}
+            <span class="truncate">{{ contact.phoneDisplay }}</span>
+            <span class="hidden text-white/50 sm:inline">/</span>
+            <span class="hidden sm:inline">{{ contact.phoneSecondary }}</span>
           </a>
-          <a [href]="'mailto:' + contact.email" class="inline-flex items-center gap-2 transition hover:text-stone-warm">
+          <a
+            [href]="'mailto:' + contact.email"
+            class="hidden min-w-0 items-center gap-2 truncate transition hover:text-stone-warm sm:inline-flex"
+          >
             <span class="text-stone-warm" aria-hidden>✉</span>
-            {{ contact.email }}
+            <span class="truncate">{{ contact.email }}</span>
           </a>
         </div>
       </div>

@@ -90,7 +90,7 @@ export class BrandLogoComponent {
       case 'lg':
         return 'h-12 w-auto';
       case 'hero':
-        return 'h-14 w-auto sm:h-[4.5rem] md:h-20';
+        return 'h-11 w-auto sm:h-14 md:h-[4.5rem] lg:h-20';
       default:
         return 'h-10 w-auto sm:h-11';
     }
@@ -103,7 +103,7 @@ export class BrandLogoComponent {
       case 'lg':
         return 'text-base sm:text-lg';
       case 'hero':
-        return 'text-lg sm:text-2xl md:text-[1.75rem]';
+        return 'text-base sm:text-xl md:text-2xl lg:text-[1.75rem]';
       default:
         return 'text-sm sm:text-[0.95rem]';
     }
@@ -116,7 +116,7 @@ export class BrandLogoComponent {
       case 'lg':
         return 'text-[0.7rem] sm:text-xs';
       case 'hero':
-        return 'text-[0.65rem] sm:text-sm md:text-[0.9rem]';
+        return 'text-[0.55rem] sm:text-xs md:text-sm lg:text-[0.9rem]';
       default:
         return 'text-[0.6rem] sm:text-[0.65rem]';
     }
