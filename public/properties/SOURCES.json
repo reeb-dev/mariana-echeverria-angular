@@ -1,0 +1,78 @@
+{
+  "note": "Galerías demo con fotos de stock Unsplash descargadas a public/properties (sin hotlink). NO son del Instagram @coronelsuarezbienesraices ni hotlinks de Google Images.",
+  "origin": "Unsplash (Unsplash License)",
+  "folders": {
+    "casa-mitre": [
+      "/properties/casa-mitre/01.jpg",
+      "/properties/casa-mitre/02.jpg",
+      "/properties/casa-mitre/03.jpg",
+      "/properties/casa-mitre/04.jpg",
+      "/properties/casa-mitre/05.jpg",
+      "/properties/casa-mitre/06.jpg",
+      "/properties/casa-mitre/07.jpg",
+      "/properties/casa-mitre/08.jpg"
+    ],
+    "depto-rivas": [
+      "/properties/depto-rivas/01.jpg",
+      "/properties/depto-rivas/02.jpg",
+      "/properties/depto-rivas/03.jpg",
+      "/properties/depto-rivas/04.jpg",
+      "/properties/depto-rivas/05.jpg",
+      "/properties/depto-rivas/06.jpg",
+      "/properties/depto-rivas/07.jpg",
+      "/properties/depto-rivas/08.jpg"
+    ],
+    "lote-sierra": [
+      "/properties/lote-sierra/01.jpg",
+      "/properties/lote-sierra/02.jpg",
+      "/properties/lote-sierra/03.jpg",
+      "/properties/lote-sierra/04.jpg",
+      "/properties/lote-sierra/05.jpg",
+      "/properties/lote-sierra/06.jpg",
+      "/properties/lote-sierra/07.jpg",
+      "/properties/lote-sierra/08.jpg"
+    ],
+    "local-belgrano": [
+      "/properties/local-belgrano/01.jpg",
+      "/properties/local-belgrano/02.jpg",
+      "/properties/local-belgrano/03.jpg",
+      "/properties/local-belgrano/04.jpg",
+      "/properties/local-belgrano/05.jpg",
+      "/properties/local-belgrano/06.jpg"
+    ],
+    "chalet-nordelta": [
+      "/properties/chalet-nordelta/01.jpg",
+      "/properties/chalet-nordelta/02.jpg",
+      "/properties/chalet-nordelta/03.jpg",
+      "/properties/chalet-nordelta/04.jpg",
+      "/properties/chalet-nordelta/05.jpg",
+      "/properties/chalet-nordelta/06.jpg",
+      "/properties/chalet-nordelta/07.jpg",
+      "/properties/chalet-nordelta/08.jpg"
+    ],
+    "depto-victorica": [
+      "/properties/depto-victorica/01.jpg",
+      "/properties/depto-victorica/02.jpg",
+      "/properties/depto-victorica/03.jpg",
+      "/properties/depto-victorica/04.jpg",
+      "/properties/depto-victorica/05.jpg",
+      "/properties/depto-victorica/06.jpg"
+    ],
+    "lotes-sanjose": [
+      "/properties/lotes-sanjose/01.jpg",
+      "/properties/lotes-sanjose/02.jpg",
+      "/properties/lotes-sanjose/03.jpg",
+      "/properties/lotes-sanjose/04.jpg",
+      "/properties/lotes-sanjose/05.jpg",
+      "/properties/lotes-sanjose/06.jpg"
+    ],
+    "campo": [
+      "/properties/campo/01.jpg",
+      "/properties/campo/02.jpg",
+      "/properties/campo/03.jpg",
+      "/properties/campo/04.jpg",
+      "/properties/campo/05.jpg",
+      "/properties/campo/06.jpg"
+    ]
+  }
+}

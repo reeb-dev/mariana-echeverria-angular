@@ -45,6 +45,10 @@ Build local equivalente a CI:
 npm run build:pages
 ```
 
+## Fotos de propiedades
+
+Las galerías en `public/properties/` son **stock Unsplash** descargado localmente (demo). **No** son del Instagram ni hotlinks de Google. Ver `public/properties/SOURCES.md`.
+
 ## Contenido (inspirado en el feed de Instagram)
 
 - Hero con marca clara, sin tipografías superpuestas

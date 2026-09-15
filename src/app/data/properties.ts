@@ -216,7 +216,7 @@ export const FAQS = [
   },
 ] as const;
 
-/** Inventario demo inspirado en el mix que publica: CS urbano, lotes, alquileres, Zona Norte */
+/** Inventario demo (CS urbano, lotes, alquileres, Zona Norte). Galerías: stock Unsplash en public/properties — no Instagram. */
 export const PROPERTIES: Property[] = [
   {
     id: '1',
@@ -230,55 +230,50 @@ export const PROPERTIES: Property[] = [
     beds: 3,
     baths: 2,
     areaLabel: '180 m²',
-    highlight: 'Publicado en el feed',
+    highlight: 'Casa familiar',
     description:
-      'Casa en Mitre 2000, Coronel Suárez. Living-comedor, cocina, dormitorios y patio. Aviso al estilo de los que publica en Instagram: precio visible, fotos claras y consulta directa por WhatsApp.',
+      'Casa en Mitre 2000, Coronel Suárez. Living-comedor, cocina, dormitorios y patio. Precio visible, fotos claras de referencia (stock demo) y consulta directa por WhatsApp.',
     amenities: ['Patio', 'Garage', 'Cocina separada', 'Barrio consolidado', 'Cerca del centro'],
     photos: [
       {
-        src: '/properties/casa-mitre/01.jpeg',
+        src: '/properties/casa-mitre/01.jpg',
         alt: 'Fachada',
         caption: 'Fachada',
       },
       {
-        src: '/properties/casa-mitre/02.webp',
-        alt: 'Living',
-        caption: 'Living',
-      },
-      {
-        src: '/properties/casa-mitre/03.webp',
-        alt: 'Cocina',
-        caption: 'Cocina',
-      },
-      {
-        src: '/properties/casa-mitre/04.webp',
-        alt: 'Dormitorio',
-        caption: 'Dormitorio',
-      },
-      {
-        src: '/properties/casa-mitre/05.webp',
-        alt: 'Patio',
-        caption: 'Patio',
-      },
-      {
-        src: '/properties/casa-mitre/06.webp',
-        alt: 'Garage',
-        caption: 'Garage',
-      },
-      {
-        src: '/properties/casa-mitre/07.webp',
-        alt: 'Detalle',
-        caption: 'Detalle',
-      },
-      {
-        src: '/properties/casa-mitre/08.webp',
+        src: '/properties/casa-mitre/02.jpg',
         alt: 'Exterior',
         caption: 'Exterior',
       },
       {
-        src: '/properties/casa-mitre/09.webp',
-        alt: 'Ambiente',
-        caption: 'Ambiente',
+        src: '/properties/casa-mitre/03.jpg',
+        alt: 'Living',
+        caption: 'Living',
+      },
+      {
+        src: '/properties/casa-mitre/04.jpg',
+        alt: 'Cocina',
+        caption: 'Cocina',
+      },
+      {
+        src: '/properties/casa-mitre/05.jpg',
+        alt: 'Dormitorio',
+        caption: 'Dormitorio',
+      },
+      {
+        src: '/properties/casa-mitre/06.jpg',
+        alt: 'Patio',
+        caption: 'Patio',
+      },
+      {
+        src: '/properties/casa-mitre/07.jpg',
+        alt: 'Acceso',
+        caption: 'Acceso',
+      },
+      {
+        src: '/properties/casa-mitre/08.jpg',
+        alt: 'Detalle',
+        caption: 'Detalle',
       },
     ],
   },
@@ -296,7 +291,7 @@ export const PROPERTIES: Property[] = [
     areaLabel: '65 m²',
     highlight: 'Alquiler activo',
     description:
-      'Departamento en Rivas 200, listo para habitar. Dos dormitorios, living y cocina. Formato típico de alquiler en el feed: ubicación, precio mensual y consulta rápida.',
+      'Departamento en Rivas 200, listo para habitar. Dos dormitorios, living y cocina. Ubicación, precio mensual y consulta rápida por WhatsApp.',
     amenities: ['Luminoso', 'Cocina equipada', 'Cerca de servicios', 'Segundo piso'],
     photos: [
       {
@@ -306,8 +301,8 @@ export const PROPERTIES: Property[] = [
       },
       {
         src: '/properties/depto-rivas/02.jpg',
-        alt: 'Dormitorio',
-        caption: 'Dormitorio',
+        alt: 'Ambiente',
+        caption: 'Ambiente',
       },
       {
         src: '/properties/depto-rivas/03.jpg',
@@ -321,18 +316,18 @@ export const PROPERTIES: Property[] = [
       },
       {
         src: '/properties/depto-rivas/05.jpg',
-        alt: 'Pasillo',
-        caption: 'Pasillo',
+        alt: 'Dormitorio',
+        caption: 'Dormitorio',
       },
       {
         src: '/properties/depto-rivas/06.jpg',
-        alt: 'Vista',
-        caption: 'Vista',
+        alt: 'Estar',
+        caption: 'Estar',
       },
       {
         src: '/properties/depto-rivas/07.jpg',
-        alt: 'Ambiente',
-        caption: 'Ambiente',
+        alt: 'Comedor',
+        caption: 'Comedor',
       },
       {
         src: '/properties/depto-rivas/08.jpg',
@@ -353,7 +348,7 @@ export const PROPERTIES: Property[] = [
     areaLabel: 'Consultar medidas',
     highlight: 'Para proyecto',
     description:
-      'Lote en Juan Bautista Gil, Sierra de la Ventana. Ideal vivienda de fin de semana o inversión. Mismo criterio de los avisos de terrenos del Instagram: ubicación, precio y contacto inmediato.',
+      'Lote en Juan Bautista Gil, Sierra de la Ventana. Ideal vivienda de fin de semana o inversión. Ubicación, precio y contacto inmediato por WhatsApp.',
     amenities: ['Entorno serrano', 'Para construir', 'Inversión', 'Escritura'],
     photos: [
       {
@@ -363,13 +358,13 @@ export const PROPERTIES: Property[] = [
       },
       {
         src: '/properties/lote-sierra/02.jpg',
-        alt: 'Entorno',
-        caption: 'Entorno',
+        alt: 'Entorno serrano',
+        caption: 'Entorno serrano',
       },
       {
         src: '/properties/lote-sierra/03.jpg',
-        alt: 'Acceso',
-        caption: 'Acceso',
+        alt: 'Horizonte',
+        caption: 'Horizonte',
       },
       {
         src: '/properties/lote-sierra/04.jpg',
@@ -378,33 +373,23 @@ export const PROPERTIES: Property[] = [
       },
       {
         src: '/properties/lote-sierra/05.jpg',
-        alt: 'Horizonte',
-        caption: 'Horizonte',
-      },
-      {
-        src: '/properties/lote-sierra/06.jpg',
-        alt: 'Referencia',
-        caption: 'Referencia',
-      },
-      {
-        src: '/properties/lote-sierra/07.jpg',
-        alt: 'Detalle',
-        caption: 'Detalle',
-      },
-      {
-        src: '/properties/lote-sierra/08.jpg',
         alt: 'Relieve',
         caption: 'Relieve',
       },
       {
-        src: '/properties/lote-sierra/09.jpg',
-        alt: 'Panorámica',
-        caption: 'Panorámica',
+        src: '/properties/lote-sierra/06.jpg',
+        alt: 'Paisaje',
+        caption: 'Paisaje',
       },
       {
-        src: '/properties/lote-sierra/10.jpg',
-        alt: 'Acceso 2',
-        caption: 'Acceso 2',
+        src: '/properties/lote-sierra/07.jpg',
+        alt: 'Acceso',
+        caption: 'Acceso',
+      },
+      {
+        src: '/properties/lote-sierra/08.jpg',
+        alt: 'Panorámica',
+        caption: 'Panorámica',
       },
     ],
   },
@@ -420,7 +405,7 @@ export const PROPERTIES: Property[] = [
     areaLabel: 'Consultar',
     highlight: 'Vidriera a la calle',
     description:
-      'Local comercial en Belgrano 1200 con buena exposición. Apto comercio o servicio profesional. Aviso al estilo Instagram: ubicación, precio y WhatsApp.',
+      'Local comercial en Belgrano 1200 con buena exposición. Apto comercio o servicio profesional. Ubicación, precio y consulta por WhatsApp.',
     amenities: ['Vidriera', 'Zona comercial', 'Baño', 'Alta circulación'],
     photos: [
       {
@@ -442,6 +427,16 @@ export const PROPERTIES: Property[] = [
         src: '/properties/local-belgrano/04.jpg',
         alt: 'Vidriera',
         caption: 'Vidriera',
+      },
+      {
+        src: '/properties/local-belgrano/05.jpg',
+        alt: 'Espacio comercial',
+        caption: 'Espacio comercial',
+      },
+      {
+        src: '/properties/local-belgrano/06.jpg',
+        alt: 'Detalle',
+        caption: 'Detalle',
       },
     ],
   },
@@ -469,13 +464,13 @@ export const PROPERTIES: Property[] = [
       },
       {
         src: '/properties/chalet-nordelta/02.jpg',
-        alt: 'Living',
-        caption: 'Living',
+        alt: 'Exterior',
+        caption: 'Exterior',
       },
       {
         src: '/properties/chalet-nordelta/03.jpg',
-        alt: 'Cocina',
-        caption: 'Cocina',
+        alt: 'Living',
+        caption: 'Living',
       },
       {
         src: '/properties/chalet-nordelta/04.jpg',
@@ -522,29 +517,34 @@ export const PROPERTIES: Property[] = [
     amenities: ['Vista abierta', 'Balcón', 'Amenities', 'Cerca del centro de Tigre'],
     photos: [
       {
-        src: '/properties/depto-victorica/01.jpeg',
+        src: '/properties/depto-victorica/01.jpg',
         alt: 'Living',
         caption: 'Living',
       },
       {
-        src: '/properties/depto-victorica/02.jpeg',
+        src: '/properties/depto-victorica/02.jpg',
         alt: 'Dormitorio',
         caption: 'Dormitorio',
       },
       {
-        src: '/properties/depto-victorica/03.jpeg',
+        src: '/properties/depto-victorica/03.jpg',
         alt: 'Cocina',
         caption: 'Cocina',
       },
       {
-        src: '/properties/depto-victorica/04.jpeg',
-        alt: 'Balcón',
-        caption: 'Balcón',
+        src: '/properties/depto-victorica/04.jpg',
+        alt: 'Balcón / vista',
+        caption: 'Balcón / vista',
       },
       {
-        src: '/properties/depto-victorica/05.jpeg',
+        src: '/properties/depto-victorica/05.jpg',
         alt: 'Baño',
         caption: 'Baño',
+      },
+      {
+        src: '/properties/depto-victorica/06.jpg',
+        alt: 'Ambiente',
+        caption: 'Ambiente',
       },
     ],
   },
@@ -560,7 +560,7 @@ export const PROPERTIES: Property[] = [
     areaLabel: 'Últimos lotes',
     highlight: 'Desarrollo',
     description:
-      'Últimos lotes en desarrollo de San José (Berutti). Precio accesible para quien busca terreno propio. Mensaje típico de campaña en Instagram: urgencia, ubicación y valor.',
+      'Últimos lotes en desarrollo de San José (Berutti). Precio accesible para quien busca terreno propio. Últimos lotes: ubicación accesible y valor a consultar.',
     amenities: ['Servicios cercanos', 'Financiación a consultar', 'Zona en crecimiento'],
     photos: [
       {
@@ -569,39 +569,29 @@ export const PROPERTIES: Property[] = [
         caption: 'Lote',
       },
       {
-        src: '/properties/lotes-sanjose/02.webp',
+        src: '/properties/lotes-sanjose/02.jpg',
         alt: 'Entorno',
         caption: 'Entorno',
       },
       {
-        src: '/properties/lotes-sanjose/03.webp',
+        src: '/properties/lotes-sanjose/03.jpg',
         alt: 'Acceso',
         caption: 'Acceso',
       },
       {
-        src: '/properties/lotes-sanjose/04.webp',
+        src: '/properties/lotes-sanjose/04.jpg',
         alt: 'Panorámica',
         caption: 'Panorámica',
       },
       {
-        src: '/properties/lotes-sanjose/05.webp',
+        src: '/properties/lotes-sanjose/05.jpg',
         alt: 'Referencia',
         caption: 'Referencia',
       },
       {
-        src: '/properties/lotes-sanjose/06.webp',
+        src: '/properties/lotes-sanjose/06.jpg',
         alt: 'Servicios',
         caption: 'Servicios',
-      },
-      {
-        src: '/properties/lotes-sanjose/07.webp',
-        alt: 'Detalle',
-        caption: 'Detalle',
-      },
-      {
-        src: '/properties/lotes-sanjose/08.jpg',
-        alt: 'Vista',
-        caption: 'Vista',
       },
     ],
   },
@@ -617,36 +607,36 @@ export const PROPERTIES: Property[] = [
     areaLabel: 'Según padrón',
     highlight: 'Arrendamiento rural',
     description:
-      'Campo disponible para arrendamiento en el partido. Operaciones rurales con la misma seriedad que las urbanas: contrato claro y seguimiento. También publicamos este tipo de aviso en el feed.',
+      'Campo disponible para arrendamiento en el partido. Operaciones rurales con la misma seriedad que las urbanas: contrato claro y seguimiento. Consultá disponibilidad y condiciones por WhatsApp.',
     amenities: ['Aptitud mixta', 'Acceso consolidado', 'Contrato de arrendamiento'],
     photos: [
       {
-        src: '/properties/campo/01.jpeg',
+        src: '/properties/campo/01.jpg',
         alt: 'Vista general',
         caption: 'Vista general',
       },
       {
-        src: '/properties/campo/02.jpeg',
+        src: '/properties/campo/02.jpg',
         alt: 'Horizonte',
         caption: 'Horizonte',
       },
       {
-        src: '/properties/campo/03.jpeg',
-        alt: 'Acceso',
-        caption: 'Acceso',
-      },
-      {
-        src: '/properties/campo/04.jpeg',
+        src: '/properties/campo/03.jpg',
         alt: 'Pastura',
         caption: 'Pastura',
       },
       {
-        src: '/properties/campo/05.jpeg',
-        alt: 'Detalle',
-        caption: 'Detalle',
+        src: '/properties/campo/04.jpg',
+        alt: 'Cultivo',
+        caption: 'Cultivo',
       },
       {
-        src: '/properties/campo/06.jpeg',
+        src: '/properties/campo/05.jpg',
+        alt: 'Detalle rural',
+        caption: 'Detalle rural',
+      },
+      {
+        src: '/properties/campo/06.jpg',
         alt: 'Panorámica',
         caption: 'Panorámica',
       },
