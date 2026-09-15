@@ -6,6 +6,7 @@ import {
   CONTACT,
   CREDENTIALS,
   FAQS,
+  INSTAGRAM_HIGHLIGHTS,
   PROCESS,
   PROPERTIES,
   SERVICES,
@@ -30,6 +31,7 @@ export class HomeComponent {
   readonly credentials = CREDENTIALS;
   readonly testimonials = TESTIMONIALS;
   readonly faqs = FAQS;
+  readonly instagramHighlights = INSTAGRAM_HIGHLIGHTS;
 
   readonly filter = signal<'todas' | PropertyOperation>('todas');
   readonly formState = signal<'idle' | 'error' | 'success'>('idle');

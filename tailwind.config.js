@@ -4,30 +4,36 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "oklch(0.97 0.008 145)",
-        foreground: "oklch(0.22 0.03 155)",
+        background: "#f4f7f4",
+        foreground: "#1c2e24",
         primary: {
-          DEFAULT: "oklch(0.32 0.055 155)",
-          foreground: "oklch(0.97 0.01 145)",
+          DEFAULT: "#243f32",
+          foreground: "#f4f7f4",
         },
         muted: {
-          DEFAULT: "oklch(0.93 0.012 145)",
-          foreground: "oklch(0.45 0.03 155)",
+          DEFAULT: "#e7eee8",
+          foreground: "#5a6b60",
         },
-        border: "oklch(0.86 0.02 145)",
+        border: "#cfdad2",
         forest: {
-          DEFAULT: "oklch(0.38 0.06 155)",
-          deep: "oklch(0.26 0.045 155)",
+          DEFAULT: "#2f5a43",
+          deep: "#1a3026",
         },
         stone: {
-          warm: "oklch(0.78 0.035 85)",
+          warm: "#c9b496",
         },
-        mist: "oklch(0.94 0.015 145)",
+        mist: "#eef3ef",
       },
       fontFamily: {
-        sans: ["Figtree", "system-ui", "sans-serif"],
-        heading: ["Cormorant Garamond", "Georgia", "serif"],
-        display: ["Fraunces", "Georgia", "serif"],
+        sans: ["\"Source Sans 3\"", "system-ui", "sans-serif"],
+        display: ["\"Libre Baskerville\"", "Georgia", "serif"],
+        heading: ["\"Libre Baskerville\"", "Georgia", "serif"],
+      },
+      letterSpacing: {
+        brand: "0.01em",
+      },
+      lineHeight: {
+        brand: "1.12",
       },
     },
   },

@@ -8,18 +8,28 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-background font-sans text-foreground antialiased;
     background-image:
-      radial-gradient(ellipse 80% 50% at 10% -10%, oklch(0.9 0.03 145 / 0.7), transparent),
-      radial-gradient(ellipse 60% 40% at 100% 20%, oklch(0.88 0.03 85 / 0.45), transparent);
+      radial-gradient(ellipse 80% 50% at 10% -10%, rgb(47 90 67 / 0.08), transparent),
+      radial-gradient(ellipse 60% 40% at 100% 20%, rgb(201 180 150 / 0.18), transparent);
     background-attachment: fixed;
+  }
+
+  h1,
+  h2,
+  h3,
+  .brand-title,
+  .section-title {
+    text-wrap: balance;
+    font-kerning: normal;
+    font-feature-settings: "kern" 1, "liga" 1;
   }
 }
 
 @keyframes hero-rise {
   from {
     opacity: 0;
-    transform: translateY(1.25rem);
+    transform: translateY(0.75rem);
   }
   to {
     opacity: 1;
@@ -29,7 +39,7 @@
 
 @keyframes hero-ken-burns {
   from {
-    transform: scale(1.08);
+    transform: scale(1.06);
   }
   to {
     transform: scale(1);
@@ -37,11 +47,34 @@
 }
 
 .animate-hero-rise {
-  animation: hero-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: hero-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .animate-hero-image {
-  animation: hero-ken-burns 8s ease-out both;
+  animation: hero-ken-burns 10s ease-out both;
+}
+
+/* Una sola serif para marca/títulos: line-height holgado evita solapes */
+.brand-title {
+  font-family: "Libre Baskerville", Georgia, serif;
+  font-weight: 700;
+  line-height: 1.28;
+  letter-spacing: 0;
+}
+
+.section-title {
+  font-family: "Libre Baskerville", Georgia, serif;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+.eyebrow {
+  font-family: "Source Sans 3", system-ui, sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  line-height: 1.5;
+  text-transform: uppercase;
 }
 
 .reveal {
@@ -52,14 +85,14 @@
 @media (prefers-reduced-motion: no-preference) {
   .reveal.will-animate {
     opacity: 0.01;
-    transform: translateY(0.85rem);
+    transform: translateY(0.75rem);
   }
 
   .reveal.will-animate.in-view {
     opacity: 1;
     transform: translateY(0);
     transition:
-      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
   }
 }

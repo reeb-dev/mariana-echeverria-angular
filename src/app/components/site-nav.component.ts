@@ -17,7 +17,7 @@ import { CONTACT } from '../data/properties';
       "
     >
       <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 md:px-8">
-        <a routerLink="/" fragment="inicio" class="font-display text-xl tracking-tight md:text-2xl">
+        <a routerLink="/" fragment="inicio" class="brand-title text-lg leading-none md:text-xl">
           {{ contact.brand }}
         </a>
 
@@ -106,7 +106,7 @@ export class SiteNavComponent {
   readonly links = [
     { href: '#servicios', fragment: 'servicios', label: 'Servicios' },
     { href: '#propiedades', fragment: 'propiedades', label: 'Propiedades' },
-    { href: '#proceso', fragment: 'proceso', label: 'Proceso' },
+    { href: '#instagram', fragment: 'instagram', label: 'Instagram' },
     { href: '#trayectoria', fragment: 'trayectoria', label: 'Trayectoria' },
     { href: '#contacto', fragment: 'contacto', label: 'Contacto' },
   ];

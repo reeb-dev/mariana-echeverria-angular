@@ -10,11 +10,11 @@ import { CONTACT } from '../data/properties';
     <footer class="border-t border-white/10 bg-forest-deep text-white/70">
       <div class="mx-auto grid max-w-6xl gap-10 px-5 py-12 md:grid-cols-[1.2fr_1fr_1fr] md:px-8">
         <div>
-          <p class="font-display text-2xl text-white">{{ contact.brand }}</p>
-          <p class="mt-1 text-sm tracking-[0.14em] text-stone-warm uppercase">{{ contact.tagline }}</p>
+          <p class="brand-title text-xl leading-snug text-white md:text-2xl">{{ contact.brand }}</p>
+          <p class="mt-2 font-sans text-sm font-medium text-stone-warm">{{ contact.tagline }}</p>
           <p class="mt-4 max-w-sm text-sm leading-relaxed">
             Corredora, tasadora y martillera pública. {{ contact.matricula }}.
-            Servicio personalizado en Zona Norte, CABA y Coronel Suárez.
+            Venta, alquiler, arrendamientos, tasaciones en el día y home staging.
           </p>
         </div>
         <div>
