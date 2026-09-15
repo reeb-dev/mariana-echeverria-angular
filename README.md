@@ -47,7 +47,7 @@ npm run build:pages
 
 ## Fotos de propiedades
 
-Las galerías en `public/properties/` son **stock Unsplash** descargado localmente (demo). **No** son del Instagram ni hotlinks de Google. Ver `public/properties/SOURCES.md`.
+Las galerías en `public/properties/` son avisos públicos del circuito CS (`coronelsuarezpropiedades.com.ar`), alineados por tipo/zona. Zona Norte: Unsplash. Instagram `@coronelsuarezbienesraices` exige login — **no** son fotos del IG. Ver `public/properties/SOURCES.md`.
 
 ## Contenido (inspirado en el feed de Instagram)
 

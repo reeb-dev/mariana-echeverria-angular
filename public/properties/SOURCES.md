@@ -1,8 +1,13 @@
 # Origen de las fotos de propiedades
 
-**Stock Unsplash** (licencia Unsplash), descargadas localmente en esta carpeta.
+## Instagram
+Handle confirmado en CONTACT: **@coronelsuarezbienesraices**.
 
-**No** son del Instagram `@coronelsuarezbienesraices`.
-**No** son hotlinks de Google Images.
+Al 2026-09-15 el perfil público exige login; no se pudieron obtener imágenes del feed ni de scrapers/CDN sin credenciales.
 
-Usadas solo para la demo Angular de Mariana Echeverría cuando no hubo fotos nuevas del feed.
+## Qué usamos en su lugar
+- **Coronel Suárez / Sierra / San José / campo**: fotos de avisos públicos en [coronelsuarezpropiedades.com.ar](https://coronelsuarezpropiedades.com.ar/), alineados por tipo, zona o calle a cada ficha del inventario demo.
+- **Zona Norte (Nordelta / Paseo Victorica)**: sin avisos equivalentes en ese portal → se mantienen fotos de **stock Unsplash** ya descargadas.
+
+**No** son (ni se presentan como) capturas del Instagram de Mariana.
+Detalle por carpeta: `SOURCES.json`.

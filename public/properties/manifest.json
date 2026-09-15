@@ -7,7 +7,9 @@
     "/properties/casa-mitre/05.jpg",
     "/properties/casa-mitre/06.jpg",
     "/properties/casa-mitre/07.jpg",
-    "/properties/casa-mitre/08.jpg"
+    "/properties/casa-mitre/08.jpg",
+    "/properties/casa-mitre/09.jpg",
+    "/properties/casa-mitre/10.jpg"
   ],
   "depto-rivas": [
     "/properties/depto-rivas/01.jpg",
@@ -17,7 +19,9 @@
     "/properties/depto-rivas/05.jpg",
     "/properties/depto-rivas/06.jpg",
     "/properties/depto-rivas/07.jpg",
-    "/properties/depto-rivas/08.jpg"
+    "/properties/depto-rivas/08.jpg",
+    "/properties/depto-rivas/09.jpg",
+    "/properties/depto-rivas/10.jpg"
   ],
   "lote-sierra": [
     "/properties/lote-sierra/01.jpg",
@@ -35,7 +39,28 @@
     "/properties/local-belgrano/03.jpg",
     "/properties/local-belgrano/04.jpg",
     "/properties/local-belgrano/05.jpg",
-    "/properties/local-belgrano/06.jpg"
+    "/properties/local-belgrano/06.jpg",
+    "/properties/local-belgrano/07.jpg",
+    "/properties/local-belgrano/08.jpg",
+    "/properties/local-belgrano/09.jpg",
+    "/properties/local-belgrano/10.jpg"
+  ],
+  "lotes-sanjose": [
+    "/properties/lotes-sanjose/01.jpg",
+    "/properties/lotes-sanjose/02.jpg",
+    "/properties/lotes-sanjose/03.jpg",
+    "/properties/lotes-sanjose/04.jpg",
+    "/properties/lotes-sanjose/05.jpg",
+    "/properties/lotes-sanjose/06.jpg"
+  ],
+  "campo": [
+    "/properties/campo/01.jpg",
+    "/properties/campo/02.jpg",
+    "/properties/campo/03.jpg",
+    "/properties/campo/04.jpg",
+    "/properties/campo/05.jpg",
+    "/properties/campo/06.jpg",
+    "/properties/campo/07.jpg"
   ],
   "chalet-nordelta": [
     "/properties/chalet-nordelta/01.jpg",
@@ -54,21 +79,5 @@
     "/properties/depto-victorica/04.jpg",
     "/properties/depto-victorica/05.jpg",
     "/properties/depto-victorica/06.jpg"
-  ],
-  "lotes-sanjose": [
-    "/properties/lotes-sanjose/01.jpg",
-    "/properties/lotes-sanjose/02.jpg",
-    "/properties/lotes-sanjose/03.jpg",
-    "/properties/lotes-sanjose/04.jpg",
-    "/properties/lotes-sanjose/05.jpg",
-    "/properties/lotes-sanjose/06.jpg"
-  ],
-  "campo": [
-    "/properties/campo/01.jpg",
-    "/properties/campo/02.jpg",
-    "/properties/campo/03.jpg",
-    "/properties/campo/04.jpg",
-    "/properties/campo/05.jpg",
-    "/properties/campo/06.jpg"
   ]
 }

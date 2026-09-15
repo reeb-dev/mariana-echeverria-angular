@@ -216,7 +216,7 @@ export const FAQS = [
   },
 ] as const;
 
-/** Inventario demo (CS urbano, lotes, alquileres, Zona Norte). Galerías: stock Unsplash en public/properties — no Instagram. */
+/** Inventario demo (CS urbano, lotes, alquileres, Zona Norte). Galerías: avisos públicos CS + Unsplash Zona Norte — ver public/properties/SOURCES.md (no Instagram). */
 export const PROPERTIES: Property[] = [
   {
     id: '1',
@@ -232,7 +232,7 @@ export const PROPERTIES: Property[] = [
     areaLabel: '180 m²',
     highlight: 'Casa familiar',
     description:
-      'Casa en Mitre 2000, Coronel Suárez. Living-comedor, cocina, dormitorios y patio. Precio visible, fotos claras de referencia (stock demo) y consulta directa por WhatsApp.',
+      'Casa en Mitre 2000, Coronel Suárez. Living-comedor, cocina, dormitorios y patio. Precio visible, fotos del circuito inmobiliario de Coronel Suárez y consulta directa por WhatsApp.',
     amenities: ['Patio', 'Garage', 'Cocina separada', 'Barrio consolidado', 'Cerca del centro'],
     photos: [
       {
@@ -242,23 +242,23 @@ export const PROPERTIES: Property[] = [
       },
       {
         src: '/properties/casa-mitre/02.jpg',
-        alt: 'Exterior',
-        caption: 'Exterior',
-      },
-      {
-        src: '/properties/casa-mitre/03.jpg',
         alt: 'Living',
         caption: 'Living',
       },
       {
-        src: '/properties/casa-mitre/04.jpg',
+        src: '/properties/casa-mitre/03.jpg',
         alt: 'Cocina',
         caption: 'Cocina',
       },
       {
-        src: '/properties/casa-mitre/05.jpg',
+        src: '/properties/casa-mitre/04.jpg',
         alt: 'Dormitorio',
         caption: 'Dormitorio',
+      },
+      {
+        src: '/properties/casa-mitre/05.jpg',
+        alt: 'Baño',
+        caption: 'Baño',
       },
       {
         src: '/properties/casa-mitre/06.jpg',
@@ -267,11 +267,21 @@ export const PROPERTIES: Property[] = [
       },
       {
         src: '/properties/casa-mitre/07.jpg',
-        alt: 'Acceso',
-        caption: 'Acceso',
+        alt: 'Garage',
+        caption: 'Garage',
       },
       {
         src: '/properties/casa-mitre/08.jpg',
+        alt: 'Exterior',
+        caption: 'Exterior',
+      },
+      {
+        src: '/properties/casa-mitre/09.jpg',
+        alt: 'Ambiente',
+        caption: 'Ambiente',
+      },
+      {
+        src: '/properties/casa-mitre/10.jpg',
         alt: 'Detalle',
         caption: 'Detalle',
       },
@@ -301,8 +311,8 @@ export const PROPERTIES: Property[] = [
       },
       {
         src: '/properties/depto-rivas/02.jpg',
-        alt: 'Ambiente',
-        caption: 'Ambiente',
+        alt: 'Dormitorio',
+        caption: 'Dormitorio',
       },
       {
         src: '/properties/depto-rivas/03.jpg',
@@ -316,23 +326,33 @@ export const PROPERTIES: Property[] = [
       },
       {
         src: '/properties/depto-rivas/05.jpg',
-        alt: 'Dormitorio',
-        caption: 'Dormitorio',
+        alt: 'Ambiente',
+        caption: 'Ambiente',
       },
       {
         src: '/properties/depto-rivas/06.jpg',
-        alt: 'Estar',
-        caption: 'Estar',
+        alt: 'Pasillo',
+        caption: 'Pasillo',
       },
       {
         src: '/properties/depto-rivas/07.jpg',
-        alt: 'Comedor',
-        caption: 'Comedor',
+        alt: 'Vista',
+        caption: 'Vista',
       },
       {
         src: '/properties/depto-rivas/08.jpg',
         alt: 'Detalle',
         caption: 'Detalle',
+      },
+      {
+        src: '/properties/depto-rivas/09.jpg',
+        alt: 'Estar',
+        caption: 'Estar',
+      },
+      {
+        src: '/properties/depto-rivas/10.jpg',
+        alt: 'Comedor',
+        caption: 'Comedor',
       },
     ],
   },
@@ -358,38 +378,38 @@ export const PROPERTIES: Property[] = [
       },
       {
         src: '/properties/lote-sierra/02.jpg',
-        alt: 'Entorno serrano',
-        caption: 'Entorno serrano',
+        alt: 'Entorno',
+        caption: 'Entorno',
       },
       {
         src: '/properties/lote-sierra/03.jpg',
-        alt: 'Horizonte',
-        caption: 'Horizonte',
-      },
-      {
-        src: '/properties/lote-sierra/04.jpg',
         alt: 'Vegetación',
         caption: 'Vegetación',
       },
       {
+        src: '/properties/lote-sierra/04.jpg',
+        alt: 'Horizonte',
+        caption: 'Horizonte',
+      },
+      {
         src: '/properties/lote-sierra/05.jpg',
-        alt: 'Relieve',
-        caption: 'Relieve',
-      },
-      {
-        src: '/properties/lote-sierra/06.jpg',
-        alt: 'Paisaje',
-        caption: 'Paisaje',
-      },
-      {
-        src: '/properties/lote-sierra/07.jpg',
         alt: 'Acceso',
         caption: 'Acceso',
       },
       {
-        src: '/properties/lote-sierra/08.jpg',
+        src: '/properties/lote-sierra/06.jpg',
+        alt: 'Relieve',
+        caption: 'Relieve',
+      },
+      {
+        src: '/properties/lote-sierra/07.jpg',
         alt: 'Panorámica',
         caption: 'Panorámica',
+      },
+      {
+        src: '/properties/lote-sierra/08.jpg',
+        alt: 'Referencia',
+        caption: 'Referencia',
       },
     ],
   },
@@ -437,6 +457,26 @@ export const PROPERTIES: Property[] = [
         src: '/properties/local-belgrano/06.jpg',
         alt: 'Detalle',
         caption: 'Detalle',
+      },
+      {
+        src: '/properties/local-belgrano/07.jpg',
+        alt: 'Baño',
+        caption: 'Baño',
+      },
+      {
+        src: '/properties/local-belgrano/08.jpg',
+        alt: 'Depósito',
+        caption: 'Depósito',
+      },
+      {
+        src: '/properties/local-belgrano/09.jpg',
+        alt: 'Acceso',
+        caption: 'Acceso',
+      },
+      {
+        src: '/properties/local-belgrano/10.jpg',
+        alt: 'Lateral',
+        caption: 'Lateral',
       },
     ],
   },
@@ -627,8 +667,8 @@ export const PROPERTIES: Property[] = [
       },
       {
         src: '/properties/campo/04.jpg',
-        alt: 'Cultivo',
-        caption: 'Cultivo',
+        alt: 'Acceso',
+        caption: 'Acceso',
       },
       {
         src: '/properties/campo/05.jpg',
@@ -639,6 +679,11 @@ export const PROPERTIES: Property[] = [
         src: '/properties/campo/06.jpg',
         alt: 'Panorámica',
         caption: 'Panorámica',
+      },
+      {
+        src: '/properties/campo/07.jpg',
+        alt: 'Cultivo',
+        caption: 'Cultivo',
       },
     ],
   },

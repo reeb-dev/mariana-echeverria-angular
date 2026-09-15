@@ -1,78 +1,489 @@
 {
-  "note": "Galerías demo con fotos de stock Unsplash descargadas a public/properties (sin hotlink). NO son del Instagram @coronelsuarezbienesraices ni hotlinks de Google Images.",
-  "origin": "Unsplash (Unsplash License)",
+  "note": "Fotos de propiedades para la demo. Instagram @coronelsuarezbienesraices NO es accesible sin login (2026-09-15). Las galerías CS vienen de avisos públicos en coronelsuarezpropiedades.com.ar alineados por tipo/zona/calle. NO se afirman como posts del IG de Mariana.",
+  "instagram_handle_confirmed": "coronelsuarezbienesraices",
+  "instagram_status": "login_wall",
   "folders": {
-    "casa-mitre": [
-      "/properties/casa-mitre/01.jpg",
-      "/properties/casa-mitre/02.jpg",
-      "/properties/casa-mitre/03.jpg",
-      "/properties/casa-mitre/04.jpg",
-      "/properties/casa-mitre/05.jpg",
-      "/properties/casa-mitre/06.jpg",
-      "/properties/casa-mitre/07.jpg",
-      "/properties/casa-mitre/08.jpg"
-    ],
-    "depto-rivas": [
-      "/properties/depto-rivas/01.jpg",
-      "/properties/depto-rivas/02.jpg",
-      "/properties/depto-rivas/03.jpg",
-      "/properties/depto-rivas/04.jpg",
-      "/properties/depto-rivas/05.jpg",
-      "/properties/depto-rivas/06.jpg",
-      "/properties/depto-rivas/07.jpg",
-      "/properties/depto-rivas/08.jpg"
-    ],
-    "lote-sierra": [
-      "/properties/lote-sierra/01.jpg",
-      "/properties/lote-sierra/02.jpg",
-      "/properties/lote-sierra/03.jpg",
-      "/properties/lote-sierra/04.jpg",
-      "/properties/lote-sierra/05.jpg",
-      "/properties/lote-sierra/06.jpg",
-      "/properties/lote-sierra/07.jpg",
-      "/properties/lote-sierra/08.jpg"
-    ],
-    "local-belgrano": [
-      "/properties/local-belgrano/01.jpg",
-      "/properties/local-belgrano/02.jpg",
-      "/properties/local-belgrano/03.jpg",
-      "/properties/local-belgrano/04.jpg",
-      "/properties/local-belgrano/05.jpg",
-      "/properties/local-belgrano/06.jpg"
-    ],
-    "chalet-nordelta": [
-      "/properties/chalet-nordelta/01.jpg",
-      "/properties/chalet-nordelta/02.jpg",
-      "/properties/chalet-nordelta/03.jpg",
-      "/properties/chalet-nordelta/04.jpg",
-      "/properties/chalet-nordelta/05.jpg",
-      "/properties/chalet-nordelta/06.jpg",
-      "/properties/chalet-nordelta/07.jpg",
-      "/properties/chalet-nordelta/08.jpg"
-    ],
-    "depto-victorica": [
-      "/properties/depto-victorica/01.jpg",
-      "/properties/depto-victorica/02.jpg",
-      "/properties/depto-victorica/03.jpg",
-      "/properties/depto-victorica/04.jpg",
-      "/properties/depto-victorica/05.jpg",
-      "/properties/depto-victorica/06.jpg"
-    ],
-    "lotes-sanjose": [
-      "/properties/lotes-sanjose/01.jpg",
-      "/properties/lotes-sanjose/02.jpg",
-      "/properties/lotes-sanjose/03.jpg",
-      "/properties/lotes-sanjose/04.jpg",
-      "/properties/lotes-sanjose/05.jpg",
-      "/properties/lotes-sanjose/06.jpg"
-    ],
-    "campo": [
-      "/properties/campo/01.jpg",
-      "/properties/campo/02.jpg",
-      "/properties/campo/03.jpg",
-      "/properties/campo/04.jpg",
-      "/properties/campo/05.jpg",
-      "/properties/campo/06.jpg"
-    ]
+    "casa-mitre": {
+      "origin": "coronelsuarezpropiedades.com.ar",
+      "not_instagram": true,
+      "listing_slug": "casa-en-venta-urquiza-40-coronel-suarez",
+      "listing_title": "CASA EN VENTA &#8211; Urquiza 40, Coronel Suarez",
+      "listing_url": "https://coronelsuarezpropiedades.com.ar/property/casa-en-venta-urquiza-40-coronel-suarez/",
+      "listing_agent": "JOSEFINA GARIGLIO INMOBILIARIA",
+      "listing_street": "Urquiza",
+      "listing_suburb": "Coronel Suárez",
+      "alignment": "Casa urbana CS (Urquiza 40) — alineada al aviso Mitre 2000 del inventario demo",
+      "files": [
+        {
+          "file": "01.jpg",
+          "src": "/properties/casa-mitre/01.jpg",
+          "alt": "Fachada",
+          "caption": "Fachada"
+        },
+        {
+          "file": "02.jpg",
+          "src": "/properties/casa-mitre/02.jpg",
+          "alt": "Living",
+          "caption": "Living"
+        },
+        {
+          "file": "03.jpg",
+          "src": "/properties/casa-mitre/03.jpg",
+          "alt": "Cocina",
+          "caption": "Cocina"
+        },
+        {
+          "file": "04.jpg",
+          "src": "/properties/casa-mitre/04.jpg",
+          "alt": "Dormitorio",
+          "caption": "Dormitorio"
+        },
+        {
+          "file": "05.jpg",
+          "src": "/properties/casa-mitre/05.jpg",
+          "alt": "Baño",
+          "caption": "Baño"
+        },
+        {
+          "file": "06.jpg",
+          "src": "/properties/casa-mitre/06.jpg",
+          "alt": "Patio",
+          "caption": "Patio"
+        },
+        {
+          "file": "07.jpg",
+          "src": "/properties/casa-mitre/07.jpg",
+          "alt": "Garage",
+          "caption": "Garage"
+        },
+        {
+          "file": "08.jpg",
+          "src": "/properties/casa-mitre/08.jpg",
+          "alt": "Exterior",
+          "caption": "Exterior"
+        },
+        {
+          "file": "09.jpg",
+          "src": "/properties/casa-mitre/09.jpg",
+          "alt": "Ambiente",
+          "caption": "Ambiente"
+        },
+        {
+          "file": "10.jpg",
+          "src": "/properties/casa-mitre/10.jpg",
+          "alt": "Detalle",
+          "caption": "Detalle"
+        }
+      ]
+    },
+    "depto-rivas": {
+      "origin": "coronelsuarezpropiedades.com.ar",
+      "not_instagram": true,
+      "listing_slug": "departamento-en-alquiler-sarmiento-222",
+      "listing_title": "DEPARTAMENTO EN ALQUILER &#8211; Sarmiento 222",
+      "listing_url": "https://coronelsuarezpropiedades.com.ar/rental/departamento-en-alquiler-sarmiento-222/",
+      "listing_agent": "POGOST INMOBILIARIA",
+      "listing_street": "Sarmiento",
+      "listing_suburb": "Coronél Suarez",
+      "alignment": "Depto en alquiler CS (Sarmiento 222) — alineado a Rivas 200 alquiler",
+      "files": [
+        {
+          "file": "01.jpg",
+          "src": "/properties/depto-rivas/01.jpg",
+          "alt": "Living",
+          "caption": "Living"
+        },
+        {
+          "file": "02.jpg",
+          "src": "/properties/depto-rivas/02.jpg",
+          "alt": "Dormitorio",
+          "caption": "Dormitorio"
+        },
+        {
+          "file": "03.jpg",
+          "src": "/properties/depto-rivas/03.jpg",
+          "alt": "Cocina",
+          "caption": "Cocina"
+        },
+        {
+          "file": "04.jpg",
+          "src": "/properties/depto-rivas/04.jpg",
+          "alt": "Baño",
+          "caption": "Baño"
+        },
+        {
+          "file": "05.jpg",
+          "src": "/properties/depto-rivas/05.jpg",
+          "alt": "Ambiente",
+          "caption": "Ambiente"
+        },
+        {
+          "file": "06.jpg",
+          "src": "/properties/depto-rivas/06.jpg",
+          "alt": "Pasillo",
+          "caption": "Pasillo"
+        },
+        {
+          "file": "07.jpg",
+          "src": "/properties/depto-rivas/07.jpg",
+          "alt": "Vista",
+          "caption": "Vista"
+        },
+        {
+          "file": "08.jpg",
+          "src": "/properties/depto-rivas/08.jpg",
+          "alt": "Detalle",
+          "caption": "Detalle"
+        },
+        {
+          "file": "09.jpg",
+          "src": "/properties/depto-rivas/09.jpg",
+          "alt": "Estar",
+          "caption": "Estar"
+        },
+        {
+          "file": "10.jpg",
+          "src": "/properties/depto-rivas/10.jpg",
+          "alt": "Comedor",
+          "caption": "Comedor"
+        }
+      ]
+    },
+    "lote-sierra": {
+      "origin": "coronelsuarezpropiedades.com.ar",
+      "not_instagram": true,
+      "listing_slug": "lote-en-sierra-de-la-ventana",
+      "listing_title": "LOTE EN SIERRA DE LA VENTANA",
+      "listing_url": "https://coronelsuarezpropiedades.com.ar/property/lote-en-sierra-de-la-ventana/",
+      "listing_agent": "GASTON LASTRA INMOBILIARIA",
+      "listing_street": "Avenida Tres Picos",
+      "listing_suburb": "Sierra de la Ventana",
+      "alignment": "Lote Sierra de la Ventana — misma zona del aviso",
+      "files": [
+        {
+          "file": "01.jpg",
+          "src": "/properties/lote-sierra/01.jpg",
+          "alt": "Vista del lote",
+          "caption": "Vista del lote"
+        },
+        {
+          "file": "02.jpg",
+          "src": "/properties/lote-sierra/02.jpg",
+          "alt": "Entorno",
+          "caption": "Entorno"
+        },
+        {
+          "file": "03.jpg",
+          "src": "/properties/lote-sierra/03.jpg",
+          "alt": "Vegetación",
+          "caption": "Vegetación"
+        },
+        {
+          "file": "04.jpg",
+          "src": "/properties/lote-sierra/04.jpg",
+          "alt": "Horizonte",
+          "caption": "Horizonte"
+        },
+        {
+          "file": "05.jpg",
+          "src": "/properties/lote-sierra/05.jpg",
+          "alt": "Acceso",
+          "caption": "Acceso"
+        },
+        {
+          "file": "06.jpg",
+          "src": "/properties/lote-sierra/06.jpg",
+          "alt": "Relieve",
+          "caption": "Relieve"
+        },
+        {
+          "file": "07.jpg",
+          "src": "/properties/lote-sierra/07.jpg",
+          "alt": "Panorámica",
+          "caption": "Panorámica"
+        },
+        {
+          "file": "08.jpg",
+          "src": "/properties/lote-sierra/08.jpg",
+          "alt": "Referencia",
+          "caption": "Referencia"
+        }
+      ]
+    },
+    "local-belgrano": {
+      "origin": "coronelsuarezpropiedades.com.ar",
+      "not_instagram": true,
+      "listing_slug": "local-comercial-en-venta-belgrano-1254",
+      "listing_title": "LOCAL COMERCIAL EN VENTA &#8211; Belgrano 1254",
+      "listing_url": "https://coronelsuarezpropiedades.com.ar/property/local-comercial-en-venta-belgrano-1254/",
+      "listing_agent": "POGOST INMOBILIARIA",
+      "listing_street": "Belgrano",
+      "listing_suburb": "Coronel Suárez",
+      "alignment": "Local Belgrano 1254 CS — misma calle del aviso Belgrano 1200",
+      "files": [
+        {
+          "file": "01.jpg",
+          "src": "/properties/local-belgrano/01.jpg",
+          "alt": "Frente",
+          "caption": "Frente"
+        },
+        {
+          "file": "02.jpg",
+          "src": "/properties/local-belgrano/02.jpg",
+          "alt": "Salón",
+          "caption": "Salón"
+        },
+        {
+          "file": "03.jpg",
+          "src": "/properties/local-belgrano/03.jpg",
+          "alt": "Interior",
+          "caption": "Interior"
+        },
+        {
+          "file": "04.jpg",
+          "src": "/properties/local-belgrano/04.jpg",
+          "alt": "Vidriera",
+          "caption": "Vidriera"
+        },
+        {
+          "file": "05.jpg",
+          "src": "/properties/local-belgrano/05.jpg",
+          "alt": "Espacio comercial",
+          "caption": "Espacio comercial"
+        },
+        {
+          "file": "06.jpg",
+          "src": "/properties/local-belgrano/06.jpg",
+          "alt": "Detalle",
+          "caption": "Detalle"
+        },
+        {
+          "file": "07.jpg",
+          "src": "/properties/local-belgrano/07.jpg",
+          "alt": "Baño",
+          "caption": "Baño"
+        },
+        {
+          "file": "08.jpg",
+          "src": "/properties/local-belgrano/08.jpg",
+          "alt": "Depósito",
+          "caption": "Depósito"
+        },
+        {
+          "file": "09.jpg",
+          "src": "/properties/local-belgrano/09.jpg",
+          "alt": "Acceso",
+          "caption": "Acceso"
+        },
+        {
+          "file": "10.jpg",
+          "src": "/properties/local-belgrano/10.jpg",
+          "alt": "Lateral",
+          "caption": "Lateral"
+        }
+      ]
+    },
+    "lotes-sanjose": {
+      "origin": "coronelsuarezpropiedades.com.ar",
+      "not_instagram": true,
+      "listing_slug": "amplio-lote-en-pueblo-san-jose",
+      "listing_title": "AMPLIO LOTE EN PUEBLO SAN JOSÉ",
+      "listing_url": "https://coronelsuarezpropiedades.com.ar/property/amplio-lote-en-pueblo-san-jose/",
+      "listing_agent": "GASTON LASTRA INMOBILIARIA",
+      "listing_street": "French",
+      "listing_suburb": "Coronel Suárez",
+      "alignment": "Lote Pueblo San José — misma localidad",
+      "files": [
+        {
+          "file": "01.jpg",
+          "src": "/properties/lotes-sanjose/01.jpg",
+          "alt": "Lote",
+          "caption": "Lote"
+        },
+        {
+          "file": "02.jpg",
+          "src": "/properties/lotes-sanjose/02.jpg",
+          "alt": "Entorno",
+          "caption": "Entorno"
+        },
+        {
+          "file": "03.jpg",
+          "src": "/properties/lotes-sanjose/03.jpg",
+          "alt": "Acceso",
+          "caption": "Acceso"
+        },
+        {
+          "file": "04.jpg",
+          "src": "/properties/lotes-sanjose/04.jpg",
+          "alt": "Panorámica",
+          "caption": "Panorámica"
+        },
+        {
+          "file": "05.jpg",
+          "src": "/properties/lotes-sanjose/05.jpg",
+          "alt": "Referencia",
+          "caption": "Referencia"
+        },
+        {
+          "file": "06.jpg",
+          "src": "/properties/lotes-sanjose/06.jpg",
+          "alt": "Servicios",
+          "caption": "Servicios"
+        }
+      ]
+    },
+    "campo": {
+      "origin": "coronelsuarezpropiedades.com.ar",
+      "not_instagram": true,
+      "listing_slug": "campo-en-venta-zona-del-balneario-municipal",
+      "listing_title": "CAMPO EN VENTA &#8211; ZONA DEL BALNEARIO MUNICIPAL",
+      "listing_url": "https://coronelsuarezpropiedades.com.ar/property/campo-en-venta-zona-del-balneario-municipal/",
+      "listing_agent": "GASTON LASTRA INMOBILIARIA",
+      "listing_street": "Zona balneario municipal",
+      "listing_suburb": "Coronel Suárez",
+      "alignment": "Campo partido CS (zona balneario) — mismo partido/rural",
+      "files": [
+        {
+          "file": "01.jpg",
+          "src": "/properties/campo/01.jpg",
+          "alt": "Vista general",
+          "caption": "Vista general"
+        },
+        {
+          "file": "02.jpg",
+          "src": "/properties/campo/02.jpg",
+          "alt": "Horizonte",
+          "caption": "Horizonte"
+        },
+        {
+          "file": "03.jpg",
+          "src": "/properties/campo/03.jpg",
+          "alt": "Pastura",
+          "caption": "Pastura"
+        },
+        {
+          "file": "04.jpg",
+          "src": "/properties/campo/04.jpg",
+          "alt": "Acceso",
+          "caption": "Acceso"
+        },
+        {
+          "file": "05.jpg",
+          "src": "/properties/campo/05.jpg",
+          "alt": "Detalle rural",
+          "caption": "Detalle rural"
+        },
+        {
+          "file": "06.jpg",
+          "src": "/properties/campo/06.jpg",
+          "alt": "Panorámica",
+          "caption": "Panorámica"
+        },
+        {
+          "file": "07.jpg",
+          "src": "/properties/campo/07.jpg",
+          "alt": "Cultivo",
+          "caption": "Cultivo"
+        }
+      ]
+    },
+    "chalet-nordelta": {
+      "origin": "Unsplash (stock)",
+      "not_instagram": true,
+      "reason": "Sin avisos públicos equivalentes en coronelsuarezpropiedades.com.ar (Zona Norte/Tigre/Nordelta). Instagram @coronelsuarezbienesraices exige login.",
+      "files": [
+        {
+          "file": "01.jpg",
+          "src": "/properties/chalet-nordelta/01.jpg",
+          "alt": "Fachada",
+          "caption": "Fachada"
+        },
+        {
+          "file": "02.jpg",
+          "src": "/properties/chalet-nordelta/02.jpg",
+          "alt": "Exterior",
+          "caption": "Exterior"
+        },
+        {
+          "file": "03.jpg",
+          "src": "/properties/chalet-nordelta/03.jpg",
+          "alt": "Living",
+          "caption": "Living"
+        },
+        {
+          "file": "04.jpg",
+          "src": "/properties/chalet-nordelta/04.jpg",
+          "alt": "Suite",
+          "caption": "Suite"
+        },
+        {
+          "file": "05.jpg",
+          "src": "/properties/chalet-nordelta/05.jpg",
+          "alt": "Jardín",
+          "caption": "Jardín"
+        },
+        {
+          "file": "06.jpg",
+          "src": "/properties/chalet-nordelta/06.jpg",
+          "alt": "Pileta",
+          "caption": "Pileta"
+        },
+        {
+          "file": "07.jpg",
+          "src": "/properties/chalet-nordelta/07.jpg",
+          "alt": "Ambiente",
+          "caption": "Ambiente"
+        },
+        {
+          "file": "08.jpg",
+          "src": "/properties/chalet-nordelta/08.jpg",
+          "alt": "Detalle",
+          "caption": "Detalle"
+        }
+      ]
+    },
+    "depto-victorica": {
+      "origin": "Unsplash (stock)",
+      "not_instagram": true,
+      "reason": "Sin avisos públicos equivalentes en coronelsuarezpropiedades.com.ar (Zona Norte/Tigre/Nordelta). Instagram @coronelsuarezbienesraices exige login.",
+      "files": [
+        {
+          "file": "01.jpg",
+          "src": "/properties/depto-victorica/01.jpg",
+          "alt": "Living",
+          "caption": "Living"
+        },
+        {
+          "file": "02.jpg",
+          "src": "/properties/depto-victorica/02.jpg",
+          "alt": "Dormitorio",
+          "caption": "Dormitorio"
+        },
+        {
+          "file": "03.jpg",
+          "src": "/properties/depto-victorica/03.jpg",
+          "alt": "Cocina",
+          "caption": "Cocina"
+        },
+        {
+          "file": "04.jpg",
+          "src": "/properties/depto-victorica/04.jpg",
+          "alt": "Balcón / vista",
+          "caption": "Balcón / vista"
+        },
+        {
+          "file": "05.jpg",
+          "src": "/properties/depto-victorica/05.jpg",
+          "alt": "Baño",
+          "caption": "Baño"
+        },
+        {
+          "file": "06.jpg",
+          "src": "/properties/depto-victorica/06.jpg",
+          "alt": "Ambiente",
+          "caption": "Ambiente"
+        }
+      ]
+    }
   }
 }
