@@ -1,6 +1,6 @@
 # Mariana Echeverría Bienes Raíces — Demo Angular
 
-Rediseño demo en **Angular 19** + Tailwind, alineado a [marianaecheverria.com.ar](https://www.marianaecheverria.com.ar/) e Instagram [@marianaecheverriainmob](https://www.instagram.com/marianaecheverriainmob/).
+Rediseño demo en **Angular 19** + Tailwind, alineado a [marianaecheverria.com.ar](https://www.marianaecheverria.com.ar/) e Instagram [@marianaecheverriacs](https://www.instagram.com/marianaecheverriacs/).
 
 No es el sitio oficial.
 

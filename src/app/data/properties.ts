@@ -36,10 +36,10 @@ export const CONTACT = {
   phoneSecondary: '02926 460944',
   whatsappUrl: 'https://wa.me/5491165911565',
   email: 'marianalecheverria@gmail.com',
-  instagram: 'marianaecheverriainmob',
-  instagramUrl: 'https://www.instagram.com/marianaecheverriainmob/',
+  instagram: 'marianaecheverriacs',
+  instagramUrl: 'https://www.instagram.com/marianaecheverriacs/',
   matricula: 'Mat. 2227 CBB',
-  years: '26',
+  years: '25',
   offices: [
     {
       name: 'Coronel Suárez',
@@ -107,7 +107,7 @@ export const PROCESS = [
     step: '03',
     title: 'Publicación',
     description:
-      'Armamos fotos, texto y difusión — el mismo criterio que ves en @marianaecheverriainmob.',
+      'Armamos fotos, texto y difusión — el mismo criterio que ves en @marianaecheverriacs.',
   },
   {
     step: '04',
@@ -119,30 +119,29 @@ export const PROCESS = [
 
 export const CREDENTIALS = [
   'Corredora, tasadora y martillera pública — Mat. 2227 CBB',
-  'Abogada (UBA) · derecho inmobiliario y negociación',
-  'Venta · alquileres · arrendamientos · tasaciones en el día',
-  'Desarrollos inmobiliarios y home staging antes de publicar',
-  '26 años de servicio personalizado orientado al cliente',
+  'Abogada · corredora inmobiliaria · tasadora',
+  'Ventas · alquileres · tasaciones (bio de @marianaecheverriacs)',
+  '25 años de servicios profesionales personalizados',
   'Oficinas en Coronel Suárez y Sucursal Norte (Tigre)',
 ] as const;
 
-/** Temas que más se repiten en @marianaecheverriainmob */
+/** Destacados del perfil @marianaecheverriacs (bio + highlights) */
 export const INSTAGRAM_HIGHLIGHTS = [
   {
-    title: 'Venta',
-    detail: 'Casas Mitre, chalets Zona Norte, deptos Rivas y Paseo Victorica.',
+    title: 'Ventas',
+    detail: 'Casas y departamentos en Coronel Suárez, Tigre y alrededores.',
   },
   {
-    title: 'Alquiler y arrendamientos',
-    detail: 'Deptos, locales comerciales y campos para arrendar.',
+    title: 'Alquileres',
+    detail: 'Locaciones urbanas y rurales con contratos claros.',
   },
   {
-    title: 'Lotes y desarrollos',
-    detail: 'Sierra de la Ventana, San José / Berutti y barrios abiertos.',
+    title: 'Tasaciones',
+    detail: 'Valuaciones para decidir rápido: venta, sucesión o garantía.',
   },
   {
-    title: 'Tasaciones en el día',
-    detail: 'Valuación rápida para venta, sucesión o refinanciación.',
+    title: 'Nuevos ingresos',
+    detail: 'Avisos frescos del feed: CS, Zona Norte y oportunidades nuevas.',
   },
 ] as const;
 
@@ -174,7 +173,7 @@ export const FAQS = [
   },
   {
     q: '¿Publican en Instagram todas las propiedades?',
-    a: 'La mayoría de los avisos activos se difunden en @marianaecheverriainmob: venta, alquiler, lotes y novedades de tasación. Acá en la web tenés la ficha con galería completa.',
+    a: 'La mayoría de los avisos activos se difunden en @marianaecheverriacs: venta, alquiler, lotes y novedades de tasación. Acá en la web tenés la ficha con galería completa.',
   },
   {
     q: '¿Trabajan Coronel Suárez y Zona Norte?',
