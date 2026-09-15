@@ -60,25 +60,6 @@
   animation: hero-ken-burns 10s ease-out both;
 }
 
-/* Placa clara para logo a color (naranja + oro visibles) */
-.logo-plate {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0.75rem;
-  background: linear-gradient(165deg, #fffaf3 0%, #f3ebe0 100%);
-  box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.7) inset,
-    0 16px 36px -20px rgb(28 22 18 / 0.55);
-  border: 1px solid rgb(226 212 194 / 0.9);
-}
-
-.logo-plate--dark {
-  background: linear-gradient(165deg, #2a211c 0%, #1c1612 100%);
-  border-color: rgb(224 176 64 / 0.28);
-  box-shadow: 0 16px 36px -20px rgb(0 0 0 / 0.55);
-}
-
 /* Títulos alineados al logo: sans bold, tracking amplio */
 .brand-title {
   font-family: "Source Sans 3", system-ui, sans-serif;

@@ -10,13 +10,11 @@ import { CONTACT } from '../data/properties';
     <footer class="border-t border-white/10 bg-forest-deep text-white/75">
       <div class="mx-auto grid max-w-6xl gap-10 px-5 py-12 md:grid-cols-[1.3fr_1fr_1fr] md:px-8">
         <div>
-          <div class="logo-plate px-3 py-2">
-            <img
-              src="/about/logo-mark.png"
-              alt="Mariana Echeverría Bienes Raíces"
-              class="h-12 w-auto max-w-[260px] object-contain object-left"
-            />
-          </div>
+          <img
+            src="/about/logo-mark.png"
+            alt="Mariana Echeverría Bienes Raíces"
+            class="h-12 w-auto max-w-[260px] object-contain object-left"
+          />
           <p class="mt-4 max-w-sm text-sm leading-relaxed">
             Corredora, tasadora y martillera pública. {{ contact.matricula }}.
             Venta, alquiler, arrendamientos, tasaciones en el día y home staging.
