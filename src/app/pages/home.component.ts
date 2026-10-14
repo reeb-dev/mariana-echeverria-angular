@@ -1,9 +1,9 @@
 import { MIN_HOME_SECTION_ITEMS, ZonesStore } from '../data/zones-store';
 import { ZONE_PAGES } from '../data/zone-pages';
 import { ToastService } from '../data/toast.service';
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { BrandLogoComponent } from '../components/brand-logo.component';
 import { PropertiesMapComponent } from '../components/properties-map.component';
 import { ContactsStore, SavedSearchesStore } from '../data/crm-stores';
@@ -189,7 +189,35 @@ export class HomeComponent {
     });
   });
 
+  private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
+
+  /** Abre el formulario de alerta (por ejemplo, desde «sin resultados»). */
+  openAlert() {
+    this.alertSent.set(false);
+    this.alertOpen.set(true);
+  }
+
   constructor() {
+    // Filtros en la dirección (?op=venta&tipo=casa&zona=zona-norte): se pueden compartir y volver con «atrás».
+    const q = this.route.snapshot.queryParamMap;
+    const op = q.get('op');
+    if (op === 'venta' || op === 'alquiler') this.filter.set(op);
+    if (q.get('tipo')) this.typeFilter.set(q.get('tipo') as string);
+    if (q.get('zona')) this.zoneFilter.set(q.get('zona') as string);
+    effect(() => {
+      const op = this.filter();
+      const type = this.typeFilter();
+      const zone = this.zoneFilter();
+      void this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: { op: op === 'todas' ? null : op, tipo: type === 'todos' ? null : type, zona: zone === 'todas' ? null : zone },
+        queryParamsHandling: 'merge',
+        preserveFragment: true,
+        replaceUrl: true,
+      });
+    });
+
     this.seo.set({
       title: 'Mariana Echeverría Bienes Raíces | Inmobiliaria en Coronel Suárez y Zona Norte',
       description:

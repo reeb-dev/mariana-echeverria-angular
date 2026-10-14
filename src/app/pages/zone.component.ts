@@ -3,6 +3,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PropertyCardComponent } from '../components/property-card.component';
 import { PropertyStore } from '../data/property-store';
 import { CONTACT } from '../data/properties';
+import { GUIDES } from '../data/guides';
 import { ZONE_PAGES, type ZonePage } from '../data/zone-pages';
 import { ZonesStore } from '../data/zones-store';
 import { SeoService } from '../utils/seo.service';
@@ -72,6 +73,18 @@ import { SeoService } from '../utils/seo.service';
           </a>
         </section>
 
+        <h2 class="mt-14 font-display text-2xl font-medium text-forest-deep">Guías para operar en {{ z.name }}</h2>
+        <ul class="mt-5 grid gap-4 sm:grid-cols-3">
+          @for (g of guides; track g.slug) {
+            <li>
+              <a [routerLink]="['/guias', g.slug]" class="mer-card mer-card-link flex h-full flex-col p-5">
+                <p class="text-xs tracking-[0.14em] text-forest uppercase">{{ g.minutes }} min de lectura</p>
+                <p class="mt-2 font-display text-lg font-medium leading-snug text-forest-deep">{{ g.title }}</p>
+              </a>
+            </li>
+          }
+        </ul>
+
         <h2 class="mt-14 text-xs font-semibold tracking-[0.14em] text-muted-foreground uppercase">Otras zonas</h2>
         <ul class="mt-3 flex flex-wrap gap-2">
           @for (other of others(); track other.slug) {
@@ -91,6 +104,7 @@ export class ZoneComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly store = inject(PropertyStore);
   readonly contact = CONTACT;
+  readonly guides = GUIDES;
 
   private readonly zonesStore = inject(ZonesStore);
 

@@ -65,6 +65,9 @@ import { WatermarkComponent } from './watermark.component';
           </h3>
           <p class="mt-2 truncate text-sm text-muted-foreground">{{ property().location }}</p>
           <p class="mt-1 truncate text-sm text-muted-foreground">{{ details() }}</p>
+          @if (published(); as when) {
+            <p class="mt-1 text-xs text-forest/80">{{ when }}</p>
+          }
         </div>
       </a>
 
@@ -124,6 +127,17 @@ export class PropertyCardComponent {
     event.stopPropagation();
     this.favorites.toggle(this.property().slug);
     this.toast.success(this.isFavorite() ? 'Guardada en tus favoritas.' : 'Quitada de tus favoritas.');
+  }
+
+  /** «Publicada hace 3 días», solo para avisos recientes (las de ejemplo no tienen fecha). */
+  published(): string | null {
+    const at = this.property().createdAt;
+    if (!at) return null;
+    const days = Math.floor((Date.now() - new Date(at).getTime()) / 86_400_000);
+    if (Number.isNaN(days) || days < 0 || days > 45) return null;
+    if (days === 0) return 'Publicada hoy';
+    if (days === 1) return 'Publicada ayer';
+    return `Publicada hace ${days} días`;
   }
 
   cover() {
