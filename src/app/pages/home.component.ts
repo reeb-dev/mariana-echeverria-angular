@@ -12,6 +12,7 @@ import {
   CREDENTIALS,
   FAQS,
   INSTAGRAM_HIGHLIGHTS,
+  INSTAGRAM_POSTS,
   PROCESS,
   SERVICES,
   TESTIMONIALS,
@@ -55,6 +56,12 @@ export class HomeComponent {
   readonly testimonials = TESTIMONIALS;
   readonly faqs = FAQS;
   readonly instagramHighlights = INSTAGRAM_HIGHLIGHTS;
+  readonly instagramPosts = INSTAGRAM_POSTS;
+
+  /** Pedido corto de llamada: nombre y teléfono. */
+  callback = { name: '', phone: '', consent: false };
+  readonly callbackSent = signal(false);
+  readonly callbackError = signal<string | null>(null);
 
   readonly filter = signal<'todas' | PropertyOperation>('todas');
   readonly zoneFilter = signal<'todas' | PropertyZone>('todas');
@@ -78,6 +85,28 @@ export class HomeComponent {
 
   serviceIcon(title: string): string {
     return this.serviceIcons[title] ?? 'M12 5v14 M5 12h14';
+  }
+
+  submitCallback(event: Event) {
+    event.preventDefault();
+    const c = this.callback;
+    if (!c.name.trim() || !c.phone.trim()) {
+      this.callbackError.set('Dejanos tu nombre y tu teléfono.');
+      return;
+    }
+    if (!c.consent) {
+      this.callbackError.set('Tenés que aceptar la política de privacidad.');
+      return;
+    }
+    this.callbackError.set(null);
+    this.inquiries.add({
+      name: c.name.trim(),
+      email: '',
+      phone: c.phone.trim(),
+      message: 'Pidió que lo llamen (formulario corto del inicio).',
+    });
+    this.callbackSent.set(true);
+    this.callback = { name: '', phone: '', consent: false };
   }
 
   searchFromHero(event: Event) {

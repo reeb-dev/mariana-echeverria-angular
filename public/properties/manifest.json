@@ -1,66 +1,66 @@
 {
   "casa-mitre": [
-    "/properties/casa-mitre/01.jpg",
-    "/properties/casa-mitre/02.jpg",
-    "/properties/casa-mitre/03.jpg",
-    "/properties/casa-mitre/04.jpg",
-    "/properties/casa-mitre/05.jpg",
-    "/properties/casa-mitre/06.jpg"
+    "/properties/casa-mitre/01.webp",
+    "/properties/casa-mitre/02.webp",
+    "/properties/casa-mitre/03.webp",
+    "/properties/casa-mitre/04.webp",
+    "/properties/casa-mitre/05.webp",
+    "/properties/casa-mitre/06.webp"
   ],
   "depto-rivas": [
-    "/properties/depto-rivas/01.jpg",
-    "/properties/depto-rivas/02.jpg",
-    "/properties/depto-rivas/03.jpg",
-    "/properties/depto-rivas/04.jpg",
-    "/properties/depto-rivas/05.jpg",
-    "/properties/depto-rivas/06.jpg"
+    "/properties/depto-rivas/01.webp",
+    "/properties/depto-rivas/02.webp",
+    "/properties/depto-rivas/03.webp",
+    "/properties/depto-rivas/04.webp",
+    "/properties/depto-rivas/05.webp",
+    "/properties/depto-rivas/06.webp"
   ],
   "lote-sierra": [
-    "/properties/lote-sierra/01.jpg",
-    "/properties/lote-sierra/02.jpg",
-    "/properties/lote-sierra/03.jpg",
-    "/properties/lote-sierra/04.jpg",
-    "/properties/lote-sierra/05.jpg",
-    "/properties/lote-sierra/06.jpg"
+    "/properties/lote-sierra/01.webp",
+    "/properties/lote-sierra/02.webp",
+    "/properties/lote-sierra/03.webp",
+    "/properties/lote-sierra/04.webp",
+    "/properties/lote-sierra/05.webp",
+    "/properties/lote-sierra/06.webp"
   ],
   "local-belgrano": [
-    "/properties/local-belgrano/01.jpg",
-    "/properties/local-belgrano/02.jpg",
-    "/properties/local-belgrano/03.jpg",
-    "/properties/local-belgrano/04.jpg",
-    "/properties/local-belgrano/05.jpg",
-    "/properties/local-belgrano/06.jpg"
+    "/properties/local-belgrano/01.webp",
+    "/properties/local-belgrano/02.webp",
+    "/properties/local-belgrano/03.webp",
+    "/properties/local-belgrano/04.webp",
+    "/properties/local-belgrano/05.webp",
+    "/properties/local-belgrano/06.webp"
   ],
   "chalet-nordelta": [
-    "/properties/chalet-nordelta/01.jpg",
-    "/properties/chalet-nordelta/02.jpg",
-    "/properties/chalet-nordelta/03.jpg",
-    "/properties/chalet-nordelta/04.jpg",
-    "/properties/chalet-nordelta/05.jpg",
-    "/properties/chalet-nordelta/06.jpg"
+    "/properties/chalet-nordelta/01.webp",
+    "/properties/chalet-nordelta/02.webp",
+    "/properties/chalet-nordelta/03.webp",
+    "/properties/chalet-nordelta/04.webp",
+    "/properties/chalet-nordelta/05.webp",
+    "/properties/chalet-nordelta/06.webp"
   ],
   "depto-victorica": [
-    "/properties/depto-victorica/01.jpg",
-    "/properties/depto-victorica/02.jpg",
-    "/properties/depto-victorica/03.jpg",
-    "/properties/depto-victorica/04.jpg",
-    "/properties/depto-victorica/05.jpg",
-    "/properties/depto-victorica/06.jpg"
+    "/properties/depto-victorica/01.webp",
+    "/properties/depto-victorica/02.webp",
+    "/properties/depto-victorica/03.webp",
+    "/properties/depto-victorica/04.webp",
+    "/properties/depto-victorica/05.webp",
+    "/properties/depto-victorica/06.webp"
   ],
   "lotes-sanjose": [
-    "/properties/lotes-sanjose/01.jpg",
-    "/properties/lotes-sanjose/02.jpg",
-    "/properties/lotes-sanjose/03.jpg",
-    "/properties/lotes-sanjose/04.jpg",
-    "/properties/lotes-sanjose/05.jpg",
-    "/properties/lotes-sanjose/06.jpg"
+    "/properties/lotes-sanjose/01.webp",
+    "/properties/lotes-sanjose/02.webp",
+    "/properties/lotes-sanjose/03.webp",
+    "/properties/lotes-sanjose/04.webp",
+    "/properties/lotes-sanjose/05.webp",
+    "/properties/lotes-sanjose/06.webp"
   ],
   "campo": [
-    "/properties/campo/01.jpg",
-    "/properties/campo/02.jpg",
-    "/properties/campo/03.jpg",
-    "/properties/campo/04.jpg",
-    "/properties/campo/05.jpg",
-    "/properties/campo/06.jpg"
+    "/properties/campo/01.webp",
+    "/properties/campo/02.webp",
+    "/properties/campo/03.webp",
+    "/properties/campo/04.webp",
+    "/properties/campo/05.webp",
+    "/properties/campo/06.webp"
   ]
 }

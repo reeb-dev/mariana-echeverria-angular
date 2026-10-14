@@ -21,6 +21,8 @@ export type PropertyPhoto = {
   src: string;
   alt: string;
   caption: string;
+  /** La marca de agua ya está dentro de la imagen (se agrega al subirla desde el panel). */
+  watermarked?: boolean;
 };
 
 export type Property = {
@@ -122,6 +124,8 @@ export const CONTACT = {
   instagram: 'coronelsuarezbienesraices',
   instagramUrl: 'https://www.instagram.com/coronelsuarezbienesraices/',
   matricula: 'Mat. CMCBB 2227',
+  /** Enlace a la ficha de Google con reseñas (dejar vacío si todavía no hay). */
+  googleReviewsUrl: '',
   years: '25',
   offices: [
     {
@@ -228,7 +232,26 @@ export const INSTAGRAM_HIGHLIGHTS = [
   },
 ] as const;
 
-export const TESTIMONIALS = [
+/**
+ * Publicaciones para la grilla de Instagram del inicio. Se cargan a mano (la web no se conecta a Instagram): la URL
+ * de cada publicación y una imagen propia. Si la lista está vacía, la grilla no se muestra.
+ */
+export type InstagramPost = { url: string; image: string; alt: string };
+export const INSTAGRAM_POSTS: InstagramPost[] = [];
+
+export type Testimonial = {
+  quote: string;
+  name: string;
+  place: string;
+  /** Qué operación fue («Venta de una casa en Mitre»). */
+  operation?: string;
+  /** Foto de la persona (con su permiso). */
+  photo?: string;
+  /** Enlace a la reseña original, si existe. */
+  url?: string;
+};
+
+export const TESTIMONIALS: Testimonial[] = [
   {
     quote:
       'Publicó la casa con fotos y un texto claro, como en su Instagram. En pocas semanas cerramos la venta.',
@@ -247,9 +270,11 @@ export const TESTIMONIALS = [
     name: 'Lucía P.',
     place: 'Centro',
   },
-] as const;
+];
 
-export const FAQS = [
+export type Faq = { q: string; a: string; link?: { label: string; path: string } };
+
+export const FAQS: Faq[] = [
   {
     q: '¿Hacen tasaciones en el día?',
     a: 'Sí. Según el tipo de inmueble y la documentación, en muchos casos entregamos valuación de mercado el mismo día — es uno de los servicios que más pedís por Instagram y WhatsApp.',
@@ -266,7 +291,17 @@ export const FAQS = [
     q: '¿Qué es el home staging?',
     a: 'Es la puesta en valor antes de publicar: orden, luz y encuadre para que el aviso se vea atractivo en fotos — clave cuando el primer contacto es por Instagram.',
   },
-] as const;
+  {
+    q: '¿Cuánto cuesta comprar o vender una propiedad?',
+    a: 'Además del precio hay honorarios, impuestos y gastos de escribanía. Los montos dependen de cada operación: en la calculadora podés hacer una estimación y en la guía tenés el detalle de qué se paga en cada caso.',
+    link: { label: 'Ver la guía de gastos', path: '/guias/gastos-de-comprar-o-vender' },
+  },
+  {
+    q: '¿Qué papeles necesito para vender?',
+    a: 'Título de propiedad, DNI y estado civil de los titulares, datos catastrales, y comprobantes de impuestos y servicios al día. Según el caso pueden pedirse más documentos.',
+    link: { label: 'Ver la lista completa', path: '/guias/papeles-para-vender-una-propiedad' },
+  },
+];
 
 /** Inventario demo (CS urbano, lotes, alquileres, Zona Norte). Galerías: fotos de avisos públicos (Pogost, Ferrari, Galeazzi, BG, Argenprop, etc.) en public/properties — ver SOURCES.md. No Instagram. */
 export const PROPERTIES: Property[] = [
@@ -293,32 +328,38 @@ export const PROPERTIES: Property[] = [
     amenities: ['Patio', 'Garage', 'Cocina separada', 'Barrio consolidado', 'Cerca del centro'],
         photos: [
       {
-        src: '/properties/casa-mitre/01.jpg',
+        src: '/properties/casa-mitre/01.webp',
+        watermarked: true,
         alt: 'Fachada',
         caption: 'Fachada',
       },
       {
-        src: '/properties/casa-mitre/02.jpg',
+        src: '/properties/casa-mitre/02.webp',
+        watermarked: true,
         alt: 'Living',
         caption: 'Living',
       },
       {
-        src: '/properties/casa-mitre/03.jpg',
+        src: '/properties/casa-mitre/03.webp',
+        watermarked: true,
         alt: 'Cocina',
         caption: 'Cocina',
       },
       {
-        src: '/properties/casa-mitre/04.jpg',
+        src: '/properties/casa-mitre/04.webp',
+        watermarked: true,
         alt: 'Dormitorio',
         caption: 'Dormitorio',
       },
       {
-        src: '/properties/casa-mitre/05.jpg',
+        src: '/properties/casa-mitre/05.webp',
+        watermarked: true,
         alt: 'Patio',
         caption: 'Patio',
       },
       {
-        src: '/properties/casa-mitre/06.jpg',
+        src: '/properties/casa-mitre/06.webp',
+        watermarked: true,
         alt: 'Garage',
         caption: 'Garage',
       },
@@ -346,32 +387,38 @@ export const PROPERTIES: Property[] = [
     amenities: ['Luminoso', 'Cocina equipada', 'Cerca de servicios', 'Segundo piso'],
         photos: [
       {
-        src: '/properties/depto-rivas/01.jpg',
+        src: '/properties/depto-rivas/01.webp',
+        watermarked: true,
         alt: 'Living',
         caption: 'Living',
       },
       {
-        src: '/properties/depto-rivas/02.jpg',
+        src: '/properties/depto-rivas/02.webp',
+        watermarked: true,
         alt: 'Ambiente',
         caption: 'Ambiente',
       },
       {
-        src: '/properties/depto-rivas/03.jpg',
+        src: '/properties/depto-rivas/03.webp',
+        watermarked: true,
         alt: 'Cocina',
         caption: 'Cocina',
       },
       {
-        src: '/properties/depto-rivas/04.jpg',
+        src: '/properties/depto-rivas/04.webp',
+        watermarked: true,
         alt: 'Dormitorio',
         caption: 'Dormitorio',
       },
       {
-        src: '/properties/depto-rivas/05.jpg',
+        src: '/properties/depto-rivas/05.webp',
+        watermarked: true,
         alt: 'Baño',
         caption: 'Baño',
       },
       {
-        src: '/properties/depto-rivas/06.jpg',
+        src: '/properties/depto-rivas/06.webp',
+        watermarked: true,
         alt: 'Estar',
         caption: 'Estar',
       },
@@ -398,32 +445,38 @@ export const PROPERTIES: Property[] = [
     amenities: ['Entorno serrano', 'Para construir', 'Inversión', 'Escritura'],
         photos: [
       {
-        src: '/properties/lote-sierra/01.jpg',
+        src: '/properties/lote-sierra/01.webp',
+        watermarked: true,
         alt: 'Vista del lote',
         caption: 'Vista del lote',
       },
       {
-        src: '/properties/lote-sierra/02.jpg',
+        src: '/properties/lote-sierra/02.webp',
+        watermarked: true,
         alt: 'Entorno serrano',
         caption: 'Entorno serrano',
       },
       {
-        src: '/properties/lote-sierra/03.jpg',
+        src: '/properties/lote-sierra/03.webp',
+        watermarked: true,
         alt: 'Horizonte',
         caption: 'Horizonte',
       },
       {
-        src: '/properties/lote-sierra/04.jpg',
+        src: '/properties/lote-sierra/04.webp',
+        watermarked: true,
         alt: 'Vegetación',
         caption: 'Vegetación',
       },
       {
-        src: '/properties/lote-sierra/05.jpg',
+        src: '/properties/lote-sierra/05.webp',
+        watermarked: true,
         alt: 'Relieve',
         caption: 'Relieve',
       },
       {
-        src: '/properties/lote-sierra/06.jpg',
+        src: '/properties/lote-sierra/06.webp',
+        watermarked: true,
         alt: 'Paisaje',
         caption: 'Paisaje',
       },
@@ -449,32 +502,38 @@ export const PROPERTIES: Property[] = [
     amenities: ['Vidriera', 'Zona comercial', 'Baño', 'Alta circulación'],
         photos: [
       {
-        src: '/properties/local-belgrano/01.jpg',
+        src: '/properties/local-belgrano/01.webp',
+        watermarked: true,
         alt: 'Frente',
         caption: 'Frente',
       },
       {
-        src: '/properties/local-belgrano/02.jpg',
+        src: '/properties/local-belgrano/02.webp',
+        watermarked: true,
         alt: 'Vidriera',
         caption: 'Vidriera',
       },
       {
-        src: '/properties/local-belgrano/03.jpg',
+        src: '/properties/local-belgrano/03.webp',
+        watermarked: true,
         alt: 'Interior',
         caption: 'Interior',
       },
       {
-        src: '/properties/local-belgrano/04.jpg',
+        src: '/properties/local-belgrano/04.webp',
+        watermarked: true,
         alt: 'Salón',
         caption: 'Salón',
       },
       {
-        src: '/properties/local-belgrano/05.jpg',
+        src: '/properties/local-belgrano/05.webp',
+        watermarked: true,
         alt: 'Espacio comercial',
         caption: 'Espacio comercial',
       },
       {
-        src: '/properties/local-belgrano/06.jpg',
+        src: '/properties/local-belgrano/06.webp',
+        watermarked: true,
         alt: 'Detalle',
         caption: 'Detalle',
       },
@@ -503,32 +562,38 @@ export const PROPERTIES: Property[] = [
     amenities: ['Pileta', 'Jardín', 'Cochera', 'Suite', 'Barrio cerrado', 'Seguridad'],
         photos: [
       {
-        src: '/properties/chalet-nordelta/01.jpg',
+        src: '/properties/chalet-nordelta/01.webp',
+        watermarked: true,
         alt: 'Fachada',
         caption: 'Fachada',
       },
       {
-        src: '/properties/chalet-nordelta/02.jpg',
+        src: '/properties/chalet-nordelta/02.webp',
+        watermarked: true,
         alt: 'Exterior',
         caption: 'Exterior',
       },
       {
-        src: '/properties/chalet-nordelta/03.jpg',
+        src: '/properties/chalet-nordelta/03.webp',
+        watermarked: true,
         alt: 'Living',
         caption: 'Living',
       },
       {
-        src: '/properties/chalet-nordelta/04.jpg',
+        src: '/properties/chalet-nordelta/04.webp',
+        watermarked: true,
         alt: 'Suite',
         caption: 'Suite',
       },
       {
-        src: '/properties/chalet-nordelta/05.jpg',
+        src: '/properties/chalet-nordelta/05.webp',
+        watermarked: true,
         alt: 'Jardín',
         caption: 'Jardín',
       },
       {
-        src: '/properties/chalet-nordelta/06.jpg',
+        src: '/properties/chalet-nordelta/06.webp',
+        watermarked: true,
         alt: 'Pileta',
         caption: 'Pileta',
       },
@@ -555,32 +620,38 @@ export const PROPERTIES: Property[] = [
     amenities: ['Vista abierta', 'Balcón', 'Amenities', 'Cerca del centro de Tigre'],
         photos: [
       {
-        src: '/properties/depto-victorica/01.jpg',
+        src: '/properties/depto-victorica/01.webp',
+        watermarked: true,
         alt: 'Living',
         caption: 'Living',
       },
       {
-        src: '/properties/depto-victorica/02.jpg',
+        src: '/properties/depto-victorica/02.webp',
+        watermarked: true,
         alt: 'Dormitorio',
         caption: 'Dormitorio',
       },
       {
-        src: '/properties/depto-victorica/03.jpg',
+        src: '/properties/depto-victorica/03.webp',
+        watermarked: true,
         alt: 'Cocina',
         caption: 'Cocina',
       },
       {
-        src: '/properties/depto-victorica/04.jpg',
+        src: '/properties/depto-victorica/04.webp',
+        watermarked: true,
         alt: 'Balcón / vista',
         caption: 'Balcón / vista',
       },
       {
-        src: '/properties/depto-victorica/05.jpg',
+        src: '/properties/depto-victorica/05.webp',
+        watermarked: true,
         alt: 'Baño',
         caption: 'Baño',
       },
       {
-        src: '/properties/depto-victorica/06.jpg',
+        src: '/properties/depto-victorica/06.webp',
+        watermarked: true,
         alt: 'Ambiente',
         caption: 'Ambiente',
       },
@@ -602,32 +673,38 @@ export const PROPERTIES: Property[] = [
     amenities: ['Servicios cercanos', 'Financiación a consultar', 'Zona en crecimiento'],
         photos: [
       {
-        src: '/properties/lotes-sanjose/01.jpg',
+        src: '/properties/lotes-sanjose/01.webp',
+        watermarked: true,
         alt: 'Lote',
         caption: 'Lote',
       },
       {
-        src: '/properties/lotes-sanjose/02.jpg',
+        src: '/properties/lotes-sanjose/02.webp',
+        watermarked: true,
         alt: 'Entorno',
         caption: 'Entorno',
       },
       {
-        src: '/properties/lotes-sanjose/03.jpg',
+        src: '/properties/lotes-sanjose/03.webp',
+        watermarked: true,
         alt: 'Acceso',
         caption: 'Acceso',
       },
       {
-        src: '/properties/lotes-sanjose/04.jpg',
+        src: '/properties/lotes-sanjose/04.webp',
+        watermarked: true,
         alt: 'Panorámica',
         caption: 'Panorámica',
       },
       {
-        src: '/properties/lotes-sanjose/05.jpg',
+        src: '/properties/lotes-sanjose/05.webp',
+        watermarked: true,
         alt: 'Referencia',
         caption: 'Referencia',
       },
       {
-        src: '/properties/lotes-sanjose/06.jpg',
+        src: '/properties/lotes-sanjose/06.webp',
+        watermarked: true,
         alt: 'Servicios',
         caption: 'Servicios',
       },
@@ -649,32 +726,38 @@ export const PROPERTIES: Property[] = [
     amenities: ['Aptitud mixta', 'Acceso consolidado', 'Contrato de arrendamiento'],
         photos: [
       {
-        src: '/properties/campo/01.jpg',
+        src: '/properties/campo/01.webp',
+        watermarked: true,
         alt: 'Vista general',
         caption: 'Vista general',
       },
       {
-        src: '/properties/campo/02.jpg',
+        src: '/properties/campo/02.webp',
+        watermarked: true,
         alt: 'Horizonte',
         caption: 'Horizonte',
       },
       {
-        src: '/properties/campo/03.jpg',
+        src: '/properties/campo/03.webp',
+        watermarked: true,
         alt: 'Pastura',
         caption: 'Pastura',
       },
       {
-        src: '/properties/campo/04.jpg',
+        src: '/properties/campo/04.webp',
+        watermarked: true,
         alt: 'Cultivo',
         caption: 'Cultivo',
       },
       {
-        src: '/properties/campo/05.jpg',
+        src: '/properties/campo/05.webp',
+        watermarked: true,
         alt: 'Detalle rural',
         caption: 'Detalle rural',
       },
       {
-        src: '/properties/campo/06.jpg',
+        src: '/properties/campo/06.webp',
+        watermarked: true,
         alt: 'Panorámica',
         caption: 'Panorámica',
       },
@@ -694,7 +777,7 @@ export function coverPhoto(property: Property) {
   }
   const dir = first.src.replace(/\/[^/]+$/, '');
   return {
-    src: `${dir}/cover-card.jpg`,
+    src: `${dir}/cover-card.webp`,
     alt: first.alt,
     caption: first.caption,
   };

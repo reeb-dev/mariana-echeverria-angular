@@ -5,12 +5,12 @@
       "https://www.inmobiliariapogost.com/propiedad/222033_casa-en-venta-c-cochera-en-coronel-suarez/"
     ],
     "photos": [
-      "/properties/casa-mitre/01.jpg",
-      "/properties/casa-mitre/02.jpg",
-      "/properties/casa-mitre/03.jpg",
-      "/properties/casa-mitre/04.jpg",
-      "/properties/casa-mitre/05.jpg",
-      "/properties/casa-mitre/06.jpg"
+      "/properties/casa-mitre/01.webp",
+      "/properties/casa-mitre/02.webp",
+      "/properties/casa-mitre/03.webp",
+      "/properties/casa-mitre/04.webp",
+      "/properties/casa-mitre/05.webp",
+      "/properties/casa-mitre/06.webp"
     ],
     "image_urls": [
       "https://storage.googleapis.com/portales-prod-images/2436/property-images/2026/9/c560b788-57b4-42fe-9292-87ebc9715c2d.jpeg",
@@ -28,12 +28,12 @@
       "https://inmobiliariaverdechia.com/property/departamento-en-alquiler-lamadrid-y-villegas-coronel-suarez/"
     ],
     "photos": [
-      "/properties/depto-rivas/01.jpg",
-      "/properties/depto-rivas/02.jpg",
-      "/properties/depto-rivas/03.jpg",
-      "/properties/depto-rivas/04.jpg",
-      "/properties/depto-rivas/05.jpg",
-      "/properties/depto-rivas/06.jpg"
+      "/properties/depto-rivas/01.webp",
+      "/properties/depto-rivas/02.webp",
+      "/properties/depto-rivas/03.webp",
+      "/properties/depto-rivas/04.webp",
+      "/properties/depto-rivas/05.webp",
+      "/properties/depto-rivas/06.webp"
     ],
     "image_urls": [
       "https://storage.googleapis.com/portales-prod-images/2436/property-images/2026/7/be65c0c9-aef8-4ef4-9e6b-d12740c7cdbf.jpeg",
@@ -51,20 +51,20 @@
       "Zonaprop CDN Saldungaray/Sierra"
     ],
     "photos": [
-      "/properties/lote-sierra/01.jpg",
-      "/properties/lote-sierra/02.jpg",
-      "/properties/lote-sierra/03.jpg",
-      "/properties/lote-sierra/04.jpg",
-      "/properties/lote-sierra/05.jpg",
-      "/properties/lote-sierra/06.jpg"
+      "/properties/lote-sierra/01.webp",
+      "/properties/lote-sierra/02.webp",
+      "/properties/lote-sierra/03.webp",
+      "/properties/lote-sierra/04.webp",
+      "/properties/lote-sierra/05.webp",
+      "/properties/lote-sierra/06.webp"
     ],
     "image_urls": [
       "https://storage.googleapis.com/portales-prod-images/3806/property-images/2026/2/ef5f1219-c749-46bc-9b8e-98bf44e0e185_wm.jpeg",
       "https://storage.googleapis.com/portales-prod-images/3806/property-images/2026/2/5220b99e-befd-42d4-8648-bfe4bb5b4e81_wm.jpeg",
       "https://storage.googleapis.com/portales-prod-images/3806/property-images/2026/2/ee5bf2c6-b5d3-48d2-a92d-5f2385ef669d_wm.jpeg",
-      "https://imgar.zonapropcdn.com/avisos/resize/1/00/59/79/31/97/1200x1200/2069810598.jpg",
-      "https://imgar.zonapropcdn.com/avisos/resize/1/00/59/79/31/97/1200x1200/2069810629.jpg",
-      "https://imgar.zonapropcdn.com/avisos/1/00/59/79/31/97/360x266/2069810598.jpg"
+      "https://imgar.zonapropcdn.com/avisos/resize/1/00/59/79/31/97/1200x1200/2069810598.webp",
+      "https://imgar.zonapropcdn.com/avisos/resize/1/00/59/79/31/97/1200x1200/2069810629.webp",
+      "https://imgar.zonapropcdn.com/avisos/1/00/59/79/31/97/360x266/2069810598.webp"
     ]
   },
   "local-belgrano": {
@@ -74,19 +74,19 @@
       "https://www.inmobiliariapogost.com/propiedad/219389"
     ],
     "photos": [
-      "/properties/local-belgrano/01.jpg",
-      "/properties/local-belgrano/02.jpg",
-      "/properties/local-belgrano/03.jpg",
-      "/properties/local-belgrano/04.jpg",
-      "/properties/local-belgrano/05.jpg",
-      "/properties/local-belgrano/06.jpg"
+      "/properties/local-belgrano/01.webp",
+      "/properties/local-belgrano/02.webp",
+      "/properties/local-belgrano/03.webp",
+      "/properties/local-belgrano/04.webp",
+      "/properties/local-belgrano/05.webp",
+      "/properties/local-belgrano/06.webp"
     ],
     "image_urls": [
-      "https://bgpropiedades.ar/wp-content/uploads/2025/10/porta-BELG-1316.jpg",
-      "https://bgpropiedades.ar/wp-content/uploads/2025/10/IMG-20251002-WA0025.jpg",
-      "https://bgpropiedades.ar/wp-content/uploads/2025/10/IMG-20251002-WA0026.jpg",
-      "https://bgpropiedades.ar/wp-content/uploads/2025/10/IMG-20251002-WA0027.jpg",
-      "https://bgpropiedades.ar/wp-content/uploads/2025/10/IMG-20251002-WA0024.jpg",
+      "https://bgpropiedades.ar/wp-content/uploads/2025/10/porta-BELG-1316.webp",
+      "https://bgpropiedades.ar/wp-content/uploads/2025/10/IMG-20251002-WA0025.webp",
+      "https://bgpropiedades.ar/wp-content/uploads/2025/10/IMG-20251002-WA0026.webp",
+      "https://bgpropiedades.ar/wp-content/uploads/2025/10/IMG-20251002-WA0027.webp",
+      "https://bgpropiedades.ar/wp-content/uploads/2025/10/IMG-20251002-WA0024.webp",
       "https://bgpropiedades.ar/wp-content/uploads/2025/06/cropped-icono-BG-sf-1-270x270.png"
     ]
   },
@@ -97,15 +97,15 @@
       "https://www.argenprop.com/casa-en-venta-en-nordelta-la-isla-8-ambientes--17970188"
     ],
     "photos": [
-      "/properties/chalet-nordelta/01.jpg",
-      "/properties/chalet-nordelta/02.jpg",
-      "/properties/chalet-nordelta/03.jpg",
-      "/properties/chalet-nordelta/04.jpg",
-      "/properties/chalet-nordelta/05.jpg",
-      "/properties/chalet-nordelta/06.jpg"
+      "/properties/chalet-nordelta/01.webp",
+      "/properties/chalet-nordelta/02.webp",
+      "/properties/chalet-nordelta/03.webp",
+      "/properties/chalet-nordelta/04.webp",
+      "/properties/chalet-nordelta/05.webp",
+      "/properties/chalet-nordelta/06.webp"
     ],
     "image_urls": [
-      "https://www.argenprop.com/static-content/73973481/7810f9d4-d949-4315-8c6c-108ca9bbdbc8.jpg"
+      "https://www.argenprop.com/static-content/73973481/7810f9d4-d949-4315-8c6c-108ca9bbdbc8.webp"
     ]
   },
   "depto-victorica": {
@@ -115,17 +115,17 @@
       "https://www.argenprop.com/departamento-en-venta-en-tigre-centro-2-ambientes--19225777"
     ],
     "photos": [
-      "/properties/depto-victorica/01.jpg",
-      "/properties/depto-victorica/02.jpg",
-      "/properties/depto-victorica/03.jpg",
-      "/properties/depto-victorica/04.jpg",
-      "/properties/depto-victorica/05.jpg",
-      "/properties/depto-victorica/06.jpg"
+      "/properties/depto-victorica/01.webp",
+      "/properties/depto-victorica/02.webp",
+      "/properties/depto-victorica/03.webp",
+      "/properties/depto-victorica/04.webp",
+      "/properties/depto-victorica/05.webp",
+      "/properties/depto-victorica/06.webp"
     ],
     "image_urls": [
       "https://www.argenprop.com/static-content/14926002/3180546c-5e66-46c4-9904-b6d0d288c48b.jpg",
-      "https://www.argenprop.com/static-content/77752291/5a6d9542-a929-4750-8c7f-393dd8767031.jpg",
-      "https://www.argenprop.com/static-content/78236541/e570cfac-24cc-4af1-8177-31096399bf33.jpg"
+      "https://www.argenprop.com/static-content/77752291/5a6d9542-a929-4750-8c7f-393dd8767031.webp",
+      "https://www.argenprop.com/static-content/78236541/e570cfac-24cc-4af1-8177-31096399bf33.webp"
     ]
   },
   "lotes-sanjose": {
@@ -135,18 +135,18 @@
       "https://inmobiliariaverdechia.com/property/lotes-en-venta-2/"
     ],
     "photos": [
-      "/properties/lotes-sanjose/01.jpg",
-      "/properties/lotes-sanjose/02.jpg",
-      "/properties/lotes-sanjose/03.jpg",
-      "/properties/lotes-sanjose/04.jpg",
-      "/properties/lotes-sanjose/05.jpg",
-      "/properties/lotes-sanjose/06.jpg"
+      "/properties/lotes-sanjose/01.webp",
+      "/properties/lotes-sanjose/02.webp",
+      "/properties/lotes-sanjose/03.webp",
+      "/properties/lotes-sanjose/04.webp",
+      "/properties/lotes-sanjose/05.webp",
+      "/properties/lotes-sanjose/06.webp"
     ],
     "image_urls": [
       "https://galeazzipropiedades.com.ar/wp-content/uploads/2023/12/WhatsApp-Image-2023-06-27-at-15.58.03.jpeg",
       "https://galeazzipropiedades.com.ar/wp-content/uploads/2023/12/WhatsApp-Image-2023-06-27-at-15.58.27.jpeg",
       "https://galeazzipropiedades.com.ar/wp-content/uploads/2023/12/WhatsApp-Image-2023-06-27-at-16.00.07.jpeg",
-      "https://galeazzipropiedades.com.ar/wp-content/uploads/2023/11/cropped-cropped-cropped-Proyecto-de-Studio-2023-11-30T111056.155-1.jpg",
+      "https://galeazzipropiedades.com.ar/wp-content/uploads/2023/11/cropped-cropped-cropped-Proyecto-de-Studio-2023-11-30T111056.155-1.webp",
       "https://galeazzipropiedades.com.ar/wp-content/uploads/2023/12/WhatsApp-Image-2023-06-27-at-15.58.03-1024x1024.jpeg",
       "https://galeazzipropiedades.com.ar/wp-content/uploads/2023/12/WhatsApp-Image-2023-06-27-at-15.58.03-768x768.jpeg"
     ]
@@ -158,12 +158,12 @@
       "https://www.inmobiliariapogost.com/propiedad/196040_campo-34-has-y-fraccion/"
     ],
     "photos": [
-      "/properties/campo/01.jpg",
-      "/properties/campo/02.jpg",
-      "/properties/campo/03.jpg",
-      "/properties/campo/04.jpg",
-      "/properties/campo/05.jpg",
-      "/properties/campo/06.jpg"
+      "/properties/campo/01.webp",
+      "/properties/campo/02.webp",
+      "/properties/campo/03.webp",
+      "/properties/campo/04.webp",
+      "/properties/campo/05.webp",
+      "/properties/campo/06.webp"
     ],
     "image_urls": [
       "https://storage.googleapis.com/portales-prod-images/2436/property-images/2026/7/963e5793-f96b-48c9-845b-ea090b8ae770.jpeg",

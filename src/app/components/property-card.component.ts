@@ -4,6 +4,7 @@ import { FavoritesService } from '../data/favorites.service';
 import { StatsStore } from '../data/stats-store';
 import { CONTACT, coverPhoto, type Property } from '../data/properties';
 import { AssetUrlPipe } from '../utils/asset-url';
+import { WatermarkComponent } from './watermark.component';
 
 /**
  * Tarjeta de propiedad: la usan el listado, las destacadas y las similares.
@@ -14,13 +15,16 @@ import { AssetUrlPipe } from '../utils/asset-url';
 @Component({
   selector: 'app-property-card',
   standalone: true,
-  imports: [RouterLink, AssetUrlPipe],
+  imports: [RouterLink, AssetUrlPipe, WatermarkComponent],
   host: { class: 'block h-full' },
   template: `
     <article class="prop-card group flex h-full flex-col">
       <a [routerLink]="['/propiedades', property().slug]" class="flex flex-1 flex-col">
         <div class="prop-card-media">
-          <img [src]="cover().src | assetUrl" [alt]="cover().alt" />
+          <img [src]="cover().src | assetUrl" [alt]="cover().alt" loading="lazy" decoding="async" />
+          @if (!cover().watermarked) {
+            <app-watermark position="bottom-center" />
+          }
           <div class="absolute inset-0 z-[1] bg-gradient-to-t from-forest-deep/40 via-transparent to-transparent"></div>
           @if (showFavorite()) {
             <button
@@ -66,15 +70,24 @@ import { AssetUrlPipe } from '../utils/asset-url';
       <div class="mt-auto flex items-center justify-between gap-3 border-t border-border/70 px-5 py-4">
         <div class="min-w-0">
           <p class="truncate text-lg font-semibold leading-tight tracking-tight text-forest-deep">{{ property().priceLabel }}</p>
-          <a
-            [href]="whatsappUrl()"
-            (click)="recordWhatsapp()"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="mt-0.5 inline-block text-xs text-muted-foreground/80 transition hover:text-forest"
-          >
-            Consultar por WhatsApp
-          </a>
+          <p class="mt-0.5 flex flex-wrap gap-x-3 text-xs text-muted-foreground/80">
+            <a
+              [href]="whatsappUrl()"
+              (click)="recordWhatsapp()"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="transition hover:text-forest"
+            >
+              WhatsApp
+            </a>
+            <a
+              [routerLink]="['/propiedades', property().slug]"
+              [queryParams]="{ visita: 1 }"
+              class="font-medium text-forest transition hover:underline"
+            >
+              Pedir visita
+            </a>
+          </p>
         </div>
         <a
           [routerLink]="['/propiedades', property().slug]"

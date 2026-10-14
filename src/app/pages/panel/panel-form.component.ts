@@ -29,8 +29,39 @@ const MAX_PHOTOS = 12;
 const MAX_PHOTO_SIDE = 1280;
 const PHOTO_QUALITY = 0.75;
 
+const WATERMARK_TEXT = 'MARIANA ECHEVERRÍA · BIENES RAÍCES';
+
+/** Dibuja la marca de agua abajo a la derecha: casita dorada y el nombre, con sombra para que se lea sobre cualquier foto. */
+function drawWatermark(ctx: CanvasRenderingContext2D, width: number, height: number): void {
+  const size = Math.max(13, Math.round(width * 0.02));
+  const pad = Math.round(size * 1.1);
+  ctx.save();
+  ctx.font = `600 ${size}px "Source Sans 3", system-ui, sans-serif`;
+  ctx.textBaseline = 'middle';
+  ctx.shadowColor = 'rgba(0,0,0,0.65)';
+  ctx.shadowBlur = size * 0.35;
+  const textWidth = ctx.measureText(WATERMARK_TEXT).width;
+  const iconSize = size * 1.15;
+  const gap = size * 0.5;
+  const x = width - pad - textWidth;
+  const y = height - pad - size * 0.5;
+
+  // casita (mismo trazo que el ícono de la web)
+  ctx.translate(x - gap - iconSize, y - iconSize / 2);
+  ctx.scale(iconSize / 24, iconSize / 24);
+  ctx.strokeStyle = '#e0b040';
+  ctx.lineWidth = 2.4;
+  ctx.lineJoin = 'round';
+  ctx.stroke(new Path2D('M3 11l9-8 9 8v10H3z'));
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+
+  ctx.fillStyle = 'rgba(255,255,255,0.88)';
+  ctx.fillText(WATERMARK_TEXT, x, y);
+  ctx.restore();
+}
+
 /** Achica la foto en el navegador antes de guardarla (el celular saca fotos de varios MB). */
-function compressImage(file: File): Promise<string> {
+function compressImage(file: File, watermark = false): Promise<string> {
   return new Promise((resolve, reject) => {
     const url = URL.createObjectURL(file);
     const img = new Image();
@@ -46,6 +77,7 @@ function compressImage(file: File): Promise<string> {
         return;
       }
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      if (watermark) drawWatermark(ctx, canvas.width, canvas.height);
       resolve(canvas.toDataURL('image/jpeg', PHOTO_QUALITY));
     };
     img.onerror = () => {
@@ -303,6 +335,13 @@ function compressImage(file: File): Promise<string> {
                 />
               </label>
             </div>
+            <label class="mt-3 flex items-center gap-2 text-sm">
+              <input type="checkbox" class="h-4 w-4" name="watermark" [(ngModel)]="watermark" />
+              <span>
+                Agregar la marca de agua de la inmobiliaria a las fotos nuevas
+                <span class="text-xs text-muted-foreground">(queda dentro de la imagen y no se puede sacar)</span>
+              </span>
+            </label>
             @if (photoError(); as msg) {
               <p class="mt-3 text-sm text-red-700" role="alert">{{ msg }}</p>
             }
@@ -602,6 +641,8 @@ export class PanelFormComponent {
   readonly photos = signal<PropertyPhoto[]>([]);
   readonly photoError = signal<string | null>(null);
   readonly uploading = signal(false);
+  /** Agregar la marca de agua de la inmobiliaria a las fotos nuevas. */
+  watermark = true;
 
   private readonly ai = inject(AiCopyService);
   private readonly location = inject(Location);
@@ -783,9 +824,9 @@ export class PanelFormComponent {
     let failed = 0;
     for (const file of files.slice(0, room)) {
       try {
-        const src = await compressImage(file);
+        const src = await compressImage(file, this.watermark);
         const caption = file.name.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ');
-        added.push({ src, alt: caption, caption });
+        added.push({ src, alt: caption, caption, watermarked: this.watermark });
       } catch {
         failed++;
       }

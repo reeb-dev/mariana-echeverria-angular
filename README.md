@@ -205,3 +205,9 @@ de documentos. Son 36 pruebas.
 
 Eliminar una propiedad o cambiar varias en lote muestra un aviso abajo con «Deshacer» durante 7 segundos
 (`ToastService`, `toast-host`). Restaurar respeta los permisos de quien lo hace.
+
+## SEO al publicar
+
+`tools/postbuild.mjs <carpeta> [url]` corre después del build (lo hace el workflow): escribe un `index.html` por ruta conocida
+(propiedades, zonas, guías, tasación…) con su título, descripción, imagen y datos estructurados, genera `sitemap.xml`,
+agrega `Sitemap:` a `robots.txt` y crea `404.html`. Las rutas nuevas se agregan en ese script.

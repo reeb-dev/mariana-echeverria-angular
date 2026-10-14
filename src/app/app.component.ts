@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter, map } from 'rxjs';
+import { GOATCOUNTER_CODE } from './config/analytics.config';
 import { SiteFooterComponent } from './components/site-footer.component';
 import { SiteNavComponent } from './components/site-nav.component';
 import { WhatsappFloatComponent } from './components/whatsapp-float.component';
@@ -33,6 +34,17 @@ function isBarePath(url: string): boolean {
 })
 export class AppComponent {
   private readonly router = inject(Router);
+
+  constructor() {
+    // Medición opcional: solo se carga si hay un código configurado (config/analytics.config.ts).
+    if (GOATCOUNTER_CODE.trim() && typeof document !== 'undefined') {
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://gc.zgo.at/count.js';
+      script.dataset['goatcounter'] = `https://${GOATCOUNTER_CODE.trim()}.goatcounter.com/count`;
+      document.head.appendChild(script);
+    }
+  }
 
   /** La ficha ya tiene su barra de contacto fija en el celular. */
   readonly isDetail = toSignal(

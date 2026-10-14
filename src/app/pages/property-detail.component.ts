@@ -180,6 +180,10 @@ export class PropertyDetailComponent {
       return;
     }
     this.stats.recordView(p.slug);
+    if (this.route.snapshot.queryParamMap.get('visita')) {
+      this.visitOpen.set(true);
+      setTimeout(() => document.getElementById('ficha-visita')?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 600);
+    }
     if (this.route.snapshot.queryParamMap.get('src') === 'cartel') {
       this.stats.recordOnce(p.slug, 'qr');
     }

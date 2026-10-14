@@ -41,8 +41,8 @@ jobs:
           else
             cp -R dist/tmp-angular _site
           fi
-          # SPA fallback for GitHub Pages (deep links / refresh)
-          cp _site/index.html _site/404.html
+          # Una página por ruta conocida (200, título y metadatos propios), sitemap y 404.html
+          node tools/postbuild.mjs _site https://reeb-dev.github.io/mariana-echeverria-angular
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

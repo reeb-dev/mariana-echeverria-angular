@@ -27,6 +27,9 @@ import { BrandLogoComponent } from './brand-logo.component';
             <li><a routerLink="/" fragment="contacto" class="transition hover:text-stone-warm">Contacto</a></li>
             <li><a routerLink="/tasacion" class="transition hover:text-stone-warm">Pedí tu tasación</a></li>
             <li><a routerLink="/calculadoras" class="transition hover:text-stone-warm">Calculadoras</a></li>
+            <li><a routerLink="/guias" class="transition hover:text-stone-warm">Guías</a></li>
+            <li><a routerLink="/zona/coronel-suarez" class="transition hover:text-stone-warm">Coronel Suárez</a></li>
+            <li><a routerLink="/zona/zona-norte" class="transition hover:text-stone-warm">Zona Norte</a></li>
             <li><a routerLink="/privacidad" class="transition hover:text-stone-warm">Política de privacidad</a></li>
           </ul>
         </div>
