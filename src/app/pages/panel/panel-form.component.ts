@@ -36,7 +36,7 @@ function loadLogo(): Promise<HTMLImageElement | null> {
     const logo = new Image();
     logo.onload = () => resolve(logo);
     logo.onerror = () => resolve(null);
-    logo.src = new URL('about/logo-nav.png', document.baseURI).href;
+    logo.src = new URL('about/logo-watermark.png', document.baseURI).href;
   });
   return logoPromise;
 }

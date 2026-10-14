@@ -7,10 +7,60 @@ import glob
 import io
 import subprocess
 
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 
-LOGO = Image.open('public/about/logo-nav.png').convert('RGBA')
-LOGO = LOGO.crop(LOGO.getbbox())
+FONT = '/System/Library/Fonts/Helvetica.ttc'
+
+def build_logo(path: str = 'public/about/logo-watermark.png', height: int = 480) -> Image.Image:
+    """Dibuja el logo en alta resolución (casita del SVG + nombre) para que no se vea blando al achicarlo."""
+    ss = 3  # supersampling
+    H = height * ss
+    k = H / 100  # la casita del SVG está en un viewBox de 80x100
+    mark_w = int(80 * k)
+
+    def pt(x, y):
+        return (x * k, y * k)
+
+    mark = Image.new('RGBA', (mark_w, H), (0, 0, 0, 0))
+    d = ImageDraw.Draw(mark)
+    d.polygon([pt(*p) for p in [(5, 38), (34, 5), (75, 50), (75, 95), (5, 95)]], fill=(224, 176, 64, 255))
+    d.polygon([pt(*p) for p in [(19, 50), (34, 28), (61, 56), (61, 79), (19, 79)]], fill=(0, 0, 0, 0))
+    d.polygon([pt(*p) for p in [(25, 54), (36, 36), (49, 52), (49, 75), (25, 75)]], fill=(208, 106, 40, 255))
+    # el hueco del marco debe quedar transparente: se recorta con una máscara
+    hole = Image.new('L', mark.size, 0)
+    ImageDraw.Draw(hole).polygon([pt(*p) for p in [(19, 50), (34, 28), (61, 56), (61, 79), (19, 79)]], fill=255)
+    core = Image.new('L', mark.size, 0)
+    ImageDraw.Draw(core).polygon([pt(*p) for p in [(25, 54), (36, 36), (49, 52), (49, 75), (25, 75)]], fill=255)
+    alpha = mark.getchannel('A')
+    alpha = Image.composite(Image.new('L', mark.size, 0), alpha, hole)
+    alpha = Image.composite(Image.new('L', mark.size, 255), alpha, core)
+    mark.putalpha(alpha)
+
+    f1 = ImageFont.truetype(FONT, int(H * 0.30), index=1)
+    f2 = ImageFont.truetype(FONT, int(H * 0.27), index=0)
+    t1, t2 = 'MARIANA ECHEVERRÍA', 'BIENES RAÍCES'
+    w1 = int(f1.getlength(t1))
+    gap = int(H * 0.12)
+    out = Image.new('RGBA', (mark_w + gap + w1 + int(H * 0.04), H), (0, 0, 0, 0))
+    out.alpha_composite(mark, (0, 0))
+    d = ImageDraw.Draw(out)
+    x0 = mark_w + gap
+    d.text((x0, int(H * 0.19)), t1, font=f1, fill=(232, 135, 58, 255))
+    # segunda línea con espaciado de letras para ocupar el mismo ancho
+    letters = list(t2)
+    natural = sum(f2.getlength(c) for c in letters)
+    track = (w1 - natural) / (len(letters) - 1)
+    x = x0
+    for c in letters:
+        d.text((x, int(H * 0.55)), c, font=f2, fill=(244, 214, 128, 255))
+        x += f2.getlength(c) + track
+    out = out.crop(out.getbbox())
+    out = out.resize((round(out.width / ss), round(out.height / ss)), Image.LANCZOS)
+    out.save(path)
+    return out
+
+
+LOGO = build_logo()
 
 
 def logo_at(width: int, opacity: float = 1.0) -> Image.Image:
@@ -59,6 +109,6 @@ for webp in sorted(glob.glob('public/properties/*/*.webp')):
     if not data:
         print('sin original:', webp)
         continue
-    stamp(Image.open(io.BytesIO(data)), cover=webp.endswith('cover-card.webp')).save(webp, 'WEBP', quality=82, method=6)
+    stamp(Image.open(io.BytesIO(data)), cover=webp.endswith('cover-card.webp')).save(webp, 'WEBP', quality=92, method=6)
     count += 1
 print(count, 'fotos con marca de agua')

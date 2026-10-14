@@ -15,7 +15,7 @@ import { AssetUrlPipe } from '../utils/asset-url';
       [class]="positionClass()"
       aria-hidden="true"
     >
-      <img [src]="'/about/logo-nav.png' | assetUrl" alt="" class="block h-4 w-auto opacity-85 sm:h-5" />
+      <img [src]="'/about/logo-watermark.png' | assetUrl" alt="" class="block h-4 w-auto opacity-85 sm:h-5" />
     </span>
   `,
 })
