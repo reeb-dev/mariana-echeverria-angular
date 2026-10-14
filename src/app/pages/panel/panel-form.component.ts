@@ -29,34 +29,50 @@ const MAX_PHOTOS = 12;
 const MAX_PHOTO_SIDE = 1280;
 const PHOTO_QUALITY = 0.75;
 
-const WATERMARK_TEXT = 'MARIANA ECHEVERRÍA · BIENES RAÍCES';
+/** Logo de la inmobiliaria (se carga una sola vez). Si no se puede cargar, la foto se guarda sin marca. */
+let logoPromise: Promise<HTMLImageElement | null> | null = null;
+function loadLogo(): Promise<HTMLImageElement | null> {
+  logoPromise ??= new Promise((resolve) => {
+    const logo = new Image();
+    logo.onload = () => resolve(logo);
+    logo.onerror = () => resolve(null);
+    logo.src = new URL('about/logo-nav.png', document.baseURI).href;
+  });
+  return logoPromise;
+}
 
-/** Dibuja la marca de agua abajo a la derecha: casita dorada y el nombre, con sombra para que se lea sobre cualquier foto. */
-function drawWatermark(ctx: CanvasRenderingContext2D, width: number, height: number): void {
-  const size = Math.max(13, Math.round(width * 0.02));
-  const pad = Math.round(size * 1.1);
+/** Estampa el logo abajo a la derecha sobre una placa oscura (se lee sobre cualquier foto) y repetido, tenue, en diagonal. */
+function drawWatermark(ctx: CanvasRenderingContext2D, width: number, height: number, logo: HTMLImageElement): void {
+  const ratio = logo.naturalHeight / logo.naturalWidth;
+
+  // logo repetido en diagonal
+  const tileW = Math.max(120, width / 5);
+  const tileH = tileW * ratio;
   ctx.save();
-  ctx.font = `600 ${size}px "Source Sans 3", system-ui, sans-serif`;
-  ctx.textBaseline = 'middle';
-  ctx.shadowColor = 'rgba(0,0,0,0.65)';
-  ctx.shadowBlur = size * 0.35;
-  const textWidth = ctx.measureText(WATERMARK_TEXT).width;
-  const iconSize = size * 1.15;
-  const gap = size * 0.5;
-  const x = width - pad - textWidth;
-  const y = height - pad - size * 0.5;
+  ctx.globalAlpha = 0.4;
+  ctx.translate(width / 2, height / 2);
+  ctx.rotate((-25 * Math.PI) / 180);
+  const reach = Math.hypot(width, height) / 2;
+  for (let y = -reach, row = 0; y < reach; y += tileH * 2.6, row++) {
+    for (let x = -reach + (row % 2) * tileW * 0.9; x < reach; x += tileW * 1.8) {
+      ctx.drawImage(logo, x, y, tileW, tileH);
+    }
+  }
+  ctx.restore();
 
-  // casita (mismo trazo que el ícono de la web)
-  ctx.translate(x - gap - iconSize, y - iconSize / 2);
-  ctx.scale(iconSize / 24, iconSize / 24);
-  ctx.strokeStyle = '#e0b040';
-  ctx.lineWidth = 2.4;
-  ctx.lineJoin = 'round';
-  ctx.stroke(new Path2D('M3 11l9-8 9 8v10H3z'));
-  ctx.setTransform(1, 0, 0, 1, 0, 0);
-
-  ctx.fillStyle = 'rgba(255,255,255,0.88)';
-  ctx.fillText(WATERMARK_TEXT, x, y);
+  // sello
+  const badgeW = Math.max(160, width / 4);
+  const badgeH = badgeW * ratio;
+  const m = Math.max(10, badgeH / 3);
+  const edge = Math.max(12, width / 60);
+  const x = width - badgeW - m * 2 - edge;
+  const y = height - badgeH - m * 2 - edge;
+  ctx.save();
+  ctx.fillStyle = 'rgba(20,20,20,0.6)';
+  ctx.beginPath();
+  ctx.roundRect(x, y, badgeW + m * 2, badgeH + m * 2, m);
+  ctx.fill();
+  ctx.drawImage(logo, x + m, y + m, badgeW, badgeH);
   ctx.restore();
 }
 
@@ -65,7 +81,7 @@ function compressImage(file: File, watermark = false): Promise<string> {
   return new Promise((resolve, reject) => {
     const url = URL.createObjectURL(file);
     const img = new Image();
-    img.onload = () => {
+    img.onload = async () => {
       URL.revokeObjectURL(url);
       const scale = Math.min(1, MAX_PHOTO_SIDE / Math.max(img.width, img.height));
       const canvas = document.createElement('canvas');
@@ -77,7 +93,10 @@ function compressImage(file: File, watermark = false): Promise<string> {
         return;
       }
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      if (watermark) drawWatermark(ctx, canvas.width, canvas.height);
+      if (watermark) {
+        const logo = await loadLogo();
+        if (logo) drawWatermark(ctx, canvas.width, canvas.height, logo);
+      }
       resolve(canvas.toDataURL('image/jpeg', PHOTO_QUALITY));
     };
     img.onerror = () => {
