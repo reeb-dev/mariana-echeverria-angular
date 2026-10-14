@@ -312,6 +312,7 @@ export const PROPERTIES: Property[] = [
   {
     id: '1',
     featured: true,
+    spotlight: true,
     featuredOrder: 1,
     slug: 'casa-mitre-coronel-suarez',
     lat: -37.4581,

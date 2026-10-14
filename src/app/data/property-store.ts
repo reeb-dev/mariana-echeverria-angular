@@ -348,7 +348,13 @@ export class PropertyStore {
       if (raw) {
         const parsed = JSON.parse(raw);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          return parsed as Property[];
+          const list = parsed as Property[];
+          // Listas guardadas antes de existir «súper destacada»: se toma la del inventario de ejemplo.
+          if (!list.some((p) => 'spotlight' in p)) {
+            const seedSpot = PROPERTIES.find((p) => p.spotlight);
+            return seedSpot ? list.map((p) => (p.id === seedSpot.id ? { ...p, spotlight: true } : p)) : list;
+          }
+          return list;
         }
       }
     } catch {
