@@ -197,14 +197,21 @@ function compressImage(file: File, watermark = false): Promise<string> {
               <span class="field-label">Superficie (como se muestra) *</span>
               <input class="field" name="areaLabel" [(ngModel)]="draft.areaLabel" placeholder="180 m²" />
             </label>
-            <label>
-              <span class="field-label">Dormitorios</span>
-              <input class="field" type="number" min="0" name="beds" [(ngModel)]="beds" />
-            </label>
-            <label>
-              <span class="field-label">Baños</span>
-              <input class="field" type="number" min="0" name="baths" [(ngModel)]="baths" />
-            </label>
+            <div class="md:col-span-2">
+              <span class="field-label">Lo que tiene</span>
+              <div class="grid grid-cols-3 gap-3">
+                @for (s of steppers; track s.key) {
+                  <div class="rounded-xl border border-border bg-background p-3 text-center">
+                    <p class="text-xs font-semibold tracking-[0.08em] text-muted-foreground uppercase">{{ s.label }}</p>
+                    <div class="mt-2 flex items-center justify-center gap-3">
+                      <button type="button" class="h-9 w-9 rounded-full border border-border text-lg transition hover:border-forest" (click)="step(s.key, -1)" [attr.aria-label]="'Menos ' + s.label.toLowerCase()">−</button>
+                      <span class="w-8 font-display text-2xl text-forest-deep tabular-nums">{{ stepValue(s.key) ?? '—' }}</span>
+                      <button type="button" class="h-9 w-9 rounded-full border border-border text-lg transition hover:border-forest" (click)="step(s.key, 1)" [attr.aria-label]="'Más ' + s.label.toLowerCase()">+</button>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
             <label class="md:col-span-2">
               <span class="field-label">Destacado corto (opcional)</span>
               <input class="field" name="highlight" [(ngModel)]="draft.highlight" placeholder="Casa familiar" />
@@ -219,6 +226,23 @@ function compressImage(file: File, watermark = false): Promise<string> {
                 Sugerencia: entre 300 y 1000 caracteres. Contá ubicación, ambientes, estado y qué la hace especial.
               </span>
             </label>
+            <div class="md:col-span-2">
+              <span class="field-label">Tocá lo que tiene la propiedad</span>
+              <div class="flex flex-wrap gap-2">
+                @for (a of quickAmenities; track a) {
+                  <button
+                    type="button"
+                    class="filter-chip"
+                    [class.filter-chip-active]="hasAmenity(a)"
+                    [class.filter-chip-idle]="!hasAmenity(a)"
+                    [attr.aria-pressed]="hasAmenity(a)"
+                    (click)="toggleAmenity(a)"
+                  >
+                    {{ hasAmenity(a) ? '✓ ' : '+ ' }}{{ a }}
+                  </button>
+                }
+              </div>
+            </div>
             <label class="md:col-span-2">
               <span class="field-label">Características (una por línea)</span>
               <textarea
@@ -236,10 +260,6 @@ function compressImage(file: File, watermark = false): Promise<string> {
             <label>
               <span class="field-label">Antigüedad (años)</span>
               <input class="field" type="number" min="0" name="ageYears" [(ngModel)]="draft.ageYears" placeholder="0 = a estrenar" />
-            </label>
-            <label>
-              <span class="field-label">Cocheras</span>
-              <input class="field" type="number" min="0" name="garages" [(ngModel)]="draft.garages" />
             </label>
             <label>
               <span class="field-label">Sucursal que atiende</span>
@@ -773,6 +793,45 @@ export class PanelFormComponent {
       const timer = setInterval(() => this.saveDraft(), 4000);
       inject(DestroyRef).onDestroy(() => clearInterval(timer));
     }
+  }
+
+  readonly steppers = [
+    { key: 'beds', label: 'Dormitorios' },
+    { key: 'baths', label: 'Baños' },
+    { key: 'garages', label: 'Cocheras' },
+  ] as const;
+
+  readonly quickAmenities = [
+    'Pileta', 'Parrilla', 'Quincho', 'Patio', 'Jardín', 'Balcón', 'Terraza', 'Aire acondicionado', 'Calefacción',
+    'Gas natural', 'Agua corriente', 'Cloacas', 'Luz', 'Amoblado', 'Apto crédito', 'Escritura', 'Cochera cubierta',
+    'Seguridad', 'Ascensor', 'Lavadero',
+  ];
+
+  stepValue(key: 'beds' | 'baths' | 'garages'): number | null {
+    return key === 'garages' ? (this.draft.garages ?? null) : this[key];
+  }
+
+  /** Suma o resta uno; al bajar de 0 queda «sin dato». */
+  step(key: 'beds' | 'baths' | 'garages', delta: 1 | -1) {
+    const current = this.stepValue(key);
+    const next = current === null ? (delta === 1 ? 1 : null) : current + delta < 0 ? null : current + delta;
+    if (key === 'garages') this.draft.garages = next ?? undefined;
+    else this[key] = next;
+  }
+
+  private amenityLines(): string[] {
+    return this.amenitiesText.split('\n').map((l) => l.trim()).filter(Boolean);
+  }
+
+  hasAmenity(name: string): boolean {
+    return this.amenityLines().some((l) => l.toLowerCase() === name.toLowerCase());
+  }
+
+  toggleAmenity(name: string) {
+    const lines = this.amenityLines();
+    this.amenitiesText = this.hasAmenity(name)
+      ? lines.filter((l) => l.toLowerCase() !== name.toLowerCase()).join('\n')
+      : [...lines, name].join('\n');
   }
 
   private static readonly DRAFT_KEY = 'mer.panel.draft.new';
