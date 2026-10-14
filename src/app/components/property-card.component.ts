@@ -23,7 +23,7 @@ import { WatermarkComponent } from './watermark.component';
         <div class="prop-card-media">
           <img [src]="cover().src | assetUrl" [alt]="cover().alt" loading="lazy" decoding="async" />
           @if (!cover().watermarked) {
-            <app-watermark position="bottom-center" />
+            <app-watermark position="top-left" />
           }
           <div class="absolute inset-0 z-[1] bg-gradient-to-t from-forest-deep/40 via-transparent to-transparent"></div>
           @if (showFavorite()) {

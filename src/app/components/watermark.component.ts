@@ -11,11 +11,11 @@ import { AssetUrlPipe } from '../utils/asset-url';
   imports: [AssetUrlPipe],
   template: `
     <span
-      class="pointer-events-none absolute z-[2] select-none rounded-lg bg-black/55 p-1.5 backdrop-blur-[1px]"
+      class="pointer-events-none absolute z-[2] select-none rounded-lg bg-black/35 p-1 backdrop-blur-[1px]"
       [class]="positionClass()"
       aria-hidden="true"
     >
-      <img [src]="'/about/logo-nav.png' | assetUrl" alt="" class="block h-6 w-auto sm:h-7" />
+      <img [src]="'/about/logo-nav.png' | assetUrl" alt="" class="block h-4 w-auto opacity-85 sm:h-5" />
     </span>
   `,
 })

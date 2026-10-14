@@ -41,37 +41,38 @@ function loadLogo(): Promise<HTMLImageElement | null> {
   return logoPromise;
 }
 
-/** Estampa el logo abajo a la derecha sobre una placa oscura (se lee sobre cualquier foto) y repetido, tenue, en diagonal. */
+/** Estampa el logo arriba a la izquierda sobre una placa oscura (se lee sobre cualquier foto) y repetido, tenue, en diagonal. */
 function drawWatermark(ctx: CanvasRenderingContext2D, width: number, height: number, logo: HTMLImageElement): void {
   const ratio = logo.naturalHeight / logo.naturalWidth;
 
   // logo repetido en diagonal
-  const tileW = Math.max(120, width / 5);
+  const tileW = Math.max(90, width / 6);
   const tileH = tileW * ratio;
   ctx.save();
-  ctx.globalAlpha = 0.4;
+  ctx.globalAlpha = 0.2;
   ctx.translate(width / 2, height / 2);
   ctx.rotate((-25 * Math.PI) / 180);
   const reach = Math.hypot(width, height) / 2;
-  for (let y = -reach, row = 0; y < reach; y += tileH * 2.6, row++) {
-    for (let x = -reach + (row % 2) * tileW * 0.9; x < reach; x += tileW * 1.8) {
+  for (let y = -reach, row = 0; y < reach; y += tileH * 3.4, row++) {
+    for (let x = -reach + (row % 2) * tileW * 0.9; x < reach; x += tileW * 2.6) {
       ctx.drawImage(logo, x, y, tileW, tileH);
     }
   }
   ctx.restore();
 
   // sello
-  const badgeW = Math.max(160, width / 4);
+  const badgeW = Math.max(110, width / 7);
   const badgeH = badgeW * ratio;
-  const m = Math.max(10, badgeH / 3);
+  const m = Math.max(6, badgeH / 4);
   const edge = Math.max(12, width / 60);
-  const x = width - badgeW - m * 2 - edge;
-  const y = height - badgeH - m * 2 - edge;
+  const x = edge;
+  const y = edge;
   ctx.save();
-  ctx.fillStyle = 'rgba(20,20,20,0.6)';
+  ctx.fillStyle = 'rgba(20,20,20,0.35)';
   ctx.beginPath();
   ctx.roundRect(x, y, badgeW + m * 2, badgeH + m * 2, m);
   ctx.fill();
+  ctx.globalAlpha = 0.85;
   ctx.drawImage(logo, x + m, y + m, badgeW, badgeH);
   ctx.restore();
 }
