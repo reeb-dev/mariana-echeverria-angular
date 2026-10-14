@@ -1,4 +1,5 @@
 import { MIN_HOME_SECTION_ITEMS, ZonesStore } from '../data/zones-store';
+import { AutoScrollDirective } from '../directives/auto-scroll.directive';
 import { VideoEmbedComponent } from '../components/video-embed.component';
 import { ZONE_PAGES } from '../data/zone-pages';
 import { ToastService } from '../data/toast.service';
@@ -39,6 +40,7 @@ import { SeoService, parsePrice } from '../utils/seo.service';
     FormsModule,
     RouterLink,
     VideoEmbedComponent,
+    AutoScrollDirective,
     RevealDirective,
     BrandLogoComponent,
     PropertyCardComponent,
