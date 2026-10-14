@@ -19,8 +19,8 @@ import { PanelShellComponent } from './panel-shell.component';
       @if (auth.can('propiedades.crear')) {
         <form class="mer-card mt-6 flex flex-col gap-3 p-4 sm:flex-row sm:items-end" (submit)="add($event)">
           <label class="min-w-0 flex-1">
-            <span class="field-label">Nueva zona</span>
-            <input class="field" name="name" [(ngModel)]="name" placeholder="Ej. Pigüé, Tornquist, Pehuen Co" autocomplete="off" />
+            <span class="lbl">Nueva zona</span>
+            <input class="inp" name="name" [(ngModel)]="name" placeholder="Ej. Pigüé, Tornquist, Pehuen Co" autocomplete="off" />
           </label>
           <button type="submit" class="h-11 rounded-lg bg-forest-deep px-5 text-sm font-semibold text-white transition hover:bg-forest">
             Agregar zona
@@ -50,7 +50,7 @@ import { PanelShellComponent } from './panel-shell.component';
       <div class="mt-6 flex flex-wrap items-center gap-3">
         <input
           type="search"
-          class="field max-w-sm"
+          class="inp max-w-sm"
           name="q"
           [ngModel]="query()"
           (ngModelChange)="query.set($event)"
@@ -68,6 +68,9 @@ import { PanelShellComponent } from './panel-shell.component';
               <p class="text-sm text-muted-foreground">
                 {{ zones.usage(z.id) }} {{ zones.usage(z.id) === 1 ? 'propiedad' : 'propiedades' }}
               </p>
+              @if (z.homeSection && zones.usage(z.id) < min) {
+                <p class="mt-1 text-xs text-red-700">Todavía no se ve en la home: necesita {{ min }} propiedades.</p>
+              }
             </div>
             @if (auth.can('propiedades.destacar')) {
               <label class="flex shrink-0 cursor-pointer items-center gap-2 text-xs text-muted-foreground">
@@ -91,6 +94,32 @@ import { PanelShellComponent } from './panel-shell.component';
       </ul>
     </app-panel-shell>
   `,
+  styles: [
+    `
+      .lbl {
+        display: block;
+        margin-bottom: 0.375rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #6a5748;
+      }
+      .inp {
+        width: 100%;
+        height: 2.75rem;
+        border: 1px solid #e5d9cb;
+        border-radius: 0.5rem;
+        background: #faf7f2;
+        padding: 0 0.875rem;
+        font-size: 0.875rem;
+        outline: none;
+      }
+      .inp:focus {
+        border-color: #2d5a3d;
+      }
+    `,
+  ],
 })
 export class PanelZonesComponent {
   readonly auth = inject(AuthService);
