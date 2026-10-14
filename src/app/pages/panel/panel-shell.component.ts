@@ -238,6 +238,7 @@ export class PanelShellComponent {
 
     { path: '/panel/propiedades', group: 'Inmuebles', label: 'Propiedades', icon: 'M3 11l9-8 9 8 M5 10v10h14V10' },
     { path: '/panel/mapa', label: 'Mapa', icon: 'M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z M12 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4' },
+    { path: '/panel/zonas', label: 'Zonas', icon: 'M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z' },
     {
       path: '/panel/destacadas',
       label: 'Destacadas',

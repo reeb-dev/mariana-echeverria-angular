@@ -16,6 +16,7 @@ export const routes: Routes = [
   { path: 'panel/ingresar', loadComponent: () => import('./pages/panel/panel-login.component').then((m) => m.PanelLoginComponent) },
   { path: 'panel', loadComponent: () => import('./pages/panel/panel-dashboard.component').then((m) => m.PanelDashboardComponent), canActivate: [authGuard] },
   { path: 'panel/propiedades', loadComponent: () => import('./pages/panel/panel-list.component').then((m) => m.PanelListComponent), canActivate: [authGuard] },
+  { path: 'panel/zonas', loadComponent: () => import('./pages/panel/panel-zones.component').then((m) => m.PanelZonesComponent), canActivate: [authGuard] },
   { path: 'panel/destacadas', loadComponent: () => import('./pages/panel/panel-featured.component').then((m) => m.PanelFeaturedComponent), canActivate: [authGuard] },
   {
     path: 'panel/ajustes',

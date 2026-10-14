@@ -1,3 +1,4 @@
+import { ZonesStore } from '../../data/zones-store';
 import { ToastService } from '../../data/toast.service';
 import { Component, inject, signal } from '@angular/core';
 import { AppraisalsStore } from '../../data/appraisals-store';
@@ -81,6 +82,7 @@ export class PanelSettingsComponent {
     inject(LeasesStore),
     inject(CasesStore),
     inject(RemindersStore),
+    inject(ZonesStore),
   ];
   readonly notice = signal<string | null>(null);
 

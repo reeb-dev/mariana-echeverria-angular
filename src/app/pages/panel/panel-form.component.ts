@@ -1,3 +1,4 @@
+import { ZonesStore } from '../../data/zones-store';
 import { ToastService } from '../../data/toast.service';
 import { DatePipe, Location } from '@angular/common';
 import { Component, HostListener, computed, inject, signal } from '@angular/core';
@@ -167,18 +168,22 @@ function compressImage(file: File, watermark = false): Promise<string> {
             </label>
             <label>
               <span class="field-label">Zona *</span>
-              <input
-                class="field"
-                name="zone"
-                list="panel-zones"
-                [(ngModel)]="zoneInput"
-                placeholder="Coronel Suárez"
-              />
-              <datalist id="panel-zones">
+              <select class="field" name="zoneSelect" [ngModel]="zoneChoice()" (ngModelChange)="chooseZone($event)">
+                <option value="">Elegí una zona…</option>
                 @for (z of zoneNames(); track z) {
-                  <option [value]="z"></option>
+                  <option [value]="z">{{ z }}</option>
                 }
-              </datalist>
+                <option value="__nueva">＋ Agregar zona nueva…</option>
+              </select>
+              @if (addingZone()) {
+                <input
+                  class="field mt-2"
+                  name="zone"
+                  [(ngModel)]="zoneInput"
+                  placeholder="Nombre de la zona nueva"
+                  autocomplete="off"
+                />
+              }
             </label>
             <label>
               <span class="field-label">Ubicación (como se muestra) *</span>
@@ -710,13 +715,28 @@ export class PanelFormComponent {
   readonly readonly = computed(() => !this.isNew() && !this.notFound() && !this.canEditCurrent());
   private readonly canEditCurrent = signal(true);
 
-  readonly zoneNames = computed(() => {
-    const ids = new Set<string>([
-      ...Object.keys(ZONE_LABELS),
-      ...this.store.all().map((p) => p.zone),
-    ]);
-    return [...ids].map((id) => labelForZone(id)).sort((a, b) => a.localeCompare(b, 'es'));
+  private readonly zonesStore = inject(ZonesStore);
+  readonly zoneNames = computed(() => this.zonesStore.options().map((z) => z.name));
+  readonly addingZone = signal(false);
+  /** Valor del desplegable: el nombre de la zona, o «__nueva» mientras se escribe una. */
+  readonly zoneChoice = computed(() => {
+    if (this.addingZone()) return '__nueva';
+    const current = this.zoneInputSignal().trim().toLowerCase();
+    return this.zoneNames().find((n) => n.toLowerCase() === current) ?? (current ? '__nueva' : '');
   });
+  private readonly zoneInputSignal = signal('');
+
+  chooseZone(value: string) {
+    if (value === '__nueva') {
+      this.addingZone.set(true);
+      this.zoneInput = '';
+      this.zoneInputSignal.set('');
+      return;
+    }
+    this.addingZone.set(false);
+    this.zoneInput = value;
+    this.zoneInputSignal.set(value);
+  }
 
   constructor() {
     if (!this.isNew()) {
@@ -727,6 +747,7 @@ export class PanelFormComponent {
       }
       this.draft = { ...found };
       this.zoneInput = labelForZone(found.zone);
+      this.zoneInputSignal.set(this.zoneInput);
       this.amenitiesText = found.amenities.join('\n');
       this.beds = found.beds ?? null;
       this.baths = found.baths ?? null;
@@ -1012,6 +1033,7 @@ export class PanelFormComponent {
       ([, label]) => label.toLowerCase() === zoneLabel.toLowerCase()
     );
     const zone = known ? known[0] : slugify(zoneLabel);
+    if (!known) this.zonesStore.add(zoneLabel);
 
     const nextOrder =
       Math.max(0, ...this.store.featuredAll().map((p) => p.featuredOrder ?? 0)) + 1;
