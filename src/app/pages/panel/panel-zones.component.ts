@@ -2,7 +2,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../data/auth.service';
 import { ToastService } from '../../data/toast.service';
-import { MAX_HOME_SECTIONS, ZonesStore } from '../../data/zones-store';
+import { MAX_HOME_SECTIONS, MIN_HOME_SECTION_ITEMS, ZonesStore } from '../../data/zones-store';
 import { PanelShellComponent } from './panel-shell.component';
 
 @Component({
@@ -13,7 +13,7 @@ import { PanelShellComponent } from './panel-shell.component';
     <app-panel-shell title="Zonas">
       <p class="max-w-2xl text-sm text-muted-foreground">
         Las zonas que cargues acá aparecen en la lista desplegable al crear o editar una propiedad y en el filtro del sitio
-        (cuando tienen propiedades publicadas). Tildá «En la home» para que una zona tenga su propia sección en la página principal (hasta {{ max }}, para no saturarla).
+        (cuando tienen propiedades publicadas). Tildá «En la home» para que una zona tenga su propia sección en la página principal (hasta {{ max }}, para no saturarla). Se muestra cuando la zona tiene al menos {{ min }} propiedades publicadas.
       </p>
 
       @if (auth.can('propiedades.crear')) {
@@ -26,6 +26,25 @@ import { PanelShellComponent } from './panel-shell.component';
             Agregar zona
           </button>
         </form>
+      }
+
+      @if (zones.homeSections().length > 0) {
+        <section class="mer-card mt-6 p-4">
+          <h2 class="font-display text-lg font-medium text-forest-deep">Orden en la home</h2>
+          <ol class="mt-3 space-y-2">
+            @for (z of zones.homeSections(); track z.id; let i = $index; let last = $last) {
+              <li class="flex items-center gap-3 text-sm">
+                <span class="w-5 text-center font-semibold text-forest tabular-nums">{{ i + 1 }}</span>
+                <span class="min-w-0 flex-1 truncate">{{ z.name }}</span>
+                @if (zones.usage(z.id) < min) {
+                  <span class="text-xs text-red-700">No se muestra: tiene menos de {{ min }} propiedades.</span>
+                }
+                <button type="button" class="h-8 w-8 rounded-lg border border-border transition hover:border-forest disabled:opacity-30" [disabled]="i === 0" (click)="zones.moveHomeSection(z.id, -1)" aria-label="Subir">↑</button>
+                <button type="button" class="h-8 w-8 rounded-lg border border-border transition hover:border-forest disabled:opacity-30" [disabled]="last" (click)="zones.moveHomeSection(z.id, 1)" aria-label="Bajar">↓</button>
+              </li>
+            }
+          </ol>
+        </section>
       }
 
       <div class="mt-6 flex flex-wrap items-center gap-3">
@@ -79,6 +98,7 @@ export class PanelZonesComponent {
   private readonly toast = inject(ToastService);
 
   readonly max = MAX_HOME_SECTIONS;
+  readonly min = MIN_HOME_SECTION_ITEMS;
   name = '';
   readonly query = signal('');
 

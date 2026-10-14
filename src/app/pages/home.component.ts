@@ -1,4 +1,4 @@
-import { ZonesStore } from '../data/zones-store';
+import { MIN_HOME_SECTION_ITEMS, ZonesStore } from '../data/zones-store';
 import { ZONE_PAGES } from '../data/zone-pages';
 import { ToastService } from '../data/toast.service';
 import { Component, computed, inject, signal } from '@angular/core';
@@ -150,7 +150,7 @@ export class HomeComponent {
         items: this.store.published().filter((p) => p.zone === z.id),
         page: ZONE_PAGES.find((page) => page.zoneId === z.id)?.slug ?? null,
       }))
-      .filter((z) => z.items.length > 0)
+      .filter((z) => z.items.length >= MIN_HOME_SECTION_ITEMS)
   );
 
   /** Destacadas elegidas en el panel. */

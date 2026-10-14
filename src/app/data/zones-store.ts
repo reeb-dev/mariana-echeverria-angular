@@ -8,10 +8,14 @@ export type ZoneEntry = {
   name: string;
   /** Muestra una sección con sus propiedades en la página principal. */
   homeSection?: boolean;
+  /** Posición entre las secciones de la home. */
+  homeOrder?: number;
 };
 
 /** Tope de secciones por zona en la home, para que la página no se sature. */
 export const MAX_HOME_SECTIONS = 3;
+/** La sección de una zona aparece desde esta cantidad de propiedades publicadas. */
+export const MIN_HOME_SECTION_ITEMS = 3;
 
 const SEED = (): ZoneEntry[] => Object.entries(ZONE_LABELS).map(([id, name]) => ({ id, name }));
 
@@ -31,19 +35,38 @@ export class ZonesStore extends CollectionStore<ZoneEntry> {
     for (const z of this.all()) byId.set(z.id, z.name);
     for (const p of this.properties.all()) if (p.zone && !byId.has(p.zone)) byId.set(p.zone, labelForZone(p.zone));
     return [...byId]
-      .map(([id, name]) => ({ id, name, homeSection: !!this.get(id)?.homeSection }))
+      .map(([id, name]) => ({ id, name, homeSection: !!this.get(id)?.homeSection, homeOrder: this.get(id)?.homeOrder ?? 0 }))
       .sort((a, b) => a.name.localeCompare(b.name, 'es'));
   });
 
   /** Zonas con sección propia en la home, de la A a la Z. */
-  readonly homeSections = computed(() => this.options().filter((z) => z.homeSection));
+  readonly homeSections = computed(() =>
+    this.options()
+      .filter((z) => z.homeSection)
+      .sort((a, b) => a.homeOrder - b.homeOrder || a.name.localeCompare(b.name, 'es'))
+  );
 
   /** Activa o desactiva la sección de la zona en la home. */
   toggleHomeSection(id: string, name: string): boolean {
     const current = this.get(id);
     const next = !current?.homeSection;
-    this.save({ ...(current ?? { id, name }), homeSection: next });
+    const last = Math.max(0, ...this.homeSections().map((z) => z.homeOrder));
+    this.save({ ...(current ?? { id, name }), homeSection: next, homeOrder: next ? last + 1 : undefined });
     return next;
+  }
+
+  /** Sube o baja una sección entre las de la home. */
+  moveHomeSection(id: string, direction: -1 | 1): void {
+    const list = this.homeSections();
+    const i = list.findIndex((z) => z.id === id);
+    const j = i + direction;
+    if (i < 0 || j < 0 || j >= list.length) return;
+    const next = [...list];
+    [next[i], next[j]] = [next[j], next[i]];
+    next.forEach((z, index) => {
+      const entry = this.get(z.id) ?? { id: z.id, name: z.name };
+      this.save({ ...entry, homeSection: true, homeOrder: index + 1 });
+    });
   }
 
   /** Cuántas propiedades hay en cada zona. */
