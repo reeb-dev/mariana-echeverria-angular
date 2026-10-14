@@ -1,3 +1,5 @@
+import { ZonesStore } from '../data/zones-store';
+import { ZONE_PAGES } from '../data/zone-pages';
 import { ToastService } from '../data/toast.service';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -136,6 +138,20 @@ export class HomeComponent {
 
   /** Zonas únicas del inventario — si agregás una zona nueva en data, aparece acá. */
   readonly zoneOptions = computed(() => zoneFilterOptionsFrom(this.store.published()));
+
+  private readonly zonesStore = inject(ZonesStore);
+
+  /** Secciones por zona que se activaron en el panel (solo con propiedades publicadas). */
+  readonly zoneSections = computed(() =>
+    this.zonesStore
+      .homeSections()
+      .map((z) => ({
+        ...z,
+        items: this.store.published().filter((p) => p.zone === z.id),
+        page: ZONE_PAGES.find((page) => page.zoneId === z.id)?.slug ?? null,
+      }))
+      .filter((z) => z.items.length > 0)
+  );
 
   /** Destacadas elegidas en el panel. */
   readonly featured = this.store.featured;

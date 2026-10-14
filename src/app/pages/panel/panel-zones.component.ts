@@ -13,7 +13,7 @@ import { PanelShellComponent } from './panel-shell.component';
     <app-panel-shell title="Zonas">
       <p class="max-w-2xl text-sm text-muted-foreground">
         Las zonas que cargues acá aparecen en la lista desplegable al crear o editar una propiedad y en el filtro del sitio
-        (cuando tienen propiedades publicadas).
+        (cuando tienen propiedades publicadas). Tildá «En la home» para que una zona tenga su propia sección en la página principal.
       </p>
 
       @if (auth.can('propiedades.crear')) {
@@ -50,6 +50,12 @@ import { PanelShellComponent } from './panel-shell.component';
                 {{ zones.usage(z.id) }} {{ zones.usage(z.id) === 1 ? 'propiedad' : 'propiedades' }}
               </p>
             </div>
+            @if (auth.can('propiedades.destacar')) {
+              <label class="flex shrink-0 cursor-pointer items-center gap-2 text-xs text-muted-foreground">
+                <input type="checkbox" class="h-4 w-4 accent-[#2d5a3d]" [checked]="z.homeSection" (change)="toggleSection(z.id, z.name)" />
+                En la home
+              </label>
+            }
             @if (auth.can('propiedades.eliminar') && zones.usage(z.id) === 0) {
               <button
                 type="button"
@@ -89,6 +95,11 @@ export class PanelZonesComponent {
     }
     this.toast.success(`Zona «${this.name.trim()}» agregada.`);
     this.name = '';
+  }
+
+  toggleSection(id: string, name: string) {
+    const on = this.zones.toggleHomeSection(id, name);
+    this.toast.success(on ? `«${name}» tiene su sección en la home.` : `«${name}» ya no tiene sección en la home.`);
   }
 
   remove(id: string, name: string) {

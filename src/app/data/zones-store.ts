@@ -3,7 +3,12 @@ import { CollectionStore } from './collection-store';
 import { PropertyStore, slugify } from './property-store';
 import { ZONE_LABELS, labelForZone } from './properties';
 
-export type ZoneEntry = { id: string; name: string };
+export type ZoneEntry = {
+  id: string;
+  name: string;
+  /** Muestra una sección con sus propiedades en la página principal. */
+  homeSection?: boolean;
+};
 
 const SEED = (): ZoneEntry[] => Object.entries(ZONE_LABELS).map(([id, name]) => ({ id, name }));
 
@@ -22,8 +27,21 @@ export class ZonesStore extends CollectionStore<ZoneEntry> {
     const byId = new Map<string, string>();
     for (const z of this.all()) byId.set(z.id, z.name);
     for (const p of this.properties.all()) if (p.zone && !byId.has(p.zone)) byId.set(p.zone, labelForZone(p.zone));
-    return [...byId].map(([id, name]) => ({ id, name })).sort((a, b) => a.name.localeCompare(b.name, 'es'));
+    return [...byId]
+      .map(([id, name]) => ({ id, name, homeSection: !!this.get(id)?.homeSection }))
+      .sort((a, b) => a.name.localeCompare(b.name, 'es'));
   });
+
+  /** Zonas con sección propia en la home, de la A a la Z. */
+  readonly homeSections = computed(() => this.options().filter((z) => z.homeSection));
+
+  /** Activa o desactiva la sección de la zona en la home. */
+  toggleHomeSection(id: string, name: string): boolean {
+    const current = this.get(id);
+    const next = !current?.homeSection;
+    this.save({ ...(current ?? { id, name }), homeSection: next });
+    return next;
+  }
 
   /** Cuántas propiedades hay en cada zona. */
   usage(id: string): number {

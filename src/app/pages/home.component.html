@@ -201,6 +201,30 @@
   </section>
 }
 
+<!-- SECCIONES POR ZONA (se activan desde Panel → Zonas) -->
+@for (z of zoneSections(); track z.id) {
+  <section [id]="'zona-' + z.id" class="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-20">
+    <div appReveal class="flex flex-wrap items-end justify-between gap-4">
+      <div class="max-w-xl">
+        <p class="eyebrow text-forest">Zona</p>
+        <h2 class="section-title mt-4 text-3xl text-forest-deep md:text-4xl">Propiedades en {{ z.name }}</h2>
+      </div>
+      @if (z.page) {
+        <a [routerLink]="['/zona', z.page]" class="text-sm font-semibold text-forest underline decoration-forest/30 underline-offset-4 transition hover:decoration-forest">
+          Conocer la zona
+        </a>
+      }
+    </div>
+    <ul class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
+      @for (property of z.items.slice(0, 6); track property.id; let i = $index) {
+        <li appReveal [appRevealDelay]="i * 50" class="h-full">
+          <app-property-card [property]="property" />
+        </li>
+      }
+    </ul>
+  </section>
+}
+
 <!-- TE LLAMAMOS -->
 <section aria-label="Pedí que te llamemos" class="mx-auto max-w-6xl px-5 pb-20 md:px-8 md:pb-24">
   <div class="mer-card mer-card-accent grid gap-6 p-6 md:grid-cols-[0.9fr_1.1fr] md:items-center md:p-8">
