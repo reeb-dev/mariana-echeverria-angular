@@ -1,3 +1,4 @@
+import { ConfirmService } from '../../data/confirm.service';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../data/auth.service';
@@ -13,7 +14,7 @@ import { PanelShellComponent } from './panel-shell.component';
     <app-panel-shell title="Zonas">
       <p class="max-w-2xl text-sm text-muted-foreground">
         Las zonas que cargues acá aparecen en la lista desplegable al crear o editar una propiedad y en el filtro del sitio
-        (cuando tienen propiedades publicadas). Tildá «En la home» para que una zona tenga su propia sección en la página principal Las zonas tildadas forman un solo bloque con pestañas. Se muestra cuando la zona tiene al menos {{ min }} propiedades publicadas, y no repite las destacadas.
+        (cuando tienen propiedades publicadas). Tildá «En la home» para que una zona tenga su propia sección en la página principal. Las zonas tildadas forman un solo bloque con pestañas. Se muestra cuando la zona tiene al menos {{ min }} propiedades publicadas, y no repite las destacadas.
       </p>
 
       @if (auth.can('propiedades.crear')) {
@@ -122,6 +123,7 @@ import { PanelShellComponent } from './panel-shell.component';
   ],
 })
 export class PanelZonesComponent {
+  protected readonly dialog = inject(ConfirmService);
   readonly auth = inject(AuthService);
   readonly zones = inject(ZonesStore);
   private readonly toast = inject(ToastService);
@@ -151,8 +153,8 @@ export class PanelZonesComponent {
     this.toast.success(on ? `«${name}» tiene su sección en la home.` : `«${name}» ya no tiene sección en la home.`);
   }
 
-  remove(id: string, name: string) {
-    if (!confirm(`¿Quitar la zona «${name}»?`)) return;
+  async remove(id: string, name: string) {
+    if (!(await this.dialog.confirm({ title: `¿Quitar la zona «${name}»?`, confirmLabel: 'Quitar', danger: true }))) return;
     const error = this.zones.delete(id);
     if (error) this.toast.error(error);
     else this.toast.success(`Zona «${name}» quitada.`);

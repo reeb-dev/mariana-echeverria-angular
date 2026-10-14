@@ -1,3 +1,4 @@
+import { ConfirmService } from '../../data/confirm.service';
 import { ToastService } from '../../data/toast.service';
 import { DatePipe } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
@@ -130,6 +131,7 @@ import { PanelShellComponent } from './panel-shell.component';
   `,
 })
 export class PanelUsersComponent {
+  protected readonly dialog = inject(ConfirmService);
   protected readonly toast = inject(ToastService);
   readonly users = inject(UsersStore);
   readonly auth = inject(AuthService);
@@ -166,7 +168,12 @@ export class PanelUsersComponent {
   }
 
   async resetPassword(user: PanelUser) {
-    const password = prompt(`Nueva clave para ${user.name} (8 caracteres o más):`);
+    const password = await this.dialog.ask({
+      title: `Nueva clave para ${user.name}`,
+      message: 'Compartila por un medio seguro. La persona puede cambiarla después.',
+      confirmLabel: 'Cambiar clave',
+      input: { label: 'Clave nueva', type: 'password', minLength: 8, placeholder: '8 caracteres o más' },
+    });
     if (password === null) return;
     const error = await this.users.resetPassword(user.id, password);
     this.message.set(error ?? `Se cambió la clave de ${user.name}.`);

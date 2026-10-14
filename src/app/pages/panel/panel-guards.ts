@@ -1,6 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, CanDeactivateFn, Router } from '@angular/router';
 import { AuthService } from '../../data/auth.service';
+import { ConfirmService } from '../../data/confirm.service';
 import type { Permission } from '../../data/permissions';
 
 /** Pide ingresar al panel. */
@@ -21,5 +22,13 @@ export function permissionGuard(permission: Permission): CanActivateFn {
 }
 
 /** Pregunta antes de salir de un formulario si quedaron cambios sin guardar. */
-export const unsavedChangesGuard: CanDeactivateFn<{ hasUnsavedChanges(): boolean }> = (component) =>
-  !component.hasUnsavedChanges() || confirm('Tenés cambios sin guardar. ¿Salir igual?');
+export const unsavedChangesGuard: CanDeactivateFn<{ hasUnsavedChanges(): boolean }> = (component) => {
+  if (!component.hasUnsavedChanges()) return true;
+  return inject(ConfirmService).confirm({
+    title: '¿Salir sin guardar?',
+    message: 'Tenés cambios sin guardar y se van a perder.',
+    confirmLabel: 'Salir sin guardar',
+    cancelLabel: 'Seguir editando',
+    danger: true,
+  });
+};

@@ -1,3 +1,4 @@
+import { ConfirmService } from '../../data/confirm.service';
 import { ToastService } from '../../data/toast.service';
 import { DatePipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
@@ -228,6 +229,7 @@ const ALERT_ADJUST_DAYS = 30;
   ],
 })
 export class PanelLeasesComponent {
+  protected readonly dialog = inject(ConfirmService);
   protected readonly toast = inject(ToastService);
   readonly leases = inject(LeasesStore);
   readonly contacts = inject(ContactsStore);
@@ -339,8 +341,8 @@ export class PanelLeasesComponent {
     this.toast.success(this.isNew() ? 'Contrato creado.' : 'Contrato actualizado.');
   }
 
-  remove(lease: Lease) {
-    if (!confirm(`¿Eliminar el contrato de ${lease.tenantName}?`)) return;
+  async remove(lease: Lease) {
+    if (!(await this.dialog.confirm({ title: `¿Eliminar el contrato de ${lease.tenantName}?`, confirmLabel: 'Eliminar', danger: true }))) return;
     this.leases.remove(lease.id);
     this.toast.success('Contrato eliminado.');
   }

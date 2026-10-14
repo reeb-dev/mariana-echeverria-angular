@@ -1,3 +1,4 @@
+import { ConfirmService } from '../../data/confirm.service';
 import { ZonesStore } from '../../data/zones-store';
 import { ToastService } from '../../data/toast.service';
 import { Component, inject, signal } from '@angular/core';
@@ -69,6 +70,7 @@ import { PanelShellComponent } from './panel-shell.component';
   `,
 })
 export class PanelSettingsComponent {
+  protected readonly dialog = inject(ConfirmService);
   protected readonly toast = inject(ToastService);
   readonly store = inject(PropertyStore);
   private readonly users = inject(UsersStore);
@@ -102,15 +104,15 @@ export class PanelSettingsComponent {
     const file = input.files?.[0];
     input.value = '';
     if (!file) return;
-    if (!confirm('Cargar esta copia reemplaza todas las propiedades actuales. ¿Continuar?')) return;
+    if (!(await this.dialog.confirm({ title: '¿Cargar esta copia?', message: 'Reemplaza todas las propiedades actuales.', confirmLabel: 'Cargar copia', danger: true }))) return;
     const error = this.store.importJson(await file.text());
     this.notice.set(error ?? 'Copia cargada correctamente.');
     if (error) this.toast.error(error);
     else this.toast.success('Copia cargada correctamente.');
   }
 
-  resetDemo() {
-    if (!confirm('Se pierden los cambios y vuelven los datos de ejemplo. ¿Continuar?')) return;
+  async resetDemo() {
+    if (!(await this.dialog.confirm({ title: '¿Volver a los datos de ejemplo?', message: 'Se pierden los cambios que hiciste.', confirmLabel: 'Restaurar', danger: true }))) return;
     this.store.reset();
     this.users.reset();
     this.inquiries.reset();

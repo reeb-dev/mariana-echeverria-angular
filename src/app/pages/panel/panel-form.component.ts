@@ -989,6 +989,11 @@ export class PanelFormComponent {
   /** Hay cambios sin guardar (se usa para avisar antes de salir). */
   hasUnsavedChanges(): boolean {
     if (this.saved || this.notFound() || this.readonly()) return false;
+    // En una propiedad nueva no se pregunta: el borrador queda guardado y se recupera al volver.
+    if (this.isNew()) {
+      this.saveDraft();
+      return false;
+    }
     return this.currentState() !== this.snapshot;
   }
 

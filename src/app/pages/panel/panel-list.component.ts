@@ -1,3 +1,4 @@
+import { ConfirmService } from '../../data/confirm.service';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -308,6 +309,7 @@ import { PanelShellComponent } from './panel-shell.component';
   `,
 })
 export class PanelListComponent {
+  protected readonly dialog = inject(ConfirmService);
   readonly store = inject(PropertyStore);
   readonly auth = inject(AuthService);
   protected readonly toast = inject(ToastService);
@@ -466,9 +468,9 @@ export class PanelListComponent {
     );
   }
 
-  bulkRemove() {
+  async bulkRemove() {
     const count = this.selected().size;
-    if (!confirm(`¿Eliminar ${this.plural(count)}?`)) return;
+    if (!(await this.dialog.confirm({ title: `¿Eliminar ${this.plural(count)}?`, message: 'Después de eliminar podés deshacer desde el aviso, por unos segundos.', confirmLabel: 'Eliminar', danger: true }))) return;
     const ids = [...this.selected()];
     this.applyBulk(
       (n) => `Eliminaste ${this.plural(n)}.`,

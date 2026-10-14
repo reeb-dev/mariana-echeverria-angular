@@ -1,3 +1,4 @@
+import { ConfirmService } from '../../data/confirm.service';
 import { ToastService } from '../../data/toast.service';
 import { DatePipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
@@ -167,6 +168,7 @@ const SLA_HOURS = 24;
   `,
 })
 export class PanelAppraisalsComponent {
+  protected readonly dialog = inject(ConfirmService);
   protected readonly toast = inject(ToastService);
   readonly store = inject(AppraisalsStore);
   readonly auth = inject(AuthService);
@@ -227,10 +229,9 @@ export class PanelAppraisalsComponent {
     return `https://wa.me/${digits}?text=${text}`;
   }
 
-  remove(a: Appraisal) {
-    if (confirm(`¿Eliminar el pedido de ${a.name}?`)) {
-      this.store.remove(a.id);
-      this.toast.success('Pedido eliminado.');
-    }
+  async remove(a: Appraisal) {
+    if (!(await this.dialog.confirm({ title: `¿Eliminar el pedido de ${a.name}?`, confirmLabel: 'Eliminar', danger: true }))) return;
+    this.store.remove(a.id);
+    this.toast.success('Pedido eliminado.');
   }
 }

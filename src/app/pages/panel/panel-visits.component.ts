@@ -1,3 +1,4 @@
+import { ConfirmService } from '../../data/confirm.service';
 import { ToastService } from '../../data/toast.service';
 import { DatePipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
@@ -206,6 +207,7 @@ import { PanelShellComponent } from './panel-shell.component';
   ],
 })
 export class PanelVisitsComponent {
+  protected readonly dialog = inject(ConfirmService);
   protected readonly toast = inject(ToastService);
   readonly auth = inject(AuthService);
   readonly visits = inject(VisitsStore);
@@ -297,8 +299,8 @@ export class PanelVisitsComponent {
     this.draft = { propertySlug: '', at: '', contactId: '', visitorName: '' };
   }
 
-  remove(v: Visit) {
-    if (!confirm('¿Eliminar esta visita?')) return;
+  async remove(v: Visit) {
+    if (!(await this.dialog.confirm({ title: '¿Eliminar esta visita?', confirmLabel: 'Eliminar', danger: true }))) return;
     this.visits.remove(v.id);
     this.toast.success('Visita eliminada.');
   }

@@ -1,3 +1,4 @@
+import { ConfirmService } from '../../data/confirm.service';
 import { ToastService } from '../../data/toast.service';
 import { DatePipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
@@ -196,6 +197,7 @@ const STATUS_LABELS = { abierto: 'Abierto', en_tramite: 'En trámite', cerrado: 
   ],
 })
 export class PanelCasesComponent {
+  protected readonly dialog = inject(ConfirmService);
   protected readonly toast = inject(ToastService);
   readonly cases = inject(CasesStore);
   readonly contacts = inject(ContactsStore);
@@ -305,8 +307,8 @@ export class PanelCasesComponent {
     this.toast.success('Plazo quitado.');
   }
 
-  remove(c: LegalCase) {
-    if (!confirm(`¿Eliminar el expediente «${c.title}»? No se puede deshacer.`)) return;
+  async remove(c: LegalCase) {
+    if (!(await this.dialog.confirm({ title: `¿Eliminar el expediente «${c.title}»?`, message: 'No se puede deshacer.', confirmLabel: 'Eliminar', danger: true }))) return;
     this.cases.remove(c.id);
     this.selectedId.set(null);
     this.toast.success('Expediente eliminado.');

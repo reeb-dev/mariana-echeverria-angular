@@ -1,3 +1,4 @@
+import { ConfirmService } from '../../data/confirm.service';
 import { ToastService } from '../../data/toast.service';
 import { DatePipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
@@ -211,6 +212,7 @@ type TimelineEntry = { at: string; label: string; detail: string; link?: string[
   ],
 })
 export class PanelContactsComponent {
+  protected readonly dialog = inject(ConfirmService);
   protected readonly toast = inject(ToastService);
   readonly auth = inject(AuthService);
   readonly contacts = inject(ContactsStore);
@@ -355,8 +357,8 @@ export class PanelContactsComponent {
     this.draft = { name: '', phone: '', email: '', kind: 'comprador' };
   }
 
-  remove(c: CrmContact) {
-    if (!confirm(`¿Eliminar a ${c.name}? Las consultas y tasaciones quedan, solo se borra la ficha.`)) return;
+  async remove(c: CrmContact) {
+    if (!(await this.dialog.confirm({ title: `¿Eliminar a ${c.name}?`, message: 'Las consultas y tasaciones quedan, solo se borra la ficha.', confirmLabel: 'Eliminar', danger: true }))) return;
     this.contacts.remove(c.id);
     this.selectedId.set(null);
     this.toast.success('Contacto eliminado.');

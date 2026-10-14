@@ -1,3 +1,4 @@
+import { ConfirmService } from '../../data/confirm.service';
 import { ToastService } from '../../data/toast.service';
 import { DatePipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
@@ -164,6 +165,7 @@ import { PanelShellComponent } from './panel-shell.component';
   `,
 })
 export class PanelInquiriesComponent {
+  protected readonly dialog = inject(ConfirmService);
   protected readonly toast = inject(ToastService);
   readonly store = inject(InquiriesStore);
   readonly auth = inject(AuthService);
@@ -223,10 +225,9 @@ export class PanelInquiriesComponent {
     return `https://wa.me/${digits}?text=${text}`;
   }
 
-  remove(q: Inquiry) {
-    if (confirm(`¿Eliminar la consulta de ${q.name}?`)) {
-      this.store.remove(q.id);
-      this.toast.success('Consulta eliminada.');
-    }
+  async remove(q: Inquiry) {
+    if (!(await this.dialog.confirm({ title: `¿Eliminar la consulta de ${q.name}?`, message: 'No se puede deshacer.', confirmLabel: 'Eliminar', danger: true }))) return;
+    this.store.remove(q.id);
+    this.toast.success('Consulta eliminada.');
   }
 }

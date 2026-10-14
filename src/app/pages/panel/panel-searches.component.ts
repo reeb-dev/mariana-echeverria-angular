@@ -1,3 +1,4 @@
+import { ConfirmService } from '../../data/confirm.service';
 import { ToastService } from '../../data/toast.service';
 import { DatePipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
@@ -171,6 +172,7 @@ import { PanelShellComponent } from './panel-shell.component';
   ],
 })
 export class PanelSearchesComponent {
+  protected readonly dialog = inject(ConfirmService);
   protected readonly toast = inject(ToastService);
   readonly auth = inject(AuthService);
   readonly searches = inject(SavedSearchesStore);
@@ -237,8 +239,8 @@ export class PanelSearchesComponent {
     this.draft = { contactId: '', operation: '', type: '', zone: '', maxPrice: null, currency: 'USD' };
   }
 
-  remove(search: SavedSearch) {
-    if (!confirm('¿Eliminar esta búsqueda?')) return;
+  async remove(search: SavedSearch) {
+    if (!(await this.dialog.confirm({ title: '¿Eliminar esta búsqueda?', confirmLabel: 'Eliminar', danger: true }))) return;
     this.searches.remove(search.id);
     this.toast.success('Búsqueda eliminada.');
   }
