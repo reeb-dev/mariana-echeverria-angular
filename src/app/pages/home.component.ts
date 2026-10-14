@@ -141,17 +141,29 @@ export class HomeComponent {
 
   private readonly zonesStore = inject(ZonesStore);
 
-  /** Secciones por zona que se activaron en el panel (solo con propiedades publicadas). */
-  readonly zoneSections = computed(() =>
-    this.zonesStore
+  /** Zonas activadas en el panel, con sus propiedades publicadas (sin repetir las destacadas). */
+  readonly zoneSections = computed(() => {
+    const featuredIds = new Set(this.store.featured().map((p) => p.id));
+    return this.zonesStore
       .homeSections()
-      .map((z) => ({
-        ...z,
-        items: this.store.published().filter((p) => p.zone === z.id),
-        page: ZONE_PAGES.find((page) => page.zoneId === z.id)?.slug ?? null,
-      }))
-      .filter((z) => z.items.length >= MIN_HOME_SECTION_ITEMS)
-  );
+      .map((z) => {
+        const all = this.store.published().filter((p) => p.zone === z.id);
+        return {
+          ...z,
+          total: all.length,
+          items: all.filter((p) => !featuredIds.has(p.id)),
+          page: ZONE_PAGES.find((page) => page.zoneId === z.id)?.slug ?? null,
+        };
+      })
+      .filter((z) => z.total >= MIN_HOME_SECTION_ITEMS && z.items.length > 0);
+  });
+
+  /** Pestaña elegida del bloque «Por zona»; si no hay o ya no existe, la primera. */
+  readonly activeZoneId = signal<string | null>(null);
+  readonly activeZone = computed(() => {
+    const list = this.zoneSections();
+    return list.find((z) => z.id === this.activeZoneId()) ?? list[0] ?? null;
+  });
 
   /** Destacadas elegidas en el panel. */
   readonly featured = this.store.featured;

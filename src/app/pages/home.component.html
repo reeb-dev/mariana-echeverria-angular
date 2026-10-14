@@ -228,25 +228,46 @@
   </section>
 }
 
-<!-- SECCIONES POR ZONA (se activan desde Panel → Zonas): carrusel corto + enlace a todas las de la zona -->
-@for (z of zoneSections(); track z.id) {
-  <section [id]="'zona-' + z.id" class="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-16">
-    <div appReveal class="flex flex-wrap items-end justify-between gap-4">
-      <div class="max-w-xl">
-        <p class="eyebrow text-forest">Zona</p>
-        <h2 class="section-title mt-3 text-2xl text-forest-deep md:text-3xl">Propiedades en {{ z.name }}</h2>
+<!-- POR ZONA: un solo bloque con pestañas (se activan desde Panel → Zonas) -->
+@if (activeZone(); as active) {
+  <section id="por-zona" class="border-y border-border bg-mist/60">
+    <div class="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-16">
+      <div appReveal class="flex flex-wrap items-end justify-between gap-4">
+        <div class="max-w-xl">
+          <p class="eyebrow text-forest">Explorá por zona</p>
+          <h2 class="section-title mt-3 text-2xl text-forest-deep md:text-3xl">Propiedades en {{ active.name }}</h2>
+        </div>
+        <a [routerLink]="['/zona', active.page ?? active.id]" class="text-sm font-semibold text-forest underline decoration-forest/30 underline-offset-4 transition hover:decoration-forest">
+          Ver {{ active.total === 1 ? 'la propiedad' : 'las ' + active.total + ' propiedades' }} de la zona →
+        </a>
       </div>
-      <a [routerLink]="['/zona', z.page ?? z.id]" class="text-sm font-semibold text-forest underline decoration-forest/30 underline-offset-4 transition hover:decoration-forest">
-        Ver {{ z.items.length === 1 ? 'la propiedad' : 'las ' + z.items.length + ' propiedades' }} de la zona →
-      </a>
-    </div>
-    <ul class="-mx-5 mt-8 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-3 md:mx-0 md:px-0" tabindex="0" [attr.aria-label]="'Propiedades en ' + z.name">
-      @for (property of z.items.slice(0, 6); track property.id) {
-        <li class="w-[82%] shrink-0 snap-start sm:w-[46%] lg:w-[31.5%]">
-          <app-property-card [property]="property" />
-        </li>
+
+      @if (zoneSections().length > 1) {
+        <div class="mt-6 flex flex-wrap gap-2" role="tablist" aria-label="Zonas">
+          @for (z of zoneSections(); track z.id) {
+            <button
+              type="button"
+              role="tab"
+              [attr.aria-selected]="z.id === active.id"
+              class="filter-chip"
+              [class.filter-chip-active]="z.id === active.id"
+              [class.filter-chip-idle]="z.id !== active.id"
+              (click)="activeZoneId.set(z.id)"
+            >
+              {{ z.name }}
+            </button>
+          }
+        </div>
       }
-    </ul>
+
+      <ul class="-mx-5 mt-8 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-3 md:mx-0 md:px-0" tabindex="0" [attr.aria-label]="'Propiedades en ' + active.name">
+        @for (property of active.items.slice(0, 8); track property.id) {
+          <li class="w-[82%] shrink-0 snap-start sm:w-[46%] lg:w-[31.5%]">
+            <app-property-card [property]="property" />
+          </li>
+        }
+      </ul>
+    </div>
   </section>
 }
 

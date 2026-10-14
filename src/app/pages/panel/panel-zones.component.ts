@@ -2,7 +2,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../data/auth.service';
 import { ToastService } from '../../data/toast.service';
-import { MAX_HOME_SECTIONS, MIN_HOME_SECTION_ITEMS, ZonesStore } from '../../data/zones-store';
+import { MIN_HOME_SECTION_ITEMS, ZonesStore } from '../../data/zones-store';
 import { PanelShellComponent } from './panel-shell.component';
 
 @Component({
@@ -13,7 +13,7 @@ import { PanelShellComponent } from './panel-shell.component';
     <app-panel-shell title="Zonas">
       <p class="max-w-2xl text-sm text-muted-foreground">
         Las zonas que cargues acá aparecen en la lista desplegable al crear o editar una propiedad y en el filtro del sitio
-        (cuando tienen propiedades publicadas). Tildá «En la home» para que una zona tenga su propia sección en la página principal (hasta {{ max }}, para no saturarla). Se muestra cuando la zona tiene al menos {{ min }} propiedades publicadas.
+        (cuando tienen propiedades publicadas). Tildá «En la home» para que una zona tenga su propia sección en la página principal Las zonas tildadas forman un solo bloque con pestañas. Se muestra cuando la zona tiene al menos {{ min }} propiedades publicadas, y no repite las destacadas.
       </p>
 
       @if (auth.can('propiedades.crear')) {
@@ -30,7 +30,7 @@ import { PanelShellComponent } from './panel-shell.component';
 
       @if (zones.homeSections().length > 0) {
         <section class="mer-card mt-6 p-4">
-          <h2 class="font-display text-lg font-medium text-forest-deep">Orden en la home</h2>
+          <h2 class="font-display text-lg font-medium text-forest-deep">Orden de las pestañas en la home</h2>
           <ol class="mt-3 space-y-2">
             @for (z of zones.homeSections(); track z.id; let i = $index; let last = $last) {
               <li class="flex items-center gap-3 text-sm">
@@ -71,7 +71,7 @@ import { PanelShellComponent } from './panel-shell.component';
             </div>
             @if (auth.can('propiedades.destacar')) {
               <label class="flex shrink-0 cursor-pointer items-center gap-2 text-xs text-muted-foreground">
-                <input type="checkbox" class="h-4 w-4 accent-[#2d5a3d]" [checked]="z.homeSection" (change)="toggleSection(z.id, z.name, $event)" />
+                <input type="checkbox" class="h-4 w-4 accent-[#2d5a3d]" [checked]="z.homeSection" (change)="toggleSection(z.id, z.name)" />
                 En la home
               </label>
             }
@@ -97,7 +97,6 @@ export class PanelZonesComponent {
   readonly zones = inject(ZonesStore);
   private readonly toast = inject(ToastService);
 
-  readonly max = MAX_HOME_SECTIONS;
   readonly min = MIN_HOME_SECTION_ITEMS;
   name = '';
   readonly query = signal('');
@@ -118,13 +117,7 @@ export class PanelZonesComponent {
     this.name = '';
   }
 
-  toggleSection(id: string, name: string, event: Event) {
-    const wantsOn = (event.target as HTMLInputElement).checked;
-    if (wantsOn && this.zones.homeSections().length >= MAX_HOME_SECTIONS) {
-      (event.target as HTMLInputElement).checked = false;
-      this.toast.error(`Como mucho ${MAX_HOME_SECTIONS} zonas en la home, para que la página no se sature. Sacá una antes.`);
-      return;
-    }
+  toggleSection(id: string, name: string) {
     const on = this.zones.toggleHomeSection(id, name);
     this.toast.success(on ? `«${name}» tiene su sección en la home.` : `«${name}» ya no tiene sección en la home.`);
   }
