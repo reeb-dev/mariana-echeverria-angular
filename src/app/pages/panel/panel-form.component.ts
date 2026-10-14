@@ -1,3 +1,4 @@
+import { ToastService } from '../../data/toast.service';
 import { DatePipe, Location } from '@angular/common';
 import { Component, HostListener, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -637,6 +638,7 @@ function compressImage(file: File, watermark = false): Promise<string> {
   ],
 })
 export class PanelFormComponent {
+  protected readonly toast = inject(ToastService);
   readonly store = inject(PropertyStore);
   readonly auth = inject(AuthService);
   private readonly activity = inject(ActivityLog);
@@ -837,6 +839,7 @@ export class PanelFormComponent {
     const room = MAX_PHOTOS - this.photos().length;
     if (room <= 0) {
       this.photoError.set(`Ya hay ${MAX_PHOTOS} fotos. Quitá alguna para agregar otra.`);
+      this.toast.error(`Ya hay ${MAX_PHOTOS} fotos. Quitá alguna para agregar otra.`);
       return;
     }
     this.uploading.set(true);
@@ -853,6 +856,8 @@ export class PanelFormComponent {
     }
     this.photos.update((list) => [...list, ...added]);
     this.uploading.set(false);
+    if (added.length > 0) this.toast.success(`${added.length} ${added.length === 1 ? 'foto agregada' : 'fotos agregadas'}.`);
+    if (failed > 0) this.toast.error(`${failed} archivo(s) no se pudieron leer como imagen.`);
     const messages: string[] = [];
     if (files.length > room) messages.push(`Solo entraron ${room} de ${files.length} fotos (máximo ${MAX_PHOTOS}).`);
     if (failed > 0) messages.push(`${failed} archivo(s) no se pudieron leer como imagen.`);
@@ -937,9 +942,11 @@ export class PanelFormComponent {
     try {
       await navigator.clipboard.writeText(text);
       this.copiedTab.set(this.activeTab());
+      this.toast.success('Texto copiado.');
       setTimeout(() => this.copiedTab.set(null), 1800);
     } catch {
       this.assistantError.set('No se pudo copiar automáticamente: seleccioná el texto y copialo a mano.');
+      this.toast.error('No se pudo copiar. Seleccioná el texto y copialo a mano.');
     }
   }
 
@@ -969,6 +976,7 @@ export class PanelFormComponent {
 
   removePhoto(index: number) {
     this.photos.update((list) => list.filter((_, i) => i !== index));
+    this.toast.success('Foto quitada.');
   }
 
   save(event: Event) {
@@ -1047,6 +1055,7 @@ export class PanelFormComponent {
 
     if (this.store.upsert(property)) {
       this.saved = true;
+      this.toast.success('Propiedad guardada.');
       void this.router.navigate(['/panel/propiedades']);
     }
   }

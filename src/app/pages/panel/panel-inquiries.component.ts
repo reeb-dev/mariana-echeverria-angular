@@ -1,3 +1,4 @@
+import { ToastService } from '../../data/toast.service';
 import { DatePipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -98,7 +99,7 @@ import { PanelShellComponent } from './panel-shell.component';
                 placeholder="Ej.: la llamé el martes, quiere visitar el sábado."
                 [value]="q.notes ?? ''"
                 [disabled]="!auth.can('consultas.gestionar')"
-                (change)="store.setNotes(q.id, $any($event.target).value)"
+                (change)="store.setNotes(q.id, $any($event.target).value); toast.success('Nota guardada.')"
               ></textarea>
             </label>
             <div class="mt-4 flex flex-wrap items-center gap-2 border-t border-border/60 pt-3">
@@ -107,7 +108,7 @@ import { PanelShellComponent } from './panel-shell.component';
                 <select
                   class="ml-1 h-9 rounded-lg border border-border bg-background px-2 text-sm text-foreground disabled:opacity-60"
                   [ngModel]="q.status"
-                  (ngModelChange)="store.setStatus(q.id, $event)"
+                  (ngModelChange)="store.setStatus(q.id, $event); toast.success('Estado actualizado.')"
                   [disabled]="!auth.can('consultas.gestionar')"
                 >
                   @for (s of statusOptions; track s.id) {
@@ -163,6 +164,7 @@ import { PanelShellComponent } from './panel-shell.component';
   `,
 })
 export class PanelInquiriesComponent {
+  protected readonly toast = inject(ToastService);
   readonly store = inject(InquiriesStore);
   readonly auth = inject(AuthService);
   private readonly users = inject(UsersStore);
@@ -212,6 +214,7 @@ export class PanelInquiriesComponent {
       notes: q.message,
       createdAt: new Date().toISOString(),
     });
+    this.toast.success(`${q.name} se guardó en contactos.`);
   }
 
   whatsappUrl(q: Inquiry) {
@@ -223,6 +226,7 @@ export class PanelInquiriesComponent {
   remove(q: Inquiry) {
     if (confirm(`¿Eliminar la consulta de ${q.name}?`)) {
       this.store.remove(q.id);
+      this.toast.success('Consulta eliminada.');
     }
   }
 }

@@ -1,8 +1,8 @@
+import { ToastService } from '../../data/toast.service';
 import { Component, computed, inject, input, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { filter, map } from 'rxjs';
-import { ToastHostComponent } from '../../components/toast-host.component';
 import { PanelSearchComponent, PanelSearchDialogComponent } from './panel-search.component';
 import { AuthService } from '../../data/auth.service';
 import { AppraisalsStore } from '../../data/appraisals-store';
@@ -30,7 +30,7 @@ const COLLAPSE_KEY = 'mer.panel.sidebar.collapsed';
 @Component({
   selector: 'app-panel-shell',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, PanelSearchComponent, PanelSearchDialogComponent, ToastHostComponent, AssetUrlPipe],
+  imports: [RouterLink, RouterLinkActive, PanelSearchComponent, PanelSearchDialogComponent, AssetUrlPipe],
   template: `
     <div class="min-h-screen bg-mist/60 lg:flex">
       <!-- Barra superior (celular) -->
@@ -173,7 +173,7 @@ const COLLAPSE_KEY = 'mer.panel.sidebar.collapsed';
             <button
               type="button"
               class="rounded-lg px-3 py-2 text-left text-sm text-white/75 transition hover:bg-white/10 hover:text-white"
-              (click)="auth.logout()"
+              (click)="logout()"
             >
               Salir
             </button>
@@ -182,7 +182,7 @@ const COLLAPSE_KEY = 'mer.panel.sidebar.collapsed';
             <button
               type="button"
               class="mt-2 hidden h-9 w-full items-center justify-center rounded-lg text-white/75 transition hover:bg-white/10 hover:text-white lg:flex"
-              (click)="auth.logout()"
+              (click)="logout()"
               aria-label="Salir"
               title="Salir"
             >
@@ -194,7 +194,6 @@ const COLLAPSE_KEY = 'mer.panel.sidebar.collapsed';
 
       <!-- Buscador global (fuera de la barra para que ocupe toda la pantalla) -->
       <app-panel-search-dialog />
-      <app-toast-host />
 
       <!-- Contenido -->
       <div class="min-w-0 flex-1">
@@ -215,6 +214,12 @@ const COLLAPSE_KEY = 'mer.panel.sidebar.collapsed';
   `,
 })
 export class PanelShellComponent {
+  protected readonly toast = inject(ToastService);
+
+  logout() {
+    this.auth.logout();
+    this.toast.show('Cerraste la sesión.');
+  }
   readonly title = input.required<string>();
   readonly contact = CONTACT;
   readonly auth = inject(AuthService);

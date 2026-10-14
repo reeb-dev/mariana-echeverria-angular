@@ -1,3 +1,4 @@
+import { ToastService } from '../data/toast.service';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -42,6 +43,7 @@ import { SeoService, parsePrice } from '../utils/seo.service';
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
+  protected readonly toast = inject(ToastService);
   private readonly store = inject(PropertyStore);
   private readonly inquiries = inject(InquiriesStore);
   private readonly seo = inject(SeoService);
@@ -92,10 +94,12 @@ export class HomeComponent {
     const c = this.callback;
     if (!c.name.trim() || !c.phone.trim()) {
       this.callbackError.set('Dejanos tu nombre y tu teléfono.');
+      this.toast.error('Dejanos tu nombre y tu teléfono.');
       return;
     }
     if (!c.consent) {
       this.callbackError.set('Tenés que aceptar la política de privacidad.');
+      this.toast.error('Aceptá la política de privacidad.');
       return;
     }
     this.callbackError.set(null);
@@ -106,6 +110,7 @@ export class HomeComponent {
       message: 'Pidió que lo llamen (formulario corto del inicio).',
     });
     this.callbackSent.set(true);
+    this.toast.success('Listo, te llamamos a la brevedad.');
     this.callback = { name: '', phone: '', consent: false };
   }
 
@@ -231,6 +236,7 @@ export class HomeComponent {
       consent: true,
     });
     this.alertSent.set(true);
+    this.toast.success('Alerta creada. Te avisamos cuando entre algo así.');
     this.alert = { name: '', phone: '', consent: false };
   }
 

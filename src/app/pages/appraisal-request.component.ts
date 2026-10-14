@@ -1,3 +1,4 @@
+import { ToastService } from '../data/toast.service';
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -156,6 +157,7 @@ import { SeoService } from '../utils/seo.service';
   ],
 })
 export class AppraisalRequestComponent {
+  protected readonly toast = inject(ToastService);
   private readonly store = inject(AppraisalsStore);
   readonly contact = CONTACT;
 
@@ -198,14 +200,17 @@ export class AppraisalRequestComponent {
     const f = this.form;
     if (!f.address.trim() || !f.name.trim() || !f.phone.trim()) {
       this.error.set('Completá la dirección, tu nombre y tu teléfono.');
+      this.toast.error('Completá la dirección, tu nombre y tu teléfono.');
       return;
     }
     if (f.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.trim())) {
       this.error.set('Revisá el email: el formato no parece válido.');
+      this.toast.error('Revisá el email: el formato no parece válido.');
       return;
     }
     if (!f.consent) {
       this.error.set('Tenés que aceptar la política de privacidad para enviar el pedido.');
+      this.toast.error('Tenés que aceptar la política de privacidad para enviar el pedido.');
       return;
     }
     this.error.set(null);
@@ -234,6 +239,7 @@ export class AppraisalRequestComponent {
       'noopener,noreferrer'
     );
     this.sent.set(true);
+    this.toast.success('Pedido de tasación enviado.');
     this.form = { ...this.form, address: '', area: '', name: '', phone: '', email: '', details: '', consent: false };
   }
 }

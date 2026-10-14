@@ -1,3 +1,4 @@
+import { ToastService } from '../../data/toast.service';
 import { DatePipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -205,6 +206,7 @@ import { PanelShellComponent } from './panel-shell.component';
   ],
 })
 export class PanelVisitsComponent {
+  protected readonly toast = inject(ToastService);
   readonly auth = inject(AuthService);
   readonly visits = inject(VisitsStore);
   readonly contacts = inject(ContactsStore);
@@ -273,10 +275,12 @@ export class PanelVisitsComponent {
     const d = this.draft;
     if (!d.propertySlug || !d.at) {
       this.error.set('Elegí la propiedad y la fecha y hora de la visita.');
+      this.toast.error('Elegí la propiedad y la fecha y hora de la visita.');
       return;
     }
     if (!d.contactId && !d.visitorName.trim()) {
       this.error.set('Indicá quién visita: elegí un contacto o escribí el nombre.');
+      this.toast.error('Indicá quién visita.');
       return;
     }
     this.error.set(null);
@@ -289,10 +293,13 @@ export class PanelVisitsComponent {
       status: 'programada',
       agentId: this.auth.user()?.id,
     });
+    this.toast.success('Visita agendada.');
     this.draft = { propertySlug: '', at: '', contactId: '', visitorName: '' };
   }
 
   remove(v: Visit) {
-    if (confirm('¿Eliminar esta visita?')) this.visits.remove(v.id);
+    if (!confirm('¿Eliminar esta visita?')) return;
+    this.visits.remove(v.id);
+    this.toast.success('Visita eliminada.');
   }
 }

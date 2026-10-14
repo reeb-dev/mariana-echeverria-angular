@@ -1,3 +1,4 @@
+import { ToastService } from '../../data/toast.service';
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -73,6 +74,7 @@ import { AssetUrlPipe } from '../../utils/asset-url';
   `,
 })
 export class PanelLoginComponent {
+  protected readonly toast = inject(ToastService);
   private readonly auth = inject(AuthService);
   private readonly router = inject(Router);
   readonly contact = CONTACT;
@@ -103,6 +105,7 @@ export class PanelLoginComponent {
     event.preventDefault();
     if (!this.email.trim() || !this.password) {
       this.error.set('Completá el email y la clave.');
+      this.toast.error('Completá el email y la clave.');
       return;
     }
     this.busy.set(true);
@@ -110,9 +113,11 @@ export class PanelLoginComponent {
     this.busy.set(false);
     if (problem) {
       this.error.set(problem);
+      this.toast.error(problem);
       return;
     }
     this.error.set(null);
+    this.toast.success(`Hola, ${this.auth.user()?.name ?? 'bienvenida/o'}.`);
     void this.router.navigate(['/panel']);
   }
 }

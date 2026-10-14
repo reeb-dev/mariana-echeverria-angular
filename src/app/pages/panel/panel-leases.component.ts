@@ -1,3 +1,4 @@
+import { ToastService } from '../../data/toast.service';
 import { DatePipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -227,6 +228,7 @@ const ALERT_ADJUST_DAYS = 30;
   ],
 })
 export class PanelLeasesComponent {
+  protected readonly toast = inject(ToastService);
   readonly leases = inject(LeasesStore);
   readonly contacts = inject(ContactsStore);
   readonly properties = inject(PropertyStore);
@@ -309,14 +311,17 @@ export class PanelLeasesComponent {
     if (!e) return;
     if (!e.propertyLabel.trim() || !e.ownerName.trim() || !e.tenantName.trim()) {
       this.error.set('Completá el inmueble, el propietario y el inquilino.');
+      this.toast.error('Completá el inmueble, el propietario y el inquilino.');
       return;
     }
     if (!e.startDate || !e.endDate || e.endDate <= e.startDate) {
       this.error.set('El vencimiento tiene que ser posterior al inicio.');
+      this.toast.error('El vencimiento tiene que ser posterior al inicio.');
       return;
     }
     if (!(e.rent > 0)) {
       this.error.set('Cargá el monto del alquiler o canon.');
+      this.toast.error('Cargá el monto del alquiler o canon.');
       return;
     }
     const tenant = this.contacts.all().find((c) => c.name.toLowerCase() === e.tenantName.trim().toLowerCase());
@@ -331,9 +336,12 @@ export class PanelLeasesComponent {
       deposit: e.deposit != null ? Number(e.deposit) || undefined : undefined,
     });
     this.editing.set(null);
+    this.toast.success(this.isNew() ? 'Contrato creado.' : 'Contrato actualizado.');
   }
 
   remove(lease: Lease) {
-    if (confirm(`¿Eliminar el contrato de ${lease.tenantName}?`)) this.leases.remove(lease.id);
+    if (!confirm(`¿Eliminar el contrato de ${lease.tenantName}?`)) return;
+    this.leases.remove(lease.id);
+    this.toast.success('Contrato eliminado.');
   }
 }

@@ -1,3 +1,4 @@
+import { ToastService } from '../../data/toast.service';
 import { DatePipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -89,7 +90,7 @@ const SLA_HOURS = 24;
                   placeholder="Ej.: USD 48.000 a 52.000"
                   [value]="a.valueDelivered ?? ''"
                   [disabled]="!auth.can('consultas.gestionar')"
-                  (change)="store.update(a.id, { valueDelivered: $any($event.target).value.trim() || undefined })"
+                  (change)="store.update(a.id, { valueDelivered: $any($event.target).value.trim() || undefined }); toast.success('Valor guardado.')"
                 />
               </label>
               <label class="text-xs text-muted-foreground">
@@ -99,7 +100,7 @@ const SLA_HOURS = 24;
                   placeholder="Ej.: visita el jueves 10 hs"
                   [value]="a.notes ?? ''"
                   [disabled]="!auth.can('consultas.gestionar')"
-                  (change)="store.update(a.id, { notes: $any($event.target).value.trim() || undefined })"
+                  (change)="store.update(a.id, { notes: $any($event.target).value.trim() || undefined }); toast.success('Nota guardada.')"
                 />
               </label>
             </div>
@@ -110,7 +111,7 @@ const SLA_HOURS = 24;
                 <select
                   class="ml-1 h-9 rounded-lg border border-border bg-background px-2 text-sm text-foreground disabled:opacity-60"
                   [ngModel]="a.status"
-                  (ngModelChange)="store.setStatus(a.id, $event)"
+                  (ngModelChange)="store.setStatus(a.id, $event); toast.success('Estado actualizado.')"
                   [disabled]="!auth.can('consultas.gestionar')"
                 >
                   @for (s of statusOptions; track s.id) {
@@ -123,7 +124,7 @@ const SLA_HOURS = 24;
                 <select
                   class="ml-1 h-9 rounded-lg border border-border bg-background px-2 text-sm text-foreground disabled:opacity-60"
                   [ngModel]="a.assignedTo ?? ''"
-                  (ngModelChange)="store.update(a.id, { assignedTo: $event || undefined })"
+                  (ngModelChange)="store.update(a.id, { assignedTo: $event || undefined }); toast.success('Responsable actualizado.')"
                   [disabled]="!auth.can('consultas.asignar')"
                 >
                   <option value="">Sin asignar</option>
@@ -166,6 +167,7 @@ const SLA_HOURS = 24;
   `,
 })
 export class PanelAppraisalsComponent {
+  protected readonly toast = inject(ToastService);
   readonly store = inject(AppraisalsStore);
   readonly auth = inject(AuthService);
   private readonly users = inject(UsersStore);
@@ -216,6 +218,7 @@ export class PanelAppraisalsComponent {
       notes: `Pidió tasación de ${a.propertyType} en ${a.address}.`,
       createdAt: new Date().toISOString(),
     });
+    this.toast.success(`${a.name} se guardó en contactos.`);
   }
 
   whatsappUrl(a: Appraisal) {
@@ -225,6 +228,9 @@ export class PanelAppraisalsComponent {
   }
 
   remove(a: Appraisal) {
-    if (confirm(`¿Eliminar el pedido de ${a.name}?`)) this.store.remove(a.id);
+    if (confirm(`¿Eliminar el pedido de ${a.name}?`)) {
+      this.store.remove(a.id);
+      this.toast.success('Pedido eliminado.');
+    }
   }
 }

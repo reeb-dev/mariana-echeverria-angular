@@ -1,3 +1,4 @@
+import { ToastService } from '../../data/toast.service';
 import { Component, inject, signal } from '@angular/core';
 import { AppraisalsStore } from '../../data/appraisals-store';
 import { InquiriesStore } from '../../data/inquiries-store';
@@ -67,6 +68,7 @@ import { PanelShellComponent } from './panel-shell.component';
   `,
 })
 export class PanelSettingsComponent {
+  protected readonly toast = inject(ToastService);
   readonly store = inject(PropertyStore);
   private readonly users = inject(UsersStore);
   private readonly inquiries = inject(InquiriesStore);
@@ -90,6 +92,7 @@ export class PanelSettingsComponent {
     link.download = `propiedades-${new Date().toISOString().slice(0, 10)}.json`;
     link.click();
     URL.revokeObjectURL(url);
+    this.toast.success('Copia de seguridad descargada.');
   }
 
   async importCopy(event: Event) {
@@ -100,6 +103,8 @@ export class PanelSettingsComponent {
     if (!confirm('Cargar esta copia reemplaza todas las propiedades actuales. ¿Continuar?')) return;
     const error = this.store.importJson(await file.text());
     this.notice.set(error ?? 'Copia cargada correctamente.');
+    if (error) this.toast.error(error);
+    else this.toast.success('Copia cargada correctamente.');
   }
 
   resetDemo() {
@@ -111,5 +116,6 @@ export class PanelSettingsComponent {
     this.appraisals.reset();
     this.crm.forEach((store) => store.reset());
     this.notice.set('Datos de ejemplo restaurados.');
+    this.toast.success('Datos de ejemplo restaurados.');
   }
 }

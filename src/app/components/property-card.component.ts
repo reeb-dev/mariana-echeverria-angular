@@ -1,3 +1,4 @@
+import { ToastService } from '../data/toast.service';
 import { Component, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FavoritesService } from '../data/favorites.service';
@@ -100,6 +101,7 @@ import { WatermarkComponent } from './watermark.component';
   `,
 })
 export class PropertyCardComponent {
+  protected readonly toast = inject(ToastService);
   readonly property = input.required<Property>();
   /** En la sección de destacadas se muestra la etiqueta sobre la foto. */
   readonly showFeaturedBadge = input(false);
@@ -121,6 +123,7 @@ export class PropertyCardComponent {
     event.preventDefault();
     event.stopPropagation();
     this.favorites.toggle(this.property().slug);
+    this.toast.success(this.isFavorite() ? 'Guardada en tus favoritas.' : 'Quitada de tus favoritas.');
   }
 
   cover() {

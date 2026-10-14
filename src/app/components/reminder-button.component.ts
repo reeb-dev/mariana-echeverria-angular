@@ -1,3 +1,4 @@
+import { ToastService } from '../data/toast.service';
 import { Component, inject, input, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../data/auth.service';
@@ -56,6 +57,7 @@ import { RemindersStore } from '../data/crm-stores';
   `,
 })
 export class ReminderButtonComponent {
+  protected readonly toast = inject(ToastService);
   private readonly reminders = inject(RemindersStore);
   private readonly auth = inject(AuthService);
 
@@ -92,5 +94,6 @@ export class ReminderButtonComponent {
     });
     this.open.set(false);
     this.saved.set(true);
+    this.toast.success('Recordatorio guardado.');
   }
 }

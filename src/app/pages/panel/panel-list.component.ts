@@ -310,7 +310,7 @@ import { PanelShellComponent } from './panel-shell.component';
 export class PanelListComponent {
   readonly store = inject(PropertyStore);
   readonly auth = inject(AuthService);
-  private readonly toast = inject(ToastService);
+  protected readonly toast = inject(ToastService);
   private readonly users = inject(UsersStore);
     readonly statuses = (Object.keys(STATUS_LABELS) as PropertyStatus[]).map((id) => ({
     id,
@@ -373,6 +373,7 @@ export class PanelListComponent {
   changeStatus(property: Property, status: PropertyStatus) {
     this.store.setStatus(property.id, status);
     this.notice.set(null);
+    this.toast.success(`«${property.title}»: ${STATUS_LABELS[status].toLowerCase()}.`);
   }
 
   toggleFeatured(property: Property) {
@@ -381,8 +382,10 @@ export class PanelListComponent {
       this.notice.set(
         `Ya hay ${MAX_FEATURED} propiedades destacadas. Sacá una antes de destacar otra.`
       );
+      this.toast.error(`Ya hay ${MAX_FEATURED} propiedades destacadas. Sacá una antes de destacar otra.`);
     } else {
       this.notice.set(null);
+      this.toast.success(property.featured ? `«${property.title}» ya no es destacada.` : `«${property.title}» ahora es destacada.`);
     }
   }
 
@@ -420,14 +423,14 @@ export class PanelListComponent {
     const done = run();
     this.clearSelection();
     if (done === 0) {
-      this.toast.show('No se pudo cambiar ninguna: no tenés permiso sobre las seleccionadas.');
+      this.toast.error('No se pudo cambiar ninguna: no tenés permiso sobre las seleccionadas.');
       return;
     }
-    this.toast.show(message(done), {
+    this.toast.success(message(done), {
       actionLabel: 'Deshacer',
       action: () => {
         const restored = this.store.restore(before);
-        this.toast.show(`Se deshizo el cambio en ${restored} ${restored === 1 ? 'propiedad' : 'propiedades'}.`);
+        this.toast.success(`Se deshizo el cambio en ${restored} ${restored === 1 ? 'propiedad' : 'propiedades'}.`);
       },
     });
   }
@@ -482,17 +485,18 @@ export class PanelListComponent {
     const id = this.store.duplicate(property.id);
     if (id) {
       this.notice.set(`Se creó «Copia de ${property.title}» como pausada. Editala y publicala cuando esté lista.`);
+      this.toast.success(`Se creó «Copia de ${property.title}» como pausada.`);
     }
   }
 
   remove(property: Property) {
     const copy: Property = { ...property, photos: [...property.photos], amenities: [...property.amenities] };
     if (!this.store.remove(property.id)) return;
-    this.toast.show(`Eliminaste «${property.title}».`, {
+    this.toast.success(`Eliminaste «${property.title}».`, {
       actionLabel: 'Deshacer',
       action: () => {
         this.store.restore([copy]);
-        this.toast.show(`Volvió «${property.title}».`);
+        this.toast.success(`Volvió «${property.title}».`);
       },
     });
   }

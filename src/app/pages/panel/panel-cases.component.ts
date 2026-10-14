@@ -1,3 +1,4 @@
+import { ToastService } from '../../data/toast.service';
 import { DatePipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -195,6 +196,7 @@ const STATUS_LABELS = { abierto: 'Abierto', en_tramite: 'En trámite', cerrado: 
   ],
 })
 export class PanelCasesComponent {
+  protected readonly toast = inject(ToastService);
   readonly cases = inject(CasesStore);
   readonly contacts = inject(ContactsStore);
 
@@ -247,6 +249,7 @@ export class PanelCasesComponent {
     event.preventDefault();
     if (!this.draft.title.trim()) {
       this.error.set('Ponele un título al expediente.');
+      this.toast.error('Ponele un título al expediente.');
       return;
     }
     this.error.set(null);
@@ -262,6 +265,7 @@ export class PanelCasesComponent {
       checklist: CASE_CHECKLISTS[this.draft.kind].map((label, i) => ({ id: `${id}-c${i}`, label, done: false })),
     });
     this.selectedId.set(id);
+    this.toast.success('Expediente creado.');
     this.draft = { title: '', kind: this.draft.kind, contactId: '' };
   }
 
@@ -274,10 +278,12 @@ export class PanelCasesComponent {
     if (!label) return;
     this.cases.patch(c.id, { checklist: [...c.checklist, { id: `${c.id}-c${Date.now().toString(36)}`, label, done: false }] });
     this.newCheck = '';
+    this.toast.success('Tarea agregada.');
   }
 
   removeCheck(c: LegalCase, itemId: string) {
     this.cases.patch(c.id, { checklist: c.checklist.filter((i) => i.id !== itemId) });
+    this.toast.success('Tarea quitada.');
   }
 
   toggleDeadline(c: LegalCase, id: string) {
@@ -291,15 +297,18 @@ export class PanelCasesComponent {
       deadlines: [...c.deadlines, { id: `${c.id}-d${Date.now().toString(36)}`, label: label.trim(), date, done: false }],
     });
     this.newDeadline = { label: '', date: '' };
+    this.toast.success('Plazo agregado.');
   }
 
   removeDeadline(c: LegalCase, id: string) {
     this.cases.patch(c.id, { deadlines: c.deadlines.filter((d) => d.id !== id) });
+    this.toast.success('Plazo quitado.');
   }
 
   remove(c: LegalCase) {
     if (!confirm(`¿Eliminar el expediente «${c.title}»? No se puede deshacer.`)) return;
     this.cases.remove(c.id);
     this.selectedId.set(null);
+    this.toast.success('Expediente eliminado.');
   }
 }

@@ -1,3 +1,4 @@
+import { ToastService } from '../../data/toast.service';
 import { DatePipe } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -129,6 +130,7 @@ import { PanelShellComponent } from './panel-shell.component';
   `,
 })
 export class PanelUsersComponent {
+  protected readonly toast = inject(ToastService);
   readonly users = inject(UsersStore);
   readonly auth = inject(AuthService);
   readonly activity = inject(ActivityLog);
@@ -140,6 +142,11 @@ export class PanelUsersComponent {
 
   form = { name: '', email: '', role: 'agente' as Role, password: '' };
 
+  private notify(error: string | null, ok: string) {
+    if (error) this.toast.error(error);
+    else this.toast.success(ok);
+  }
+
   private log(action: string) {
     this.activity.log(this.auth.user()?.name ?? 'Sistema', action);
   }
@@ -147,12 +154,14 @@ export class PanelUsersComponent {
   changeRole(user: PanelUser, role: Role) {
     const error = this.users.update(user.id, { role });
     this.message.set(error ?? `${user.name} ahora es ${ROLE_LABELS[role]}.`);
+    this.notify(error, `${user.name} ahora es ${ROLE_LABELS[role]}.`);
     if (!error) this.log(`Cambió el tipo de ${user.name} a ${ROLE_LABELS[role]}`);
   }
 
   toggleActive(user: PanelUser) {
     const error = this.users.update(user.id, { active: !user.active });
     this.message.set(error ?? `${user.name} ${user.active ? 'fue desactivado' : 'fue activado'}.`);
+    this.notify(error, `${user.name} ${user.active ? 'fue desactivado' : 'fue activado'}.`);
     if (!error) this.log(`${user.active ? 'Desactivó' : 'Activó'} a ${user.name}`);
   }
 
@@ -161,6 +170,7 @@ export class PanelUsersComponent {
     if (password === null) return;
     const error = await this.users.resetPassword(user.id, password);
     this.message.set(error ?? `Se cambió la clave de ${user.name}.`);
+    this.notify(error, `Se cambió la clave de ${user.name}.`);
     if (!error) this.log(`Cambió la clave de ${user.name}`);
   }
 
@@ -169,9 +179,11 @@ export class PanelUsersComponent {
     const error = await this.users.create(this.form);
     if (error) {
       this.message.set(error);
+      this.toast.error(error);
       return;
     }
     this.message.set(`Se creó el usuario ${this.form.name.trim()}.`);
+    this.toast.success(`Se creó el usuario ${this.form.name.trim()}.`);
     this.log(`Creó el usuario ${this.form.name.trim()} (${ROLE_LABELS[this.form.role]})`);
     this.form = { name: '', email: '', role: 'agente', password: '' };
   }

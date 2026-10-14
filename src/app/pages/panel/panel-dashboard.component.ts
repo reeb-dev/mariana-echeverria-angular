@@ -1,3 +1,4 @@
+import { ToastService } from '../../data/toast.service';
 import { DatePipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -115,7 +116,7 @@ import { PanelShellComponent } from './panel-shell.component';
                 <button
                   type="button"
                   class="shrink-0 text-red-700"
-                  (click)="reminders.remove(r.id)"
+                  (click)="reminders.remove(r.id); toast.success('Recordatorio quitado.')"
                   aria-label="Quitar recordatorio"
                 >
                   ×
@@ -269,6 +270,7 @@ import { PanelShellComponent } from './panel-shell.component';
   `,
 })
 export class PanelDashboardComponent {
+  protected readonly toast = inject(ToastService);
   readonly auth = inject(AuthService);
   private readonly properties = inject(PropertyStore);
   private readonly inquiries = inject(InquiriesStore);
@@ -379,6 +381,7 @@ export class PanelDashboardComponent {
       createdAt: new Date().toISOString(),
     });
     this.newReminder.text = '';
+    this.toast.success('Recordatorio guardado.');
   }
 
 

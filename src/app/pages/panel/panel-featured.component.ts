@@ -1,3 +1,4 @@
+import { ToastService } from '../../data/toast.service';
 import { Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../data/auth.service';
@@ -107,6 +108,7 @@ import { PanelShellComponent } from './panel-shell.component';
   `,
 })
 export class PanelFeaturedComponent {
+  protected readonly toast = inject(ToastService);
   readonly store = inject(PropertyStore);
   readonly auth = inject(AuthService);
   readonly max = MAX_FEATURED;
@@ -123,10 +125,13 @@ export class PanelFeaturedComponent {
   add(property: Property) {
     const ok = this.store.toggleFeatured(property.id);
     this.notice.set(ok ? null : `Ya hay ${MAX_FEATURED} destacadas. Quitá una antes de sumar otra.`);
+    if (ok) this.toast.success(`«${property.title}» ahora es destacada.`);
+    else this.toast.error(`Ya hay ${MAX_FEATURED} destacadas. Quitá una antes de sumar otra.`);
   }
 
   remove(property: Property) {
     this.store.toggleFeatured(property.id);
     this.notice.set(null);
+    this.toast.success(`«${property.title}» ya no es destacada.`);
   }
 }

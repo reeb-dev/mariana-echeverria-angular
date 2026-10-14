@@ -1,3 +1,4 @@
+import { ToastService } from '../../data/toast.service';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { localIsoDate } from '../../data/calculators';
@@ -130,6 +131,7 @@ import { PanelShellComponent } from './panel-shell.component';
   ],
 })
 export class PanelDocumentsComponent {
+  protected readonly toast = inject(ToastService);
   readonly properties = inject(PropertyStore);
   readonly contacts = inject(ContactsStore);
   readonly templates = DOCUMENT_TEMPLATES;
@@ -185,9 +187,10 @@ export class PanelDocumentsComponent {
     try {
       await navigator.clipboard.writeText(this.rendered());
       this.copied.set(true);
+      this.toast.success('Documento copiado.');
       setTimeout(() => this.copied.set(false), 1800);
     } catch {
-      /* sin permiso para copiar */
+      this.toast.error('No se pudo copiar. Seleccioná el texto y copialo a mano.');
     }
   }
 

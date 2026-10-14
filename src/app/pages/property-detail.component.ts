@@ -1,3 +1,4 @@
+import { ToastService } from '../data/toast.service';
 import { Component, computed, inject, signal } from '@angular/core';
 import { DomSanitizer, type SafeResourceUrl } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -22,6 +23,7 @@ import { SeoService, parsePrice } from '../utils/seo.service';
   templateUrl: './property-detail.component.html',
 })
 export class PropertyDetailComponent {
+  protected readonly toast = inject(ToastService);
   private readonly route = inject(ActivatedRoute);
   private readonly store = inject(PropertyStore);
   private readonly seo = inject(SeoService);
@@ -70,10 +72,12 @@ export class PropertyDetailComponent {
     }
     if (v.date < this.minVisitDate) {
       this.visitError.set('Elegí un día a partir de mañana.');
+      this.toast.error('Elegí un día a partir de mañana.');
       return;
     }
     if (!v.consent) {
       this.visitError.set('Tenés que aceptar la política de privacidad.');
+      this.toast.error('Tenés que aceptar la política de privacidad.');
       return;
     }
     this.visitError.set(null);
@@ -100,6 +104,7 @@ export class PropertyDetailComponent {
     ].join('\n');
     window.open(`${this.contact.whatsappUrl}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
     this.visitSent.set(true);
+    this.toast.success('Pedido de visita enviado.');
     this.visit = { name: '', phone: '', date: '', slot: 'tarde', consent: false };
   }
   private readonly sanitizer = inject(DomSanitizer);
@@ -224,14 +229,17 @@ export class PropertyDetailComponent {
     try {
       await navigator.clipboard.writeText(location.href);
       this.copied.set(true);
+      this.toast.success('Enlace copiado.');
       setTimeout(() => this.copied.set(false), 1800);
     } catch {
-      /* sin permiso para copiar: el enlace está en la barra del navegador */
+      this.toast.error('No se pudo copiar el enlace. Copialo desde la barra del navegador.');
     }
   }
 
   toggleFavorite() {
-    if (this.property) this.favorites.toggle(this.property.slug);
+    if (!this.property) return;
+    this.favorites.toggle(this.property.slug);
+    this.toast.success(this.favorites.has(this.property.slug) ? 'Guardada en tus favoritas.' : 'Quitada de tus favoritas.');
   }
 
   submitInquiry(event: Event) {
@@ -239,10 +247,12 @@ export class PropertyDetailComponent {
     if (!this.property) return;
     if (!this.inquiry.name.trim() || !this.inquiry.phone.trim()) {
       this.formError.set('Completá tu nombre y tu teléfono.');
+      this.toast.error('Completá tu nombre y tu teléfono.');
       return;
     }
     if (!this.inquiry.consent) {
       this.formError.set('Tenés que aceptar la política de privacidad para enviar la consulta.');
+      this.toast.error('Aceptá la política de privacidad para enviar la consulta.');
       return;
     }
     this.formError.set(null);
@@ -266,6 +276,7 @@ export class PropertyDetailComponent {
       .join('\n');
     window.open(`${this.contact.whatsappUrl}?text=${encodeURIComponent(body)}`, '_blank', 'noopener,noreferrer');
     this.sent.set(true);
+    this.toast.success('Consulta enviada. Te respondemos a la brevedad.');
     this.inquiry = { name: '', phone: '', message: '', consent: false };
   }
 

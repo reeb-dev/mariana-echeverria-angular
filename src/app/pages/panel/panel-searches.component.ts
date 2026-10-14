@@ -1,3 +1,4 @@
+import { ToastService } from '../../data/toast.service';
 import { DatePipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -170,6 +171,7 @@ import { PanelShellComponent } from './panel-shell.component';
   ],
 })
 export class PanelSearchesComponent {
+  protected readonly toast = inject(ToastService);
   readonly auth = inject(AuthService);
   readonly searches = inject(SavedSearchesStore);
   readonly contacts = inject(ContactsStore);
@@ -216,6 +218,7 @@ export class PanelSearchesComponent {
     const d = this.draft;
     if (!d.contactId) {
       this.error.set('Elegí un contacto.');
+      this.toast.error('Elegí un contacto.');
       return;
     }
     this.error.set(null);
@@ -230,10 +233,13 @@ export class PanelSearchesComponent {
       active: true,
       createdAt: new Date().toISOString(),
     });
+    this.toast.success('Búsqueda guardada.');
     this.draft = { contactId: '', operation: '', type: '', zone: '', maxPrice: null, currency: 'USD' };
   }
 
   remove(search: SavedSearch) {
-    if (confirm('¿Eliminar esta búsqueda?')) this.searches.remove(search.id);
+    if (!confirm('¿Eliminar esta búsqueda?')) return;
+    this.searches.remove(search.id);
+    this.toast.success('Búsqueda eliminada.');
   }
 }

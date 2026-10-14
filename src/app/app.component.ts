@@ -4,6 +4,7 @@ import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter, map } from 'rxjs';
 import { GOATCOUNTER_CODE } from './config/analytics.config';
 import { SiteFooterComponent } from './components/site-footer.component';
+import { ToastHostComponent } from './components/toast-host.component';
 import { SiteNavComponent } from './components/site-nav.component';
 import { WhatsappFloatComponent } from './components/whatsapp-float.component';
 
@@ -16,7 +17,7 @@ function isBarePath(url: string): boolean {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, SiteNavComponent, SiteFooterComponent, WhatsappFloatComponent],
+  imports: [RouterOutlet, SiteNavComponent, SiteFooterComponent, WhatsappFloatComponent, ToastHostComponent],
   template: `
     @if (isBare()) {
       <router-outlet />
@@ -30,6 +31,7 @@ function isBarePath(url: string): boolean {
         <app-whatsapp-float />
       }
     }
+    <app-toast-host />
   `,
 })
 export class AppComponent {

@@ -1,3 +1,4 @@
+import { ToastService } from '../../data/toast.service';
 import { DatePipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -210,6 +211,7 @@ type TimelineEntry = { at: string; label: string; detail: string; link?: string[
   ],
 })
 export class PanelContactsComponent {
+  protected readonly toast = inject(ToastService);
   readonly auth = inject(AuthService);
   readonly contacts = inject(ContactsStore);
   private readonly inquiries = inject(InquiriesStore);
@@ -334,6 +336,7 @@ export class PanelContactsComponent {
     const duplicate = this.contacts.all().find((c) => samePhone(c.phone, d.phone));
     if (duplicate) {
       this.formError.set(`Ya existe ese teléfono: ${duplicate.name}.`);
+      this.toast.error(`Ya existe ese teléfono: ${duplicate.name}.`);
       this.selectedId.set(duplicate.id);
       return;
     }
@@ -348,6 +351,7 @@ export class PanelContactsComponent {
       createdAt: new Date().toISOString(),
     });
     this.selectedId.set(id);
+    this.toast.success('Contacto creado.');
     this.draft = { name: '', phone: '', email: '', kind: 'comprador' };
   }
 
@@ -355,5 +359,6 @@ export class PanelContactsComponent {
     if (!confirm(`¿Eliminar a ${c.name}? Las consultas y tasaciones quedan, solo se borra la ficha.`)) return;
     this.contacts.remove(c.id);
     this.selectedId.set(null);
+    this.toast.success('Contacto eliminado.');
   }
 }
