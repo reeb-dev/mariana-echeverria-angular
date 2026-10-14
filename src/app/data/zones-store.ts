@@ -10,6 +10,9 @@ export type ZoneEntry = {
   homeSection?: boolean;
 };
 
+/** Tope de secciones por zona en la home, para que la página no se sature. */
+export const MAX_HOME_SECTIONS = 3;
+
 const SEED = (): ZoneEntry[] => Object.entries(ZONE_LABELS).map(([id, name]) => ({ id, name }));
 
 /** Zonas disponibles para cargar propiedades. Las que agrega el panel se suman a las de siempre. */

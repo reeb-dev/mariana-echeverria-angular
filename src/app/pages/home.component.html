@@ -201,23 +201,21 @@
   </section>
 }
 
-<!-- SECCIONES POR ZONA (se activan desde Panel → Zonas) -->
+<!-- SECCIONES POR ZONA (se activan desde Panel → Zonas): carrusel corto + enlace a todas las de la zona -->
 @for (z of zoneSections(); track z.id) {
-  <section [id]="'zona-' + z.id" class="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-20">
+  <section [id]="'zona-' + z.id" class="mx-auto max-w-6xl px-5 py-14 md:px-8 md:py-16">
     <div appReveal class="flex flex-wrap items-end justify-between gap-4">
       <div class="max-w-xl">
         <p class="eyebrow text-forest">Zona</p>
-        <h2 class="section-title mt-4 text-3xl text-forest-deep md:text-4xl">Propiedades en {{ z.name }}</h2>
+        <h2 class="section-title mt-3 text-2xl text-forest-deep md:text-3xl">Propiedades en {{ z.name }}</h2>
       </div>
-      @if (z.page) {
-        <a [routerLink]="['/zona', z.page]" class="text-sm font-semibold text-forest underline decoration-forest/30 underline-offset-4 transition hover:decoration-forest">
-          Conocer la zona
-        </a>
-      }
+      <a [routerLink]="['/zona', z.page ?? z.id]" class="text-sm font-semibold text-forest underline decoration-forest/30 underline-offset-4 transition hover:decoration-forest">
+        Ver {{ z.items.length === 1 ? 'la propiedad' : 'las ' + z.items.length + ' propiedades' }} de la zona →
+      </a>
     </div>
-    <ul class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
-      @for (property of z.items.slice(0, 6); track property.id; let i = $index) {
-        <li appReveal [appRevealDelay]="i * 50" class="h-full">
+    <ul class="-mx-5 mt-8 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-3 md:mx-0 md:px-0" tabindex="0" [attr.aria-label]="'Propiedades en ' + z.name">
+      @for (property of z.items.slice(0, 6); track property.id) {
+        <li class="w-[82%] shrink-0 snap-start sm:w-[46%] lg:w-[31.5%]">
           <app-property-card [property]="property" />
         </li>
       }

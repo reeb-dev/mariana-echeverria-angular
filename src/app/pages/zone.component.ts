@@ -3,7 +3,8 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PropertyCardComponent } from '../components/property-card.component';
 import { PropertyStore } from '../data/property-store';
 import { CONTACT } from '../data/properties';
-import { ZONE_PAGES } from '../data/zone-pages';
+import { ZONE_PAGES, type ZonePage } from '../data/zone-pages';
+import { ZonesStore } from '../data/zones-store';
 import { SeoService } from '../utils/seo.service';
 
 /** Página de una zona: qué hacemos ahí y sus propiedades publicadas. */
@@ -91,7 +92,29 @@ export class ZoneComponent {
   private readonly store = inject(PropertyStore);
   readonly contact = CONTACT;
 
-  readonly zone = computed(() => ZONE_PAGES.find((z) => z.slug === this.route.snapshot.paramMap.get('slug')) ?? null);
+  private readonly zonesStore = inject(ZonesStore);
+
+  /** La página editada a mano o, para una zona agregada desde el panel, una genérica con su nombre. */
+  readonly zone = computed<ZonePage | null>(() => {
+    const slug = this.route.snapshot.paramMap.get('slug');
+    const fixed = ZONE_PAGES.find((z) => z.slug === slug);
+    if (fixed) return fixed;
+    const custom = this.zonesStore.options().find((z) => z.id === slug);
+    if (!custom) return null;
+    return {
+      slug: custom.id,
+      zoneId: custom.id,
+      name: custom.name,
+      seoTitle: `Propiedades en ${custom.name}`,
+      description: `Propiedades en venta y alquiler en ${custom.name}, con tasaciones y asesoramiento legal.`,
+      intro: `Mirá las propiedades disponibles en ${custom.name}. Si no encontrás lo que buscás, escribinos y te avisamos cuando entre algo.`,
+      services: [
+        'Venta y alquiler de propiedades',
+        'Tasaciones en el día',
+        'Asesoramiento legal en cada operación',
+      ],
+    };
+  });
   readonly others = computed(() => ZONE_PAGES.filter((z) => z.slug !== this.zone()?.slug));
   readonly properties = computed(() => {
     const z = this.zone();
