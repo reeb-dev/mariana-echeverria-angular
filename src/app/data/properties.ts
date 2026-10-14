@@ -780,5 +780,6 @@ export function coverPhoto(property: Property) {
     src: `${dir}/cover-card.webp`,
     alt: first.alt,
     caption: first.caption,
+    watermarked: first.watermarked,
   };
 }

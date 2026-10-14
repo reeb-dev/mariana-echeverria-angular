@@ -156,7 +156,7 @@
     @apply relative aspect-[5/4] overflow-hidden;
   }
 
-  .prop-card-media img {
+  .prop-card-media > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -167,7 +167,7 @@
     transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .prop-card:hover .prop-card-media img {
+  .prop-card:hover .prop-card-media > img {
     transform: scale(1.28);
   }
 

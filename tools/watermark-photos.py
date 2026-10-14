@@ -22,7 +22,7 @@ def logo_at(width: int, opacity: float = 1.0) -> Image.Image:
     return out
 
 
-def stamp(im: Image.Image) -> Image.Image:
+def stamp(im: Image.Image, cover: bool = False) -> Image.Image:
     im = im.convert('RGBA')
     w, h = im.size
 
@@ -46,8 +46,9 @@ def stamp(im: Image.Image) -> Image.Image:
     plate = Image.new('RGBA', (badge.width + m * 2, badge.height + m * 2), (0, 0, 0, 0))
     ImageDraw.Draw(plate).rounded_rectangle([0, 0, plate.width - 1, plate.height - 1], radius=m, fill=(20, 20, 20, 90))
     plate.paste(badge, (m, m), badge)
-    edge = max(12, w // 60)
-    im.alpha_composite(plate, (edge, edge))
+    # Las portadas se recortan en la tarjeta (zoom y 5:4): se aleja el sello del borde para que no se pierda.
+    edge = round(w * 0.15) if cover else max(12, w // 60)
+    im.alpha_composite(plate, (edge, round(edge * 0.7) if cover else edge))
     return im.convert('RGB')
 
 
@@ -58,6 +59,6 @@ for webp in sorted(glob.glob('public/properties/*/*.webp')):
     if not data:
         print('sin original:', webp)
         continue
-    stamp(Image.open(io.BytesIO(data))).save(webp, 'WEBP', quality=82, method=6)
+    stamp(Image.open(io.BytesIO(data)), cover=webp.endswith('cover-card.webp')).save(webp, 'WEBP', quality=82, method=6)
     count += 1
 print(count, 'fotos con marca de agua')
