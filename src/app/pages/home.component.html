@@ -183,13 +183,40 @@
         Una selección de las propiedades que hoy recomendamos. Para ver todo el listado, seguí más abajo.
       </p>
     </div>
-    <ul class="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
-      @for (property of featured(); track property.id; let i = $index) {
-        <li appReveal [appRevealDelay]="i * 50" class="h-full">
-          <app-property-card [property]="property" [showFeaturedBadge]="true" />
-        </li>
+    <div class="relative mt-12">
+      <ul
+        #destCarousel
+        class="-mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth px-5 pb-3 md:mx-0 md:px-0"
+        tabindex="0"
+        aria-label="Propiedades destacadas"
+      >
+        @for (property of featured(); track property.id) {
+          <li class="w-[82%] shrink-0 snap-start sm:w-[46%] lg:w-[31.5%]">
+            <app-property-card [property]="property" [showFeaturedBadge]="true" />
+          </li>
+        }
+      </ul>
+      @if (featured().length > 1) {
+        <div class="mt-4 flex justify-end gap-2">
+          <button
+            type="button"
+            class="h-11 w-11 rounded-full border border-border bg-white text-lg text-forest-deep transition hover:border-forest"
+            (click)="destCarousel.scrollBy({ left: -destCarousel.clientWidth * 0.8 })"
+            aria-label="Destacadas anteriores"
+          >
+            ←
+          </button>
+          <button
+            type="button"
+            class="h-11 w-11 rounded-full border border-border bg-white text-lg text-forest-deep transition hover:border-forest"
+            (click)="destCarousel.scrollBy({ left: destCarousel.clientWidth * 0.8 })"
+            aria-label="Destacadas siguientes"
+          >
+            →
+          </button>
+        </div>
       }
-    </ul>
+    </div>
     <p appReveal class="mt-10">
       <a
         href="#propiedades"
