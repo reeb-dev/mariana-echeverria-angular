@@ -3,17 +3,16 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../data/auth.service';
 import { CONTACT } from '../../data/properties';
+import { AssetUrlPipe } from '../../utils/asset-url';
 
 @Component({
   selector: 'app-panel-login',
   standalone: true,
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, RouterLink, AssetUrlPipe],
   template: `
     <div class="flex min-h-screen items-center justify-center bg-mist/60 px-5 py-10">
       <div class="w-full max-w-md">
-        <p class="text-center font-display text-xl font-medium text-forest-deep">
-          {{ contact.brand }} <span class="text-forest">· Panel</span>
-        </p>
+        <div class="flex flex-col items-center gap-1.5"><img [src]="'/about/logo-watermark.png' | assetUrl" [alt]="contact.brand" class="h-12 w-auto" /><span class="text-xs font-semibold tracking-[0.16em] text-forest uppercase">Panel</span></div>
         <form
           class="mt-6 space-y-4 rounded-2xl border border-border bg-background p-6 shadow-soft"
           (submit)="submit($event)"

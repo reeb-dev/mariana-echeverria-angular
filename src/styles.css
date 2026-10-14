@@ -3,6 +3,16 @@
 @tailwind utilities;
 
 @layer base {
+  /* Números alineados (lining) en la tipografía de títulos: el 0 no se confunde con la «o». */
+  .font-display {
+    font-feature-settings: "lnum" 1, "kern" 1;
+  }
+
+  :focus-visible {
+    outline: 2px solid #d06a28;
+    outline-offset: 2px;
+  }
+
   html {
     scroll-behavior: smooth;
   }
@@ -240,11 +250,11 @@
 
   /* Indicador del Resumen */
   .mer-stat {
-    @apply mer-card mer-card-link mer-card-accent flex items-start gap-4 p-5;
+    @apply mer-card mer-card-link mer-card-accent flex flex-col items-start gap-3 p-4 sm:flex-row sm:gap-4 sm:p-5;
   }
 
   .mer-stat-icon {
-    @apply flex h-12 w-12 shrink-0 items-center justify-center rounded-xl;
+    @apply flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-xl;
   }
 
   .tone-forest {

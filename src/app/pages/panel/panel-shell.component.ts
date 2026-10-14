@@ -10,6 +10,7 @@ import { VisitsStore } from '../../data/crm-stores';
 import { InquiriesStore } from '../../data/inquiries-store';
 import { ROLE_LABELS, type Permission } from '../../data/permissions';
 import { CONTACT } from '../../data/properties';
+import { AssetUrlPipe } from '../../utils/asset-url';
 
 type NavItem = {
   path: string;
@@ -29,7 +30,7 @@ const COLLAPSE_KEY = 'mer.panel.sidebar.collapsed';
 @Component({
   selector: 'app-panel-shell',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, PanelSearchComponent, PanelSearchDialogComponent, ToastHostComponent],
+  imports: [RouterLink, RouterLinkActive, PanelSearchComponent, PanelSearchDialogComponent, ToastHostComponent, AssetUrlPipe],
   template: `
     <div class="min-h-screen bg-mist/60 lg:flex">
       <!-- Barra superior (celular) -->
@@ -42,7 +43,7 @@ const COLLAPSE_KEY = 'mer.panel.sidebar.collapsed';
         >
           <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
         </button>
-        <a routerLink="/panel" class="font-display text-base font-medium">{{ contact.brand }} <span class="text-stone-warm">· Panel</span></a>
+        <a routerLink="/panel" class="flex items-center gap-2" [attr.aria-label]="'Panel de ' + contact.brand"><img [src]="'/about/logo-watermark.png' | assetUrl" alt="" class="h-6 w-auto" /><span class="text-xs tracking-[0.14em] text-stone-warm uppercase">Panel</span></a>
         <span class="w-10"></span>
       </header>
 
@@ -65,8 +66,8 @@ const COLLAPSE_KEY = 'mer.panel.sidebar.collapsed';
       >
         <div class="flex items-center justify-between gap-2 px-4 py-5">
           <a routerLink="/panel" class="min-w-0" [class.lg:hidden]="collapsed()">
-            <span class="block truncate font-display text-lg font-medium leading-tight">{{ contact.brand }}</span>
-            <span class="text-xs tracking-[0.14em] text-stone-warm uppercase">Panel</span>
+            <img [src]="'/about/logo-watermark.png' | assetUrl" [alt]="contact.brand" class="block h-8 w-auto max-w-full" />
+            <span class="mt-1 block text-xs tracking-[0.14em] text-stone-warm uppercase">Panel</span>
           </a>
           <button
             type="button"

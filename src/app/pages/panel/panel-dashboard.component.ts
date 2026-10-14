@@ -20,7 +20,7 @@ import { PanelShellComponent } from './panel-shell.component';
   template: `
     <app-panel-shell [title]="greeting()">
       <!-- Indicadores -->
-      <dl class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+      <dl class="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-3">
         @for (card of cards(); track card.label) {
           <a [routerLink]="card.link" class="mer-stat" [class.mer-card-alert]="card.urgent">
             <span class="mer-stat-icon" [class]="card.tone">
@@ -30,7 +30,7 @@ import { PanelShellComponent } from './panel-shell.component';
             </span>
             <span class="min-w-0">
               <dt class="text-xs font-semibold tracking-[0.12em] text-muted-foreground uppercase">{{ card.label }}</dt>
-              <dd class="mt-1 font-display text-4xl font-medium leading-none text-forest-deep tabular-nums">{{ card.value }}</dd>
+              <dd class="mt-1 font-display text-3xl font-medium sm:text-4xl leading-none text-forest-deep tabular-nums">{{ card.value }}</dd>
               <p class="mt-1.5 text-sm" [class]="card.urgent ? 'font-medium text-red-700' : 'text-muted-foreground'">{{ card.hint }}</p>
             </span>
           </a>
