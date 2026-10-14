@@ -265,6 +265,12 @@ import { PanelShellComponent } from './panel-shell.component';
                     </a>
                   }
                   <a
+                    [routerLink]="['/panel/propiedad', property.id, 'difundir']"
+                    class="block rounded-lg px-3 py-2 text-sm transition hover:bg-mist"
+                  >
+                    Difundir en redes y Mercado Libre
+                  </a>
+                  <a
                     [routerLink]="['/panel/propiedad', property.id, 'cartel']"
                     class="block rounded-lg px-3 py-2 text-sm transition hover:bg-mist"
                   >

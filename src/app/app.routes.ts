@@ -40,6 +40,7 @@ export const routes: Routes = [
   { path: 'panel/contratos', loadComponent: () => import('./pages/panel/panel-leases.component').then((m) => m.PanelLeasesComponent), canActivate: [permissionGuard('contratos.gestionar')] },
   { path: 'panel/documentos', loadComponent: () => import('./pages/panel/panel-documents.component').then((m) => m.PanelDocumentsComponent), canActivate: [permissionGuard('documentos.generar')] },
   { path: 'panel/expedientes', loadComponent: () => import('./pages/panel/panel-cases.component').then((m) => m.PanelCasesComponent), canActivate: [permissionGuard('expedientes.gestionar')] },
+  { path: 'panel/propiedad/:id/difundir', loadComponent: () => import('./pages/panel/panel-diffusion.component').then((m) => m.PanelDiffusionComponent), canActivate: [authGuard] },
   { path: 'panel/propiedad/:id/cartel', loadComponent: () => import('./pages/panel/panel-poster.component').then((m) => m.PanelPosterComponent), canActivate: [authGuard] },
   { path: 'panel/propiedad/:id/informe', loadComponent: () => import('./pages/panel/panel-owner-report.component').then((m) => m.PanelOwnerReportComponent), canActivate: [authGuard] },
   {
