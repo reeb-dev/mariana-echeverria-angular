@@ -1,3 +1,4 @@
+import { parseVideo } from '../../utils/video-embed';
 import { ZonesStore } from '../../data/zones-store';
 import { ToastService } from '../../data/toast.service';
 import { DatePipe, Location } from '@angular/common';
@@ -213,6 +214,17 @@ function compressImage(file: File, watermark = false): Promise<string> {
               </div>
             </div>
             <label class="md:col-span-2">
+              <span class="field-label">Video de YouTube o Instagram (opcional)</span>
+              <input class="field" name="videoUrl" [(ngModel)]="draft.videoUrl" placeholder="https://www.instagram.com/reel/… o https://youtu.be/…" autocomplete="off" />
+              @if (draft.videoUrl?.trim()) {
+                @if (videoOk()) {
+                  <span class="mt-1 block text-xs text-forest">✓ Enlace válido: se muestra en la ficha de la propiedad.</span>
+                } @else {
+                  <span class="mt-1 block text-xs text-red-700">No parece un enlace de YouTube ni de Instagram (reel o publicación).</span>
+                }
+              }
+            </label>
+            <label class="md:col-span-2">
               <span class="field-label">Destacado corto (opcional)</span>
               <input class="field" name="highlight" [(ngModel)]="draft.highlight" placeholder="Casa familiar" />
             </label>
@@ -369,6 +381,15 @@ function compressImage(file: File, watermark = false): Promise<string> {
                 <span class="font-medium text-forest-deep">Mostrar en «Destacadas»</span>
                 <span class="block text-xs text-muted-foreground">
                   Hasta {{ maxFeatured }} propiedades en la sección destacada de la home.
+                </span>
+              </span>
+            </label>
+            <label class="flex items-start gap-3 md:col-span-2">
+              <input type="checkbox" class="mt-1 h-4 w-4" name="spotlight" [(ngModel)]="spotlight" />
+              <span>
+                <span class="font-medium text-forest-deep">★ Súper destacada (banner grande en la home)</span>
+                <span class="block text-xs text-muted-foreground">
+                  Una sola a la vez: si ya hay otra, pasa a ser esta. Si tiene video, se puede ver desde el banner.
                 </span>
               </span>
             </label>
@@ -742,6 +763,12 @@ export class PanelFormComponent {
   baths: number | null = null;
   status: PropertyStatus = 'publicada';
   featured = false;
+  spotlight = false;
+
+  /** El enlace de video cargado se reconoce como YouTube o Instagram. */
+  videoOk() {
+    return !!parseVideo(this.draft.videoUrl);
+  }
   agentId = '';
 
   /** Quienes pueden ser responsables de una propiedad. */
@@ -797,6 +824,7 @@ export class PanelFormComponent {
       this.baths = found.baths ?? null;
       this.status = this.store.statusOf(found);
       this.featured = !!found.featured;
+      this.spotlight = !!found.spotlight;
       this.photos.set(found.photos.map((p) => ({ ...p })));
       this.agentId = found.agentId ?? '';
       this.branchInput = found.branch ?? '';
@@ -1264,6 +1292,8 @@ export class PanelFormComponent {
       ownerName: this.draft.ownerName?.trim() || undefined,
       ownerPhone: this.draft.ownerPhone?.trim() || undefined,
       featured: this.featured,
+      spotlight: this.spotlight,
+      videoUrl: parseVideo(this.draft.videoUrl) ? this.draft.videoUrl!.trim() : undefined,
       featuredOrder: this.featured ? (wasFeatured ? this.draft.featuredOrder : nextOrder) : undefined,
     };
 

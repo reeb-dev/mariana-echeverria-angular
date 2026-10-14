@@ -1,5 +1,6 @@
 import { ToastService } from '../data/toast.service';
 import { Component, computed, inject, signal } from '@angular/core';
+import { VideoEmbedComponent } from '../components/video-embed.component';
 import { DomSanitizer, type SafeResourceUrl } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -19,7 +20,7 @@ import { SeoService, parsePrice } from '../utils/seo.service';
 @Component({
   selector: 'app-property-detail',
   standalone: true,
-  imports: [RouterLink, FormsModule, PropertyGalleryComponent, PropertyCardComponent, AssetUrlPipe],
+  imports: [RouterLink, FormsModule, VideoEmbedComponent, PropertyGalleryComponent, PropertyCardComponent, AssetUrlPipe],
   templateUrl: './property-detail.component.html',
 })
 export class PropertyDetailComponent {

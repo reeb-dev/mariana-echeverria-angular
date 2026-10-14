@@ -1,4 +1,5 @@
 import { MIN_HOME_SECTION_ITEMS, ZonesStore } from '../data/zones-store';
+import { VideoEmbedComponent } from '../components/video-embed.component';
 import { ZONE_PAGES } from '../data/zone-pages';
 import { ToastService } from '../data/toast.service';
 import { Component, computed, effect, inject, signal } from '@angular/core';
@@ -12,6 +13,7 @@ import { PropertyCardComponent } from '../components/property-card.component';
 import { RevealDirective } from '../directives/reveal.directive';
 import {
   CONTACT,
+  coverPhoto,
   CREDENTIALS,
   FAQS,
   INSTAGRAM_HIGHLIGHTS,
@@ -36,6 +38,7 @@ import { SeoService, parsePrice } from '../utils/seo.service';
   imports: [
     FormsModule,
     RouterLink,
+    VideoEmbedComponent,
     RevealDirective,
     BrandLogoComponent,
     PropertyCardComponent,
@@ -143,7 +146,7 @@ export class HomeComponent {
 
   /** Zonas activadas en el panel, con sus propiedades publicadas (sin repetir las destacadas). */
   readonly zoneSections = computed(() => {
-    const featuredIds = new Set(this.store.featured().map((p) => p.id));
+    const featuredIds = new Set([...this.store.featured().map((p) => p.id), ...this.store.published().filter((p) => p.spotlight).map((p) => p.id)]);
     return this.zonesStore
       .homeSections()
       .map((z) => {
@@ -165,8 +168,23 @@ export class HomeComponent {
     return list.find((z) => z.id === this.activeZoneId()) ?? list[0] ?? null;
   });
 
-  /** Destacadas elegidas en el panel. */
-  readonly featured = this.store.featured;
+  spotlightCover() {
+    const p = this.spotlight();
+    return p ? coverPhoto(p) : null;
+  }
+
+  spotlightWhatsapp() {
+    const p = this.spotlight();
+    const text = p ? `Hola Mariana, vi la propiedad destacada "${p.title}" (${p.location}) y quiero más info.` : '';
+    return `${CONTACT.whatsappUrl}?text=${encodeURIComponent(text)}`;
+  }
+
+  /** La «súper destacada»: banner grande arriba de todo, con video si lo tiene. */
+  readonly spotlight = computed(() => this.store.published().find((p) => p.spotlight) ?? null);
+  readonly spotlightVideo = signal(false);
+
+  /** Destacadas elegidas en el panel (sin repetir la súper destacada). */
+  readonly featured = computed(() => this.store.featured().filter((p) => !p.spotlight));
 
   /** Tipos presentes en el inventario publicado (casa, lote, campo…). */
   readonly typeOptions = computed(() => [...new Set(this.store.published().map((p) => p.type))].sort());

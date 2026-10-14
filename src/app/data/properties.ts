@@ -43,6 +43,10 @@ export type Property = {
   photos: PropertyPhoto[];
   /** Si falta, se considera `publicada`. Solo las publicadas salen en la home. */
   status?: PropertyStatus;
+  /** Enlace a un video de YouTube o Instagram que se muestra en la ficha. */
+  videoUrl?: string;
+  /** «Súper destacada»: banner grande en la home. Solo una a la vez. */
+  spotlight?: boolean;
   /** Aparece en la sección «Destacadas» de la home. */
   featured?: boolean;
   /** Orden dentro de las destacadas (menor = primero). */

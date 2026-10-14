@@ -103,13 +103,16 @@ export class PropertyStore {
     if (!this.auth.can('propiedades.destacar')) {
       next.featured = current?.featured ?? false;
       next.featuredOrder = current?.featuredOrder;
+      next.spotlight = current?.spotlight ?? false;
     }
     if (!this.auth.can('propiedades.editar.todas')) {
       next.agentId = current?.agentId ?? this.auth.user()?.id;
     }
-    const saved = current
+    let saved = current
       ? list.map((p) => (p.id === next.id ? next : p))
       : [next, ...list];
+    // Solo una propiedad puede ser la súper destacada.
+    if (next.spotlight) saved = saved.map((p) => (p.id === next.id || !p.spotlight ? p : { ...p, spotlight: false }));
     this.record(
       current
         ? `Editó «${next.title}»${this.describeChanges(current, next)}`
@@ -133,6 +136,7 @@ export class PropertyStore {
       slug: this.uniqueSlug(title),
       status: 'pausada',
       featured: false,
+      spotlight: false,
       featuredOrder: undefined,
       agentId: this.auth.user()?.id ?? source.agentId,
       photos: source.photos.map((p) => ({ ...p })),
@@ -257,6 +261,7 @@ export class PropertyStore {
       diffs.push(`fotos: ${before.photos.length} → ${after.photos.length}`);
     }
     if (!!before.featured !== !!after.featured) diffs.push(after.featured ? 'pasó a destacada' : 'dejó de ser destacada');
+    if (!!before.spotlight !== !!after.spotlight) diffs.push(after.spotlight ? 'pasó a súper destacada' : 'dejó de ser súper destacada');
     if (before.description !== after.description) diffs.push('cambió la descripción');
     return diffs.length > 0 ? ` (${diffs.join('; ')})` : '';
   }

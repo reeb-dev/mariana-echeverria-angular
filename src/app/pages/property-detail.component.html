@@ -23,6 +23,12 @@
         <app-property-gallery [photos]="property.photos" [title]="property.title" />
       </section>
 
+      @if (property.videoUrl) {
+        <section aria-label="Video" class="mt-8">
+          <app-video-embed [url]="property.videoUrl" [title]="'Video de ' + property.title" />
+        </section>
+      }
+
       <div class="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_23rem] lg:gap-14">
         <!-- Contenido -->
         <div class="min-w-0">
