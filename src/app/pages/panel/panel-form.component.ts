@@ -1,7 +1,7 @@
 import { ZonesStore } from '../../data/zones-store';
 import { ToastService } from '../../data/toast.service';
 import { DatePipe, Location } from '@angular/common';
-import { Component, HostListener, computed, inject, signal } from '@angular/core';
+import { Component, DestroyRef, HostListener, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { LocationPickerComponent } from '../../components/location-picker.component';
@@ -339,12 +339,19 @@ function compressImage(file: File, watermark = false): Promise<string> {
           </section>
 
           <!-- Fotos -->
-          <section class="mer-card p-5">
+          <section
+            class="mer-card p-5 transition"
+            [class.ring-2]="dragging()"
+            [class.ring-forest]="dragging()"
+            (dragover)="onDragOver($event)"
+            (dragleave)="dragging.set(false)"
+            (drop)="onDrop($event)"
+          >
             <div class="flex flex-wrap items-center justify-between gap-3">
               <div>
                 <h2 class="font-display text-lg font-medium text-forest-deep">Fotos *</h2>
                 <p class="text-xs text-muted-foreground">
-                  La primera es la portada. Hasta {{ maxPhotos }} fotos; se achican solas.
+                  La primera es la portada. Hasta {{ maxPhotos }} fotos; se achican solas. Podés arrastrarlas acá.
                 </p>
               </div>
               <label
@@ -759,8 +766,67 @@ export class PanelFormComponent {
       this.canEditCurrent.set(this.auth.canEdit(found));
     } else {
       this.agentId = this.auth.user()?.id ?? '';
+      this.restoreDraft();
     }
     this.snapshot = this.currentState();
+    if (this.isNew()) {
+      const timer = setInterval(() => this.saveDraft(), 4000);
+      inject(DestroyRef).onDestroy(() => clearInterval(timer));
+    }
+  }
+
+  private static readonly DRAFT_KEY = 'mer.panel.draft.new';
+
+  /** Guarda los textos de la propiedad nueva (sin fotos) para no perderlos si se cierra la pestaña. */
+  private saveDraft() {
+    if (this.saved || !this.isNew()) return;
+    const d = this.draft;
+    const empty = !d.title.trim() && !d.location.trim() && !d.priceLabel.trim() && !d.description.trim();
+    try {
+      if (empty) {
+        localStorage.removeItem(PanelFormComponent.DRAFT_KEY);
+        return;
+      }
+      localStorage.setItem(
+        PanelFormComponent.DRAFT_KEY,
+        JSON.stringify({
+          draft: d,
+          zoneInput: this.zoneInput,
+          amenitiesText: this.amenitiesText,
+          beds: this.beds,
+          baths: this.baths,
+          status: this.status,
+        })
+      );
+    } catch {
+      /* sin espacio: no se guarda el borrador */
+    }
+  }
+
+  private restoreDraft() {
+    try {
+      const raw = localStorage.getItem(PanelFormComponent.DRAFT_KEY);
+      if (!raw) return;
+      const saved = JSON.parse(raw);
+      this.draft = { ...this.draft, ...saved.draft };
+      this.zoneInput = saved.zoneInput ?? '';
+      this.zoneInputSignal.set(this.zoneInput);
+      this.amenitiesText = saved.amenitiesText ?? '';
+      this.beds = saved.beds ?? null;
+      this.baths = saved.baths ?? null;
+      this.status = saved.status ?? this.status;
+      setTimeout(() => this.toast.show('Recuperamos el borrador que tenías sin guardar. Las fotos hay que volver a cargarlas.'), 0);
+    } catch {
+      /* borrador ilegible: se ignora */
+    }
+  }
+
+  private clearDraft() {
+    try {
+      localStorage.removeItem(PanelFormComponent.DRAFT_KEY);
+    } catch {
+      /* nada */
+    }
   }
 
   setLocation(point: { lat: number; lng: number }) {
@@ -855,6 +921,28 @@ export class PanelFormComponent {
     const input = event.target as HTMLInputElement;
     const files = Array.from(input.files ?? []);
     input.value = '';
+    await this.uploadFiles(files);
+  }
+
+  readonly dragging = signal(false);
+
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+    this.dragging.set(true);
+  }
+
+  async onDrop(event: DragEvent) {
+    event.preventDefault();
+    this.dragging.set(false);
+    const files = Array.from(event.dataTransfer?.files ?? []).filter((f) => f.type.startsWith('image/'));
+    if (files.length === 0) {
+      this.toast.error('Soltá archivos de imagen (JPG, PNG o WebP).');
+      return;
+    }
+    await this.uploadFiles(files);
+  }
+
+  private async uploadFiles(files: File[]) {
     if (files.length === 0) return;
     this.photoError.set(null);
     const room = MAX_PHOTOS - this.photos().length;
@@ -1077,6 +1165,7 @@ export class PanelFormComponent {
 
     if (this.store.upsert(property)) {
       this.saved = true;
+      this.clearDraft();
       this.toast.success('Propiedad guardada.');
       void this.router.navigate(['/panel/propiedades']);
     }

@@ -1,3 +1,4 @@
+import { CompareService } from '../data/compare.service';
 import { ToastService } from '../data/toast.service';
 import { Component, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
@@ -91,6 +92,16 @@ import { WatermarkComponent } from './watermark.component';
             >
               Pedir visita
             </a>
+            <button
+              type="button"
+              class="transition hover:text-forest"
+              [class.font-medium]="isCompared()"
+              [class.text-forest]="isCompared()"
+              [attr.aria-pressed]="isCompared()"
+              (click)="toggleCompare()"
+            >
+              {{ isCompared() ? '✓ Comparando' : 'Comparar' }}
+            </button>
           </p>
         </div>
         <a
@@ -105,6 +116,7 @@ import { WatermarkComponent } from './watermark.component';
 })
 export class PropertyCardComponent {
   protected readonly toast = inject(ToastService);
+  private readonly compare = inject(CompareService);
   readonly property = input.required<Property>();
   /** En la sección de destacadas se muestra la etiqueta sobre la foto. */
   readonly showFeaturedBadge = input(false);
@@ -138,6 +150,16 @@ export class PropertyCardComponent {
     if (days === 0) return 'Publicada hoy';
     if (days === 1) return 'Publicada ayer';
     return `Publicada hace ${days} días`;
+  }
+
+  isCompared() {
+    return this.compare.has(this.property().slug);
+  }
+
+  toggleCompare() {
+    if (!this.compare.toggle(this.property().slug)) {
+      this.toast.error('Podés comparar hasta 3 propiedades. Sacá una para sumar otra.');
+    }
   }
 
   cover() {

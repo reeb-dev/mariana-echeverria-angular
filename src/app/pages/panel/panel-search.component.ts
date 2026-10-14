@@ -6,6 +6,7 @@ import { AuthService } from '../../data/auth.service';
 import { CasesStore, ContactsStore, LeasesStore } from '../../data/crm-stores';
 import { InquiriesStore } from '../../data/inquiries-store';
 import { PropertyStore } from '../../data/property-store';
+import { ZonesStore } from '../../data/zones-store';
 
 type Hit = { group: string; title: string; detail: string; url: string; query?: Record<string, string> };
 
@@ -139,6 +140,8 @@ export class PanelSearchDialogComponent {
   readonly active = signal(0);
 
   /** Atajos y accesos que siempre están disponibles (según permisos). */
+  private readonly zonesStore = inject(ZonesStore);
+
   private readonly shortcuts = computed<Hit[]>(() => {
     const items: Hit[] = [];
     if (this.auth.can('propiedades.crear')) {
@@ -155,6 +158,11 @@ export class PanelSearchDialogComponent {
       ['Contratos', '/panel/contratos', 'Alquileres y arrendamientos', this.auth.can('contratos.gestionar')],
       ['Expedientes', '/panel/expedientes', 'Trámites legales', this.auth.can('expedientes.gestionar')],
       ['Documentos', '/panel/documentos', 'Modelos de contratos', this.auth.can('documentos.generar')],
+      ['Zonas', '/panel/zonas', 'Agregar zonas y armar la home por zona', true],
+      ['Destacadas', '/panel/destacadas', 'Las que se ven primero en la web', true],
+      ['Búsquedas guardadas', '/panel/busquedas', 'Alertas de compradores', this.auth.can('contactos.gestionar')],
+      ['Nueva visita', '/panel/visitas', 'Agendar una visita', this.auth.can('contactos.gestionar')],
+      ['Nuevo contacto', '/panel/contactos', 'Cargar un comprador, propietario o inquilino', this.auth.can('contactos.gestionar')],
       ['Estadísticas', '/panel/estadisticas', 'Vistas, favoritas y consultas', true],
     ];
     for (const [title, url, detail, allowed] of sections) {
@@ -170,6 +178,12 @@ export class PanelSearchDialogComponent {
       rows.push({
         hit: { group: 'Propiedades', title: p.title, detail: `${p.location} · ${p.priceLabel}`, url: `/panel/propiedad/${p.id}` },
         text: `${p.title} ${p.location} ${p.type} ${p.operation} ${p.priceLabel}`,
+      });
+    }
+    for (const z of this.zonesStore.options()) {
+      rows.push({
+        hit: { group: 'Zonas', title: z.name, detail: `${this.zonesStore.usage(z.id)} propiedades`, url: '/panel/zonas' },
+        text: `${z.name} zona`,
       });
     }
     if (this.auth.can('contactos.gestionar')) {

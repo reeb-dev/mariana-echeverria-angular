@@ -4,6 +4,7 @@ import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter, map } from 'rxjs';
 import { GOATCOUNTER_CODE } from './config/analytics.config';
 import { SiteFooterComponent } from './components/site-footer.component';
+import { CompareBarComponent } from './components/compare-bar.component';
 import { ToastHostComponent } from './components/toast-host.component';
 import { SiteNavComponent } from './components/site-nav.component';
 import { WhatsappFloatComponent } from './components/whatsapp-float.component';
@@ -17,7 +18,7 @@ function isBarePath(url: string): boolean {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, SiteNavComponent, SiteFooterComponent, WhatsappFloatComponent, ToastHostComponent],
+  imports: [RouterOutlet, SiteNavComponent, SiteFooterComponent, WhatsappFloatComponent, ToastHostComponent, CompareBarComponent],
   template: `
     @if (isBare()) {
       <router-outlet />
@@ -27,6 +28,7 @@ function isBarePath(url: string): boolean {
         <router-outlet />
       </main>
       <app-site-footer />
+      <app-compare-bar />
       @if (!isDetail()) {
         <app-whatsapp-float />
       }

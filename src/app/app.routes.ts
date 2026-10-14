@@ -10,6 +10,7 @@ export const routes: Routes = [
   { path: 'privacidad', loadComponent: () => import('./pages/privacy.component').then((m) => m.PrivacyComponent) },
   { path: 'guias', loadComponent: () => import('./pages/guides.component').then((m) => m.GuidesComponent) },
   { path: 'guias/:slug', loadComponent: () => import('./pages/guides.component').then((m) => m.GuideComponent) },
+  { path: 'comparar', loadComponent: () => import('./pages/compare.component').then((m) => m.CompareComponent) },
   { path: 'zona/:slug', loadComponent: () => import('./pages/zone.component').then((m) => m.ZoneComponent) },
   { path: 'calculadoras', loadComponent: () => import('./pages/calculators.component').then((m) => m.CalculatorsComponent) },
   { path: 'ig', loadComponent: () => import('./pages/link-in-bio.component').then((m) => m.LinkInBioComponent) },
