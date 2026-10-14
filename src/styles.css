@@ -144,11 +144,11 @@
   }
 
   .prop-card {
-    @apply block overflow-hidden rounded-2xl bg-background/60 transition duration-500 ease-premium;
+    @apply block overflow-hidden rounded-2xl border border-border bg-white shadow-soft transition duration-300 ease-premium;
   }
 
   .prop-card:hover {
-    @apply -translate-y-1 shadow-card;
+    @apply -translate-y-1 border-forest/40 shadow-card;
   }
 
   /* Recorta banners cian/violeta típicos del feed; ancla visual marca */
@@ -203,5 +203,67 @@
 
   .prop-card-badge {
     @apply rounded-md bg-forest-deep/90 px-2.5 py-1 text-[11px] font-semibold tracking-wide text-stone-warm uppercase backdrop-blur-sm;
+  }
+}
+
+/* Tarjetas: una sola receta para todo el sitio y el panel, así se ven parejas y con el mismo relieve. */
+@layer components {
+  .mer-card {
+    @apply rounded-2xl border border-border bg-white shadow-soft;
+  }
+
+  /* Tarjeta que se puede tocar: sube un poco y marca el borde */
+  .mer-card-link {
+    @apply transition duration-200 ease-premium hover:-translate-y-0.5 hover:border-forest/40 hover:shadow-card;
+  }
+
+  /* Franja de color arriba para tarjetas que tienen que llamar la atención */
+  .mer-card-accent {
+    @apply relative overflow-hidden;
+  }
+
+  .mer-card-accent::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: linear-gradient(90deg, #d06a28, #e0b040);
+  }
+
+  .mer-card-alert {
+    @apply border-red-300;
+  }
+
+  .mer-card-alert::before {
+    background: linear-gradient(90deg, #c0392b, #e67e22);
+  }
+
+  /* Indicador del Resumen */
+  .mer-stat {
+    @apply mer-card mer-card-link mer-card-accent flex items-start gap-4 p-5;
+  }
+
+  .mer-stat-icon {
+    @apply flex h-12 w-12 shrink-0 items-center justify-center rounded-xl;
+  }
+
+  .tone-forest {
+    background: rgb(208 106 40 / 0.13);
+    color: #d06a28;
+  }
+
+  .tone-gold {
+    background: rgb(224 176 64 / 0.22);
+    color: #8a5a10;
+  }
+
+  .tone-ink {
+    background: rgb(28 22 18 / 0.08);
+    color: #1c1612;
+  }
+
+  .tone-alert {
+    background: rgb(192 57 43 / 0.12);
+    color: #b03a2e;
   }
 }

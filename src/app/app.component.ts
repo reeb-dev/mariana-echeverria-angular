@@ -1,20 +1,54 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { filter, map } from 'rxjs';
 import { SiteFooterComponent } from './components/site-footer.component';
 import { SiteNavComponent } from './components/site-nav.component';
 import { WhatsappFloatComponent } from './components/whatsapp-float.component';
+
+/** El panel y la página del link en bio no llevan la barra, el pie ni el botón de WhatsApp del sitio. */
+function isBarePath(url: string): boolean {
+  const path = url.split(/[?#]/)[0];
+  return path.startsWith('/panel') || path === '/ig';
+}
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, SiteNavComponent, SiteFooterComponent, WhatsappFloatComponent],
   template: `
-    <app-site-nav />
-    <main class="min-h-screen">
+    @if (isBare()) {
       <router-outlet />
-    </main>
-    <app-site-footer />
-    <app-whatsapp-float />
+    } @else {
+      <app-site-nav />
+      <main class="min-h-screen">
+        <router-outlet />
+      </main>
+      <app-site-footer />
+      @if (!isDetail()) {
+        <app-whatsapp-float />
+      }
+    }
   `,
 })
-export class AppComponent {}
+export class AppComponent {
+  private readonly router = inject(Router);
+
+  /** La ficha ya tiene su barra de contacto fija en el celular. */
+  readonly isDetail = toSignal(
+    this.router.events.pipe(
+      filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+      map((e) => e.urlAfterRedirects.split(/[?#]/)[0].startsWith('/propiedades/'))
+    ),
+    { initialValue: this.router.url.split(/[?#]/)[0].startsWith('/propiedades/') }
+  );
+
+  /** El panel no lleva la barra, el pie ni el botón de WhatsApp del sitio. */
+  readonly isBare = toSignal(
+    this.router.events.pipe(
+      filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+      map((e) => isBarePath(e.urlAfterRedirects))
+    ),
+    { initialValue: isBarePath(this.router.url) }
+  );
+}

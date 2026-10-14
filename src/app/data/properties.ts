@@ -8,6 +8,15 @@ export type PropertyType =
   | 'lote'
   | 'local';
 
+export type PropertyStatus = 'publicada' | 'pausada' | 'vendida' | 'alquilada';
+
+export const STATUS_LABELS: Record<PropertyStatus, string> = {
+  publicada: 'Publicada',
+  pausada: 'Pausada',
+  vendida: 'Vendida',
+  alquilada: 'Alquilada',
+};
+
 export type PropertyPhoto = {
   src: string;
   alt: string;
@@ -30,7 +39,50 @@ export type Property = {
   description: string;
   amenities: string[];
   photos: PropertyPhoto[];
+  /** Si falta, se considera `publicada`. Solo las publicadas salen en la home. */
+  status?: PropertyStatus;
+  /** Aparece en la sección «Destacadas» de la home. */
+  featured?: boolean;
+  /** Orden dentro de las destacadas (menor = primero). */
+  featuredOrder?: number;
+  /** Usuario del panel responsable de la propiedad (el agente solo edita las suyas). */
+  agentId?: string;
+  /** Fechas ISO de alta y última edición (las propiedades de ejemplo no las tienen). */
+  createdAt?: string;
+  updatedAt?: string;
+
+  /** Sucursal que la atiende; si falta se deduce de la zona. */
+  branch?: PropertyBranch;
+  /** Ubicación en el mapa. Con `mapApprox` se muestra una zona y no el punto exacto. */
+  lat?: number;
+  lng?: number;
+  mapApprox?: boolean;
+  /** Antigüedad en años (0 = a estrenar). */
+  ageYears?: number;
+  /** Cantidad de cocheras. */
+  garages?: number;
+  /** Solo campos y lotes: */
+  hectares?: number;
+  aptitude?: string;
+  improvements?: string;
+  routeDistanceKm?: number;
+  /** Datos internos del propietario: nunca se muestran en el sitio. */
+  ownerName?: string;
+  ownerPhone?: string;
 };
+
+export type PropertyBranch = 'coronel-suarez' | 'zona-norte';
+
+export const BRANCH_LABELS: Record<PropertyBranch, string> = {
+  'coronel-suarez': 'Coronel Suárez',
+  'zona-norte': 'Zona Norte',
+};
+
+/** Sucursal de la propiedad: la cargada, o la que corresponde a su zona. */
+export function branchOf(p: Property): PropertyBranch {
+  if (p.branch) return p.branch;
+  return /norte|tigre|nordelta|caba/i.test(p.zone) ? 'zona-norte' : 'coronel-suarez';
+}
 
 /** Etiquetas legibles; si falta, se deriva del slug. */
 export const ZONE_LABELS: Record<string, string> = {
@@ -220,7 +272,12 @@ export const FAQS = [
 export const PROPERTIES: Property[] = [
   {
     id: '1',
+    featured: true,
+    featuredOrder: 1,
     slug: 'casa-mitre-coronel-suarez',
+    lat: -37.4581,
+    lng: -61.9362,
+    mapApprox: true,
     title: 'Casa en venta – Mitre 2000',
     location: 'Coronel Suárez',
     zone: 'coronel-suarez',
@@ -269,7 +326,11 @@ export const PROPERTIES: Property[] = [
   },
   {
     id: '2',
+    agentId: 'u-agente',
     slug: 'departamento-rivas-alquiler',
+    lat: -37.4548,
+    lng: -61.9311,
+    mapApprox: true,
     title: 'Excelente departamento – Rivas 200',
     location: 'Coronel Suárez',
     zone: 'coronel-suarez',
@@ -318,7 +379,12 @@ export const PROPERTIES: Property[] = [
   },
   {
     id: '3',
+    featured: true,
+    featuredOrder: 3,
     slug: 'lote-sierra-de-la-ventana',
+    lat: -38.1356,
+    lng: -61.7922,
+    mapApprox: true,
     title: 'Terreno/lote – Juan Bautista Gil',
     location: 'Sierra de la Ventana',
     zone: 'sierra-ventana',
@@ -365,7 +431,11 @@ export const PROPERTIES: Property[] = [
   },
   {
     id: '4',
+    agentId: 'u-agente',
     slug: 'local-belgrano-alquiler',
+    lat: -37.4565,
+    lng: -61.9295,
+    mapApprox: true,
     title: 'Local en alquiler – Belgrano 1200',
     location: 'Coronel Suárez',
     zone: 'coronel-suarez',
@@ -412,7 +482,12 @@ export const PROPERTIES: Property[] = [
   },
   {
     id: '5',
+    featured: true,
+    featuredOrder: 2,
     slug: 'chalet-nordelta',
+    lat: -34.4036,
+    lng: -58.6475,
+    mapApprox: true,
     title: 'Chalet en Nordelta',
     location: 'Av. de los Lagos, Nordelta, Tigre',
     zone: 'zona-norte',
@@ -462,6 +537,9 @@ export const PROPERTIES: Property[] = [
   {
     id: '6',
     slug: 'depto-paseo-victorica-tigre',
+    lat: -34.4236,
+    lng: -58.5788,
+    mapApprox: true,
     title: 'Depto en venta – Paseo Victorica',
     location: 'Paseo Victorica, Tigre',
     zone: 'zona-norte',
@@ -610,6 +688,10 @@ export function getPropertyBySlug(slug: string) {
 
 export function coverPhoto(property: Property) {
   const first = property.photos[0];
+  // Fotos cargadas desde el panel (data URL): no tienen `cover-card.jpg` al lado.
+  if (/^(data:|blob:|https?:)/i.test(first.src)) {
+    return first;
+  }
   const dir = first.src.replace(/\/[^/]+$/, '');
   return {
     src: `${dir}/cover-card.jpg`,

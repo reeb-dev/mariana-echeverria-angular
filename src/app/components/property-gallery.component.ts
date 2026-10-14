@@ -16,7 +16,7 @@ import { AssetUrlPipe } from '../utils/asset-url';
   imports: [AssetUrlPipe],
   template: `
     <div class="space-y-4">
-      <div class="relative aspect-[16/10] overflow-hidden bg-mist md:aspect-[16/9]">
+      <div class="relative aspect-[4/3] overflow-hidden rounded-2xl bg-mist sm:aspect-[16/10] md:aspect-[16/9]">
         <button
           type="button"
           class="group relative block h-full w-full cursor-zoom-in focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest"
@@ -65,12 +65,12 @@ import { AssetUrlPipe } from '../utils/asset-url';
         </div>
       </div>
 
-      <ul class="grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-5">
+      <ul class="flex snap-x gap-2 overflow-x-auto pb-1 md:grid md:grid-cols-6 md:overflow-visible md:pb-0">
         @for (photo of photos; track photo.src; let i = $index) {
-          <li>
+          <li class="w-24 shrink-0 snap-start md:w-auto">
             <button
               type="button"
-              class="relative aspect-[4/3] w-full overflow-hidden ring-offset-2 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest"
+              class="relative aspect-[4/3] w-full overflow-hidden rounded-lg ring-offset-2 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest"
               [class.ring-2]="i === active()"
               [class.ring-forest]="i === active()"
               [class.opacity-80]="i !== active()"

@@ -1,0 +1,13 @@
+{
+  "name": "mariana-ai-proxy",
+  "private": true,
+  "type": "module",
+  "description": "Servidor chico que redacta los avisos con Claude a partir de los datos y las fotos de la propiedad.",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.133.0",
+    "zod": "^4.6.7"
+  }
+}

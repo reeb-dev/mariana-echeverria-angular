@@ -1,106 +1,433 @@
 @if (!property) {
   <div class="mx-auto max-w-3xl px-5 pt-[8.25rem] pb-24 text-center md:pt-[8.75rem]">
     <h1 class="section-title text-3xl text-forest-deep">Propiedad no encontrada</h1>
+    <p class="mt-3 text-muted-foreground">Puede que ya no esté disponible.</p>
     <a routerLink="/" fragment="propiedades" class="mt-6 inline-block text-forest underline">Volver al listado</a>
   </div>
 } @else {
-  <!-- pt compensa top bar + nav fijos (~132–140px); evita que el borde del header corte el logo -->
   <div class="min-h-full bg-background pt-[8.25rem] md:pt-[8.75rem]">
-    <header class="border-b border-border bg-background/95">
-      <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 md:px-8">
-        <a routerLink="/" fragment="propiedades" class="text-sm text-muted-foreground hover:text-forest">← Volver a propiedades</a>
-        <a routerLink="/" class="block">
-          <app-brand-logo size="sm" tone="on-light" />
-        </a>
-        <a [href]="waUrl()" target="_blank" rel="noopener noreferrer" class="rounded-md bg-primary px-3 py-1.5 text-sm text-primary-foreground">WhatsApp</a>
-      </div>
-    </header>
+    <main class="mx-auto max-w-6xl px-5 pt-6 pb-32 md:px-8 md:pt-8 md:pb-20">
+      <!-- Migas de pan -->
+      <nav aria-label="Ubicación en el sitio" class="text-sm text-muted-foreground">
+        <ol class="flex flex-wrap items-center gap-x-2 gap-y-1">
+          <li><a routerLink="/" class="transition hover:text-forest">Inicio</a></li>
+          <li aria-hidden="true">›</li>
+          <li><a routerLink="/" fragment="propiedades" class="transition hover:text-forest">Propiedades</a></li>
+          <li aria-hidden="true">›</li>
+          <li class="min-w-0 max-w-[16rem] truncate text-forest-deep" aria-current="page">{{ property.title }}</li>
+        </ol>
+      </nav>
 
-    <main class="mx-auto max-w-6xl px-5 py-8 md:px-8 md:py-12">
-      <div class="grid gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:gap-12">
-        <section aria-label="Galería de fotos">
-          <app-property-gallery [photos]="property.photos" [title]="property.title" />
-        </section>
+      <!-- Galería -->
+      <section aria-label="Galería de fotos" class="mt-5">
+        <app-property-gallery [photos]="property.photos" [title]="property.title" />
+      </section>
 
-        <aside class="space-y-6 lg:sticky lg:top-[8.75rem] lg:self-start">
-          <div>
-            <p class="text-xs tracking-[0.18em] text-forest uppercase">{{ property.operation }} · {{ property.type }}</p>
-            <h1 class="section-title mt-3 text-2xl text-forest-deep md:text-3xl">{{ property.title }}</h1>
-            <p class="mt-2 text-muted-foreground">{{ property.location }}</p>
-            <p class="mt-4 font-sans text-xl font-semibold text-forest-deep md:text-2xl">{{ property.priceLabel }}</p>
-          </div>
-
-          <dl class="grid grid-cols-2 gap-3 border-y border-border py-5 text-sm">
-            <div>
-              <dt class="text-muted-foreground">Superficie</dt>
-              <dd class="mt-1 font-medium">{{ property.areaLabel }}</dd>
+      <div class="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_23rem] lg:gap-14">
+        <!-- Contenido -->
+        <div class="min-w-0">
+          <header>
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="rounded-full bg-forest-deep px-3 py-1 text-[11px] font-semibold tracking-[0.14em] text-stone-warm uppercase">
+                {{ property.operation }}
+              </span>
+              <span class="rounded-full border border-border px-3 py-1 text-[11px] font-semibold tracking-[0.14em] text-forest-deep uppercase">
+                {{ property.type }}
+              </span>
+              @if (property.featured) {
+                <span class="rounded-full bg-stone-warm px-3 py-1 text-[11px] font-semibold tracking-[0.14em] text-forest-deep uppercase">
+                  Destacada
+                </span>
+              }
             </div>
-            @if (property.beds != null) {
-              <div>
-                <dt class="text-muted-foreground">Dormitorios</dt>
-                <dd class="mt-1 font-medium">{{ property.beds }}</dd>
-              </div>
-            }
-            @if (property.baths != null) {
-              <div>
-                <dt class="text-muted-foreground">Baños</dt>
-                <dd class="mt-1 font-medium">{{ property.baths }}</dd>
-              </div>
-            }
+            <h1 class="section-title mt-4 text-3xl text-forest-deep md:text-4xl">{{ property.title }}</h1>
+            <p class="mt-2 flex items-center gap-1.5 text-muted-foreground">
+              <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0 text-forest" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z M12 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4" />
+              </svg>
+              {{ property.location }}
+            </p>
             @if (property.highlight) {
-              <div>
-                <dt class="text-muted-foreground">Destacado</dt>
-                <dd class="mt-1 font-medium">{{ property.highlight }}</dd>
-              </div>
+              <p class="mt-3 text-lg font-medium text-forest">{{ property.highlight }}</p>
             }
-            <div>
-              <dt class="text-muted-foreground">Fotos</dt>
-              <dd class="mt-1 font-medium">{{ property.photos.length }}</dd>
-            </div>
-          </dl>
+          </header>
 
-          <div class="flex flex-col gap-3">
-            <a [href]="waUrl()" target="_blank" rel="noopener noreferrer" class="inline-flex h-11 items-center justify-center rounded-md bg-stone-warm text-sm font-semibold text-forest-deep hover:bg-[#e8c056]">Consultar esta propiedad</a>
-            <a [href]="'mailto:' + contact.email + '?subject=Consulta: ' + property.title" class="inline-flex h-11 items-center justify-center rounded-md border border-border text-sm font-medium hover:bg-muted">Escribir por email</a>
+          <!-- Datos clave -->
+          <ul class="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3" aria-label="Datos principales">
+            @for (fact of facts(); track fact.label) {
+              <li class="flex items-center gap-3 rounded-xl border border-border bg-white px-4 py-3">
+                <svg viewBox="0 0 24 24" class="h-6 w-6 shrink-0 text-forest" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path [attr.d]="fact.icon" />
+                </svg>
+                <span class="min-w-0">
+                  <span class="block text-base font-semibold leading-tight text-forest-deep">{{ fact.value }}</span>
+                  <span class="block text-xs text-muted-foreground">{{ fact.label }}</span>
+                </span>
+              </li>
+            }
+          </ul>
+
+          <!-- Acciones: favorita, compartir -->
+          <div class="mt-5 flex flex-wrap gap-2">
+            <button
+              type="button"
+              class="inline-flex h-10 items-center gap-1.5 rounded-lg border border-border px-3 text-sm font-medium transition hover:border-forest"
+              [class.text-forest]="favorites.has(property.slug)"
+              [attr.aria-pressed]="favorites.has(property.slug)"
+              (click)="toggleFavorite()"
+            >
+              {{ favorites.has(property.slug) ? '♥ En favoritas' : '♡ Guardar' }}
+            </button>
+            <a
+              [href]="shareUrl()"
+              (click)="recordShare()"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex h-10 items-center rounded-lg border border-border px-3 text-sm font-medium transition hover:border-forest"
+            >
+              Compartir por WhatsApp
+            </a>
+            <button
+              type="button"
+              class="inline-flex h-10 items-center rounded-lg border border-border px-3 text-sm font-medium transition hover:border-forest"
+              (click)="copyLink()"
+            >
+              {{ copied() ? '¡Enlace copiado!' : 'Copiar enlace' }}
+            </button>
           </div>
-          <p class="text-xs text-muted-foreground">Demo Angular · {{ contact.matricula }}. Fotos de avisos públicos del mercado.</p>
+
+          <!-- Descripción -->
+          <section class="mt-10 border-t border-border pt-8">
+            <h2 class="font-display text-2xl font-medium text-forest-deep">Descripción</h2>
+            <p class="mt-4 max-w-2xl whitespace-pre-line text-base leading-[1.75] text-foreground/85">{{ property.description }}</p>
+          </section>
+
+          <!-- Características -->
+          @if (property.amenities.length > 0) {
+            <section class="mt-10 border-t border-border pt-8">
+              <h2 class="font-display text-2xl font-medium text-forest-deep">Características</h2>
+              <ul class="mt-4 flex flex-wrap gap-2.5">
+                @for (item of property.amenities; track item) {
+                  <li class="inline-flex items-center gap-2 rounded-full border border-border bg-white px-4 py-2 text-sm">
+                    <svg viewBox="0 0 24 24" class="h-4 w-4 text-forest" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M5 12.5l4.5 4.5L19 7.5" />
+                    </svg>
+                    {{ item }}
+                  </li>
+                }
+              </ul>
+            </section>
+          }
+
+          <!-- Más datos -->
+          @if (extras().length > 0) {
+            <section class="mt-10 border-t border-border pt-8">
+              <h2 class="font-display text-2xl font-medium text-forest-deep">Más datos</h2>
+              <dl class="mt-4 grid gap-3 sm:grid-cols-2">
+                @for (row of extras(); track row.label) {
+                  <div class="rounded-xl border border-border bg-white p-4">
+                    <dt class="text-xs tracking-[0.1em] text-muted-foreground uppercase">{{ row.label }}</dt>
+                    <dd class="mt-1 text-sm font-medium">{{ row.value }}</dd>
+                  </div>
+                }
+              </dl>
+            </section>
+          }
+
+          <!-- Ubicación -->
+          @if (mapUrl(); as url) {
+            <section class="mt-10 border-t border-border pt-8">
+              <h2 class="font-display text-2xl font-medium text-forest-deep">Ubicación</h2>
+              <iframe
+                [src]="url"
+                title="Mapa de la ubicación de la propiedad"
+                class="mt-4 h-80 w-full rounded-2xl border border-border"
+                loading="lazy"
+                referrerpolicy="no-referrer"
+              ></iframe>
+              @if (property.mapApprox) {
+                <p class="mt-2 text-xs text-muted-foreground">Ubicación aproximada: la dirección exacta se informa al consultar.</p>
+              }
+              @if (mapsLink(); as link) {
+                <a
+                  [href]="link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="mt-2 inline-block text-sm font-medium text-forest underline underline-offset-2"
+                >
+                  Abrir en Google Maps
+                </a>
+              }
+            </section>
+          }
+        </div>
+
+        <!-- Panel de contacto (fijo en escritorio) -->
+        <aside class="lg:sticky lg:top-[8.75rem] lg:self-start" aria-label="Contacto">
+          <div class="overflow-hidden rounded-2xl border border-border bg-white shadow-card">
+            <!-- Precio -->
+            <div class="px-6 pt-6">
+              <p class="text-xs tracking-[0.16em] text-muted-foreground uppercase">
+                {{ property.operation === 'alquiler' ? 'Alquiler' : 'Precio de venta' }}
+              </p>
+              <p class="mt-1 font-display text-[2.1rem] font-medium leading-tight text-forest-deep">{{ property.priceLabel }}</p>
+            </div>
+
+            <!-- Acciones -->
+            <div class="grid gap-3 px-6 pt-5 pb-6">
+              <a
+                [href]="waUrl()"
+                (click)="recordWhatsapp()"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex h-12 items-center justify-center gap-2.5 rounded-xl bg-stone-warm text-[15px] font-semibold text-forest-deep shadow-soft transition hover:bg-[#e8c056] hover:shadow-card"
+              >
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.7-5.4A8.4 8.4 0 1 1 21 11.5z" />
+                </svg>
+                Consultar por WhatsApp
+              </a>
+              <div class="grid grid-cols-2 gap-3">
+                <a
+                  [href]="'tel:' + contact.phoneDisplay.replace(' ', '')"
+                  class="inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-border text-sm font-medium transition hover:border-forest hover:bg-mist/60"
+                >
+                  <svg viewBox="0 0 24 24" class="h-4 w-4 text-forest" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z" />
+                  </svg>
+                  Llamar
+                </a>
+                <a
+                  [href]="'mailto:' + contact.email + '?subject=Consulta: ' + property.title"
+                  class="inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-border text-sm font-medium transition hover:border-forest hover:bg-mist/60"
+                >
+                  <svg viewBox="0 0 24 24" class="h-4 w-4 text-forest" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z M3 7l9 6 9-6" />
+                  </svg>
+                  Email
+                </a>
+              </div>
+            </div>
+
+            <!-- Quién atiende -->
+            <div class="flex items-center gap-3 border-t border-border bg-mist/60 px-6 py-4">
+              <img
+                [src]="'/about/mariana.jpg' | assetUrl"
+                alt=""
+                class="h-12 w-12 shrink-0 rounded-full object-cover ring-2 ring-white"
+                loading="lazy"
+              />
+              <div class="min-w-0">
+                <p class="truncate text-sm font-semibold text-forest-deep">{{ contact.brand }}</p>
+                <p class="text-xs text-muted-foreground">Corredora y tasadora · {{ contact.matricula }}</p>
+                <p class="mt-0.5 flex items-center gap-1.5 text-xs text-forest">
+                  <span class="inline-block h-1.5 w-1.5 rounded-full bg-green-600" aria-hidden="true"></span>
+                  Respondemos en el día
+                </p>
+              </div>
+            </div>
+
+            <!-- Pedir una visita -->
+            <div class="border-t border-border">
+              <button
+                type="button"
+                class="flex w-full items-center justify-between gap-3 px-6 py-4 text-left text-sm font-semibold text-forest-deep transition hover:bg-mist/60"
+                [attr.aria-expanded]="visitOpen()"
+                aria-controls="ficha-visita"
+                (click)="visitOpen.set(!visitOpen())"
+              >
+                <span class="flex items-center gap-2.5">
+                  <svg viewBox="0 0 24 24" class="h-5 w-5 text-forest" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
+                  </svg>
+                  Pedir una visita
+                </span>
+                <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0 transition" [class.rotate-180]="visitOpen()" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
+              </button>
+              @if (visitOpen() || visitSent()) {
+                <form id="ficha-visita" class="space-y-3 px-6 pt-1 pb-6" (submit)="submitVisit($event)" novalidate>
+                  @if (visitSent()) {
+                    <p class="rounded-lg bg-green-50 px-3 py-2 text-sm text-green-800" role="status">
+                      ¡Listo! Recibimos tu pedido. Te escribimos para confirmar el día y la hora.
+                    </p>
+                  } @else {
+                    <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                      <input
+                        class="h-11 w-full rounded-lg border border-border bg-background px-3.5 text-sm outline-none focus:border-forest focus:ring-2 focus:ring-forest/20"
+                        name="visit-name"
+                        placeholder="Tu nombre"
+                        autocomplete="name"
+                        [(ngModel)]="visit.name"
+                      />
+                      <input
+                        class="h-11 w-full rounded-lg border border-border bg-background px-3.5 text-sm outline-none focus:border-forest focus:ring-2 focus:ring-forest/20"
+                        name="visit-phone"
+                        type="tel"
+                        placeholder="Tu teléfono"
+                        autocomplete="tel"
+                        [(ngModel)]="visit.phone"
+                      />
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                      <label class="block text-xs text-muted-foreground">
+                        Día
+                        <input
+                          class="mt-1 h-11 w-full rounded-lg border border-border bg-background px-3 text-sm text-foreground outline-none focus:border-forest"
+                          type="date"
+                          name="visit-date"
+                          [min]="minVisitDate"
+                          [(ngModel)]="visit.date"
+                        />
+                      </label>
+                      <label class="block text-xs text-muted-foreground">
+                        Franja
+                        <select
+                          class="mt-1 h-11 w-full rounded-lg border border-border bg-background px-3 text-sm text-foreground outline-none focus:border-forest"
+                          name="visit-slot"
+                          [(ngModel)]="visit.slot"
+                        >
+                          <option value="mañana">Mañana</option>
+                          <option value="tarde">Tarde</option>
+                        </select>
+                      </label>
+                    </div>
+                    <label class="flex items-start gap-2 text-xs leading-relaxed text-muted-foreground">
+                      <input type="checkbox" class="mt-0.5 h-4 w-4 shrink-0" name="visit-consent" [(ngModel)]="visit.consent" />
+                      <span>
+                        Acepto que usen mis datos para coordinar la visita
+                        (<a routerLink="/privacidad" target="_blank" class="underline">política de privacidad</a>).
+                      </span>
+                    </label>
+                    @if (visitError(); as msg) {
+                      <p class="text-sm text-red-700" role="alert">{{ msg }}</p>
+                    }
+                    <button
+                      type="submit"
+                      class="h-11 w-full rounded-lg bg-forest-deep text-sm font-semibold text-stone-warm transition hover:bg-forest hover:text-white"
+                    >
+                      Pedir la visita
+                    </button>
+                  }
+                </form>
+              }
+            </div>
+
+            <!-- Dejar los datos (plegable) -->
+            <div class="border-t border-border">
+              <button
+                type="button"
+                class="flex w-full items-center justify-between gap-3 px-6 py-4 text-left text-sm font-medium text-forest-deep transition hover:bg-mist/60"
+                [attr.aria-expanded]="formOpen()"
+                aria-controls="ficha-consulta"
+                (click)="formOpen.set(!formOpen())"
+              >
+                <span>¿Preferís que te llamemos? Dejá tus datos</span>
+                <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0 transition" [class.rotate-180]="formOpen()" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
+              </button>
+              @if (formOpen() || sent()) {
+                <form id="ficha-consulta" class="space-y-3 px-6 pt-1 pb-6" (submit)="submitInquiry($event)" novalidate>
+                  <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                    <input
+                      class="h-11 w-full rounded-lg border border-border bg-background px-3.5 text-sm outline-none focus:border-forest focus:ring-2 focus:ring-forest/20"
+                      name="inquiry-name"
+                      placeholder="Tu nombre"
+                      autocomplete="name"
+                      [(ngModel)]="inquiry.name"
+                    />
+                    <input
+                      class="h-11 w-full rounded-lg border border-border bg-background px-3.5 text-sm outline-none focus:border-forest focus:ring-2 focus:ring-forest/20"
+                      name="inquiry-phone"
+                      type="tel"
+                      placeholder="Tu teléfono"
+                      autocomplete="tel"
+                      [(ngModel)]="inquiry.phone"
+                    />
+                  </div>
+                  <textarea
+                    class="min-h-[4.5rem] w-full rounded-lg border border-border bg-background px-3.5 py-2 text-sm outline-none focus:border-forest focus:ring-2 focus:ring-forest/20"
+                    name="inquiry-message"
+                    placeholder="¿Qué querés saber? (opcional)"
+                    [(ngModel)]="inquiry.message"
+                  ></textarea>
+                  <label class="flex items-start gap-2 text-xs leading-relaxed text-muted-foreground">
+                    <input type="checkbox" class="mt-0.5 h-4 w-4 shrink-0" name="inquiry-consent" [(ngModel)]="inquiry.consent" />
+                    <span>
+                      Acepto que usen mis datos para responder esta consulta
+                      (<a routerLink="/privacidad" target="_blank" class="underline">política de privacidad</a>).
+                    </span>
+                  </label>
+                  @if (formError(); as msg) {
+                    <p class="text-sm text-red-700" role="alert">{{ msg }}</p>
+                  }
+                  @if (sent()) {
+                    <p class="rounded-lg bg-green-50 px-3 py-2 text-sm text-green-800" role="status">
+                      ¡Gracias! Abrimos WhatsApp con tu consulta y quedó registrada.
+                    </p>
+                  }
+                  <button
+                    type="submit"
+                    class="h-11 w-full rounded-lg bg-forest-deep text-sm font-semibold text-stone-warm transition hover:bg-forest hover:text-white"
+                  >
+                    Enviar consulta
+                  </button>
+                </form>
+              }
+            </div>
+          </div>
+
+          <p class="mt-4 px-1 text-xs leading-relaxed text-muted-foreground">
+            Atiende la oficina de {{ branchLabel() }}. Las fotos de esta demostración provienen de avisos públicos del mercado.
+          </p>
         </aside>
       </div>
 
-      <section class="mt-14 grid gap-10 border-t border-border pt-12 md:grid-cols-[1.2fr_0.8fr]">
-        <div>
-          <h2 class="font-sans text-xl font-semibold text-forest-deep md:text-2xl">Descripción</h2>
-          <p class="mt-4 max-w-2xl leading-relaxed text-muted-foreground">{{ property.description }}</p>
-        </div>
-        <div>
-          <h2 class="font-sans text-xl font-semibold text-forest-deep md:text-2xl">Características</h2>
-          <ul class="mt-4 grid gap-2 sm:grid-cols-2">
-            @for (item of property.amenities; track item) {
-              <li class="border-l border-forest/30 pl-3 text-sm">{{ item }}</li>
-            }
-          </ul>
-        </div>
-      </section>
-
+      <!-- Similares -->
       @if (related.length > 0) {
         <section class="mt-16 border-t border-border pt-12">
-          <h2 class="font-sans text-xl font-semibold text-forest-deep md:text-2xl">También te puede interesar</h2>
-          <ul class="mt-8 grid gap-8 sm:grid-cols-3">
+          <h2 class="font-display text-2xl font-medium text-forest-deep">También te puede interesar</h2>
+          <ul class="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             @for (item of related; track item.id) {
-              <li>
-                <a [routerLink]="['/propiedades', item.slug]" class="group block">
-                  <div class="aspect-[4/3] overflow-hidden">
-                    <img [src]="item.photos[0].src | assetUrl" [alt]="item.photos[0].alt" class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
-                  </div>
-                  <p class="mt-3 text-xs tracking-[0.14em] text-forest uppercase">{{ item.operation }} · {{ item.photos.length }} fotos</p>
-                  <h3 class="mt-1 font-sans text-base font-semibold text-forest-deep group-hover:text-forest">{{ item.title }}</h3>
-                  <p class="text-sm text-muted-foreground">{{ item.location }}</p>
-                </a>
+              <li class="h-full">
+                <app-property-card [property]="item" />
               </li>
             }
           </ul>
         </section>
       }
     </main>
+
+    <!-- Barra de contacto fija en el celular -->
+    <div
+      class="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 px-4 py-3 shadow-[0_-8px_24px_-12px_rgba(28,22,18,0.3)] backdrop-blur lg:hidden"
+    >
+      <div class="mx-auto flex max-w-6xl items-center gap-3">
+        <div class="min-w-0 flex-1">
+          <p class="truncate text-lg font-semibold leading-tight text-forest-deep">{{ property.priceLabel }}</p>
+          <p class="truncate text-xs text-muted-foreground">{{ property.title }}</p>
+        </div>
+        <a
+          [href]="'tel:' + contact.phoneDisplay.replace(' ', '')"
+          class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-border"
+          aria-label="Llamar"
+        >
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z" />
+          </svg>
+        </a>
+        <a
+          [href]="waUrl()"
+          (click)="recordWhatsapp()"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex h-11 shrink-0 items-center rounded-lg bg-stone-warm px-5 text-sm font-semibold text-forest-deep"
+        >
+          WhatsApp
+        </a>
+      </div>
+    </div>
   </div>
 }

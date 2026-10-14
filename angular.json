@@ -52,6 +52,7 @@
               }
             ],
             "styles": [
+              "node_modules/leaflet/dist/leaflet.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -94,7 +95,8 @@
           "defaultConfiguration": "development",
           "options": {
             "port": 43127,
-            "host": "0.0.0.0"
+            "host": "0.0.0.0",
+            "proxyConfig": "proxy.conf.json"
           }
         },
         "extract-i18n": {

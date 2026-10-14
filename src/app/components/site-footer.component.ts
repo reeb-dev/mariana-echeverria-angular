@@ -25,6 +25,9 @@ import { BrandLogoComponent } from './brand-logo.component';
             <li><a routerLink="/" fragment="instagram" class="transition hover:text-stone-warm">Instagram</a></li>
             <li><a routerLink="/" fragment="trayectoria" class="transition hover:text-stone-warm">Trayectoria</a></li>
             <li><a routerLink="/" fragment="contacto" class="transition hover:text-stone-warm">Contacto</a></li>
+            <li><a routerLink="/tasacion" class="transition hover:text-stone-warm">Pedí tu tasación</a></li>
+            <li><a routerLink="/calculadoras" class="transition hover:text-stone-warm">Calculadoras</a></li>
+            <li><a routerLink="/privacidad" class="transition hover:text-stone-warm">Política de privacidad</a></li>
           </ul>
         </div>
         <div>
