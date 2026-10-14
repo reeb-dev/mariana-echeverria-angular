@@ -227,9 +227,26 @@ function compressImage(file: File, watermark = false): Promise<string> {
               </span>
             </label>
             <div class="md:col-span-2">
-              <span class="field-label">Tocá lo que tiene la propiedad</span>
+              @if (popularAmenities().length > 0) {
+                <span class="field-label">Las más usadas en tus propiedades</span>
+                <div class="mb-4 flex flex-wrap gap-2">
+                  @for (a of popularAmenities(); track a.name) {
+                    <button
+                      type="button"
+                      class="filter-chip"
+                      [class.filter-chip-active]="hasAmenity(a.name)"
+                      [class.filter-chip-idle]="!hasAmenity(a.name)"
+                      [attr.aria-pressed]="hasAmenity(a.name)"
+                      (click)="toggleAmenity(a.name)"
+                    >
+                      {{ hasAmenity(a.name) ? '✓ ' : '+ ' }}{{ a.name }} <span class="opacity-60">· {{ a.count }}</span>
+                    </button>
+                  }
+                </div>
+              }
+              <span class="field-label">Otras características frecuentes</span>
               <div class="flex flex-wrap gap-2">
-                @for (a of quickAmenities; track a) {
+                @for (a of otherAmenities(); track a) {
                   <button
                     type="button"
                     class="filter-chip"
@@ -806,6 +823,29 @@ export class PanelFormComponent {
     'Gas natural', 'Agua corriente', 'Cloacas', 'Luz', 'Amoblado', 'Apto crédito', 'Escritura', 'Cochera cubierta',
     'Seguridad', 'Ascensor', 'Lavadero',
   ];
+
+  /** Las características que se repiten en al menos dos propiedades cargadas (hasta 8). */
+  readonly popularAmenities = computed(() => {
+    const counts = new Map<string, { name: string; count: number }>();
+    for (const p of this.store.all()) {
+      for (const raw of new Set(p.amenities.map((a) => a.trim()).filter(Boolean))) {
+        const key = raw.toLowerCase();
+        const entry = counts.get(key);
+        if (entry) entry.count++;
+        else counts.set(key, { name: raw, count: 1 });
+      }
+    }
+    return [...counts.values()]
+      .filter((a) => a.count >= 2 && a.name.length <= 28)
+      .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name, 'es'))
+      .slice(0, 8);
+  });
+
+  /** Las sugeridas de siempre, sin repetir las que ya salen entre las más usadas. */
+  readonly otherAmenities = computed(() => {
+    const popular = new Set(this.popularAmenities().map((a) => a.name.toLowerCase()));
+    return this.quickAmenities.filter((a) => !popular.has(a.toLowerCase()));
+  });
 
   stepValue(key: 'beds' | 'baths' | 'garages'): number | null {
     return key === 'garages' ? (this.draft.garages ?? null) : this[key];
